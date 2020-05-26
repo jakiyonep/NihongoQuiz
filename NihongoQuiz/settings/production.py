@@ -9,6 +9,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
