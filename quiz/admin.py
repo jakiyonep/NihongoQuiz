@@ -6,7 +6,7 @@ from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 
 class QuizAdmin(SummernoteModelAdmin):
-    summernote_fields = '__all__'
+    summernote_fields = 'description'
 
 admin.site.register(Level)
 admin.site.register(Category)
