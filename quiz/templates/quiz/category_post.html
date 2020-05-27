@@ -46,7 +46,8 @@
       {% endif%}
       <div class="w-100 d-flex justify-content-between card-bottom">
         <div class="quiz-info">
-          <div class="card-category">
+          <div class="card-level-category">
+            <a class=" {{quiz.level.slug}}" href="{% url 'quiz:level_post' quiz.level.slug %}">{{quiz.level}}</a>
             <a class=" {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
           </div>
           <div class="card-tag">

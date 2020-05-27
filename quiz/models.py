@@ -34,7 +34,7 @@ class Quiz(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
     choice_long = models.BooleanField(default=False)
-    description = MarkdownxField('description', blank=True)
+    description = models.TextField(blank=True)
     question = models.TextField(blank=False, null=False, max_length=200)
     choice1 = models.CharField(blank=True, max_length=100)
     choice2 = models.CharField(blank=True, max_length=100)
