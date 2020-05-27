@@ -70,7 +70,7 @@
 
     {% endif %}
     {% empty %}
-      <li>Not Questions</li>
+      <li>No result</li>
   {% endfor%}
   <nav>
     {% if page_obj.has_previous %}
@@ -89,7 +89,5 @@
     <a href="?page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
   </nav>
-  {% endif %}
+  {% endblock %}
 </div>
-
-{% endblock %}

@@ -3,10 +3,8 @@
 
 <div class="body">
   {% for quiz in object_list %}
-
   <div class="card card-quiz">
     <div class="card-title">
-
     {% if user.is_authenticated or quiz.public %}
       {% if not quiz.public %} Draft {% endif %}{{quiz.question}}
     </div>
@@ -64,9 +62,10 @@
           {{quiz.description}}
         </div>
       </div>
-  </div>
+    </div>
+    {% endif %}
+  {% endfor %}
 </div>
-
 <nav>
   {% if page_obj.has_previous %}
   <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
@@ -84,6 +83,5 @@
   <a href="?page={{ page_obj.next_page_number }}">Next</a>
   {% endif %}
 </nav>
-{% endif %}
 </div>
 {% endblock %}
