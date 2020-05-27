@@ -2,6 +2,7 @@ from django.db.models import Count, Q
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.shortcuts import get_object_or_404
 
 from quiz.models import Quiz, Category, Tag
 
@@ -31,3 +32,34 @@ class TagListView(ListView):
     queryset = Tag.objects.annotate(
         num_posts = Count('quiz', filter = Q(quiz__public=True))
     )
+
+
+class CategoryPostView(ListView):
+    model = Quiz
+    template_name = 'quiz/category_post.html'
+
+    def get_queryset(self):
+        category_slug = self.kwargs['category_slug']
+        self.category = get_object_or_404(Category, slug=category_slug)
+        qs = super().get_queryset().filter(category=self.category)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
+
+class TagPostView(ListView):
+    model = Quiz
+    template_name = 'quiz/tag_post.html'
+
+    def get_queryset(self):
+        tag_slug = self.kwargs['tag_slug']
+        self.tag = get_object_or_404(Tag, slug=tag_slug)
+        qs = super().get_queryset().filter(tags=self.tag)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tag'] = self.tag
+        return context

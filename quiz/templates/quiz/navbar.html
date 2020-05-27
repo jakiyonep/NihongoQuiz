@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">NihongoQuiz</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown row"><!--category-->
+        <div class="col-6">
+          <a class="nav-link" data-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="category">
+            Category
+          </a>
+        </div>
+        <div class="col-6"><!--tag-->
+          <a class="nav-link" data-toggle="collapse" href="#tag" role="button" aria-expanded="false" aria-controls="tag">
+            Tag
+          </a>
+        </div>
+      </li>
+    </ul>
+    <li style="list-style:none;"><!--search-->
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-white my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </li>
+  </div>
+</nav>
+<div>
+  <div class="collapse" id="category"><!--category-->
+    <div class="card card-body bg-light">
+      <ul class="list-group list-gtoup-flush">
+        {% for category in categories|dictsort:"id" %}
+          <li class="list-group-item">
+            <a href="{% url 'quiz:category_post' category.slug %}" class="card-link">{{ category.name }}</a>
+            <span class="">{{ category.num_posts }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+<div class="collapse" id="tag"><!--tag-->
+  <div class="card card-body bg-light">
+    <div class="d-flex flex-wrap">
+      {% for tag in tags|dictsort:"id" %}
+        <div class="list-group-item w-50">
+          <a href="{% url 'quiz:tag_post' tag.slug %}" class="card-link">{{ tag.name }}</a>
+          <span class="">{{ tag.num_posts }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</div>

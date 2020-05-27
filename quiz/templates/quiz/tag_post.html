@@ -1,0 +1,26 @@
+{% extends 'quiz/base.html' %}
+{% block content %}
+
+<h1>Quizzes with "{{ tag.name }}" tag</h1>
+<ul>
+  {% for post in object_list %}
+  {% if user.is_authenticated or post.public %}
+    <li>{% if not post.public %} Draft {% endif %}{{post.question}} </li>
+    1.{{post.choice1}} 2.{{post.choice2}} 3.{{post.choice3}} 4.{{post.choice4}} <br>
+
+    <a class="btn btn-primary" data-toggle="collapse" href="#c{{post.pk}}" role="button" aria-expanded="false" aria-controls="c{{post.pk}}">
+      Link with href
+    </a>
+    <div class="collapse" id="c{{post.pk}}">
+      <div class="card card-body">
+        {{post.description}}
+      </div>
+    </div>
+
+  {% endif %}
+  {% empty %}
+    <li>Not Questions</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
