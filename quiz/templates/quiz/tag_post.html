@@ -4,10 +4,8 @@
 <div class="body">
 <h1 class="section-title">"{{ tag.name }}" tag</h1>
   {% for quiz in object_list %}
-
   <div class="card card-quiz">
     <div class="card-title">
-
     {% if user.is_authenticated or quiz.public %}
       {% if not quiz.public %} Draft {% endif %}{{quiz.question}}
     </div>
@@ -67,11 +65,10 @@
       </div>
   </div>
 </div>
+{% endif %}
+{% endfor%}
 
-    {% endif %}
-    {% empty %}
       <li>Not Questions</li>
-  {% endfor%}
   <nav>
     {% if page_obj.has_previous %}
     <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
