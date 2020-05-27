@@ -21,10 +21,8 @@ class Tag(models.Model):
 
 
 class Quiz(models.Model):
-    question = models.CharField(blank=False, null=False, max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    tags = models.ManyToManyField(Tag, blank=True)
-    choice_long = models.BooleanField(default=False)
+    question = models.TextField(blank=False, null=False, max_length=200)
+    description = models.TextField(blank =True)
     choice1 = models.CharField(blank=True, max_length=100)
     choice2 = models.CharField(blank=True, max_length=100)
     choice3 = models.CharField(blank=True, max_length=100)
@@ -39,9 +37,11 @@ class Quiz(models.Model):
 
     updated = models.DateTimeField(auto_now=True)
     publish = models.DateTimeField(blank=True, null=True)
-    description = models.TextField(blank =True)
-    public = models.BooleanField(default=False)
 
+    public = models.BooleanField(default=False)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    tags = models.ManyToManyField(Tag, blank=True)
+    choice_long = models.BooleanField(default=False)
 
 
     class Meta:
