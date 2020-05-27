@@ -1,26 +1,76 @@
 {% extends 'quiz/base.html' %}
 {% block content %}
 
-<h1>Quizzes with "{{ tag.name }}" tag</h1>
-<ul>
-  {% for post in object_list %}
-  {% if user.is_authenticated or post.public %}
-    <li>{% if not post.public %} Draft {% endif %}{{post.question}} </li>
-    1.{{post.choice1}} 2.{{post.choice2}} 3.{{post.choice3}} 4.{{post.choice4}} <br>
+<div class="body">
+<h1 class="section-title">"{{ tag.name }}" tag</h1>
+  {% for quiz in object_list %}
 
-    <a class="btn btn-primary" data-toggle="collapse" href="#c{{post.pk}}" role="button" aria-expanded="false" aria-controls="c{{post.pk}}">
-      Link with href
-    </a>
-    <div class="collapse" id="c{{post.pk}}">
-      <div class="card card-body">
-        {{post.description}}
-      </div>
+  <div class="card card-quiz">
+    <div class="card-title">
+
+    {% if user.is_authenticated or quiz.public %}
+      {% if not quiz.public %} Draft {% endif %}{{quiz.question}}
     </div>
+    <div class="card-body">
+      {% if quiz.choice_long %}
+        <div class="card-text row">
+          <div class="choice choice-1 col-12 border border-white  bg-light mb-3">
+            {{quiz.choice1}}
+          </div>
+          <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
+            {{quiz.choice2}}
+          </div>
+          <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
+             {{quiz.choice2}}
+          </div>
+          <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
+            {{quiz.choice4}}
+          </div>
+        </div>
+      {% endif%}
+      {% if not quiz.choice_long %}
+        <div class="card-text row">
+          <div class="choice choice-1 col-6 border border-white  bg-light">
+            {{quiz.choice1}}
+          </div>
+          <div class="choice choice-2 col-6 border border-white  bg-light">
+            {{quiz.choice2}}
+          </div>
+          <div class="choice choice-3 col-6 border border-white  bg-light">
+             {{quiz.choice2}}
+          </div>
+          <div class="choice choice-4 col-6 border border-white  bg-light">
+            {{quiz.choice4}}
+          </div>
+        </div>
+      {% endif%}
+      <div class="w-100 d-flex justify-content-between card-bottom">
+        <div class="quiz-info">
+          <div class="card-category">
+            <a class=" {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
+          </div>
+          <div class="card-tag">
+            {% for tag in quiz.tags.all %}
+              <a href="{% url 'quiz:tag_post' tag.slug %}">{{ tag.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+        <a class="answer btn btn-success text-white" data-toggle="collapse" href="#c{{quiz.pk}}" role="button" aria-expanded="false" aria-controls="c{{quiz.pk}}">
+          Answer
+        </a>
+      </div>
+      <div class="collapse" id="c{{quiz.pk}}">
+        <div class="card card-body">
+          <span class="correct-answer">{{quiz.answer}}</span>
+          {{quiz.description}}
+        </div>
+      </div>
+  </div>
+</div>
 
-  {% endif %}
-  {% empty %}
-    <li>Not Questions</li>
-  {% endfor %}
-</ul>
-
+    {% endif %}
+    {% empty %}
+      <li>Not Questions</li>
+  {% endfor%}
+</div>
 {% endblock %}

@@ -19,9 +19,9 @@
       </li>
     </ul>
     <li style="list-style:none;"><!--search-->
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-white my-2 my-sm-0" type="submit">Search</button>
+      <form class="form-inline my-2 my-lg-0" action="{% url 'quiz:search_post' %}" method="GET">
+        <input class="form-control mr-sm-2" type="search" name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search<button>
       </form>
     </li>
   </div>
@@ -33,7 +33,7 @@
         {% for category in categories|dictsort:"id" %}
           <li class="list-group-item">
             <a href="{% url 'quiz:category_post' category.slug %}" class="card-link">{{ category.name }}</a>
-            <span class="">{{ category.num_posts }}</span>
+            <span class="badge badge-secondary">{{ category.num_posts }}</span>
           </li>
         {% endfor %}
       </ul>
@@ -45,7 +45,7 @@
       {% for tag in tags|dictsort:"id" %}
         <div class="list-group-item w-50">
           <a href="{% url 'quiz:tag_post' tag.slug %}" class="card-link">{{ tag.name }}</a>
-          <span class="">{{ tag.num_posts }}</span>
+          <span class="badge badge-secondary">{{ tag.num_posts }}</span>
         </div>
       {% endfor %}
     </div>

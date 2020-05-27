@@ -63,3 +63,30 @@ class TagPostView(ListView):
         context = super().get_context_data(**kwargs)
         context['tag'] = self.tag
         return context
+
+
+
+class SearchPostView(ListView):
+    model = Quiz
+    template_name = 'quiz/search_post.html'
+    paginate_by = 3
+
+    def get_queryset(self):
+        query = self.request.GET.get('q', None)
+        lookups = (
+            Q(question__icontains=query) |
+            Q(description__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(tags__name__icontains=query)
+        )
+        if query is not None:
+            qs = super().get_queryset().filter(lookups).distinct()
+            return qs
+        qs = super().get_queryset()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        context['query'] = query
+        return context

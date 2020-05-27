@@ -11,36 +11,56 @@
       {% if not quiz.public %} Draft {% endif %}{{quiz.question}}
     </div>
     <div class="card-body">
-
-    <div class="card-text row">
-      <div class="choice col-6 border border-white  bg-light">
-        1. {{quiz.choice1}}
-      </div>
-      <div class="choice col-6 border border-white  bg-light">
-        2. {{quiz.choice2}}
-      </div>
-      <div class="choice col-6 border border-white  bg-light">
-        3. {{quiz.choice2}}
-      </div>
-      <div class="choice col-6 border border-white  bg-light">
-        4. {{quiz.choice4}}
-      </div>
-    </div>
+      {% if quiz.choice_long %}
+        <div class="card-text row">
+          <div class="choice choice-1 col-12 border border-white  bg-light mb-3">
+            {{quiz.choice1}}
+          </div>
+          <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
+            {{quiz.choice2}}
+          </div>
+          <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
+             {{quiz.choice2}}
+          </div>
+          <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
+            {{quiz.choice4}}
+          </div>
+        </div>
+      {% endif%}
+      {% if not quiz.choice_long %}
+        <div class="card-text row">
+          <div class="choice choice-1 col-6 border border-white  bg-light">
+            {{quiz.choice1}}
+          </div>
+          <div class="choice choice-2 col-6 border border-white  bg-light">
+            {{quiz.choice2}}
+          </div>
+          <div class="choice choice-3 col-6 border border-white  bg-light">
+             {{quiz.choice2}}
+          </div>
+          <div class="choice choice-4 col-6 border border-white  bg-light">
+            {{quiz.choice4}}
+          </div>
+        </div>
+      {% endif%}
       <div class="w-100 d-flex justify-content-between card-bottom">
         <div class="quiz-info">
           <div class="card-category">
-            {{quiz.category}}
+            <a class=" {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
           </div>
           <div class="card-tag">
-            {{quiz.tags}}
+            {% for tag in quiz.tags.all %}
+              <a href="{% url 'quiz:tag_post' tag.slug %}">{{ tag.name }}</a>
+            {% endfor %}
           </div>
         </div>
-        <a class="btn btn-primary text-right" data-toggle="collapse" href="#c{{quiz.pk}}" role="button" aria-expanded="false" aria-controls="c{{quiz.pk}}">
+        <a class="answer btn btn-success text-white" data-toggle="collapse" href="#c{{quiz.pk}}" role="button" aria-expanded="false" aria-controls="c{{quiz.pk}}">
           Answer
         </a>
       </div>
       <div class="collapse" id="c{{quiz.pk}}">
         <div class="card card-body">
+          <span class="correct-answer">{{quiz.answer}}</span>
           {{quiz.description}}
         </div>
       </div>

@@ -1,0 +1,82 @@
+{% extends "quiz/base.html" %}
+
+{% block title %}{% if query %}{{ query }}{% endif %} | {{ block.super }}{% endblock %}
+{% block description %}検索ワード「{% if query %}{{ query }}{% endif %}」での検索結果ページです。{% endblock %}
+
+{% block content %}
+
+      <h1 class="mb-4">{% if query %}{{ query }}{% endif %}</h1>
+      <p class="text-right">{{ page_obj.start_index }}-{{ page_obj.end_index }}（{{ paginator.count }}）</p>
+      <div class="body">
+        {% for quiz in object_list %}
+
+        <div class="card card-quiz">
+          <div class="card-title">
+
+          {% if user.is_authenticated or quiz.public %}
+            {% if not quiz.public %} Draft {% endif %}{{quiz.question}}
+          </div>
+          <div class="card-body">
+            {% if quiz.choice_long %}
+              <div class="card-text row">
+                <div class="choice choice-1 col-12 border border-white  bg-light mb-3">
+                  {{quiz.choice1}}
+                </div>
+                <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
+                  {{quiz.choice2}}
+                </div>
+                <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
+                   {{quiz.choice2}}
+                </div>
+                <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
+                  {{quiz.choice4}}
+                </div>
+              </div>
+            {% endif%}
+            {% if not quiz.choice_long %}
+              <div class="card-text row">
+                <div class="choice choice-1 col-6 border border-white  bg-light">
+                  {{quiz.choice1}}
+                </div>
+                <div class="choice choice-2 col-6 border border-white  bg-light">
+                  {{quiz.choice2}}
+                </div>
+                <div class="choice choice-3 col-6 border border-white  bg-light">
+                   {{quiz.choice2}}
+                </div>
+                <div class="choice choice-4 col-6 border border-white  bg-light">
+                  {{quiz.choice4}}
+                </div>
+              </div>
+            {% endif%}
+            <div class="w-100 d-flex justify-content-between card-bottom">
+              <div class="quiz-info">
+                <div class="card-category">
+                  <a class=" {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
+                </div>
+                <div class="card-tag">
+                  {% for tag in quiz.tags.all %}
+                    <a href="{% url 'quiz:tag_post' tag.slug %}">{{ tag.name }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+              <a class="answer btn btn-success text-white" data-toggle="collapse" href="#c{{quiz.pk}}" role="button" aria-expanded="false" aria-controls="c{{quiz.pk}}">
+                Answer
+              </a>
+            </div>
+            <div class="collapse" id="c{{quiz.pk}}">
+              <div class="card card-body">
+                <span class="correct-answer">{{quiz.answer}}</span>
+                {{quiz.description}}
+              </div>
+            </div>
+        </div>
+      </div>
+
+          {% endif %}
+          {% empty %}
+            No result
+        {% endfor%}
+      </div>
+
+{% endblock %}

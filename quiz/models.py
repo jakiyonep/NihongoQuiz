@@ -24,6 +24,7 @@ class Quiz(models.Model):
     question = models.CharField(blank=False, null=False, max_length=100)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
+    choice_long = models.BooleanField(default=False)
     choice1 = models.CharField(blank=True, max_length=100)
     choice2 = models.CharField(blank=True, max_length=100)
     choice3 = models.CharField(blank=True, max_length=100)
