@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 
-from quiz.models import Quiz, Category, Tag
+from quiz.models import Quiz, Category, Tag, Level
 
 
 # Create your views here.
@@ -23,6 +23,12 @@ class QuizDetailView(DetailView):
             raise Http404
         return obj
 
+
+class LevelListView(ListView):
+    queryset = Level.objects.annotate(
+        num_posts = Count('quiz', filter = Q(quiz__public=True))
+    )
+
 class CategoryListView(ListView):
     queryset = Category.objects.annotate(
         num_posts=Count('quiz', filter=Q(quiz__public=True))
@@ -32,6 +38,22 @@ class TagListView(ListView):
     queryset = Tag.objects.annotate(
         num_posts = Count('quiz', filter = Q(quiz__public=True))
     )
+
+
+class LevelPostView(ListView):
+    model = Quiz
+    template_name = 'quiz/level_post.html'
+    paginate_by = 7
+    def get_queryset(self):
+        level_slug = self.kwargs['level_slug']
+        self.level = get_object_or_404(Level, slug=level_slug)
+        qs = super().get_queryset().filter(level=self.level)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['level'] = self.level
+        return context
 
 
 class CategoryPostView(ListView):

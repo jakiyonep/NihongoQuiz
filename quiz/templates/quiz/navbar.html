@@ -5,13 +5,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown row"><!--category-->
-        <div class="col-6">
+      <li class="nav-item dropdown row d-flex justify-content-between">
+        <div class="col-4"><!--level-->
+          <a class="nav-link" data-toggle="collapse" href="#level" role="button" aria-expanded="false" aria-controls="level">
+            Level
+          </a>
+        </div>
+        <div class="col-4"><!--category-->
           <a class="nav-link" data-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="category">
             Category
           </a>
         </div>
-        <div class="col-6"><!--tag-->
+        <div class="col-4"><!--tag-->
           <a class="nav-link" data-toggle="collapse" href="#tag" role="button" aria-expanded="false" aria-controls="tag">
             Tag
           </a>
@@ -27,6 +32,18 @@
   </div>
 </nav>
 <div>
+  <div class="collapse" id="level"><!--level-->
+    <div class="card card-body bg-light">
+      <ul class="list-group list-gtoup-flush">
+        {% for level in levels|dictsort:"id" %}
+          <li class="list-group-item">
+            <a href="{% url 'quiz:level_post' level.slug %}" class="card-link">{{ level.name }}</a>
+            <span class="badge badge-secondary">{{ level.num_posts }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
   <div class="collapse" id="category"><!--category-->
     <div class="card card-body bg-light">
       <ul class="list-group list-gtoup-flush">

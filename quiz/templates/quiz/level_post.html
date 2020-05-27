@@ -2,9 +2,12 @@
 {% block content %}
 
 <div class="body">
+<h1 class="section-title">Quizzes of "{{ level.name }}"</h1>
   {% for quiz in object_list %}
+
   <div class="card card-quiz">
     <div class="card-title">
+
     {% if user.is_authenticated or quiz.public %}
       {% if not quiz.public %} Draft {% endif %}{{quiz.question}}
     </div>
@@ -60,29 +63,32 @@
       <div class="collapse" id="c{{quiz.pk}}">
         <div class="card card-body">
           <span class="correct-answer">{{quiz.answer}}</span>
-          {{quiz.markdown | safe}}
+          {{quiz.description}}
         </div>
       </div>
-    </div>
+  </div>
+</div>
+
     {% endif %}
-</div>
-{% endfor %}
-<nav>
-  {% if page_obj.has_previous %}
-  <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-  {% endif %}
+    {% empty %}
+      <li>No result</li>
+  {% endfor%}
+  <nav>
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
 
-  {% for num in paginator.page_range %}
-  {% if page_obj.number == num %}
-  <span>{{ num }}</span>
-  {% else %}
-  <a href="?page={{ num }}">{{ num }}</a>
-  {% endif %}
-  {% endfor %}
+    {% for num in paginator.page_range %}
+    {% if page_obj.number == num %}
+    <span>{{ num }}</span>
+    {% else %}
+    <a href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
 
-  {% if page_obj.has_next %}
-  <a href="?page={{ page_obj.next_page_number }}">Next</a>
-  {% endif %}
-</nav>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </nav>
+  {% endblock %}
 </div>
-{% endblock %}
