@@ -30,11 +30,11 @@ class Level(models.Model):
         return self.name
 
 class Quiz(models.Model):
-    description = MarkdownxField('description', blank=True)
     level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
     choice_long = models.BooleanField(default=False)
+    description = MarkdownxField('description', blank=True)
     question = models.TextField(blank=False, null=False, max_length=200)
     choice1 = models.CharField(blank=True, max_length=100)
     choice2 = models.CharField(blank=True, max_length=100)
@@ -60,7 +60,7 @@ class Quiz(models.Model):
 
     def save(self, *args, **kwargs):
         if self.public and not self.publish:
-            self.publish = timezon.now()
+            self.publish = timezone.now()
         super().save(*args, **kwargs)
 
     def __str__(self):

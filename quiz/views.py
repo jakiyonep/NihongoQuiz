@@ -13,6 +13,8 @@ class Index(ListView):
     model = Quiz
     template_name = 'quiz/index.html'
 
+    paginate_by = 7
+
 
 class QuizDetailView(DetailView):
     model = Quiz
@@ -91,7 +93,7 @@ class TagPostView(ListView):
 class SearchPostView(ListView):
     model = Quiz
     template_name = 'quiz/search_post.html'
-    paginate_by = 3
+    paginate_by = 7
 
     def get_queryset(self):
         query = self.request.GET.get('q', None)
