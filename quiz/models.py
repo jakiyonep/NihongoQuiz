@@ -1,4 +1,6 @@
 from django.db import models
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
 from django.utils import timezone
 
 
@@ -22,7 +24,7 @@ class Tag(models.Model):
 
 class Quiz(models.Model):
     question = models.TextField(blank=False, null=False, max_length=200)
-    description = models.TextField(blank =True)
+    description = MarkdownxField('description', blank =True)
     choice1 = models.CharField(blank=True, max_length=100)
     choice2 = models.CharField(blank=True, max_length=100)
     choice3 = models.CharField(blank=True, max_length=100)
@@ -32,12 +34,9 @@ class Quiz(models.Model):
         choice2 = 2
         choice3 = 3
         choice4 = 4
-
     answer = models.IntegerField(choices=Answer.choices, null = True)
-
     updated = models.DateTimeField(auto_now=True)
     publish = models.DateTimeField(blank=True, null=True)
-
     public = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -46,6 +45,9 @@ class Quiz(models.Model):
 
     class Meta:
         ordering = ['-updated']
+
+    def markdown(self):
+        return markdownify(self.description)
 
     def save(self, *args, **kwargs):
         if self.public and not self.publish:
