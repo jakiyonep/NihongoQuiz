@@ -67,7 +67,7 @@
             <div class="collapse" id="c{{quiz.pk}}">
               <div class="card card-body">
                 <span class="correct-answer">{{quiz.answer}}</span>
-                {{quiz.description}}
+                {{quiz.description  | safe}}
               </div>
             </div>
         </div>

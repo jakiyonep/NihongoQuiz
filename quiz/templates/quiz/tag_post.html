@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="body">
-<h1 class="section-title">"{{ tag.name }}" tag</h1>
+<h1 class="section-title tag">{{ tag.name }}</h1>
   {% for quiz in object_list %}
   <div class="card card-quiz">
     <div class="card-title">
@@ -61,7 +61,7 @@
       <div class="collapse" id="c{{quiz.pk}}">
         <div class="card card-body">
           <span class="correct-answer">{{quiz.answer}}</span>
-          {{quiz.description}}
+          {{quiz.description  | safe}}
         </div>
       </div>
   </div>

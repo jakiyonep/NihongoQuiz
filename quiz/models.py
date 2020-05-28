@@ -36,10 +36,10 @@ class Quiz(models.Model):
     choice_long = models.BooleanField(default=False)
     description = models.TextField(blank=True)
     question = models.TextField(blank=False, null=False, max_length=200)
-    choice1 = models.CharField(blank=True, max_length=100)
-    choice2 = models.CharField(blank=True, max_length=100)
-    choice3 = models.CharField(blank=True, max_length=100)
-    choice4 = models.CharField(blank=True, max_length=100)
+    choice1 = models.TextField(blank=True, max_length=100)
+    choice2 = models.TextField(blank=True, max_length=100)
+    choice3 = models.TextField(blank=True, max_length=100)
+    choice4 = models.TextField(blank=True, max_length=100)
 
     class Answer(models.IntegerChoices):
         choice1 = 1
