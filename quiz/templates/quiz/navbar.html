@@ -35,7 +35,7 @@
   <div class="collapse" id="level"><!--level-->
     <div class="card card-body bg-light">
       <ul class="list-group list-gtoup-flush">
-        {% for level in levels|dictsort:"id" %}
+        {% for level in levels|dictsort:"name" %}
           <li class="list-group-item">
             <a href="{% url 'quiz:level_post' level.slug %}" class="card-link">{{ level.name }}</a>
             <span class="badge badge-secondary">{{ level.num_posts }}</span>

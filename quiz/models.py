@@ -18,6 +18,9 @@ class Tag(models.Model):
     slug = models.SlugField(unique=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -25,6 +28,9 @@ class Tag(models.Model):
 class Level(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name

@@ -67,6 +67,8 @@
     {% endif %}
 </div>
 {% endfor %}
+{% if not page_obj.has_previous and not page_obj.has_next%}
+{% else %}
 <nav class="pagination w-100 m-auto d-flex justify-content-between">
   {% if page_obj.has_previous %}
     <a class="pagination-previous btn btn-primary" href="?page={{ page_obj.previous_page_number }}"><<</a>
@@ -91,5 +93,6 @@
     <span class="pagination-next btn btn-light">>></span>
   {% endif %}
 </nav>
+{% endif %}
 </div>
 {% endblock %}
