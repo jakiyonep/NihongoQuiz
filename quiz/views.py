@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 
 from quiz.models import Quiz, Category, Tag, Level
-
+from .filters import QuizFilter
 
 # Create your views here.
 
@@ -13,7 +13,14 @@ class Index(ListView):
     model = Quiz
     template_name = 'quiz/index.html'
 
-    paginate_by = 7
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = QuizFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
 
 
 class QuizDetailView(DetailView):
@@ -90,6 +97,8 @@ class TagPostView(ListView):
 
 
 
+
+
 class SearchPostView(ListView):
     model = Quiz
     template_name = 'quiz/search_post.html'
@@ -114,3 +123,5 @@ class SearchPostView(ListView):
         query = self.request.GET.get('q')
         context['query'] = query
         return context
+
+

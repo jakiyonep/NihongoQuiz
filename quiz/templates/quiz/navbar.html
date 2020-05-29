@@ -1,29 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
   <a class="navbar-brand" href="/">NihongoQuiz</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <!--<ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown row d-flex justify-content-between">
-        <div class="col-4"><!--level-->
+        <div class="col-4">
           <a class="nav-link" data-toggle="collapse" href="#level" role="button" aria-expanded="false" aria-controls="level">
             Level
           </a>
         </div>
-        <div class="col-4"><!--category-->
+        <div class="col-4">
           <a class="nav-link" data-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="category">
             Category
           </a>
         </div>
-        <div class="col-4"><!--tag-->
+        <div class="col-4">
           <a class="nav-link" data-toggle="collapse" href="#tag" role="button" aria-expanded="false" aria-controls="tag">
             Tag
           </a>
         </div>
       </li>
-    </ul>
-    <li style="list-style:none;"><!--search-->
+    </ul>-->
+    <li style="list-style:none;" class="d-flex justify-content-end"><!--search-->
       <form class="form-inline my-2 my-lg-0" action="{% url 'quiz:search_post' %}" method="GET">
         <input class="form-control mr-sm-2" type="search" name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

@@ -1,8 +1,15 @@
 {% extends 'quiz/base.html' %}
 {% block content %}
+{% load bootstrap %}
 
 <div class="body">
-  {% for quiz in object_list %}
+  <div class="filter">
+    <form method="GET">
+      {{ filter.form | bootstrap }}
+      <button type="submit" name="button" class ="btn">Find Quizzes</button>
+  </form>
+  </div>
+  {% for quiz in filter.qs %}
   <div class="card card-quiz">
     <div class="card-title">
     {% if user.is_authenticated or quiz.public %}
@@ -17,12 +24,16 @@
           <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
             {{quiz.choice2}}
           </div>
-          <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
-             {{quiz.choice3}}
-          </div>
-          <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
-            {{quiz.choice4}}
-          </div>
+          {% if quiz.choice3 %}
+            <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
+              {{quiz.choice3}}
+            </div>
+          {% endif %}
+          {% if quiz.choice3 %}
+            <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
+              {{quiz.choice4}}
+            </div>
+          {% endif %}
         </div>
       {% endif%}
       {% if not quiz.choice_long %}
@@ -33,12 +44,16 @@
           <div class="choice choice-2 col-6 border border-white  bg-light">
             {{quiz.choice2}}
           </div>
-          <div class="choice choice-3 col-6 border border-white  bg-light">
-             {{quiz.choice3}}
-          </div>
-          <div class="choice choice-4 col-6 border border-white  bg-light">
-            {{quiz.choice4}}
-          </div>
+          {% if quiz.choice3 %}
+            <div class="choice choice-3 col-6 border border-white  bg-light">
+               {{quiz.choice3}}
+            </div>
+          {% endif %}
+          {% if quiz.choice3 %}
+            <div class="choice choice-4 col-6 border border-white  bg-light">
+              {{quiz.choice4}}
+            </div>
+          {% endif %}
         </div>
       {% endif%}
       <div class="w-100 d-flex justify-content-between card-bottom">
@@ -58,41 +73,15 @@
         </a>
       </div>
       <div class="collapse" id="c{{quiz.pk}}">
-        <div class="card card-body">
+        <div class="card card-body answer-collapse">
           <span class="correct-answer">{{quiz.answer}}</span>
-          {{quiz.description | safe}}
+          <div class="description">
+            {{quiz.description | safe}}
+          </div>
         </div>
       </div>
     </div>
     {% endif %}
-</div>
-{% endfor %}
-{% if not page_obj.has_previous and not page_obj.has_next%}
-{% else %}
-<nav class="pagination w-100 m-auto d-flex justify-content-between">
-  {% if page_obj.has_previous %}
-    <a class="pagination-previous btn btn-primary" href="?page={{ page_obj.previous_page_number }}"><<</a>
-  {% endif %}
-  {% if not page_obj.has_previous %}
-    <span class="pagination-previous btn btn-light"><<</span>
-  {% endif %}
-  <div class="">
-    {% for num in paginator.page_range %}
-    {% if page_obj.number == num %}
-      <span class="pagination-number btn btn-light">{{ num }}</span>
-    {% else %}
-      <a class="pagination-number btn btn-primary" href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-    {% endfor %}
   </div>
-
-  {% if page_obj.has_next %}
-    <a class="pagination-next btn btn-primary" href="?page={{ page_obj.next_page_number }}">>></a>
-  {% endif %}
-  {% if not page_obj.has_next %}
-    <span class="pagination-next btn btn-light">>></span>
-  {% endif %}
-</nav>
-{% endif %}
-</div>
+  {% endfor %}
 {% endblock %}
