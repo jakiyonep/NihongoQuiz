@@ -30,7 +30,7 @@ class Level(models.Model):
     slug = models.SlugField(unique=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['slug']
 
     def __str__(self):
         return self.name

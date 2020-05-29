@@ -11,6 +11,9 @@
 {% extends 'quiz/base.html' %}
 {% block content %}
 <div class="body">
+<div class="section-title {{ level.slug }}">
+  {{ level.name }}
+</div>
     {% include 'quiz/quiz_list.html' %}
 </div>
 {% endblock %}
