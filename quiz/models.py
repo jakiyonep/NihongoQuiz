@@ -55,7 +55,7 @@ class Quiz(models.Model):
 
     answer = models.IntegerField(choices=Answer.choices, null=True)
     updated = models.DateTimeField(auto_now=True)
-    publish = models.DateTimeField(blank=True, null=True)
+    publish = models.DateTimeField(auto_now=True, blank=True, null=True)
     public = models.BooleanField(default=False)
 
     class Meta:
