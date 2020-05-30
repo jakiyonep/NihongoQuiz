@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 
-from quiz.models import Quiz, Category, Tag, Level
+from quiz.models import Quiz, Category, Tag, Level, DescriptionDetail, ChoicesDetail
 from .filters import QuizFilter
 
 # Create your views here.
@@ -18,7 +18,20 @@ class Index(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = QuizFilter(self.request.GET, queryset=self.get_queryset())
+        context.update({
+            'object_list2': DescriptionDetail.objects.all,
+            'object_list3': ChoicesDetail.objects.all,
+        })
         return context
+
+    def get_queryset(self):
+        return Quiz.objects.all()
+
+
+
+
+
+
 
 
 

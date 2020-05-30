@@ -43,6 +43,7 @@ $color-n3: rgb(107, 189, 72)
 $color-n2: rgb(233, 186, 36)
 $color-n1: rgb(237, 125, 60)
 $color-n0: rgb(236, 34, 24)
+$square-color: rgb(71, 71, 71)
 
 .n6
   display: inline-block
@@ -196,5 +197,97 @@ $color-n0: rgb(236, 34, 24)
     height: 100%
     position: absolute
     left: 3em
+.detail-description
+  *
+    padding-left: 1em
+    margin-bottom: 1em
+  .detail-word
+    font-weight: bold
+    padding-left: 0
+  .detail-example-ja
+    font-style: italic
+  .detail-example-yomi
+    font-style: italic
+  .detail-example-en
+    padding-bottom: 1em
+    font-style: italic
+    border-bottom: 1px solid rgb(212, 212, 212)
+  .detail-yomi::before
+    content: "読:"
+    width: 1em
+    margin-bottom: 0.5em
+    height: 100%
+    display: inline
+    font-weight: bold
+  .detail-definition::before
+    content: "義:"
+    width: 1em
+    height: 100%
+    display: inline
+    font-weight: bold
+  .detail-usage::before
+    content: "用:"
+    width: 1em
+    height: 100%
+    display: inline
+    font-weight: bold
+  .detail-example-ja::before
+    content: "日:"
+    width: 3em
+    font-style: normal
+    height: 100%
+    display: block
+    margin-bottom: 0.5em
+    font-weight: bold
+  .detail-example-yomi::before
+    content: "読:"
+    width: 3em
+    font-style: normal
+    height: 100%
+    display: block
+    margin-bottom: 0.5em
+    font-weight: bold
+  .detail-example-en::before
+    content: "英:"
+    width: 3em
+    font-style: normal
+    height: 100%
+    display: block
+    margin-bottom: 0.5em
+    font-weight: bold
+
+.choices-description
+  p
+    font-weight: bold
+  div
+    padding-left: 1em
+  .choice1::before
+    content: "1."
+    font-weight: bold
+    width: 1em
+    height: 100%
+    display: inline
+  .choice2::before
+    content: "2."
+    font-weight: bold
+    width: 1em
+    height: 100%
+    display: inline
+  .choice3::before
+    content: "3."
+    font-weight: bold
+    width: 1em
+    height: 100%
+    display: inline
+  .choice4::before
+    content: "4."
+    font-weight: bold
+    width: 1em
+    height: 100%
+    display: inline
+
+
+
+
   .pagination
     margin: 2em auto

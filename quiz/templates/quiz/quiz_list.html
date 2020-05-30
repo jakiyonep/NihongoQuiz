@@ -7,7 +7,11 @@
 
   gtag('config', 'UA-167369199-1');
 </script>
+
+
 {% for quiz in object_list %}
+
+
 <div class="card card-quiz">
   <div class="card-title">
   {% if user.is_authenticated or quiz.public %}
@@ -71,9 +75,81 @@
       </a>
     </div>
     <div class="collapse" id="c{{quiz.pk}}">
-      <div class="card card-body">
+      <div class="card card-body answer-collapse">
         <span class="correct-answer">{{quiz.answer}}</span>
-        {{quiz.description | safe}}
+        <div class="description"><!--DetailDescription-->
+          {% if quiz.description %}
+            <div class="quiz-description">
+              {{ quiz.description |safe }}
+            </div>
+          {% endif %}
+          <div class="detail-description">
+            {% for detail in quiz.descriptiondetail_set.all  %}
+              {% if detail.word %}
+                <div class="detail-word">
+                  {{ detail.word  }}
+                </div>
+              {% endif %}
+              {% if detail.yomi %}
+                <div class="detail-yomi">
+                  {{ detail.yomi  }}
+                </div>
+              {% endif %}
+              {% if detail.definition %}
+                <div class="detail-definition">
+                  {{ detail.definition  }}
+                </div>
+              {% endif %}
+              {% if detail.usage %}
+                <div class="detail-usage">
+                  {{ detail.usage }}
+                </div>
+              {% endif %}
+              {% if detail.example_ja %}
+                <div class="detail-example-ja">
+                  {{ detail.example_ja }}
+                </div>
+              {% endif %}
+              {% if detail.example_yomi %}
+                <div class="detail-example-yomi">
+                  {{ detail.example_yomi }}
+                </div>
+              {% endif %}
+              {% if detail.example_en %}
+                <div class="detail-example-en">
+                  {{ detail.example_en }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="choices-description">
+            {% if quiz.choicesdetail_set.all %}
+            <p>Choices</p>
+            {% endif %}
+            {% for choice in quiz.choicesdetail_set.all %}
+              {% if choice.choice_explanation_1 %}
+                <div class="choice1">
+                  {{ choice.choice_explanation_1 }}
+                </div>
+              {% endif %}
+              {% if choice.choice_explanation_2 %}
+                <div class="choice2">
+                  {{ choice.choice_explanation_2 }}
+                </div>
+              {% endif %}
+              {% if choice.choice_explanation_3 %}
+                <div class="choice3">
+                  {{ choice.choice_explanation_3 }}
+                </div>
+              {% endif %}
+              {% if choice.choice_explanation_4 %}
+                <div class="choice4">
+                  {{ choice.choice_explanation_4 }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
   </div>
