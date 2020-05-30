@@ -23,23 +23,23 @@
   <div class="card card-quiz">
     <div class="card-title">
     {% if user.is_authenticated or quiz.public %}
-      {% if not quiz.public %} Draft {% endif %}{{quiz.question}}
+      {% if not quiz.public %} Draft {% endif %}{{quiz.question | safe}}
     </div>
     <div class="card-body">
       {% if quiz.choice_long %}
         <div class="card-text row">
           <div class="choice choice-1 col-12 border border-white  bg-light mb-3">
-            {{quiz.choice1}}
+            {{quiz.choice1 | safe}}
           </div>
           <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
-            {{quiz.choice2}}
+            {{quiz.choice2 | safe}}
           </div>
-          {% if quiz.choice3 %}
+          {% if quiz.choice3 | safe %}
             <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
               {{quiz.choice3}}
             </div>
           {% endif %}
-          {% if quiz.choice3 %}
+          {% if quiz.choice4 | safe %}
             <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
               {{quiz.choice4}}
             </div>
@@ -49,19 +49,19 @@
       {% if not quiz.choice_long %}
         <div class="card-text row">
           <div class="choice choice-1 col-6 border border-white  bg-light">
-            {{quiz.choice1}}
+            {{quiz.choice1 | safe}}
           </div>
           <div class="choice choice-2 col-6 border border-white  bg-light">
-            {{quiz.choice2}}
+            {{quiz.choice2 | safe}}
           </div>
-          {% if quiz.choice3 %}
+          {% if quiz.choice3 | safe %}
             <div class="choice choice-3 col-6 border border-white  bg-light">
-               {{quiz.choice3}}
+               {{quiz.choice3 | safe}}
             </div>
           {% endif %}
-          {% if quiz.choice3 %}
+          {% if quiz.choice4 | safe %}
             <div class="choice choice-4 col-6 border border-white  bg-light">
-              {{quiz.choice4}}
+              {{quiz.choice4 | safe}}
             </div>
           {% endif %}
         </div>
@@ -98,24 +98,24 @@
             {% endif %}
             {% if quiz.question_en %}
               <div class="question-en">
-                {{ quiz.question_en }}
+                {{ quiz.question_en | safe }}
               </div>
             {% endif %}
             <div class="detail-description">
               {% for detail in quiz.descriptiondetail_set.all  %}
                 {% if detail.word %}
                   <div class="detail-word">
-                    {{ detail.word  }}
+                    {{ detail.word  |safe }}
                   </div>
                 {% endif %}
                 {% if detail.yomi %}
                   <div class="detail-yomi">
-                    {{ detail.yomi  }}
+                    {{ detail.yomi  |safe }}
                   </div>
                 {% endif %}
                 {% if detail.definition %}
                   <div class="detail-definition">
-                    {{ detail.definition  }}
+                    {{ detail.definition  |safe }}
                   </div>
                 {% endif %}
                 {% if detail.usage %}
@@ -125,12 +125,12 @@
                 {% endif %}
                 {% if detail.example_ja %}
                   <div class="detail-example-ja">
-                    {{ detail.example_ja }}
+                    {{ detail.example_ja |safe }}
                   </div>
                 {% endif %}
                 {% if detail.example_yomi %}
                   <div class="detail-example-yomi">
-                    {{ detail.example_yomi }}
+                    {{ detail.example_yomi |safe }}
                   </div>
                 {% endif %}
                 {% if detail.example_en %}
