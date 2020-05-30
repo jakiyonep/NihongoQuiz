@@ -52,7 +52,8 @@ class Quiz(models.Model):
         choice2 = 2
         choice3 = 3
         choice4 = 4
-
+    question_yomi = models.TextField(blank=True, max_length=200)
+    question_en = models.TextField(blank=True, max_length=200)
     answer = models.IntegerField(choices=Answer.choices, null=True)
     updated = models.DateTimeField(auto_now=True)
     publish = models.DateTimeField(auto_now=True, blank=True, null=True)

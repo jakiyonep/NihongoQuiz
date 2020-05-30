@@ -197,6 +197,33 @@ $square-color: rgb(71, 71, 71)
     height: 100%
     position: absolute
     left: 3em
+
+.question-yomi
+  font-style: italic
+  padding-left:
+  margin-bottom: 1em
+.question-en
+  font-style: italic
+  padding-left: 
+  margin-bottom: 1em
+
+.question-yomi::before
+  content: "読:"
+  width: 5em
+  font-style: normal
+  margin-bottom: 0.5em
+  height: 100%
+  display: block
+  font-weight: bold
+.question-en::before
+  content: "義:"
+  width: 5em
+  font-style: normal
+  height: 100%
+  display: block
+  font-weight: bold
+
+
 .detail-description
   *
     padding-left: 1em

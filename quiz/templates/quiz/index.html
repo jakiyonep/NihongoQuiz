@@ -91,6 +91,16 @@
                 {{ quiz.description |safe }}
               </div>
             {% endif %}
+            {% if quiz.question_yomi %}
+              <div class="question-yomi">
+                {{ quiz.question_yomi |safe }}
+              </div>
+            {% endif %}
+            {% if quiz.question_en %}
+              <div class="question-en">
+                {{ quiz.question_en }}
+              </div>
+            {% endif %}
             <div class="detail-description">
               {% for detail in quiz.descriptiondetail_set.all  %}
                 {% if detail.word %}
