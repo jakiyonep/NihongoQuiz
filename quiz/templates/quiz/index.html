@@ -34,14 +34,14 @@
           <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
             {{quiz.choice2 | safe}}
           </div>
-          {% if quiz.choice3 | safe %}
+          {% if quiz.choice3 %}
             <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
-              {{quiz.choice3}}
+              {{quiz.choice3 | safe}}
             </div>
           {% endif %}
-          {% if quiz.choice4 | safe %}
+          {% if quiz.choice4  %}
             <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
-              {{quiz.choice4}}
+              {{quiz.choice4  | safe}}
             </div>
           {% endif %}
         </div>
@@ -54,12 +54,12 @@
           <div class="choice choice-2 col-6 border border-white  bg-light">
             {{quiz.choice2 | safe}}
           </div>
-          {% if quiz.choice3 | safe %}
+          {% if quiz.choice3 %}
             <div class="choice choice-3 col-6 border border-white  bg-light">
                {{quiz.choice3 | safe}}
             </div>
           {% endif %}
-          {% if quiz.choice4 | safe %}
+          {% if quiz.choice4  %}
             <div class="choice choice-4 col-6 border border-white  bg-light">
               {{quiz.choice4 | safe}}
             </div>
