@@ -81,17 +81,17 @@ class Quiz(models.Model):
 
 class DescriptionDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
-    word = models.CharField(blank=True, max_length=100)
-    yomi = models.CharField(blank=True, max_length=100)
-    definition = models.CharField(blank=True, max_length=100)
-    usage = models.CharField(blank=True, max_length=100)
-    example_ja = models.TextField(blank=True, max_length=100)
-    example_yomi = models.TextField(blank=True, max_length=100)
-    example_en = models.TextField(blank=True, max_length=100)
+    word = models.CharField(blank=True, max_length=200)
+    yomi = models.CharField(blank=True, max_length=200)
+    definition = models.CharField(blank=True, max_length=200)
+    usage = models.CharField(blank=True, max_length=200)
+    example_ja = models.TextField(blank=True, max_length=200)
+    example_yomi = models.TextField(blank=True, max_length=200)
+    example_en = models.TextField(blank=True, max_length=200)
 
 class ChoicesDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
-    choice_explanation_1 = models.CharField(blank=True, max_length=100)
-    choice_explanation_2 = models.CharField(blank=True, max_length=100)
-    choice_explanation_3 = models.CharField(blank=True, max_length=100)
-    choice_explanation_4 = models.CharField(blank=True, max_length=100)
+    choice_explanation_1 = models.CharField(blank=True, max_length=200)
+    choice_explanation_2 = models.CharField(blank=True, max_length=200)
+    choice_explanation_3 = models.CharField(blank=True, max_length=200)
+    choice_explanation_4 = models.CharField(blank=True, max_length=200)
