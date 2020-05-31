@@ -23,8 +23,8 @@ class QuizAdmin(SummernoteModelAdmin):
         DescriptionDetailInline,
         ChoiceDetailInline
     ]
-    list_display = ('question', 'level', 'category' )
-    search_fields = ['question', 'choice1','choice2','choice3','choice4',]
+    list_display = ('question', 'level', 'category',)
+    search_fields = ['question', 'choice1','choice2','choice3','choice4','descriptiondetail__word']
 
 
 admin.site.register(Level)

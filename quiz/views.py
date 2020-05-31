@@ -123,7 +123,8 @@ class SearchPostView(ListView):
             Q(question__icontains=query) |
             Q(description__icontains=query) |
             Q(category__name__icontains=query) |
-            Q(tags__name__icontains=query)
+            Q(tags__name__icontains=query) |
+            Q(descriptiondetail__word__icontains=query)
         )
         if query is not None:
             qs = super().get_queryset().filter(lookups).distinct()
