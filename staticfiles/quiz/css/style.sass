@@ -13,6 +13,19 @@
 .navbar-nav
   div
     text-align: center
+.navbar-brand
+  position: relative
+.navbar-brand
+  width: 2em
+  height: 2em
+  background-color: rgb(242, 71, 71)
+  border-radius: 50%
+  display: block
+  font-family: "Sawarabi Mincho"
+.navbar-collapse
+  display: flex
+  justify-content: flex-end
+
 
 /*filter*/
 .filter
@@ -198,15 +211,13 @@ $square-color: rgb(71, 71, 71)
     width: 1em
     height: 100%
     position: absolute
-    left: 3em
+    left: 2.5em
 
 .question-yomi
   font-style: italic
-  padding-left:
   margin-bottom: 1em
 .question-en
   font-style: italic
-  padding-left:
   margin-bottom: 1em
 
 .question-yomi::before
@@ -293,6 +304,11 @@ $square-color: rgb(71, 71, 71)
     padding-top: 0.5em
   div
     padding-left: 1em
+  li
+    margin-left: 1.5em
+  li::before
+    margin-left: 0.5em
+
 
   .choice1::before
     content: "1."
