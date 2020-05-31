@@ -141,6 +141,30 @@
               {% endfor %}
             </div>
             <div class="choices-description">
+              {% if quiz.choice1_detail %}
+                <p>Choices</p>
+              {% endif %}
+              {% if quiz.choice1_detail %}
+                <div class="choice1">
+                  {{ quiz.choice1_detail }}
+                </div>
+              {% endif %}
+              {% if quiz.choice2_detail %}
+                <div class="choice2">
+                  {{ quiz.choice2_detail }}
+                </div>
+              {% endif %}
+              {% if quiz.choice3_detail %}
+                <div class="choice3">
+                  {{ quiz.choice3_detail }}
+                </div>
+              {% endif %}
+              {% if quiz.choice4_detail %}
+                <div class="choice4">
+                  {{ quiz.choice4_detail }}
+                </div>
+              {% endif %}
+
               {% if quiz.choicesdetail_set.all %}
               <p>Choices</p>
               {% endif %}
