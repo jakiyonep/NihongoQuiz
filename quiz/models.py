@@ -17,9 +17,10 @@ class Tag(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    order = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['order']
 
     def __str__(self):
         return self.name

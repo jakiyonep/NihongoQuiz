@@ -27,8 +27,13 @@ class QuizAdmin(SummernoteModelAdmin):
     search_fields = ['question', 'choice1','choice2','choice3','choice4','descriptiondetail__word']
 
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
+    list_editable = ['order']
+
+
 admin.site.register(Level)
 admin.site.register(Category)
-admin.site.register(Tag)
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Quiz, QuizAdmin)
 
