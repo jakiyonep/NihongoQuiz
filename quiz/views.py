@@ -14,7 +14,6 @@ class Index(ListView):
     template_name = 'quiz/index.html'
 
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = QuizFilter(self.request.GET, queryset=self.get_queryset())
@@ -32,18 +31,6 @@ class Index(ListView):
 
 
 
-
-
-
-
-class QuizDetailView(DetailView):
-    model = Quiz
-
-    def get_object(self, gueryset=None):
-        obg = super().get_object(queryset=queryset)
-        if not obj.public and not self.request.user.is_authenticated:
-            raise Http404
-        return obj
 
 
 class LevelListView(ListView):
@@ -65,7 +52,6 @@ class TagListView(ListView):
 class LevelPostView(ListView):
     model = Quiz
     template_name = 'quiz/level_post.html'
-    paginate_by = 7
     def get_queryset(self):
         level_slug = self.kwargs['level_slug']
         self.level = get_object_or_404(Level, slug=level_slug)
@@ -81,7 +67,6 @@ class LevelPostView(ListView):
 class CategoryPostView(ListView):
     model = Quiz
     template_name = 'quiz/category_post.html'
-    paginate_by = 7
     def get_queryset(self):
         category_slug = self.kwargs['category_slug']
         self.category = get_object_or_404(Category, slug=category_slug)
@@ -96,7 +81,6 @@ class CategoryPostView(ListView):
 class TagPostView(ListView):
     model = Quiz
     template_name = 'quiz/tag_post.html'
-    paginate_by = 7
     def get_queryset(self):
         tag_slug = self.kwargs['tag_slug']
         self.tag = get_object_or_404(Tag, slug=tag_slug)
@@ -115,7 +99,6 @@ class TagPostView(ListView):
 class SearchPostView(ListView):
     model = Quiz
     template_name = 'quiz/search_post.html'
-    paginate_by = 7
 
     def get_queryset(self):
         query = self.request.GET.get('q', None)
