@@ -1,0 +1,39 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/toppage.min.css' %}">
+  </head>
+  <body>
+    <div class="body">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 section">
+          <a href="{% url 'quiz:basics' %}">
+            <div class="card h-100">
+              <div class="card-body ">
+                <h1 class="top-menu mb-10 card-title">基 - Basics</h1>
+                <p class="desc card-text">New to Nihongo? Here are some crash courses on the Japanese writing system and grammar</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 section">
+          <a href="{% url 'quiz:quiz' %}">
+            <div class="card h-100">
+              <div class="card-body">
+                <h1 class="top-menu mb-10 card-title" href="{% url 'quiz:quiz' %}">問 - Quizzes</h1>
+                <p class="desc card-text">Practice makes perfect</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+{% endblock %}

@@ -4,12 +4,20 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 
-from quiz.models import Quiz, Category, Tag, Level, DescriptionDetail, ChoicesDetail
+from quiz.models import (
+    Quiz,
+    Category,
+    Tag,
+    Level,
+    DescriptionDetail,
+    ChoicesDetail,
+    Basics,
+)
 from .filters import QuizFilter
 
 # Create your views here.
 
-class Index(ListView):
+class QuizListView(ListView):
     model = Quiz
     template_name = 'quiz/index.html'
 
@@ -25,12 +33,6 @@ class Index(ListView):
 
     def get_queryset(self):
         return Quiz.objects.all()
-
-
-
-
-
-
 
 
 class LevelListView(ListView):
@@ -122,3 +124,20 @@ class SearchPostView(ListView):
         return context
 
 
+class BasicsIndex(ListView):
+    model = Basics
+    template_name = 'quiz/basics/basics_index.html'
+
+class BasicsDetailView(DetailView):
+    model = Basics
+    template_name = 'quiz/basics/basic_post.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if not obj.public and not self.request.user.is_authenticated:
+            raise Http404
+        return obj
+
+class ToppageView(ListView):
+    model = Quiz
+    template_name = 'quiz/toppage.html'

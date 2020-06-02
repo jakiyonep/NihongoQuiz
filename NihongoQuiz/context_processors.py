@@ -1,6 +1,6 @@
 from django.db.models import Count, Q
 
-from quiz.models import Category, Tag, Level
+from quiz.models import Category, Tag, Level, Basics
 
 
 def common(request):

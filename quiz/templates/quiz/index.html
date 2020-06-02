@@ -18,10 +18,19 @@
   </head>
   <body>
 <div class="body">
+  <h1 class="top-menu">問 - Quizzes</h1>
+
+
+  <form class="mb-5 form-inline my-2 my-lg-0 w-100 d-flex justify-content-end" action="{% url 'quiz:search_post' %}" method="GET">
+    <input class="form-control mr-sm-2" type="search" name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
+      <button class="btn button my-2 my-sm-0 " type="submit">Search</button>
+  </form>
+
+
   <div class="filter">
     <form method="GET">
       {{ filter.form | bootstrap }}
-      <button type="submit" name="button" class ="btn">Find Quizzes</button>
+      <button type="submit" name="button" class ="btn button">Find Quizzes</button>
   </form>
   </div>
   {% for quiz in filter.qs %}

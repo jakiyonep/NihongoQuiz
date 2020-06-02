@@ -2,17 +2,47 @@
 *
   font-family: 'hiragino'
   color: rgb(111, 111, 111)
+
+.top-menu
+  text-decoration: none
+  color: rgb(255, 110, 110)
+  font-size: 2em
+  font-family: "Sawarabi Mincho"
+  margin-bottom: 3em
 .body
   margin-top: 4em
   padding: 0 0.5em
   margin-bottom: 4em
 .section-title
+  font-size: 2em
+  text-decoration: none
+  color: inherit
   margin-bottom: 2em
   display: inline-block
 /*navbar*/
+a:hover
+  text-decoration: none
+  color: inherit
+.logo
+  margin-right: 15vw
+.navbar
+  position: sticky
+  .form-control
+    display: inline-block
+  .btn
+    display: inline-block
+.nav-item
+  margin-bottom: 0 !important
+.nav-link
+  border-bottom: none
+  width: 100%
 .navbar-nav
-  div
-    text-align: center
+  width: 100%
+  margin: 1em auto
+  li
+    margin-bottom: 1em
+    font-size: 1.2em
+
 .navbar-brand
   position: relative
 .navbar-brand
@@ -23,8 +53,7 @@
   display: block
   font-family: "Sawarabi Mincho"
 .navbar-collapse
-  display: flex
-  justify-content: flex-end
+  text-align: right
 
 
 /*filter*/
@@ -37,16 +66,26 @@
     display: flex
     flex-direction: column
     justify-content: center
-  .btn
+    margin-top: 5em
+
+.form-inline
+  display: flex
+  .form-control
     width: 100%
-    display: inline-block
-    padding: 0.5em 1em
-    text-decoration: none
-    border-radius: 3px
-    font-weight: bold
-    color: #FFF
-    background-image: linear-gradient(45deg, #709dff 0%, #b0c9ff 100%)
-    transition: .4s
+    margin-bottom: 1em
+  .button
+    width: 100%
+    margin-bottom: 5em
+
+.button
+  display: inline-block
+  padding: 0.5em 1em
+  text-decoration: none
+  border-radius: 3px
+  font-weight: bold
+  color: #FFF
+  background-image: linear-gradient(45deg, rgb(255, 119, 119) 0%, rgb(255, 181, 181) 100%)
+  transition: .4s
 
 /*index*/
 $color-n6: rgb(168, 233, 255)
@@ -196,6 +235,7 @@ $square-color: rgb(71, 71, 71)
         background: linear-gradient(transparent 80%, rgb(230, 230, 230) 90%)
     .answer
       height: 3em
+      background-color: rgb(255, 189, 182)
   .correct-answer
     color: rgb(242, 129, 107)
     font-size: 1.5em
@@ -336,7 +376,8 @@ $square-color: rgb(71, 71, 71)
     display: inline
 
 
-
+.row
+  padding: 0
 
   .pagination
     margin: 2em auto

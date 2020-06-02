@@ -1,0 +1,25 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
+  </head>
+  <body>
+    <div class="container body">
+      <div class="row">
+        <div class="col">
+          <div class="post-info">
+            <h1 class="section-title">{{ object.title }}</h1>
+            <h3 class="section-category">{{ object.category }}</h3>
+          </div>
+          <div class="content">
+            {{ object.content | safe}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

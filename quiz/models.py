@@ -96,3 +96,28 @@ class ChoicesDetail(models.Model):
     choice_explanation_2 = models.CharField(blank=True, max_length=200)
     choice_explanation_3 = models.CharField(blank=True, max_length=200)
     choice_explanation_4 = models.CharField(blank=True, max_length=200)
+
+
+class BasicsCategory(models.Model):
+    name = models.CharField(null=True, max_length=255)
+    slug = models.CharField(blank=False, max_length=255)
+    order = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+class Basics(models.Model):
+    title = models.CharField(null=True, max_length=255)
+    category = models.ForeignKey(BasicsCategory, on_delete=models.CASCADE)
+    content = models.TextField(null=True)
+    order = models.IntegerField(null=True)
+    public = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title

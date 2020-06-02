@@ -1,0 +1,71 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
+</head>
+<div class="container mb-5">
+  <h1 class="top-menu mt-5">基 - Basics</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="hiragana">
+        <p class="category-title">Hiragana/Katakana</p>
+          {% for basic in object_list %}
+            {% if basic.category.slug == "hiragana"  %}
+              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
+          {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="verb">
+        <p class="category-title">Kanji</p>
+          {% for basic in object_list %}
+            {% if basic.category.slug == "kanji"  %}
+              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
+          {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="verb">
+        <p class="category-title">Grammar</p>
+          {% for basic in object_list %}
+            {% if basic.category.slug == "grammar"  %}
+              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
+          {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="verb">
+        <p class="category-title">Verb</p>
+          {% for basic in object_list %}
+            {% if basic.category.slug == "verb"  %}
+              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
+          {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="verb">
+        <p class="category-title">Adjective</p>
+          {% for basic in object_list %}
+            {% if basic.category.slug == "adjective"  %}
+              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
+          {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="empty">
+
+</div>
+
+{% endblock %}
