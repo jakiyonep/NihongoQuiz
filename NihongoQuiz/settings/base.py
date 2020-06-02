@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
+DEBUG = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django_filters',
     'bootstrapform',
     'quiz',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 """ summernote"""
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+# AWS S3
+
+
+
+from NihongoQuiz.aws.conf import *
+
+if DEBUG:
+    STATIC_URL = '/static/'
+else:
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_URL, 'static')
