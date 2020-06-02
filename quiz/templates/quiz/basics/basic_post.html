@@ -5,6 +5,7 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/style.min.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
     <script>
@@ -16,12 +17,11 @@
     </script>
   </head>
   <body>
-    <div class="container body">
+    <div class="container">
       <div class="row">
         <div class="col">
           <div class="post-info">
             <h1 class="section-title">{{ object.title }}</h1>
-            <h3 class="section-category">{{ object.category }}</h3>
           </div>
           <div class="content">
             {{ object.content | safe}}

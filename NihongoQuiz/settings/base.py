@@ -135,7 +135,6 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 
-
 if DEBUG:
     STATIC_URL = '/static/'
 else:

@@ -17,10 +17,10 @@
   <h1 class="top-menu mt-5">基 - Basics</h1>
   <div class="row">
     <div class="col-md-6">
-      <div class="hiragana">
-        <p class="category-title">Hiragana/Katakana</p>
+      <div class=basics-letter">
+        <p class="category-title">ひらがな/カタカナ/漢字</p>
           {% for basic in object_list %}
-            {% if basic.category.slug == "hiragana"  %}
+            {% if basic.category.slug == "letter"  %}
               <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
             {% endif%}
           {% endfor %}
@@ -28,18 +28,7 @@
     </div>
 
     <div class="col-md-6">
-      <div class="verb">
-        <p class="category-title">Kanji</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "kanji"  %}
-              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="verb">
+      <div class="basics-grammar">
         <p class="category-title">Grammar</p>
           {% for basic in object_list %}
             {% if basic.category.slug == "grammar"  %}
@@ -50,7 +39,7 @@
     </div>
 
     <div class="col-md-6">
-      <div class="verb">
+      <div class="basics-verb">
         <p class="category-title">Verb</p>
           {% for basic in object_list %}
             {% if basic.category.slug == "verb"  %}
@@ -61,7 +50,7 @@
     </div>
 
     <div class="col-md-6">
-      <div class="verb">
+      <div class="basics-adjective">
         <p class="category-title">Adjective</p>
           {% for basic in object_list %}
             {% if basic.category.slug == "adjective"  %}
