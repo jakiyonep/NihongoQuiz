@@ -28,3 +28,4 @@ import django_heroku
 django_heroku.settings(locals())
 
 #AWS
+from NihongoQuiz.aws.conf import *

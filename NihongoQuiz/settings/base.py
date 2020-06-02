@@ -134,7 +134,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 
-from NihongoQuiz.aws.conf import *
+
 
 if DEBUG:
     STATIC_URL = '/static/'
