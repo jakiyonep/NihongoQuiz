@@ -1,3 +1,6 @@
+{% extends 'quiz/base.html' %}
+{% block title %}{{category.name}}{% endblock %}
+{% block content %}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
 <script>
@@ -8,8 +11,6 @@
   gtag('config', 'UA-167867160-1');
 </script>
 
-{% extends 'quiz/base.html' %}
-{% block content %}
 <div class="body">
 <div class="section-title {{ category.slug }}">
   {{ category.name }}
