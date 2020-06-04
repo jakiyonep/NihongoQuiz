@@ -1,0 +1,85 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+
+{% block title %}Basics{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-167867160-1');
+    </script>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="post-info">
+            <h1 class="section-number">{{ object.chapter }}-{{ object.number }}</h1>
+            <h1 class="section-title">{{ object.title }}</h1>
+          </div>
+          <div class="lesson-body">
+              <p>本文</p>
+              {% for body in lesson.lessonbody_set.all  %}
+               {{ body.person }}: {{ body.sentence }} <br>
+               <div class="body-yomi">
+                 {{ body.sentence_yomi | safe}}
+               </div>
+               <div class="body-en">
+                 {{ body.sentence_en | safe }}
+               </div>
+              {% endfor %}
+          </div>
+
+          <div class="lesson-question">
+              {% for question in lesson.lessonquestion_set.all  %}
+                {{ question.question | safe}}
+                {{ question.question_en | safe}}
+                {{ question.answer | safe}}
+                {{ question.answer_en | safe}}
+              {% endfor %}
+          </div>
+
+          <div class="lesson-vocab">
+              {% for vocabulary in lesson.lessonvocabulary_set.all  %}
+                <p style="font-weight:bold;">{{vocabulary.word}}</p>
+                {{ vocabulary.yomi | safe}}
+                {{ vocabulary.definition | safe}}
+                {{ vocabulary.usage | safe}}
+              {% endfor %}
+          </div>
+
+          <div class="lesson-grammar">
+              {% for grammar in lesson.lessongrammar_set.all  %}
+                {{ grammar.grammar | safe}}
+                {{ grammar.desc | safe}}
+
+              {% endfor %}
+          </div>
+
+          <div class="lesson-kanji">
+              {% for kanji in lesson.lessonkanji_set.all  %}
+                {{ kanji.kanji | safe}}
+                {{ kanji.definition | safe}}
+                {{ kanji.yomi | safe}}
+                {{ kanji.example | safe}}
+                {{ kanji.example_en | safe}}
+              {% endfor %}
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>
+
+
+{% endblock %}

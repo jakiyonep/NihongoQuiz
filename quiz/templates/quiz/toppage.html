@@ -1,7 +1,7 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
 {% block description %}
-  Let's learn Nihongo with me! 
+  Let's learn Nihongo with me!
 {% endblock %}
 {% block content %}
 <html lang="en" dir="ltr">
@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-md-6 section">
-          <a href="#">
+          <a href="{% url 'quiz:lessons' %}">
             <div class="card h-100">
               <div class="card-body ">
                 <h1 class="top-menu mb-5 card-title">習 - Courses</h1>

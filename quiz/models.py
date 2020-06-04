@@ -121,3 +121,64 @@ class Basics(models.Model):
 
     def __str__(self):
         return self.title
+
+
+#Lessons
+
+class Lesson(models.Model):
+    chapter = models.IntegerField(null=True)
+    number = models.IntegerField(null=True)
+    title = models.TextField(null=True, max_length=300)
+    public = models.BooleanField(default=True)
+
+
+    class Meta:
+        ordering = ['chapter']
+
+
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
+class LessonBody(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    person = models.CharField(null=True, max_length=300, blank=True)
+    sentence = models.TextField(null=True, max_length=300, blank=True)
+    sentence_yomi = models.TextField(null=True, max_length=300, blank=True)
+    sentence_en = models.TextField(null=True, max_length=300, blank=True)
+
+
+class LessonVocabulary(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    word = models.CharField(blank=True, max_length=300, null=True)
+    yomi = models.CharField(blank=True, max_length=300, null=True)
+    definition = models.CharField(blank=True, max_length=300, null=True)
+    usage = models.CharField(blank=True, max_length=300, null=True)
+
+class LessonQuestion(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    question = models.TextField(null=True, max_length=300, blank=True)
+    question_en = models.TextField(null=True, max_length=300, blank=True)
+    answer = models.TextField(null=True, max_length=300, blank=True)
+    answer_en = models.TextField(null=True, max_length=300, blank=True)
+
+class LessonGrammar(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    grammar = models.CharField(null=True, max_length=300)
+    desc = models.TextField(null=True, max_length=1500)
+
+    def __str__(self):
+        return self.grammar
+
+class LessonKanji(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    kanji = models.CharField(null=True, max_length=300, blank=True)
+    definition = models.CharField(null=True, max_length=300, blank=True)
+    yomi = models.CharField(null=True, max_length=300, blank=True)
+    example = models.TextField(null=True, max_length=300, blank=True)
+    example_en = models.TextField(null=True, max_length=300, blank=True)
+

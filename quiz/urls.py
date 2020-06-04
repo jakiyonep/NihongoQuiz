@@ -12,6 +12,8 @@ from quiz.views import (
     BasicsDetailView,
     BasicsIndex,
     ToppageView,
+    LessonsIndex,
+    LessonDetailView,
 )
 
 
@@ -28,6 +30,8 @@ urlpatterns = [
     path('tag/<str:tag_slug>/', TagPostView.as_view(), name ="tag_post"),
     path('search/', SearchPostView.as_view(), name='search_post'),
     path('basics/', BasicsIndex.as_view(), name="basics"),
-    path('basic/<str:pk>/', BasicsDetailView.as_view(), name="basic_post" )
+    path('basic/<str:pk>/', BasicsDetailView.as_view(), name="basic_post"),
+    path('lessons/', LessonsIndex.as_view(), name="lessons"),
+    path('lesson/<str:pk>/', LessonDetailView.as_view(), name="lesson_post"),
 
 ]

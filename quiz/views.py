@@ -6,13 +6,15 @@ from django.shortcuts import get_object_or_404
 
 from quiz.models import (
     Quiz,
-    Category,
     Tag,
+    Category,
     Level,
     DescriptionDetail,
     ChoicesDetail,
     Basics,
+    Lesson,
 )
+
 from .filters import QuizFilter
 
 # Create your views here.
@@ -124,6 +126,13 @@ class SearchPostView(ListView):
         return context
 
 
+##### Basics #####
+
+class ToppageView(ListView):
+    model = Quiz
+    template_name = 'quiz/toppage.html'
+
+
 class BasicsIndex(ListView):
     model = Basics
     template_name = 'quiz/basics/basics_index.html'
@@ -138,6 +147,21 @@ class BasicsDetailView(DetailView):
             raise Http404
         return obj
 
-class ToppageView(ListView):
-    model = Quiz
-    template_name = 'quiz/toppage.html'
+
+##### Lessons ######
+
+
+
+class LessonsIndex(ListView):
+    model = Lesson
+    template_name = 'quiz/lessons/lessons_index.html'
+
+class LessonDetailView(DetailView):
+    model = Lesson
+    template_name = 'quiz/lessons/lesson_post.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if not obj.public and not self.request.user.is_authenticated:
+            raise Http404
+        return obj

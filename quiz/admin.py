@@ -1,5 +1,5 @@
 from django.contrib import admin
-from quiz.models import Category, Tag, Quiz, Level, DescriptionDetail,ChoicesDetail, BasicsCategory, Basics
+from quiz.models import *
 from markdownx.admin import MarkdownxModelAdmin
 from django_summernote.admin import SummernoteModelAdmin
 
@@ -35,9 +35,54 @@ class BasicsAdmin(SummernoteModelAdmin):
     summernote_fields = 'content'
 
 
+
+#lesson
+
+class LessonBodyInline(admin.TabularInline):
+    model = LessonBody
+    extra = 4
+
+class LessonQuestionInline(admin.TabularInline):
+    model = LessonQuestion
+    extra = 2
+
+class LessonVocabularyInline(admin.TabularInline):
+    model = LessonVocabulary
+    extra = 4
+
+class LessonGrammarInline(admin.TabularInline):
+    model = LessonGrammar
+    extra = 2
+
+class LessonGrammarAdmin(SummernoteModelAdmin):
+    summernote_fields = 'desc'
+    list_display = ('grammar', 'lesson')
+
+class LessonKanjiInline(admin.TabularInline):
+    model = LessonKanji
+    extra = 3
+
+class LessonAdmin(SummernoteModelAdmin):
+    summernote_fields = 'desc'
+    inlines = [
+        LessonBodyInline,
+        LessonQuestionInline,
+        LessonVocabularyInline,
+        LessonGrammarInline,
+        LessonKanjiInline,
+    ]
+    list_display = ('title', 'chapter', 'number')
+
+
 admin.site.register(Level)
 admin.site.register(Category)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Quiz, QuizAdmin)
+
+#Basics
 admin.site.register(BasicsCategory)
 admin.site.register(Basics, BasicsAdmin)
+
+#Lessons
+admin.site.register(Lesson, LessonAdmin)
+admin.site.register(LessonGrammar, LessonGrammarAdmin)
