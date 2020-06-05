@@ -84,6 +84,9 @@
                       {{ question.question_en | safe}}
                     </div>
 
+                    <div class="question-kotae collapse answer" id="question-answer">
+                      <p>答</p>
+                    </div>
                     <div class="question-answer collapse answer" id="question-answer">
                       {{ question.answer | safe}}
                     </div>
@@ -153,7 +156,9 @@
                   <div class="grammar-name">
                     {{ grammar.grammar | safe}}
                   </div>
+                  <div class="grammar-desc">
                   {{ grammar.desc | safe}}
+                </div>
                 {% endfor %}
             </div>
           {% endif %}
