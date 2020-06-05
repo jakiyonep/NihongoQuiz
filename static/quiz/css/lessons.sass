@@ -1,0 +1,149 @@
+/*lessons_detail*/
+
+
+.col-md-6
+  margin-bottom: 3em
+
+.lesson-chapter
+  .chapter
+    font-size: 1.5em
+  .lesson
+    display: flex
+    flex-direction: row
+    padding-left: 1em
+    .lesson-num
+      width: 10%
+    li
+      width: 90%
+      margin-bottom: 1em
+      list-style-type: none
+      display: inline-block
+      a
+        text-decoration: none
+        color: inherit
+        border-bottom: 1px solid rgb(185, 185, 185)
+.chapter
+  border-bottom: 1.5px solid rgb(168, 171, 163)
+
+  /*lesson_post*/
+
+$base-margin: 2em
+$base-border: 1px solid rgb(191, 191, 191)
+$yomi-color: rgb(255, 183, 158)
+$en-color: rgb(82, 200, 254)
+$answer-color: rgb(255, 70, 70)
+.lesson_post
+  .section
+    margin-bottom: $base-margin*5
+  .section-head
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    align-items: baseline
+    padding: $base-margin $base-margin/2 $base-margin 0
+    margin-bottom: $base-margin
+    .section-name
+      font-size: 1.3em
+      margin-bottom: 0
+      font-family: "Sawarabi Mincho"
+      background: linear-gradient(transparent 90%, rgb(181, 181, 181) 90%)
+      background-color: rgb(236, 236, 236)
+      border-radius: 10px
+      padding: 0 $base-margin/2
+    .buttons
+      .btn-yomi
+        background-color: $yomi-color
+        color: rgb(237, 237, 237)
+      .btn-en
+        background-color: $en-color
+        color: rgb(237, 237, 237)
+      .btn-answer
+        background-color: $answer-color
+        color: rgb(237, 237, 237)
+  .yomi
+    color: $yomi-color
+  .en
+    color: $en-color
+  .answer
+    color: $answer-color
+  .post-info
+    .section-number
+      font-size: 1.5em
+    .section-title
+      font-size: 1.8em
+
+/*body*/
+.lesson-body
+  margin: $base-margin 0
+  border-bottom: $base-border
+  .section-head
+    margin-bottom: $base-margin
+    border-bottom: $base-border
+  .sentence-container
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    margin-bottom: $base-margin
+    .body-left
+      width: 20%
+      .body-person
+        font-size: 0.9em
+    .body-right
+      width: 80%
+      .body-sentence
+        margin-bottom: $base-margin/2
+
+/*question*/
+.lesson-question
+  margin-bottom: $base-margin
+  .section-head
+    .section-name
+    .buttons
+  .questions>*
+    padding-left: 1em
+    margin-bottom: $base-margin/2
+  .question-number
+    padding-left: 0
+  .question-question
+  .question-question-yomi
+  .question-question-en
+  .question-answer
+  .question-answer-yomi
+  .question-answer-en
+
+
+/*vocabulary*/
+.lesson-vocab
+  .word
+    margin-bottom: $base-margin/2
+    font-size: 1.1em
+    color: rgb(242, 129, 107)
+.dictionary
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  padding-left: $base-margin/2
+  margin-bottom: $base-margin/2
+  .word-left
+    width: 10vw
+    font-weight: bold
+    margin-bottom: 0
+  .word-right
+    width: 90vw
+    padding-left: 0
+
+
+/*grammar*/
+.lesson-grammar
+  .grammar-name
+    color: rgb(242, 129, 107)
+    font-size: 1.5em
+    margin-bottom: $base-margin
+
+/*Kanji*/
+.lesson-kanji
+  .dictionary-kanji
+    margin-bottom: $base-margin/2
+    color: rgb(242, 129, 107)
+    font-size: 1.2em

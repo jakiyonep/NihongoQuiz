@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="{% static 'quiz/css/lessons.min.css' %}">
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -16,21 +17,36 @@
   </head>
   <body>
     <div class="container">
+      <h1 class="top-menu mt-5">習 - Lessons </h1>
       <div class="row">
-        <div class="col-md-6"><!--cp 1-->
-          <p>Chapter 1</p>
+        <div class="col-md-6 lesson-chapter"><!--cp 1-->
+          <p class="chapter">Chapter 1</p>
           {% for lesson in object_list %}
             {% if lesson.chapter == 1 %}
-              <a href="{% url 'quiz:lesson_post' lesson.pk %}">{{lesson.title}}</a> <br>
+              <div class="lesson">
+                <p class="lesson-num">{{ lesson.number }}.</p>
+                <li>
+                  <a href="{% url 'quiz:lesson_post' lesson.pk %}">
+                    {{lesson.title}}
+                  </a>
+                </li>
+              </div>
             {% endif %}
           {% endfor %}
         </div>
 
-        <div class="col-md-6"><!--cp 2-->
-          <p>Chapter 2</p>
+        <div class="col-md-6 lesson-chapter"><!--cp 2-->
+          <p class="chapter">Chapter 2</p>
           {% for lesson in object_list %}
             {% if lesson.chapter == 2 %}
-              <a href="{% url 'quiz:lesson_post' lesson.pk %}">{{lesson.title}}</a> <br>
+              <div class="lesson">
+                <p class="lesson-num">{{ lesson.number }}.</p>
+                <li>
+                  <a href="{% url 'quiz:lesson_post' lesson.pk %}">
+                    {{lesson.title}}
+                  </a>
+                </li>
+              </div>
             {% endif %}
           {% endfor %}
         </div>
