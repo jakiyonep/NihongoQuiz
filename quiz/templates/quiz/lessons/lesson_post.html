@@ -24,193 +24,204 @@
             <h1 class="section-number">{{ object.chapter }}-{{ object.number }}</h1>
             <h1 class="section-title">{{ object.title }}</h1>
           </div>
-          <div class="section lesson-body">
-            <div class="section-head">
-              <p class="section-name">本文</p>
-            <div class="buttons body-buttons">
-              <button class="btn btn-yomi" type="button" data-toggle="collapse" data-target="#body-yomi" aria-expanded="false" aria-controls="body-yomi">読</button>
-              <button class="btn btn-en" type="button" data-toggle="collapse" data-target="#body-en" aria-expanded="false" aria-controls="body-en">英</button>
-            </div>
-           </div>
-            {% for body in lesson.lessonbody_set.all  %}
-            <div class="sentence-container">
-              <div class="left body-left">
-                <div class="body-person">
-                  {{ body.person }}:
-                </div>
-              </div>
-              <div class="right body-right">
-                <div class="body-sentence">
-                  {{ body.sentence }}
-                </div>
-               <div class="yomi body-yomi  collapse" id="body-yomi">
-                 {{ body.sentence_yomi | safe}}
-               </div>
-               <div class="en body-en collapse" id="body-en">
-                 {{ body.sentence_en | safe }}
-               </div>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
 
-          <div class="section lesson-question">
-            <div class="section-head">
-              <p class="section-name">問題</p>
+          {% if lesson.lessonbody_set.all %}
+            <div class="section lesson-body">
+              <div class="section-head">
+                <p class="section-name">本文</p>
               <div class="buttons body-buttons">
-                <button class="btn btn-answer" type="button" data-toggle="collapse" data-target="#question-answer" aria-expanded="false" aria-controls="question-answer">答</button>
-                <button class="btn btn-yomi" type="button" data-toggle="collapse" data-target="#question-yomi" aria-expanded="false" aria-controls="question-yomi">読</button>
-                <button class="btn btn-en" type="button" data-toggle="collapse" data-target="#question-en" aria-expanded="false" aria-controls="question-en">英</button>
+                <button class="btn btn-yomi" type="button" data-toggle="collapse" data-target="#body-yomi" aria-expanded="false" aria-controls="body-yomi">読</button>
+                <button class="btn btn-en" type="button" data-toggle="collapse" data-target="#body-en" aria-expanded="false" aria-controls="body-en">英</button>
+              </div>
+             </div>
+              {% for body in lesson.lessonbody_set.all  %}
+              <div class="sentence-container">
+                <div class="left body-left">
+                  <div class="body-person">
+                    {{ body.person }}:
+                  </div>
+                </div>
+                <div class="right body-right">
+                  <div class="body-sentence">
+                    {{ body.sentence }}
+                  </div>
+                 <div class="yomi body-yomi  collapse" id="body-yomi">
+                   {{ body.sentence_yomi | safe}}
+                 </div>
+                 <div class="en body-en collapse" id="body-en">
+                   {{ body.sentence_en | safe }}
+                 </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+
+          {% if lesson.lessonquestion_set.all %}
+            <div class="section lesson-question">
+              <div class="section-head">
+                <p class="section-name">問題</p>
+                <div class="buttons body-buttons">
+                  <button class="btn btn-answer" type="button" data-toggle="collapse" data-target="#question-answer" aria-expanded="false" aria-controls="question-answer">答</button>
+                  <button class="btn btn-yomi" type="button" data-toggle="collapse" data-target="#question-yomi" aria-expanded="false" aria-controls="question-yomi">読</button>
+                  <button class="btn btn-en" type="button" data-toggle="collapse" data-target="#question-en" aria-expanded="false" aria-controls="question-en">英</button>
+                </div>
+              </div>
+              <div class="questions">
+                {% for question in lesson.lessonquestion_set.all  %}
+                  {% if question.question %}
+                    <div class="question-number">
+                      問{{ question.number }}
+                    </div>
+                    <div class="question-question">
+                      {{ question.question | safe}}
+                    </div>
+                    <div class="yomi question-question-yomi collapse" id="question-yomi">
+                      {{ question.question_yomi | safe}}
+                    </div>
+                    <div class="en question-question-en collapse" id="question-en">
+                      {{ question.question_en | safe}}
+                    </div>
+
+                    <div class="question-answer collapse answer" id="question-answer">
+                      {{ question.answer | safe}}
+                    </div>
+                    <div class="yomi question-answer-yomi collapse" id="question-answer">
+                      {{ question.answer_yomi | safe}}
+                    </div>
+                    <div class="en question-answer-en collapse" id="question-answer">
+                      {{ question.answer_en | safe}}
+                    </div>
+                  {% endif %}
+                {% endfor %}
               </div>
             </div>
-            <div class="questions">
-              {% for question in lesson.lessonquestion_set.all  %}
-                {% if question.question %}
-                  <div class="question-number">
-                    問{{ question.number }}
-                  </div>
-                  <div class="question-question">
-                    {{ question.question | safe}}
-                  </div>
-                  <div class="yomi question-question-yomi collapse" id="question-yomi">
-                    {{ question.question_yomi | safe}}
-                  </div>
-                  <div class="en question-question-en collapse" id="question-en">
-                    {{ question.question_en | safe}}
-                  </div>
+          {% endif %}
 
-                  <div class="question-answer collapse answer" id="question-answer">
-                    {{ question.answer | safe}}
-                  </div>
-                  <div class="yomi question-answer-yomi collapse" id="question-answer">
-                    {{ question.answer_yomi | safe}}
-                  </div>
-                  <div class="en question-answer-en collapse" id="question-answer">
-                    {{ question.answer_en | safe}}
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
-
-          <div class="section lesson-vocab">
-            <div class="section-head">
-              <p class="section-name">語彙</p>
-            </div>
-              {% for vocabulary in lesson.lessonvocabulary_set.all %}
-                {% if vocabulary.word %}
-                  <div class="word">
-                      {{ vocabulary.word | safe}}
-                  </div>
-                {% endif %}
-                {% if vocabulary.yomi %}
-                  <div class="dictionary yomi-black">
-                    <div class="word-left">
-                      <p>読:</p>
+          {% if lesson.lessonvocabulary_set.all %}
+            <div class="section lesson-vocab">
+              <div class="section-head">
+                <p class="section-name">語彙</p>
+              </div>
+                {% for vocabulary in lesson.lessonvocabulary_set.all %}
+                  {% if vocabulary.word %}
+                    <div class="word">
+                        {{ vocabulary.word | safe}}
                     </div>
-                    <div class="word-right">
-                      {{ vocabulary.yomi | safe}}
-                    </div>
-                  </div>
-                {% endif %}
-                {% if vocabulary.definition %}
-                  <div class="dictionary definition">
-                    <div class="word-left">
-                      <p>義:</p>
-                    </div>
-                    <div class="word-right">
-                      {{ vocabulary.definition | safe}}
-                    </div>
-                  </div>
-                {% endif %}
-                {% if vocabulary.usage %}
-                  <div class="dictionary usage">
-                    <div class="word-left">
-                      <p>用:</p>
-                    </div>
-                    <div class="word-right">
-                      {{ vocabulary.usage | safe}}
-                    </div>
-                  </div>
-                {% endif %}
-              {% endfor %}
-          </div>
-
-          <div class="section lesson-grammar">
-            <div class="section-head">
-              <p class="section-name">文法</p>
-            </div>
-              {% for grammar in lesson.lessongrammar_set.all  %}
-                <div class="grammar-name">
-                  {{ grammar.grammar | safe}}
-                </div>
-                {{ grammar.desc | safe}}
-              {% endfor %}
-          </div>
-
-          <div class="section lesson-kanji">
-            <div class="section-head">
-              <p class="section-name">漢字</p>
-            </div>
-              {% for kanji in lesson.lessonkanji_set.all  %}
-                {% if kanji.kanji %}
-                  <div class="dictionary-kanji">
-                    {{ kanji.kanji | safe}}
-                  </div>
-                {% endif %}
-                {% if kanji.definition %}
-                  <div class="dictionary">
-                    <div class="word-left">
-                      <p>義:</p>
-                    </div>
-                    <div class="word-right">
-                      {{ kanji.definition | safe}}
-                    </div>
-                  </div>
-                {% endif %}
-                {% if kanji.yomi %}
-                    <div class="dictionary">
+                  {% endif %}
+                  {% if vocabulary.yomi %}
+                    <div class="dictionary yomi-black">
                       <div class="word-left">
                         <p>読:</p>
                       </div>
                       <div class="word-right">
-                        {{ kanji.yomi | safe}}
+                        {{ vocabulary.yomi | safe}}
                       </div>
                     </div>
                   {% endif %}
-                  {% if kanji.example %}
-                    <div class="dictionary">
+                  {% if vocabulary.definition %}
+                    <div class="dictionary definition">
                       <div class="word-left">
-                        <p>例:</p>
+                        <p>義:</p>
                       </div>
                       <div class="word-right">
-                        {{ kanji.example | safe}}
+                        {{ vocabulary.definition | safe}}
                       </div>
                     </div>
                   {% endif %}
-                  {% if kanji.example_en%}
-                    <div class="dictionary">
+                  {% if vocabulary.usage %}
+                    <div class="dictionary usage">
                       <div class="word-left">
-                        <p>読:</p>
+                        <p>用:</p>
                       </div>
                       <div class="word-right">
-                        {{ kanji.example_yomi | safe}}
+                        {{ vocabulary.usage | safe}}
                       </div>
                     </div>
                   {% endif %}
-                  {% if kanji.example_en%}
-                    <div class="dictionary">
-                      <div class="word-left">
-                        <p>英:</p>
-                      </div>
-                      <div class="word-right">
-                        {{ kanji.example_en | safe}}
-                      </div>
-                    </div>
-                  {% endif %}
-              {% endfor %}
-          </div>
+                {% endfor %}
+            </div>
+          {% endif %}
 
+          {% if lesson.lessongrammar_set.all %}
+            <div class="section lesson-grammar">
+              <div class="section-head">
+                <p class="section-name">文法</p>
+              </div>
+                {% for grammar in lesson.lessongrammar_set.all  %}
+                  <div class="grammar-name">
+                    {{ grammar.grammar | safe}}
+                  </div>
+                  {{ grammar.desc | safe}}
+                {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if lesson.kanji_set.all %}
+            <div class="section lesson-kanji">
+              <div class="section-head">
+                <p class="section-name">漢字</p>
+              </div>
+                {% for kanji in lesson.lessonkanji_set.all  %}
+                  {% if kanji.kanji %}
+                    <div class="dictionary-kanji">
+                      {{ kanji.kanji | safe}}
+                    </div>
+                  {% endif %}
+                  {% if kanji.definition %}
+                    <div class="dictionary">
+                      <div class="word-left">
+                        <p>義:</p>
+                      </div>
+                      <div class="word-right">
+                        {{ kanji.definition | safe}}
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if kanji.yomi %}
+                      <div class="dictionary">
+                        <div class="word-left">
+                          <p>読:</p>
+                        </div>
+                        <div class="word-right">
+                          {{ kanji.yomi | safe}}
+                        </div>
+                      </div>
+                    {% endif %}
+                    {% if kanji.example %}
+                      <div class="dictionary">
+                        <div class="word-left">
+                          <p>例:</p>
+                        </div>
+                        <div class="word-right">
+                          {{ kanji.example | safe}}
+                        </div>
+                      </div>
+                    {% endif %}
+                    {% if kanji.example_en%}
+                      <div class="dictionary">
+                        <div class="word-left">
+                          <p>読:</p>
+                        </div>
+                        <div class="word-right">
+                          {{ kanji.example_yomi | safe}}
+                        </div>
+                      </div>
+                    {% endif %}
+                    {% if kanji.example_en%}
+                      <div class="dictionary">
+                        <div class="word-left">
+                          <p>英:</p>
+                        </div>
+                        <div class="word-right">
+                          {{ kanji.example_en | safe}}
+                        </div>
+                      </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+          {% endif %}
 
         </div>
       </div>
