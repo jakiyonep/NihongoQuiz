@@ -23,7 +23,9 @@
         <p class="category-title">ひらがな/カタカナ/漢字</p>
           {% for basic in object_list %}
             {% if basic.category.slug == "letter"  %}
+            {% if basic.public %}
               <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif %}
             {% endif%}
           {% endfor %}
       </div>
@@ -34,7 +36,9 @@
         <p class="category-title">Grammar</p>
           {% for basic in object_list %}
             {% if basic.category.slug == "grammar"  %}
+            {% if basic.public %}
               <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
             {% endif%}
           {% endfor %}
       </div>
@@ -45,7 +49,9 @@
         <p class="category-title">Verb</p>
           {% for basic in object_list %}
             {% if basic.category.slug == "verb"  %}
+            {% if basic.public %}
               <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
             {% endif%}
           {% endfor %}
       </div>
@@ -56,7 +62,9 @@
         <p class="category-title">Adjective</p>
           {% for basic in object_list %}
             {% if basic.category.slug == "adjective"  %}
+            {% if basic.public %}
               <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif%}
             {% endif%}
           {% endfor %}
       </div>

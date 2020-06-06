@@ -23,6 +23,7 @@
           <p class="chapter">Chapter 1</p>
           {% for lesson in object_list %}
             {% if lesson.chapter == 1 %}
+            {% if lesson.public  %}
               <div class="lesson">
                 <p class="lesson-num">{{ lesson.number }}.</p>
                 <li>
@@ -31,6 +32,7 @@
                   </a>
                 </li>
               </div>
+            {% endif %}
             {% endif %}
           {% endfor %}
         </div>

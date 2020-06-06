@@ -33,6 +33,8 @@ class TagAdmin(admin.ModelAdmin):
 
 class BasicsAdmin(SummernoteModelAdmin):
     summernote_fields = 'content'
+    list_display = ('title', 'category','order')
+    list_editable = ['order']
 
 
 
@@ -72,6 +74,7 @@ class LessonAdmin(SummernoteModelAdmin):
         LessonKanjiInline,
     ]
     list_display = ('title', 'chapter', 'number')
+    list_editable = ('chapter', 'number')
 
 
 admin.site.register(Level)

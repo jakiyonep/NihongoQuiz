@@ -133,7 +133,7 @@ class Lesson(models.Model):
 
 
     class Meta:
-        ordering = ['chapter']
+        ordering = ['chapter', 'number']
 
 
 
