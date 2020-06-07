@@ -172,7 +172,7 @@ class LessonQuestion(models.Model):
 class LessonGrammar(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
     grammar = models.CharField(null=True, max_length=300)
-    desc = models.TextField(null=True, max_length=1500)
+    desc = models.TextField(null=True)
 
     def __str__(self):
         return self.grammar
