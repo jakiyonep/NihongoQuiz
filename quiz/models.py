@@ -131,6 +131,7 @@ class Lesson(models.Model):
     title = models.TextField(null=True, max_length=300)
     public = models.BooleanField(default=True)
 
+    reading = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['chapter', 'number']
@@ -150,6 +151,7 @@ class LessonBody(models.Model):
     sentence = models.TextField(null=True, max_length=300, blank=True)
     sentence_yomi = models.TextField(null=True, max_length=300, blank=True)
     sentence_en = models.TextField(null=True, max_length=300, blank=True)
+
 
 
 class LessonVocabulary(models.Model):

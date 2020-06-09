@@ -36,11 +36,13 @@
              </div>
               {% for body in lesson.lessonbody_set.all  %}
               <div class="sentence-container">
-                <div class="left body-left">
-                  <div class="body-person">
-                    {{ body.person | safe}}:
+                {% if not object.reading %}
+                  <div class="left body-left">
+                    <div class="body-person">
+                      {{ body.person | safe}}:
+                    </div>
                   </div>
-                </div>
+                {% endif %}
                 <div class="right body-right">
                   <div class="body-sentence">
                     {{ body.sentence |safe }}
