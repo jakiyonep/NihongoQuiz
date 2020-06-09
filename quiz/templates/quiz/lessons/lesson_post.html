@@ -38,12 +38,12 @@
               <div class="sentence-container">
                 <div class="left body-left">
                   <div class="body-person">
-                    {{ body.person }}:
+                    {{ body.person | safe}}:
                   </div>
                 </div>
                 <div class="right body-right">
                   <div class="body-sentence">
-                    {{ body.sentence }}
+                    {{ body.sentence |safe }}
                   </div>
                  <div class="yomi body-yomi  collapse" id="body-yomi">
                    {{ body.sentence_yomi | safe}}
@@ -101,6 +101,7 @@
               </div>
             </div>
           {% endif %}
+
 
           {% if lesson.lessonvocabulary_set.all %}
             <div class="section lesson-vocab">
