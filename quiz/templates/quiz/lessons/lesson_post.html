@@ -39,8 +39,11 @@
                 {% if not object.reading %}
                   <div class="left body-left">
                     <div class="body-person">
-                      {{ body.person | safe}}:
+                      {{ body.person | safe}}
                     </div>
+                  </div>
+                  <div class="middle body-middle">
+
                   </div>
                 {% endif %}
                 <div class="right body-right">
@@ -72,6 +75,7 @@
               </div>
               <div class="questions">
                 {% for question in lesson.lessonquestion_set.all  %}
+
                   {% if question.question %}
                     <div class="question-number">
                       問{{ question.number }}
