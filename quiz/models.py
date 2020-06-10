@@ -146,7 +146,7 @@ class Lesson(models.Model):
 
 
 class LessonBody(models.Model):
-    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     person = models.CharField(null=True, max_length=300, blank=True)
     sentence = models.TextField(null=True, max_length=300, blank=True)
     sentence_yomi = models.TextField(null=True, max_length=300, blank=True)
@@ -155,14 +155,14 @@ class LessonBody(models.Model):
 
 
 class LessonVocabulary(models.Model):
-    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     word = models.CharField(blank=True, max_length=300, null=True)
     yomi = models.CharField(blank=True, max_length=300, null=True)
     definition = models.CharField(blank=True, max_length=300, null=True)
     usage = models.CharField(blank=True, max_length=300, null=True)
 
 class LessonQuestion(models.Model):
-    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     number = models.IntegerField(default=1, blank=True, null=True)
     question = models.TextField(null=True, max_length=300, blank=True)
     question_yomi = models.TextField(null=True, max_length=300, blank=True)
@@ -172,7 +172,7 @@ class LessonQuestion(models.Model):
     answer_en = models.TextField(null=True, max_length=300, blank=True)
 
 class LessonGrammar(models.Model):
-    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     grammar = models.CharField(null=True, max_length=300)
     desc = models.TextField(null=True)
 
@@ -180,7 +180,7 @@ class LessonGrammar(models.Model):
         return self.grammar
 
 class LessonKanji(models.Model):
-    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     kanji = models.CharField(null=True, max_length=300, blank=True)
     definition = models.CharField(null=True, max_length=300, blank=True)
     yomi = models.CharField(null=True, max_length=300, blank=True)
