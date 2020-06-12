@@ -18,6 +18,17 @@
   <body>
     <div class="container">
       <h1 class="top-menu mt-5">習 - Courses </h1>
+      <div class="row list-row">
+        <div class="col-12 col-md-4">
+          <a class="list-name chapter" href="{% url 'quiz:lesson_grammar' %}">Grammar List</a>
+        </div>
+        <div class="col-12 col-md-4">
+          <a class="list-name chapter" href="{% url 'quiz:lesson_vocabulary' %}">Vocabulary List</a>
+        </div>
+        <div class="col-12 col-md-4">
+          <a class="list-name chapter" href="{% url 'quiz:lesson_kanji' %}">Kanji List</a>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-6 lesson-chapter"><!--cp 1-->
           <p class="chapter">Chapter 1</p>

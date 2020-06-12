@@ -132,6 +132,7 @@ class Lesson(models.Model):
     public = models.BooleanField(default=True)
 
     reading = models.BooleanField(default=False)
+    vocab = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['chapter', 'number']
@@ -187,4 +188,6 @@ class LessonKanji(models.Model):
     example = models.TextField(null=True, max_length=300, blank=True)
     example_yomi = models.TextField(null=True, max_length=300, blank=True)
     example_en = models.TextField(null=True, max_length=300, blank=True)
+
+
 

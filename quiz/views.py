@@ -13,6 +13,9 @@ from quiz.models import (
     ChoicesDetail,
     Basics,
     Lesson,
+    LessonGrammar,
+    LessonVocabulary,
+    LessonKanji,
 )
 
 from .filters import QuizFilter
@@ -156,6 +159,8 @@ class LessonsIndex(ListView):
     model = Lesson
     template_name = 'quiz/lessons/lessons_index.html'
 
+
+
 class LessonDetailView(DetailView):
     model = Lesson
     template_name = 'quiz/lessons/lesson_post.html'
@@ -165,3 +170,16 @@ class LessonDetailView(DetailView):
         if not obj.public and not self.request.user.is_authenticated:
             raise Http404
         return obj
+
+
+class LessonVocabularyIndex(ListView):
+    model = LessonVocabulary
+    template_name = 'quiz/lessons/lesson_vocabulary.html'
+
+class LessonGrammarIndex(ListView):
+    model = LessonGrammar
+    template_name = 'quiz/lessons/lesson_grammar.html'
+
+class LessonKanjiIndex(ListView):
+    model = LessonKanji
+    template_name = 'quiz/lessons/lesson_kanji.html'

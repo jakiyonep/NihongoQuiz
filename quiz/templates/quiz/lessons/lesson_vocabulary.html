@@ -1,0 +1,58 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %}Lesson Vocabulary{% endblock %}
+{% block description %}
+  Let's learn Nihongo with me!
+{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'quiz/css/lessons.min.css' %}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-167867160-1');
+    </script>
+  </head>
+  <body>
+    <div class="container list">
+      <h1 class="top-menu mt-5">Vocabulary List </h1>
+      <div class="row table-top">
+        <div class="col-1">
+          <p>CP</p>
+        </div>
+        <div class="col-5">
+          <p>Word</p>
+        </div>
+        <div class="col-5">
+          <p>Deninition</p>
+        </div>
+      </div>
+      {% for vocab in object_list %}
+        <div class="row table-content">
+          <div class="col-1 table-body">
+            {{ vocab.lesson.chapter }}
+          </div>
+          <div class="col-5 table-body">
+            <a class="table-word" href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word }}</a>
+          </div>
+          <div class="col-5 table-body">
+            {{ vocab.definition }}
+          </div>
+
+
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+
+{% endblock %}

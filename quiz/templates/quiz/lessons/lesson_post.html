@@ -156,9 +156,11 @@
 
           {% if lesson.lessongrammar_set.all %}
             <div class="section lesson-grammar">
-              <div class="section-head">
-                <p class="section-name">文法</p>
-              </div>
+              {% if not object.vocab %}
+                <div class="section-head">
+                  <p class="section-name">文法</p>
+                </div>
+              {% endif %}
                 {% for grammar in lesson.lessongrammar_set.all  %}
                   <div class="grammar-name">
                     {{ grammar.grammar | safe}}

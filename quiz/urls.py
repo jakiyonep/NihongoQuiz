@@ -14,6 +14,10 @@ from quiz.views import (
     ToppageView,
     LessonsIndex,
     LessonDetailView,
+    LessonVocabularyIndex,
+    LessonGrammarIndex,
+    LessonKanjiIndex,
+
 )
 
 
@@ -33,5 +37,8 @@ urlpatterns = [
     path('basic/<str:pk>/', BasicsDetailView.as_view(), name="basic_post"),
     path('lessons/', LessonsIndex.as_view(), name="lessons"),
     path('lesson/<str:pk>/', LessonDetailView.as_view(), name="lesson_post"),
+    path('lessonvocabulary/', LessonVocabularyIndex.as_view(), name="lesson_vocabulary"),
+    path('lessongrammar/', LessonGrammarIndex.as_view(), name="lesson_grammar"),
+    path('lessonkanji//', LessonKanjiIndex.as_view(), name="lesson_kanji"),
 
 ]
