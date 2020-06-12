@@ -33,6 +33,19 @@
     </div>
 
     <div class="col-md-6 basic-category">
+      <div class=basics-number">
+        <p class="category-title">Numbers</p>
+          {% for basic in object_list %}
+            {% if basic.category.slug == "numbers"  %}
+            {% if basic.public %}
+              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif %}
+            {% endif%}
+          {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-6 basic-category">
       <div class="basics-grammar">
         <p class="category-title">Grammar</p>
           {% for basic in object_list %}
