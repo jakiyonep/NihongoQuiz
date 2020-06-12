@@ -34,7 +34,7 @@
                 <button class="btn btn-en" type="button" data-toggle="collapse" data-target="#body-en" aria-expanded="false" aria-controls="body-en">英</button>
               </div>
              </div>
-              {% for body in lesson.lessonbody_set.all |dictsort:"id"%}
+              {% for body in lesson.lessonbody_set.all  %}
               <div class="sentence-container">
                 {% if not object.reading %}
                   <div class="left body-left">
@@ -74,7 +74,7 @@
                 </div>
               </div>
               <div class="questions">
-                {% for question in lesson.lessonquestion_set.all |dictsort:"id"%}
+                {% for question in lesson.lessonquestion_set.all  %}
 
                   {% if question.question %}
                     <div class="question-number">
@@ -114,7 +114,7 @@
               <div class="section-head">
                 <p class="section-name">語彙</p>
               </div>
-                {% for vocabulary in lesson.lessonvocabulary_set.all |dictsort:"id" %}
+                {% for vocabulary in lesson.lessonvocabulary_set.all %}
                   {% if vocabulary.word %}
                     <div class="word">
                         {{ vocabulary.word | safe}}
@@ -161,7 +161,7 @@
                   <p class="section-name">文法</p>
                 </div>
               {% endif %}
-                {% for grammar in lesson.lessongrammar_set.all |dictsort:"id"  %}
+                {% for grammar in lesson.lessongrammar_set.all  %}
                   <div class="grammar-name">
                     {{ grammar.grammar | safe}}
                   </div>
@@ -177,7 +177,7 @@
               <div class="section-head">
                 <p class="section-name">漢字</p>
               </div>
-                {% for kanji in lesson.lessonkanji_set.all |dictsort:"id" %}
+                {% for kanji in lesson.lessonkanji_set.all  %}
                   {% if kanji.kanji %}
                     <div class="dictionary-kanji">
                       {{ kanji.kanji | safe}}
