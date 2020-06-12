@@ -162,6 +162,9 @@ class LessonVocabulary(models.Model):
     definition = models.CharField(blank=True, max_length=300, null=True)
     usage = models.CharField(blank=True, max_length=300, null=True)
 
+    class Meta:
+        ordering = ['lesson']
+
 class LessonQuestion(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     number = models.IntegerField(default=1, blank=True, null=True)
@@ -180,6 +183,9 @@ class LessonGrammar(models.Model):
     def __str__(self):
         return self.grammar
 
+    class Meta:
+        ordering = ['lesson']
+
 class LessonKanji(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     kanji = models.CharField(null=True, max_length=300, blank=True)
@@ -189,5 +195,7 @@ class LessonKanji(models.Model):
     example_yomi = models.TextField(null=True, max_length=300, blank=True)
     example_en = models.TextField(null=True, max_length=300, blank=True)
 
+    class Meta:
+        ordering = ['lesson']
 
 

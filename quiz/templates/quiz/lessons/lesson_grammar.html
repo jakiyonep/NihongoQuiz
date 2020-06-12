@@ -34,6 +34,7 @@
         </div>
       </div>
       {% for grammar in object_list %}
+        {% if not grammar.lesson.vocab %}
         <div class="row table-content">
           <div class="col-1 table-body">
             {{ grammar.lesson.chapter }}
@@ -42,6 +43,9 @@
             <a class="table-word" href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar }}</a>
           </div>
         </div>
+        {% endif %}
+        {% if grammar.lesson.vocab %}
+        {% endif %}
       {% endfor %}
     </div>
   </body>
