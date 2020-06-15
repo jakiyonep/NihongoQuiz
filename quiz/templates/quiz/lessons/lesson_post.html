@@ -157,11 +157,13 @@
           {% if lesson.lessongrammar_set.all %}
             <div class="section lesson-grammar">
                 <div class="section-head">
-                  {% if not lesson.exercise and not lesson.vocab%}
+                  {% if not lesson.exercise %}
                     <p class="section-name">文法</p>
                   {% endif %}
                   {% if lesson.exercise or lesson.vocab %}
                     <p class="section-name">解説</p>
+                  {% endif %}
+                  {% if lesson.vocab %}
                   {% endif %}
                 </div>
                 {% for grammar in lesson.lessongrammar_set.all|dictsort:"id" %}
