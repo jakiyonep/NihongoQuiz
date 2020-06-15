@@ -40,6 +40,8 @@ $base-border: 1px solid rgb(191, 191, 191)
 $yomi-color: rgb(255, 183, 158)
 $en-color: rgb(82, 200, 254)
 $answer-color: rgb(255, 70, 70)
+$casual-color: rgb(8, 214, 0)
+
 .lesson_post
   .section
     margin-bottom: $base-margin*5
@@ -69,12 +71,17 @@ $answer-color: rgb(255, 70, 70)
       .btn-answer
         background-color: $answer-color
         color: rgb(237, 237, 237)
+      .btn-casual
+        background-color: $casual-color
+        color: rgb(237, 237, 237)
   .yomi
     color: $yomi-color
   .en
     color: $en-color
   .answer
     color: $answer-color
+  .casual
+    color: $casual-color
   .post-info
     .section-number
       font-size: 1.5em
@@ -141,6 +148,8 @@ $answer-color: rgb(255, 70, 70)
     margin-bottom: $base-margin/2
     font-size: 1.1em
     color: rgb(242, 129, 107)
+  .casual
+    color: $casual-color
 .dictionary
   display: flex
   flex-direction: row
@@ -164,6 +173,8 @@ $answer-color: rgb(255, 70, 70)
     margin-bottom: $base-margin
   .grammar-desc
     margin-bottom: $base-margin*2
+  .casual
+    color: $casual-color
 
 /*Kanji*/
 .lesson-kanji

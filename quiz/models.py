@@ -153,6 +153,7 @@ class LessonBody(models.Model):
     sentence = models.TextField(null=True, max_length=300, blank=True)
     sentence_yomi = models.TextField(null=True, max_length=300, blank=True)
     sentence_en = models.TextField(null=True, max_length=300, blank=True)
+    sentence_casual = models.TextField(null=True, blank=True, max_length=500)
 
     class Meta:
         ordering = ['lesson', 'id']
@@ -164,11 +165,13 @@ class LessonVocabulary(models.Model):
     yomi = models.CharField(blank=True, max_length=300, null=True)
     definition = models.CharField(blank=True, max_length=300, null=True)
     usage = models.CharField(blank=True, max_length=300, null=True)
+    casual = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['lesson', 'id']
 
 class LessonQuestion(models.Model):
+
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     number = models.IntegerField(default=1, blank=True, null=True)
     question = models.TextField(null=True, max_length=300, blank=True)
@@ -185,6 +188,7 @@ class LessonGrammar(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     grammar = models.CharField(null=True, max_length=300)
     desc = models.TextField(null=True)
+    casual = models.BooleanField(default=False)
 
     def __str__(self):
         return self.grammar
