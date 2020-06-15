@@ -133,6 +133,7 @@ class Lesson(models.Model):
 
     reading = models.BooleanField(default=False)
     vocab = models.BooleanField(default=False)
+    exercise = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['chapter', 'number']

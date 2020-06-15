@@ -1,8 +1,8 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
-{% block title %}Lesson Vocabulary{% endblock %}
+{% block title %}Lesson Grammar{% endblock %}
 {% block description %}
-  Let's learn Nihongo with me!
+  The list of grammars used in the lessons
 {% endblock %}
 {% block content %}
 
@@ -35,14 +35,16 @@
       </div>
       {% for grammar in object_list %}
         {% if not grammar.lesson.vocab %}
-        <div class="row table-content">
-          <div class="col-1 table-body">
-            {{ grammar.lesson.chapter }}
-          </div>
-          <div class="col-5 table-body">
-            <a class="table-word" href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar }}</a>
-          </div>
-        </div>
+          {% if not grammar.lesson.exercise %}
+            <div class="row table-content">
+              <div class="col-1 table-body">
+                {{ grammar.lesson.chapter }}
+              </div>
+              <div class="col-5 table-body">
+                <a class="table-word" href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar | safe}}</a>
+              </div>
+            </div>
+          {% endif %}
         {% endif %}
         {% if grammar.lesson.vocab %}
         {% endif %}
