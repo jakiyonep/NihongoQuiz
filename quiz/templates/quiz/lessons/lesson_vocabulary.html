@@ -42,10 +42,10 @@
             {{ vocab.lesson.chapter }}
           </div>
           <div class="col-5 table-body">
-            <a class="table-word" href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word }}</a>
+            <a class="table-word" href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word |safe}}</a>
           </div>
           <div class="col-5 table-body">
-            {{ vocab.definition }}
+            {{ vocab.definition |safe}}}
           </div>
 
 

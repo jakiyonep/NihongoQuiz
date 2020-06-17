@@ -1,0 +1,43 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+
+{% block title %}Articles{% endblock %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-167867160-1');
+  </script>
+</head>
+<div class="container mb-5">
+  <h1 class="top-menu mt-5">記 - Articles</h1>
+
+  <div class="row">
+    <div class="col-md-6 basic-category">
+      <div class=basics-letter">
+        <p class="category-title">Keigo</p>
+          {% for basic in object_list %}
+            {% if basic.category.slug == "keigo"  %}
+            {% if basic.public %}
+              <li><a href="{% url 'quiz:article_post' basic.pk %}">{{ basic.title }}</a></li>
+            {% endif %}
+            {% endif%}
+          {% endfor %}
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+<div class="empty">
+
+</div>
+
+{% endblock %}

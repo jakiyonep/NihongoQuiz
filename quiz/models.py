@@ -122,6 +122,33 @@ class Basics(models.Model):
     def __str__(self):
         return self.title
 
+#Articles
+
+
+class ArticlesCategory(models.Model):
+    name = models.CharField(null=True, max_length=255)
+    slug = models.CharField(blank=False, max_length=255)
+    order = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+class Articles(models.Model):
+    title = models.CharField(null=True, max_length=255)
+    category = models.ForeignKey(ArticlesCategory, on_delete=models.CASCADE)
+    content = models.TextField(null=True)
+    order = models.IntegerField(null=True)
+    public = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
 
 #Lessons
 

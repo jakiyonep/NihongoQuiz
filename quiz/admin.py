@@ -37,6 +37,12 @@ class BasicsAdmin(SummernoteModelAdmin):
     list_editable = ['order']
 
 
+#Aritlces
+
+class ArticlesAdmin(SummernoteModelAdmin):
+    summernote_fields = 'content'
+    list_display = ('title', 'category','order')
+    list_editable = ['order']
 
 #lesson
 
@@ -85,6 +91,10 @@ admin.site.register(Quiz, QuizAdmin)
 #Basics
 admin.site.register(BasicsCategory)
 admin.site.register(Basics, BasicsAdmin)
+
+#Aritlces
+admin.site.register(ArticlesCategory)
+admin.site.register(Articles, ArticlesAdmin)
 
 #Lessons
 admin.site.register(Lesson, LessonAdmin)

@@ -12,6 +12,7 @@ from quiz.models import (
     DescriptionDetail,
     ChoicesDetail,
     Basics,
+    Articles,
     Lesson,
     LessonGrammar,
     LessonVocabulary,
@@ -150,6 +151,21 @@ class BasicsDetailView(DetailView):
             raise Http404
         return obj
 
+##### Articles ######
+
+class ArticlesIndex(ListView):
+    model = Articles
+    template_name = 'quiz/articles/articles_index.html'
+
+class ArticleDetailView(DetailView):
+    model = Articles
+    template_name = 'quiz/articles/article_post.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if not obj.public and not self.request.user.is_authenticated:
+            raise Http404
+        return obj
 
 ##### Lessons ######
 
