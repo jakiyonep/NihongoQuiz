@@ -28,7 +28,7 @@
   </form>
 
 
-  <div class="filter">
+  <div class="filter" >
     <form method="GET">
       {{ filter.form | bootstrap }}
       <button type="submit" name="button" class ="btn button">Find Quizzes</button>
@@ -42,7 +42,7 @@
     {% if user.is_authenticated or quiz.public %}
       {% if not quiz.public %} Draft {% endif %}{{quiz.question | safe}}
     </div>
-    <div class="card-body">
+    <div class="card-body" >
       {% if quiz.choice_long %}
         <div class="card-text row">
           <div class="choice choice-1 col-12 border border-white  bg-light mb-3">
