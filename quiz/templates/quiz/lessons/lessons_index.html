@@ -64,6 +64,21 @@
           {% endfor %}
         </div>
 
+        <div class="col-md-6 lesson-chapter">
+          <p class="chapter">Chapter 3</p>
+          {% for lesson in object_list %}
+            {% if lesson.chapter == 3 %}
+              <div class="lesson">
+                <p class="lesson-num">{{ lesson.number }}.</p>
+                <li>
+                  <a href="{% url 'qukiz:lesson_post' lesson.pk %}">
+                    {{lesson.title}}
+                  </a>
+                </li>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
 
       </div>
     </div>
