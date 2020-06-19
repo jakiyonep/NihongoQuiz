@@ -1,5 +1,6 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
+{% block title %} Top Page {% endblock %}
 {% block description %}
   Let's learn Nihongo with me!
 {% endblock %}
@@ -35,6 +36,17 @@
         </div>
 
         <div class="col-md-6 section">
+          <a href="{% url 'quiz:articles' %}">
+            <div class="card h-100">
+              <div class="card-body">
+                <h1 class="top-menu mb-5 card-title" href="{% url 'quiz:quiz' %}">記 - Articles</h1>
+                <p class="desc card-text">Want to explore the Nihongo world more? Let's dive into it!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-6 section">
           <a href="{% url 'quiz:lessons' %}">
             <div class="card h-100">
               <div class="card-body ">
@@ -56,16 +68,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 section">
-          <a href="{% url 'quiz:articles' %}">
-            <div class="card h-100">
-              <div class="card-body">
-                <h1 class="top-menu mb-5 card-title" href="{% url 'quiz:quiz' %}">記 - Articles</h1>
-                <p class="desc card-text">Want to explore the Nihongo world more? Let's dive into it!</p>
-              </div>
-            </div>
-          </a>
-        </div>
+
 
 
       </div>

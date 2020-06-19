@@ -37,19 +37,19 @@
         </div>
       </div>
       {% for kanji in object_list %}
-        <div class="row table-content">
-          <div class="col-1 table-body">
-            {{ kanji.lesson.chapter }}
+        {% if kanji.kanji %}
+          <div class="row table-content">
+            <div class="col-1 table-body">
+              {{ kanji.lesson.chapter }}
+            </div>
+            <div class="col-5 table-body">
+              <a class="table-word" href="{% url 'quiz:lesson_post' kanji.lesson.pk %}">{{ kanji.kanji }}</a>
+            </div>
+            <div class="col-5 table-body">
+              {{ kanji.definition }}
+            </div>
           </div>
-          <div class="col-5 table-body">
-            <a class="table-word" href="{% url 'quiz:lesson_post' kanji.lesson.pk %}">{{ kanji.kanji }}</a>
-          </div>
-          <div class="col-5 table-body">
-            {{ kanji.definition }}
-          </div>
-
-
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
   </body>

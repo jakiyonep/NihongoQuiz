@@ -1,3 +1,5 @@
+$color: rgb(135, 189, 238)
+
 /*index*/
 body
   width: 100vw
@@ -30,15 +32,31 @@ body
   border-top: 1px solid rgb(222, 222, 222)
   padding-top: 2em
   ul
-    padding-left: 2em
+    padding: 0.5em 1em
+    color: #494949
+    background: transparent
+    border-left: solid 5px rgb(185, 211, 223)
+    li
+      list-style: none
+      padding-left: 0
+      font-style: italic
+
   ol
     padding-left: 2em
   li
-    list-style: inherit
+    padding-left: 2em
+
   img
     max-width: 100%
     margin: auto
     display: block
+  h3
+    border-bottom: 3px solid $color
+    padding: 0.5em 0
+  h3::first-letter
+    font-size: 1.3em
+  .japa
+
 
 
 .empty

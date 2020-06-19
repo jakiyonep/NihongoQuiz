@@ -42,9 +42,15 @@
           <div class="col-1 table-body">
             {{ vocab.lesson.chapter }}
           </div>
-          <div class="col-5 table-body">
-            <a class="table-word" href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word |safe}}</a>
-          </div>
+          {% if not vocab.casual %}
+            <div class="col-5 table-body">
+              <a class="table-word" href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word |safe}}</a>
+            </div>
+          {% else %}
+            <div class="col-5 table-body">
+              <a class="table-word casual" href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word |safe}} </a>
+            </div>
+          {% endif %}
           <div class="col-5 table-body">
             {{ vocab.definition |safe}}
           </div>
