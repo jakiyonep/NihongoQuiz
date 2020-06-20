@@ -22,7 +22,9 @@
   <body>
     <div class="body">
       <div class="container">
-        welcome to nihongo tatsujin
+        {% for object in object_list %}
+        {{ object.content|safe }}
+        {% endfor %}
       </div>
     </div>
   </body>

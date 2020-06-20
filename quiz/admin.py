@@ -7,7 +7,6 @@ from django_summernote.admin import SummernoteModelAdmin
 
 class BeforeYouStartAdmin(SummernoteModelAdmin):
     summernote_fields = 'content'
-    list_display = ['content']
 
 
 class DescriptionDetailInline(admin.TabularInline):
@@ -87,7 +86,7 @@ class LessonAdmin(SummernoteModelAdmin):
 
 
 #BeforeYouStart
-admin.site.register(BeforeYouStart)
+admin.site.register(BeforeYouStart, BeforeYouStartAdmin)
 
 #quiz
 admin.site.register(Level)
