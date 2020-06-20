@@ -8,9 +8,10 @@ from django.utils import timezone
 #BeforeYouStart
 
 class BeforeYouStart(models.Model):
-    content = models.TextField(null=True, blank=True)
+    content = MarkdownxField(null=True, blank=True)
 
-
+    def markdown(self):
+        return markdownify(self.content)
 
 
 #Quiz
@@ -126,7 +127,7 @@ class BasicsCategory(models.Model):
 class Basics(models.Model):
     title = models.CharField(null=True, max_length=255)
     category = models.ForeignKey(BasicsCategory, on_delete=models.CASCADE)
-    content = models.TextField(null=True)
+    content = MarkdownxField(null=True)
     order = models.IntegerField(null=True)
     public = models.BooleanField(default=True)
 
@@ -135,6 +136,9 @@ class Basics(models.Model):
 
     def __str__(self):
         return self.title
+
+    def markdown(self):
+        return markdownify(self.content)
 
 #Articles
 
@@ -153,7 +157,7 @@ class ArticlesCategory(models.Model):
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
     category = models.ForeignKey(ArticlesCategory, on_delete=models.CASCADE)
-    content = models.TextField(null=True)
+    content = MarkdownxField(null=True)
     order = models.IntegerField(null=True)
     public = models.BooleanField(default=True)
 
@@ -163,6 +167,8 @@ class Articles(models.Model):
     def __str__(self):
         return self.title
 
+    def markdown(self):
+        return markdownify(self.content)
 
 #Lessons
 
@@ -228,7 +234,7 @@ class LessonQuestion(models.Model):
 class LessonGrammar(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     grammar = models.CharField(null=True, max_length=300)
-    desc = models.TextField(null=True)
+    desc = MarkdownxField(null=True)
     casual = models.BooleanField(default=False)
 
     def __str__(self):
@@ -236,6 +242,9 @@ class LessonGrammar(models.Model):
 
     class Meta:
         ordering = ['lesson', 'id']
+
+    def markdown(self):
+        return markdownify(self.desc)
 
 class LessonKanji(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)

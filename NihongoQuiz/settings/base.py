@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'quiz',
     'storages',
+    'markdownx',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'NihongoQuiz.urls'
+
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.toc',
+]
 
 TEMPLATES = [
     {

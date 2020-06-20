@@ -1,5 +1,6 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
+
 {% block title %} Before You Start {% endblock %}
 {% block description %}
   Learn how to use 日本語Tatsujin
@@ -21,10 +22,14 @@
   </head>
   <body>
     <div class="body">
-      <div class="container">
+      <div class="container before_you_start">
+        <p class="welcome">Welcome to 日本語Tatsujin!</p>
+        <div class="before_content">
+
         {% for object in object_list %}
-        {{ object.content|safe }}
+          {{ object.markdown|safe }}
         {% endfor %}
+      </div>
       </div>
     </div>
   </body>

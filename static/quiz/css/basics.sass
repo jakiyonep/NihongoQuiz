@@ -32,15 +32,7 @@ body
   border-top: 1px solid rgb(222, 222, 222)
   padding-top: 2em
   ul
-    padding: 0.5em 1em
-    color: #494949
-    background: transparent
-    border-left: solid 5px rgb(185, 211, 223)
-    li
-      list-style: none
-      padding-left: 0
-      font-style: italic
-
+    padding-left: 2em
   ol
     padding-left: 2em
   li
@@ -53,11 +45,72 @@ body
   h3
     border-bottom: 3px solid $color
     padding: 0.5em 0
+    margin: 2em 0
   h3::first-letter
     font-size: 1.3em
+  h4
+    margin: 1.5em 0
+    padding: 0.5em
+    color: #010101
+    background: rgba(244, 252, 255, 0.07)
+    border-bottom: solid 3px rgb(194, 236, 247)
+    display: inline-block
+    border-radius: 0 2em 2em 0
+    color: inherit
   .japa
+    padding: 0.5em 1em
+    color: #494949
+    background: transparent
+    border-left: solid 5px rgb(185, 211, 223)
+    margin: 2em 0
+    li
+      list-style: none
+      padding-left: 0
+      font-style: italic
+  .line
+    color: inherit
+    background: linear-gradient(transparent 10%, #c1e0ff 70%)
+    font-weight: bold
+  .toc
+    margin: 1.5em 0
+    border: 1px solid $color
+    border-radius: 0.5em
 
+    padding: 3em 1em
+    &::before
+      content: "Contents"
+      margin-bottom: 1em
+      width: 100%
+      display: block
+      font-weight: bold
 
+    li
+      padding-left: 0
+    a
+      color: $color !important
+
+.before_you_start
+  h3
+    border-bottom: 3px solid $color
+    padding: 0.5em 0
+  h3::first-letter
+    font-size: 1.3em
 
 .empty
   height: 400px
+
+
+
+/*before you start*/
+
+.before_you_start
+  .welcome
+    text-align: center
+    font-size: 1.5em
+    margin: 0 auto
+  .before_content
+    margin: 5em 0
+  img
+    display: block
+    max-width: 100%
+    margin: 0 auto

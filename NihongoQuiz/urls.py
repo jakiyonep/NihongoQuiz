@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quiz.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('markdownx/', include('markdownx.urls')),
 ]
 

@@ -5,8 +5,7 @@ from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
-class BeforeYouStartAdmin(SummernoteModelAdmin):
-    summernote_fields = 'content'
+
 
 
 class DescriptionDetailInline(admin.TabularInline):
@@ -33,16 +32,14 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'order')
     list_editable = ['order']
 
-class BasicsAdmin(SummernoteModelAdmin):
-    summernote_fields = 'content'
+class BasicsAdmin(MarkdownxModelAdmin):
     list_display = ('title', 'category','order')
     list_editable = ['order']
 
 
 #Aritlces
 
-class ArticlesAdmin(SummernoteModelAdmin):
-    summernote_fields = 'content'
+class ArticlesAdmin(MarkdownxModelAdmin):
     list_display = ('title', 'category','order')
     list_editable = ['order']
 
@@ -64,16 +61,14 @@ class LessonGrammarInline(admin.TabularInline):
     model = LessonGrammar
     extra = 2
 
-class LessonGrammarAdmin(SummernoteModelAdmin):
-    summernote_fields = 'desc'
+class LessonGrammarAdmin(MarkdownxModelAdmin):
     list_display = ('grammar', 'lesson')
 
 class LessonKanjiInline(admin.TabularInline):
     model = LessonKanji
     extra = 3
 
-class LessonAdmin(SummernoteModelAdmin):
-    summernote_fields = 'desc'
+class LessonAdmin(MarkdownxModelAdmin):
     inlines = [
         LessonBodyInline,
         LessonQuestionInline,
@@ -86,7 +81,7 @@ class LessonAdmin(SummernoteModelAdmin):
 
 
 #BeforeYouStart
-admin.site.register(BeforeYouStart, BeforeYouStartAdmin)
+admin.site.register(BeforeYouStart, MarkdownxModelAdmin)
 
 #quiz
 admin.site.register(Level)
