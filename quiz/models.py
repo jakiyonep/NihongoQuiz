@@ -5,6 +5,20 @@ from django.utils import timezone
 
 
 # Create your models here.
+#BeforeYouStart
+
+class BeforeYouStart(models.Model):
+    content = models.TextField(null=True, blank=True)
+
+
+
+
+#Quiz
+
+
+
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)

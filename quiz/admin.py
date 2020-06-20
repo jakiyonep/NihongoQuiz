@@ -5,6 +5,9 @@ from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
+class BeforeYouStartAdmin(SummernoteModelAdmin):
+    summernote_fields = 'content'
+    list_display = ['content']
 
 
 class DescriptionDetailInline(admin.TabularInline):
@@ -83,6 +86,10 @@ class LessonAdmin(SummernoteModelAdmin):
     list_editable = ('chapter', 'number')
 
 
+#BeforeYouStart
+admin.site.register(BeforeYouStart)
+
+#quiz
 admin.site.register(Level)
 admin.site.register(Category)
 admin.site.register(Tag, TagAdmin)

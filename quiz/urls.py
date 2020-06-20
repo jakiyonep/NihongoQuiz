@@ -19,6 +19,7 @@ from quiz.views import (
     LessonVocabularyIndex,
     LessonGrammarIndex,
     LessonKanjiIndex,
+    BeforeYouStart,
 
 )
 
@@ -27,6 +28,7 @@ app_name = 'quiz'
 
 urlpatterns = [
     path('', ToppageView.as_view(), name="toppage"),
+    path('beforeyoustart', BeforeYouStart.as_view(), name='before_you_start'),
     path('quiz', QuizListView.as_view(), name='quiz'),
     path('levels/', LevelListView.as_view(), name="level_list"),
     path('categories/', CategoryListView.as_view(), name="category_list"),

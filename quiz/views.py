@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 
 from quiz.models import (
+    BeforeYouStart,
     Quiz,
     Tag,
     Category,
@@ -22,6 +23,11 @@ from quiz.models import (
 from .filters import QuizFilter
 
 # Create your views here.
+
+class BeforeYouStart(ListView):
+    model = BeforeYouStart
+    template_name = 'quiz/before.html'
+
 
 class QuizListView(ListView):
     model = Quiz
