@@ -130,7 +130,7 @@ class Basics(models.Model):
     content = MarkdownxField(null=True)
     order = models.IntegerField(null=True)
     public = models.BooleanField(default=True)
-
+    image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
     class Meta:
         ordering = ['order']
 
@@ -139,6 +139,10 @@ class Basics(models.Model):
 
     def markdown(self):
         return markdownify(self.content)
+
+class BasicImage(models.Model):
+    basic = models.ForeignKey(Basics, on_delete=models.CASCADE)
+    basic_image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
 
 #Articles
 

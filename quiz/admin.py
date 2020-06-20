@@ -32,9 +32,14 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'order')
     list_editable = ['order']
 
+class BasicsImage(admin.TabularInline):
+    model = BasicImage
+    extra = 1
+
 class BasicsAdmin(MarkdownxModelAdmin):
     list_display = ('title', 'category','order')
     list_editable = ['order']
+    inlines = [BasicsImage]
 
 
 #Aritlces
