@@ -14,6 +14,11 @@ class BeforeYouStart(models.Model):
         return markdownify(self.content)
 
 
+class BeforeYouStartImage(models.Model):
+    before = models.ForeignKey(BeforeYouStart, on_delete=models.CASCADE)
+    before_image = models.ImageField(upload_to='before_image/', null=True, blank=True)
+
+
 #Quiz
 
 
@@ -174,6 +179,11 @@ class Articles(models.Model):
     def markdown(self):
         return markdownify(self.content)
 
+class ArticleImage(models.Model):
+    article = models.ForeignKey(Articles, on_delete=models.CASCADE)
+    article_image = models.ImageField(upload_to='article_image/', null=True, blank=True)
+
+
 #Lessons
 
 class Lesson(models.Model):
@@ -249,6 +259,11 @@ class LessonGrammar(models.Model):
 
     def markdown(self):
         return markdownify(self.desc)
+
+class LessonGrammarImage(models.Model):
+    lesson_grammar = models.ForeignKey(LessonGrammar, on_delete=models.CASCADE)
+    lesson_gramamr_image = models.ImageField(upload_to='grammar_image/', null=True, blank=True)
+
 
 class LessonKanji(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)

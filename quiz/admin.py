@@ -44,9 +44,14 @@ class BasicsAdmin(MarkdownxModelAdmin):
 
 #Aritlces
 
+class ArticlesImage(admin.TabularInline):
+    model = ArticleImage
+    extra = 1
+
 class ArticlesAdmin(MarkdownxModelAdmin):
     list_display = ('title', 'category','order')
     list_editable = ['order']
+    inlines = [ArticlesImage]
 
 #lesson
 
@@ -66,8 +71,13 @@ class LessonGrammarInline(admin.TabularInline):
     model = LessonGrammar
     extra = 2
 
+class LessonGrammarImage(admin.TabularInline):
+    model = LessonGrammarImage
+    extra = 1
+
 class LessonGrammarAdmin(MarkdownxModelAdmin):
     list_display = ('grammar', 'lesson')
+    inlines = [LessonGrammarImage]
 
 class LessonKanjiInline(admin.TabularInline):
     model = LessonKanji
@@ -84,9 +94,16 @@ class LessonAdmin(MarkdownxModelAdmin):
     list_display = ('title', 'chapter', 'number')
     list_editable = ('chapter', 'number')
 
+class BeforeImage(admin.TabularInline):
+    model = BeforeYouStartImage
+    extra = 1
+
+class BeforeYouStartAdmin(MarkdownxModelAdmin):
+    inlines = [BeforeImage]
+
 
 #BeforeYouStart
-admin.site.register(BeforeYouStart, MarkdownxModelAdmin)
+admin.site.register(BeforeYouStart, BeforeYouStartAdmin)
 
 #quiz
 admin.site.register(Level)
