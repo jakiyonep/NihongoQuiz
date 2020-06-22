@@ -58,6 +58,9 @@ body
     display: inline-block
     border-radius: 0 2em 2em 0
     color: inherit
+  h5
+    margin: 2em 0
+
 .japa
   padding: 0.5em 1em
   color: #494949
@@ -68,27 +71,27 @@ body
     list-style: none
     padding-left: 0
     font-style: italic
-  .line
-    color: inherit
-    background: linear-gradient(transparent 10%, #c1e0ff 70%)
+.line
+  color: inherit
+  background: linear-gradient(transparent 10%, #c1e0ff 70%)
+  font-weight: bold
+.toc
+  margin: 1.5em 0
+  border: 1px solid $color
+  border-radius: 0.5em
+
+  padding: 3em 1em
+  &::before
+    content: "Contents"
+    margin-bottom: 1em
+    width: 100%
+    display: block
     font-weight: bold
-  .toc
-    margin: 1.5em 0
-    border: 1px solid $color
-    border-radius: 0.5em
 
-    padding: 3em 1em
-    &::before
-      content: "Contents"
-      margin-bottom: 1em
-      width: 100%
-      display: block
-      font-weight: bold
-
-    li
-      padding-left: 0
-    a
-      color: $color !important
+  li
+    padding-left: 0
+  a
+    color: $color !important
 
 .before_you_start
   h3
