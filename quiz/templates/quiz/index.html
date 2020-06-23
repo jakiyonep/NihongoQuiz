@@ -2,6 +2,7 @@
 {% block title %}Quizzes{% endblock %}
 {% block content %}
 {% load bootstrap %}
+{% load quiz_filter %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -30,191 +31,222 @@
 
   <div class="filter" >
     <form method="GET">
-      {{ filter.form | bootstrap }}
+      {{ filtered_quiz.form | bootstrap }}
       <button type="submit" name="button" class ="btn button">Find Quizzes</button>
   </form>
   </div>
-  {% for quiz in filter.qs %}
+
+      {% for quiz in quiz_page_obj %}
+        <div class="card card-quiz ">
+          <div class="card-title">
+          {% if user.is_authenticated or quiz.public %}
+            {% if not quiz.public %} Draft {% endif %}{{quiz.question | safe}}
+          </div>
+          <div class="card-body" >
+            {% if quiz.choice_long %}
+              <div class="card-text row">
+                <div class="choice choice-1 col-12 border border-white  bg-light mb-3">
+                  {{quiz.choice1 | safe}}
+                </div>
+                <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
+                  {{quiz.choice2 | safe}}
+                </div>
+                {% if quiz.choice3 %}
+                  <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
+                    {{quiz.choice3 | safe}}
+                  </div>
+                {% endif %}
+                {% if quiz.choice4  %}
+                  <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
+                    {{quiz.choice4  | safe}}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif%}
+            {% if not quiz.choice_long %}
+              <div class="card-text row">
+                <div class="choice choice-1 col-6 border border-white  bg-light">
+                  {{quiz.choice1 | safe}}
+                </div>
+                <div class="choice choice-2 col-6 border border-white  bg-light">
+                  {{quiz.choice2 | safe}}
+                </div>
+                {% if quiz.choice3 %}
+                  <div class="choice choice-3 col-6 border border-white  bg-light">
+                     {{quiz.choice3 | safe}}
+                  </div>
+                {% endif %}
+                {% if quiz.choice4  %}
+                  <div class="choice choice-4 col-6 border border-white  bg-light">
+                    {{quiz.choice4 | safe}}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif%}
+            <div class="w-100 d-flex justify-content-between card-bottom">
+              <div class="quiz-info">
+                <div class="card-level-category">
+                  <a class=" {{quiz.level.slug}}" href="{% url 'quiz:level_post' quiz.level.slug %}">{{quiz.level}}</a>
+                  <a class=" {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
+                </div>
+                <div class="card-tag">
+                  {% for tag in quiz.tags.all %}
+                    <a href="{% url 'quiz:tag_post' tag.slug %}">{{ tag.name }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+              <a class="answer btn text-white" data-toggle="collapse" href="#c{{quiz.pk}}" role="button" aria-expanded="false" aria-controls="c{{quiz.pk}}">
+                Answer
+              </a>
+            </div>
+            <div class="collapse" id="c{{quiz.pk}}">
+              <div class="card card-body answer-collapse">
+                <span class="correct-answer">{{quiz.answer}}</span>
+                <div class="description"><!--DetailDescription-->
+                  {% if quiz.description %}
+                    <div class="quiz-description">
+                      {{ quiz.description |safe }}
+                    </div>
+                  {% endif %}
+                  {% if quiz.question_yomi %}
+                    <div class="question-yomi">
+                      {{ quiz.question_yomi |safe }}
+                    </div>
+                  {% endif %}
+                  {% if quiz.question_en %}
+                    <div class="question-en">
+                      {{ quiz.question_en | safe }}
+                    </div>
+                  {% endif %}
+                  <div class="detail-description">
+                    {% for detail in quiz.descriptiondetail_set.all  %}
+                      {% if detail.word %}
+                        <div class="detail-word">
+                          {{ detail.word  |safe }}
+                        </div>
+                      {% endif %}
+                      {% if detail.yomi %}
+                        <div class="detail-yomi">
+                          {{ detail.yomi  |safe }}
+                        </div>
+                      {% endif %}
+                      {% if detail.definition %}
+                        <div class="detail-definition">
+                          {{ detail.definition  |safe }}
+                        </div>
+                      {% endif %}
+                      {% if detail.usage %}
+                        <div class="detail-usage">
+                          {{ detail.usage | safe}}
+                        </div>
+                      {% endif %}
+                      {% if detail.example_ja %}
+                        <div class="detail-example-ja">
+                          {{ detail.example_ja |safe }}
+                        </div>
+                      {% endif %}
+                      {% if detail.example_yomi %}
+                        <div class="detail-example-yomi">
+                          {{ detail.example_yomi |safe }}
+                        </div>
+                      {% endif %}
+                      {% if detail.example_en %}
+                        <div class="detail-example-en">
+                          {{ detail.example_en | safe}}
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="choices-description">
+                    {% if quiz.choice1_detail %}
+                      <p>Choices</p>
+                    {% endif %}
+                    {% if quiz.choice1_detail %}
+                      <div class="choice1">
+                        {{ quiz.choice1_detail | safe }}
+                      </div>
+                    {% endif %}
+                    {% if quiz.choice2_detail %}
+                      <div class="choice2">
+                        {{ quiz.choice2_detail | safe }}
+                      </div>
+                    {% endif %}
+                    {% if quiz.choice3_detail %}
+                      <div class="choice3">
+                        {{ quiz.choice3_detail | safe}}
+                      </div>
+                    {% endif %}
+                    {% if quiz.choice4_detail %}
+                      <div class="choice4">
+                        {{ quiz.choice4_detail | safe }}
+                      </div>
+                    {% endif %}
+
+                    {% if quiz.choicesdetail_set.all %}
+                    <p>Choices</p>
+                    {% endif %}
+                    {% for choice in quiz.choicesdetail_set.all %}
+                      {% if choice.choice_explanation_1 %}
+                        <div class="choice1">
+                          {{ choice.choice_explanation_1 }}
+                        </div>
+                      {% endif %}
+                      {% if choice.choice_explanation_2 %}
+                        <div class="choice2">
+                          {{ choice.choice_explanation_2 }}
+                        </div>
+                      {% endif %}
+                      {% if choice.choice_explanation_3 %}
+                        <div class="choice3">
+                          {{ choice.choice_explanation_3 }}
+                        </div>
+                      {% endif %}
+                      {% if choice.choice_explanation_4 %}
+                        <div class="choice4">
+                          {{ choice.choice_explanation_4 }}
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      {% endfor %}
 
 
-  <div class="card card-quiz">
-    <div class="card-title">
-    {% if user.is_authenticated or quiz.public %}
-      {% if not quiz.public %} Draft {% endif %}{{quiz.question | safe}}
-    </div>
-    <div class="card-body" >
-      {% if quiz.choice_long %}
-        <div class="card-text row">
-          <div class="choice choice-1 col-12 border border-white  bg-light mb-3">
-            {{quiz.choice1 | safe}}
-          </div>
-          <div class="choice choice-2 col-12 border border-white  bg-light mb-3">
-            {{quiz.choice2 | safe}}
-          </div>
-          {% if quiz.choice3 %}
-            <div class="choice choice-3 col-12 border border-white  bg-light mb-3">
-              {{quiz.choice3 | safe}}
-            </div>
-          {% endif %}
-          {% if quiz.choice4  %}
-            <div class="choice choice-4 col-12 border border-white  bg-light mb-3">
-              {{quiz.choice4  | safe}}
-            </div>
-          {% endif %}
-        </div>
-      {% endif%}
-      {% if not quiz.choice_long %}
-        <div class="card-text row">
-          <div class="choice choice-1 col-6 border border-white  bg-light">
-            {{quiz.choice1 | safe}}
-          </div>
-          <div class="choice choice-2 col-6 border border-white  bg-light">
-            {{quiz.choice2 | safe}}
-          </div>
-          {% if quiz.choice3 %}
-            <div class="choice choice-3 col-6 border border-white  bg-light">
-               {{quiz.choice3 | safe}}
-            </div>
-          {% endif %}
-          {% if quiz.choice4  %}
-            <div class="choice choice-4 col-6 border border-white  bg-light">
-              {{quiz.choice4 | safe}}
-            </div>
-          {% endif %}
-        </div>
-      {% endif%}
-      <div class="w-100 d-flex justify-content-between card-bottom">
-        <div class="quiz-info">
-          <div class="card-level-category">
-            <a class=" {{quiz.level.slug}}" href="{% url 'quiz:level_post' quiz.level.slug %}">{{quiz.level}}</a>
-            <a class=" {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
-          </div>
-          <div class="card-tag">
-            {% for tag in quiz.tags.all %}
-              <a href="{% url 'quiz:tag_post' tag.slug %}">{{ tag.name }}</a>
-            {% endfor %}
-          </div>
-        </div>
-        <a class="answer btn text-white" data-toggle="collapse" href="#c{{quiz.pk}}" role="button" aria-expanded="false" aria-controls="c{{quiz.pk}}">
-          Answer
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination  justify-content-center">
+    {% if quiz_page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link page-side" href="{% my_url quiz_page_obj.previous_page_number 'page' request.GET.urlencode %}" aria-label="Previous">
+          <span class="page-side" aria-hidden="true">&laquo;前</span>
         </a>
-      </div>
-      <div class="collapse" id="c{{quiz.pk}}">
-        <div class="card card-body answer-collapse">
-          <span class="correct-answer">{{quiz.answer}}</span>
-          <div class="description"><!--DetailDescription-->
-            {% if quiz.description %}
-              <div class="quiz-description">
-                {{ quiz.description |safe }}
-              </div>
-            {% endif %}
-            {% if quiz.question_yomi %}
-              <div class="question-yomi">
-                {{ quiz.question_yomi |safe }}
-              </div>
-            {% endif %}
-            {% if quiz.question_en %}
-              <div class="question-en">
-                {{ quiz.question_en | safe }}
-              </div>
-            {% endif %}
-            <div class="detail-description">
-              {% for detail in quiz.descriptiondetail_set.all  %}
-                {% if detail.word %}
-                  <div class="detail-word">
-                    {{ detail.word  |safe }}
-                  </div>
-                {% endif %}
-                {% if detail.yomi %}
-                  <div class="detail-yomi">
-                    {{ detail.yomi  |safe }}
-                  </div>
-                {% endif %}
-                {% if detail.definition %}
-                  <div class="detail-definition">
-                    {{ detail.definition  |safe }}
-                  </div>
-                {% endif %}
-                {% if detail.usage %}
-                  <div class="detail-usage">
-                    {{ detail.usage | safe}}
-                  </div>
-                {% endif %}
-                {% if detail.example_ja %}
-                  <div class="detail-example-ja">
-                    {{ detail.example_ja |safe }}
-                  </div>
-                {% endif %}
-                {% if detail.example_yomi %}
-                  <div class="detail-example-yomi">
-                    {{ detail.example_yomi |safe }}
-                  </div>
-                {% endif %}
-                {% if detail.example_en %}
-                  <div class="detail-example-en">
-                    {{ detail.example_en | safe}}
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-            <div class="choices-description">
-              {% if quiz.choice1_detail %}
-                <p>Choices</p>
-              {% endif %}
-              {% if quiz.choice1_detail %}
-                <div class="choice1">
-                  {{ quiz.choice1_detail | safe }}
-                </div>
-              {% endif %}
-              {% if quiz.choice2_detail %}
-                <div class="choice2">
-                  {{ quiz.choice2_detail | safe }}
-                </div>
-              {% endif %}
-              {% if quiz.choice3_detail %}
-                <div class="choice3">
-                  {{ quiz.choice3_detail | safe}}
-                </div>
-              {% endif %}
-              {% if quiz.choice4_detail %}
-                <div class="choice4">
-                  {{ quiz.choice4_detail | safe }}
-                </div>
-              {% endif %}
-
-              {% if quiz.choicesdetail_set.all %}
-              <p>Choices</p>
-              {% endif %}
-              {% for choice in quiz.choicesdetail_set.all %}
-                {% if choice.choice_explanation_1 %}
-                  <div class="choice1">
-                    {{ choice.choice_explanation_1 }}
-                  </div>
-                {% endif %}
-                {% if choice.choice_explanation_2 %}
-                  <div class="choice2">
-                    {{ choice.choice_explanation_2 }}
-                  </div>
-                {% endif %}
-                {% if choice.choice_explanation_3 %}
-                  <div class="choice3">
-                    {{ choice.choice_explanation_3 }}
-                  </div>
-                {% endif %}
-                {% if choice.choice_explanation_4 %}
-                  <div class="choice4">
-                    {{ choice.choice_explanation_4 }}
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </li>
     {% endif %}
-  </div>
-  {% endfor %}
+
+    {% for num in quiz_page_obj.paginator.page_range %}
+      {% if not num == quiz_page_obj.number %}
+        <li class="page-item"><a class="page-link" href="{% my_url num 'page' request.GET.urlencode  %}">{{num}}</a></li>
+      {% else %}
+        <li class="page-item disabled"><a class="page-link current_number">{{num}}</a></li>
+      {% endif %}
+    {% endfor%}
+
+    {% if quiz_page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link page-side" href="{% my_url quiz_page_obj.next_page_number 'page' request.GET.urlencode %}" aria-label="Next">
+          <span class="page-side" aria-hidden="true">&raquo;次</span>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
 </body>
 </html>
 {% endblock %}

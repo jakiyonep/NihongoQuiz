@@ -2,7 +2,8 @@ from django.db.models import Count, Q
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
+from django.core.paginator import Paginator
 
 from quiz.models import (
     BeforeYouStart,
@@ -29,22 +30,28 @@ class BeforeYouStart(ListView):
     template_name = 'quiz/before.html'
 
 
-class QuizListView(ListView):
-    model = Quiz
-    template_name = 'quiz/index.html'
+def QuizListView(request):
+    context ={}
+
+    filtered_quiz = QuizFilter(
+        request.GET,
+        queryset=Quiz.objects.all(),
+    )
+
+    context['filtered_quiz'] = filtered_quiz
+
+    paginator = Paginator(filtered_quiz.qs, 20)
+    page_number = request.GET.get('page')
+    quiz_page_obj = paginator.get_page(page_number)
+
+    context['quiz_page_obj'] = quiz_page_obj
+
+    return render(request, 'quiz/index.html', context)
 
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = QuizFilter(self.request.GET, queryset=self.get_queryset())
-        context.update({
-            'object_list2': DescriptionDetail.objects.all,
-            'object_list3': ChoicesDetail.objects.all,
-        })
-        return context
 
-    def get_queryset(self):
-        return Quiz.objects.all()
+
+
 
 
 class LevelListView(ListView):
@@ -66,6 +73,8 @@ class TagListView(ListView):
 class LevelPostView(ListView):
     model = Quiz
     template_name = 'quiz/level_post.html'
+
+
     def get_queryset(self):
         level_slug = self.kwargs['level_slug']
         self.level = get_object_or_404(Level, slug=level_slug)
