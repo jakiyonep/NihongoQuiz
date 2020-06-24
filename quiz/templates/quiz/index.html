@@ -219,28 +219,27 @@
 
 
 
-<nav aria-label="Page navigation example">
+<nav aria-label="Page navigation example col-12">
   <ul class="pagination  justify-content-center">
-    {% if quiz_page_obj.has_previous %}
+    {% if quiz_page_obj.number|add:"-3" > 1 %}
       <li class="page-item">
-        <a class="page-link page-side" href="{% my_url quiz_page_obj.previous_page_number 'page' request.GET.urlencode %}" aria-label="Previous">
-          <span class="page-side" aria-hidden="true">&laquo;前</span>
+        <a class="page-link page-side" href="{% my_url 1 'page' request.GET.urlencode %}" aria-label="Previous">
+          <span class="page-side" aria-hidden="true">1&laquo;</span>
         </a>
       </li>
     {% endif %}
 
     {% for num in quiz_page_obj.paginator.page_range %}
-      {% if not num == quiz_page_obj.number %}
+      {% if  num == quiz_page_obj.number|add:"-1" or num == quiz_page_obj.number|add:"-2" or num == quiz_page_obj.number|add:"1" or num == quiz_page_obj.number|add:"2" or num == quiz_page_obj.number|add:"-3" or num == quiz_page_obj.number|add:"3"  %}
         <li class="page-item"><a class="page-link" href="{% my_url num 'page' request.GET.urlencode  %}">{{num}}</a></li>
-      {% else %}
+      {% elif quiz_page_obj.number == num %}
         <li class="page-item disabled"><a class="page-link current_number">{{num}}</a></li>
       {% endif %}
     {% endfor%}
-
-    {% if quiz_page_obj.has_next %}
+    {% if quiz_page_obj.paginator.num_pages > quiz_page_obj.number|add:"3" %}
       <li class="page-item">
         <a class="page-link page-side" href="{% my_url quiz_page_obj.next_page_number 'page' request.GET.urlencode %}" aria-label="Next">
-          <span class="page-side" aria-hidden="true">&raquo;次</span>
+          <span class="page-side" aria-hidden="true">&raquo;{{quiz_page_obj.paginator.num_pages}}</span>
         </a>
       </li>
     {% endif %}

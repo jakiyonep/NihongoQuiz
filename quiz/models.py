@@ -268,8 +268,8 @@ class LessonGrammarImage(models.Model):
 class LessonKanji(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     kanji = models.CharField(null=True, max_length=300, blank=True)
-    definition = models.CharField(null=True, max_length=300, blank=True)
     yomi = models.CharField(null=True, max_length=300, blank=True)
+    definition = models.CharField(null=True, max_length=300, blank=True)
     example = models.TextField(null=True, max_length=300, blank=True)
     example_yomi = models.TextField(null=True, max_length=300, blank=True)
     example_en = models.TextField(null=True, max_length=300, blank=True)

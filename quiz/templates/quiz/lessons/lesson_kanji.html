@@ -1,6 +1,6 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
-{% block title %}Lesson Kanji{% endblock %}
+{% block title %}Course Kanji{% endblock %}
 {% block description %}
   The list of Kanji used in the lessons
 {% endblock %}
@@ -29,10 +29,13 @@
         <div class="col-1">
           <p>CP</p>
         </div>
-        <div class="col-5">
-          <p>Word</p>
+        <div class="col-2">
+          <p>Kanji</p>
         </div>
-        <div class="col-5">
+        <div class="col-4">
+          <p>Yomi</p>
+        </div>
+        <div class="col-4">
           <p>Deninition</p>
         </div>
       </div>
@@ -42,10 +45,13 @@
             <div class="col-1 table-body">
               {{ kanji.lesson.chapter }}
             </div>
-            <div class="col-5 table-body">
+            <div class="col-2 table-body">
               <a class="table-word" href="{% url 'quiz:lesson_post' kanji.lesson.pk %}">{{ kanji.kanji }}</a>
             </div>
-            <div class="col-5 table-body">
+            <div class="col-4 table-body">
+              {{ kanji.yomi }}
+            </div>
+            <div class="col-4 table-body">
               {{ kanji.definition }}
             </div>
           </div>
