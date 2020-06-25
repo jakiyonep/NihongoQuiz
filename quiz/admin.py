@@ -101,6 +101,16 @@ class BeforeImage(admin.TabularInline):
 class BeforeYouStartAdmin(MarkdownxModelAdmin):
     inlines = [BeforeImage]
 
+class CorrectionInline(admin.TabularInline):
+    model=CorrectionSentences
+    extra = 3
+
+class CorrectionAdmin(MarkdownxModelAdmin):
+    inlines=[
+        CorrectionInline,
+    ]
+    list_display = ('title','public')
+    list_editable = ('public',)
 
 #BeforeYouStart
 admin.site.register(BeforeYouStart, BeforeYouStartAdmin)
@@ -122,3 +132,6 @@ admin.site.register(Articles, ArticlesAdmin)
 #Lessons
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(LessonGrammar, LessonGrammarAdmin)
+
+#Correction
+admin.site.register(Correction, CorrectionAdmin)

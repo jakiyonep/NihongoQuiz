@@ -2,10 +2,10 @@ from django.db import models
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from django.utils import timezone
-
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 
 # Create your models here.
-#BeforeYouStart
+# BeforeYouStart
 
 class BeforeYouStart(models.Model):
     content = MarkdownxField(null=True, blank=True)
@@ -19,10 +19,7 @@ class BeforeYouStartImage(models.Model):
     before_image = models.ImageField(upload_to='before_image/', null=True, blank=True)
 
 
-#Quiz
-
-
-
+# Quiz
 
 
 class Category(models.Model):
@@ -56,6 +53,7 @@ class Level(models.Model):
     def __str__(self):
         return self.name
 
+
 class Quiz(models.Model):
     description = models.TextField(blank=True)
     public = models.BooleanField(default=True)
@@ -85,7 +83,6 @@ class Quiz(models.Model):
     updated = models.DateTimeField(auto_now=True)
     publish = models.DateTimeField(auto_now=True, blank=True, null=True)
 
-
     class Meta:
         ordering = ['-updated']
 
@@ -100,6 +97,7 @@ class Quiz(models.Model):
     def __str__(self):
         return self.question
 
+
 class DescriptionDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
     word = models.CharField(blank=True, max_length=200)
@@ -109,6 +107,7 @@ class DescriptionDetail(models.Model):
     example_ja = models.TextField(blank=True, max_length=200)
     example_yomi = models.TextField(blank=True, max_length=200)
     example_en = models.TextField(blank=True, max_length=200)
+
 
 class ChoicesDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
@@ -129,6 +128,7 @@ class BasicsCategory(models.Model):
     def __str__(self):
         return self.name
 
+
 class Basics(models.Model):
     title = models.CharField(null=True, max_length=255)
     category = models.ForeignKey(BasicsCategory, on_delete=models.CASCADE)
@@ -136,6 +136,7 @@ class Basics(models.Model):
     order = models.IntegerField(null=True)
     public = models.BooleanField(default=True)
     image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
+
     class Meta:
         ordering = ['order']
 
@@ -145,11 +146,13 @@ class Basics(models.Model):
     def markdown(self):
         return markdownify(self.content)
 
+
 class BasicImage(models.Model):
     basic = models.ForeignKey(Basics, on_delete=models.CASCADE)
     basic_image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
 
-#Articles
+
+# Articles
 
 
 class ArticlesCategory(models.Model):
@@ -162,6 +165,7 @@ class ArticlesCategory(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
@@ -179,12 +183,13 @@ class Articles(models.Model):
     def markdown(self):
         return markdownify(self.content)
 
+
 class ArticleImage(models.Model):
     article = models.ForeignKey(Articles, on_delete=models.CASCADE)
     article_image = models.ImageField(upload_to='article_image/', null=True, blank=True)
 
 
-#Lessons
+# Lessons
 
 class Lesson(models.Model):
     chapter = models.IntegerField(null=True)
@@ -198,8 +203,6 @@ class Lesson(models.Model):
 
     class Meta:
         ordering = ['chapter', 'number']
-
-
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -231,8 +234,8 @@ class LessonVocabulary(models.Model):
     class Meta:
         ordering = ['lesson', 'id']
 
-class LessonQuestion(models.Model):
 
+class LessonQuestion(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     number = models.IntegerField(default=1, blank=True, null=True)
     question = models.TextField(null=True, max_length=300, blank=True)
@@ -244,6 +247,7 @@ class LessonQuestion(models.Model):
 
     class Meta:
         ordering = ['lesson', 'id']
+
 
 class LessonGrammar(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
@@ -259,6 +263,7 @@ class LessonGrammar(models.Model):
 
     def markdown(self):
         return markdownify(self.desc)
+
 
 class LessonGrammarImage(models.Model):
     lesson_grammar = models.ForeignKey(LessonGrammar, on_delete=models.CASCADE)
@@ -276,3 +281,39 @@ class LessonKanji(models.Model):
 
     class Meta:
         ordering = ['lesson', 'id']
+
+
+class Correction(models.Model):
+    title = models.TextField(max_length=100, null=True, blank=True)
+    public = models.BooleanField(default=False)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    text = models.TextField(max_length=500,
+                            validators=[
+                                MaxLengthValidator(500, 'Text should be less than 500 characters! Suimasen!'),
+                                MinLengthValidator(1, 'Text is empty')
+                                        ])
+    desc = models.TextField(max_length=500, null=True, blank=True)
+    type_choices = (
+        (1, 'Casual'),
+        (2, 'Formal'),
+        (3, 'SUPER Formal'),
+    )
+    type = models.IntegerField(choices=type_choices, blank=True, null=True)
+
+    def __str__(self):
+        if len(self.title) > 1:
+            return self.title
+        else:
+            cut_text = "New!"
+            return cut_text
+
+
+
+class CorrectionSentences(models.Model):
+    correction = models.ForeignKey(Correction, on_delete=models.CASCADE)
+    original = models.TextField(max_length=50000, blank=True, null=True)
+    corrected = models.TextField(max_length=50000, blank=True, null=True)
+    desc = models.TextField(max_length=50000, blank=True, null=True)
+
+    def markdown(self):
+        return markdownify(self.desc)

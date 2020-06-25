@@ -203,34 +203,6 @@
 {% endfor %}
 
 
-<!--
-{% if not page_obj.has_previous and not page_obj.has_next%}
-{% else %}
-<nav class="pagination w-100 m-auto d-flex justify-content-between">
-{% if page_obj.has_previous %}
-  <a class="pagination-previous btn btn-primary" href="?page={{ page_obj.previous_page_number }}"><<</a>
-{% endif %}
-{% if not page_obj.has_previous %}
-  <span class="pagination-previous btn btn-light"><<</span>
-{% endif %}
-<div class="">
-  {% for num in paginator.page_range %}
-  {% if page_obj.number == num %}
-    <span class="pagination-number btn btn-light">{{ num }}</span>
-  {% else %}
-    <a class="pagination-number btn btn-primary" href="?page={{ num }}">{{ num }}</a>
-  {% endif %}
-  {% endfor %}
-</div>
 
-{% if page_obj.has_next %}
-  <a class="pagination-next btn btn-primary" href="?page={{ page_obj.next_page_number }}">>></a>
-{% endif %}
-{% if not page_obj.has_next %}
-  <span class="pagination-next btn btn-light">>></span>
-{% endif %}
-</nav>
-{% endif %}
--->
 </body>
 </html>

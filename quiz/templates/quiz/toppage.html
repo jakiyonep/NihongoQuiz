@@ -74,12 +74,25 @@
           <a href="{% url 'quiz:quiz' %}">
             <div class="card h-100">
               <div class="card-body">
-                <h1 class="top-menu mb-5 card-title" href="{% url 'quiz:quiz' %}">問 - Quizzes</h1>
+                <h1 class="top-menu mb-5 card-title">問 - Quizzes</h1>
                 <p class="desc card-text">Practice makes perfect. A bunch of quick quizzes are waiting for you!</p>
               </div>
             </div>
           </a>
         </div>
+
+        {% if user.is_authenticated %}
+        <div class="col-md-6 section">
+          <a href="{% url 'quiz:correction' %}">
+            <div class="card h-100">
+              <div class="card-body">
+                <h1 class="top-menu mb-5 card-title">修 - Correction</h1>
+                <p class="desc card-text">Submit your Japanese composition and let me revise it for you</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endif %}
 
 
 

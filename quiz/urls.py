@@ -1,24 +1,5 @@
 from django.urls import path
-from quiz.views import (
-    QuizListView,
-    LevelPostView,
-    CategoryPostView,
-    TagPostView,
-    SearchPostView,
-    QuizFilter,
-    BasicsDetailView,
-    BasicsIndex,
-    ArticleDetailView,
-    ArticlesIndex,
-    ToppageView,
-    LessonsIndex,
-    LessonDetailView,
-    LessonVocabularyIndex,
-    LessonGrammarIndex,
-    LessonKanjiIndex,
-    BeforeYouStart,
-
-)
+from quiz.views import *
 
 
 app_name = 'quiz'
@@ -39,6 +20,9 @@ urlpatterns = [
     path('lesson/<str:pk>/', LessonDetailView.as_view(), name="lesson_post"),
     path('lessonvocabulary/', LessonVocabularyIndex.as_view(), name="lesson_vocabulary"),
     path('lessongrammar/', LessonGrammarIndex.as_view(), name="lesson_grammar"),
-    path('lessonkanji//', LessonKanjiIndex.as_view(), name="lesson_kanji"),
-
+    path('lessonkanji/', LessonKanjiIndex.as_view(), name="lesson_kanji"),
+    path('correction/', CorrectionIndex.as_view(), name="correction"),
+    path('correctionadd/', CorrectionAdd, name="correction_add"),
+    path('submitted', AfterSubmit, name="after_submit"),
+    path('correction/<str:pk>/', CorrectionDetail.as_view(), name="correction_post")
 ]
