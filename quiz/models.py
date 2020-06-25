@@ -300,12 +300,7 @@ class Correction(models.Model):
     )
     type = models.IntegerField(choices=type_choices, blank=True, null=True)
 
-    def __str__(self):
-        if len(self.title) > 1:
-            return self.title
-        else:
-            cut_text = "New!"
-            return cut_text
+
 
 
 
