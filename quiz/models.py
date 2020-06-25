@@ -294,9 +294,10 @@ class Correction(models.Model):
                                         ])
     desc = models.TextField(max_length=500, null=True, blank=True)
     type_choices = (
-        (1, 'Casual'),
-        (2, 'Formal'),
-        (3, 'SUPER Formal'),
+        (1, 'SUPER Casual'),
+        (2, 'Casual'),
+        (3, 'Formal'),
+        (4, 'SUPER Formal'),
     )
     type = models.IntegerField(choices=type_choices, blank=True, null=True)
 

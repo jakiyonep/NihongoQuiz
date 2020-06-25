@@ -25,7 +25,7 @@
         <h1 class="top-menu mb-5 card-title">修 - Correction</h1>
         <div class="section-top row">
           <div class="col-12 col-md-8">
-            <p class="desc card-text">Here you can read other's Japanese composition with my correction. I'm willing to correct your Japanese writing, so feel free to submit yours!</p>
+            <p class="desc card-text">Here you can read other's Japanese composition with my correction. I'm willing to correct your Japanese writing too, so feel free to send me yours!</p>
           </div>
           <div class="col-12 col-md-4 d-flex justify-content-center d-flex align-items-center">
             <a class="button" href="{% url 'quiz:correction_add' %}">Submit</a>
@@ -33,8 +33,6 @@
         </div>
 
         <div class="correction_content">
-
-
           <div class="correction_list container">
             <div class="row list_head">
               <div class="col-8">
@@ -52,12 +50,15 @@
                   </div>
                   <div class="correction_type col-4">
                     {% if correction.type == 1 %}
-                    <span>Casual</span>
+                    <span>SUPER Casual</span>
                     {% endif %}
                     {% if correction.type == 2 %}
-                    <span>Formal</span>
+                    <span>Casual</span>
                     {% endif %}
                     {% if correction.type == 3 %}
+                    <span>Formal</span>
+                    {% endif %}
+                    {% if correction.type == 4 %}
                     <span>SUPER Formal</span>
                     {% endif %}
                   </div>

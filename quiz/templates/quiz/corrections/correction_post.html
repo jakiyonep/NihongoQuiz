@@ -25,14 +25,19 @@
 
       <p >Written by <span class="writer">{{object.name}}</span></p>
       <p>Type: <span class="writer">{% if correction.type == 1 %}
-      Casual
+      SUPER Casual
       {% endif %}
       {% if correction.type == 2 %}
-      Formal
+      Casual
       {% endif %}
       {% if correction.type == 3 %}
+      Formal
+      {% endif %}
+      {% if correction.type == 4 %}
       SUPER Formal
-      {% endif %}</span></p>
+      {% endif %}
+    </span>
+    </p>
     </div>
 
       <div class="row">
