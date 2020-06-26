@@ -3,9 +3,7 @@
 {% load markdownify %}
 {% block title %} {{object.title}} {% endblock %}
 {% block description %}
-  {% for desc in correction.correctionsentences_set.all %}
-    {{ desc.markdown | safe}}
-  {% endfor %}
+  {{object.name}}'s composition
 {% endblock %}
 {% block content %}
 <!DOCTYPE html>
@@ -71,7 +69,7 @@
                   <div class="correction_desc collapse " id="desc-{{desc.pk}}">
                     <p class="corrected">{{ desc.markdown_corrected | safe }}</p>
                     <p class="corrected_yomi">{{ desc.corrected_yomi | safe }}</p>
-                    <!--<p class="desc">{{ desc.markdown | safe }}</p>-->
+                    <p class="desc">{{ desc.markdown | safe }}</p>
                   </div>
                 </div>
                 <div class="col-1 right">
