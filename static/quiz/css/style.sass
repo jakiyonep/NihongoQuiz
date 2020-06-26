@@ -1,4 +1,6 @@
 /*base*/
+$yomi-color: rgb(255, 183, 158)
+
 body
   width: 100%
 *
@@ -510,21 +512,34 @@ $square-color: rgb(71, 71, 71)
 
 .correction_post
   .correction_info
-    p
-      font-size: 1.2em
     span
       font-weight: bold
-  .correction-wrapper
-    li
-      list-style-position: inside
-    .left
-      border-bottom: 1px solid rgba(195, 195, 195, 0.59)
-      padding: 1em 0
+  .container
+    p
+      font-size: 1em
+    .original
+      margin-bottom: 0 !important
 
-      .corrected
-        color: rgb(255, 110, 110)
-      .desc
-        color: black !important
+  .row
+    width: 100%
+.correction-wrapper
+  padding-left: 1em
+  ul
+    padding: 1.2em
+  ol
+    padding: 1.2em
+  .left
+    border-bottom: 1px solid rgba(195, 195, 195, 0.59)
+    padding: 1em 0
+    .correction_desc
+      span
+        color: red
+      .f
+        color: rgb(86, 207, 32)
+      .corrected_yomi
+        color: $yomi-color
+  .desc
+    font-size: 0.9em
 
-    .right
-      padding-top: 1em
+  .right
+    padding-top: 1em

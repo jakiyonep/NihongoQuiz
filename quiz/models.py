@@ -102,11 +102,18 @@ class DescriptionDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
     word = models.CharField(blank=True, max_length=200)
     yomi = models.CharField(blank=True, max_length=200)
-    definition = models.CharField(blank=True, max_length=200)
-    usage = models.CharField(blank=True, max_length=200)
+    definition = models.TextField(blank=True, max_length=200)
+    usage = models.TextField(blank=True, max_length=200)
     example_ja = models.TextField(blank=True, max_length=200)
     example_yomi = models.TextField(blank=True, max_length=200)
     example_en = models.TextField(blank=True, max_length=200)
+
+    def markdown_definition(self):
+        return markdownify(self.definition)
+
+    def markdown_usage(self):
+        return markdownify(self.usage)
+
 
 
 class ChoicesDetail(models.Model):
@@ -284,7 +291,7 @@ class LessonKanji(models.Model):
 
 
 class Correction(models.Model):
-    title = models.TextField(max_length=100, null=True, blank=True)
+    title = models.TextField(max_length=100, null=True, blank=True, default="New!")
     public = models.BooleanField(default=False)
     name = models.CharField(max_length=100, null=True, blank=True)
     text = models.TextField(max_length=500,
@@ -300,8 +307,16 @@ class Correction(models.Model):
         (4, 'SUPER Formal'),
     )
     type = models.IntegerField(choices=type_choices, blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
 
+    class Meta():
+        ordering =['public','-updated']
 
+    def title_new(self):
+        if not self.title:
+            self.title = "New!!"
+
+        return self.title
 
 
 
@@ -309,7 +324,13 @@ class CorrectionSentences(models.Model):
     correction = models.ForeignKey(Correction, on_delete=models.CASCADE)
     original = models.TextField(max_length=50000, blank=True, null=True)
     corrected = models.TextField(max_length=50000, blank=True, null=True)
+    corrected_yomi = models.TextField(max_length=50000, blank=True, null=True)
     desc = models.TextField(max_length=50000, blank=True, null=True)
 
     def markdown(self):
         return markdownify(self.desc)
+
+    def markdown_corrected(self):
+        return markdownify(self.corrected)
+
+

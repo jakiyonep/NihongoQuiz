@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -118,12 +119,12 @@
               {% endif %}
               {% if detail.definition %}
                 <div class="detail-definition">
-                  {{ detail.definition  |safe }}
+                  {{ detail.markdown_definition |safe }}
                 </div>
               {% endif %}
               {% if detail.usage %}
                 <div class="detail-usage">
-                  {{ detail.usage | safe}}
+                  {{ detail.markdown_usage | safe}}
                 </div>
               {% endif %}
               {% if detail.example_ja %}

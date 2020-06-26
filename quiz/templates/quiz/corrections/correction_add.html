@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %} Submit Your Writing {% endblock %}
 {% block description %}
-  Brush up your Japanese writing
+  Submit your Japanese writing to brush up you writin skill
 {% endblock %}
 {% block content %}
 <html lang="en" dir="ltr">
@@ -37,13 +37,13 @@
           </div>
           <div class="correction_desc">
             <p class="correction_label">Description<span class="span">(Optional)</span><br>
-            <span class="span">Describe what kind of text yours is if you want</span>
+            <span class="span">Add a description about your text if you want(Who is the reader?/In what context?...), so I can give you a detailed feedback</span>
             </p>
             {{form.desc}}
           </div>
           <span class="correction_error">{{form.text.errors}}</span>
 
-          <button type="submit" name="button" class="submit_button" onclick="kakunin()">Submit</button>
+          <button type="submit" name="button" class="submit_button" onclick="confirmation()">Submit</button>
           {% csrf_token %}
         </form>
       </div>

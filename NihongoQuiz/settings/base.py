@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'quiz',
     'storages',
     'markdownx',
+    'markdownify'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,22 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.extra',
     'markdown.extensions.toc',
 ]
+MARKDOWNIFY_STRIP = False
+MARKDOWNIFY_WHITELIST_TAGS = {
+    'p'
+    'h1'
+    'h2'
+    'h3'
+    'h4'
+    'h5'
+    'span'
+    'li'
+    'ol'
+    'ul'
+    'a'
+
+}
+
 
 TEMPLATES = [
     {
