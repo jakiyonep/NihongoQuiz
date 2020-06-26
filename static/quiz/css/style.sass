@@ -518,12 +518,13 @@ $square-color: rgb(71, 71, 71)
     p
       font-size: 1em
     .original
-      margin-bottom: 0 !important
 
   .row
     width: 100%
 .correction-wrapper
-  padding-left: 1em
+
+  .correction_row
+    margin: 0 !important
   ul
     padding: 1.2em
   ol
@@ -538,8 +539,15 @@ $square-color: rgb(71, 71, 71)
         color: rgb(86, 207, 32)
       .corrected_yomi
         color: $yomi-color
+    .correction_toggle
+      font-weight: bold
+      span
+        color: red
+      .f
+        color: rgb(86, 207, 32)
   .desc
     font-size: 0.9em
-
   .right
     padding-top: 1em
+.corrected
+  margin-bottom: 0

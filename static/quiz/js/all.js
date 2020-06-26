@@ -3,6 +3,6 @@ function confirmation(){
   }
 
 function color_change(pk){
-  document.getElementById("original-"+pk).classList.toggle('correction_desc');
+  document.getElementById("original-"+pk).classList.toggle('correction_toggle');
 
 }
