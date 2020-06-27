@@ -118,8 +118,9 @@
           {% if lesson.lessonvocabulary_set.all %}
             <div class="section lesson-vocab">
               <div class="section-head">
-                <p class="section-name">語彙</p>
+                <p class="section-name btn" data-toggle="collapse" href="#vocabulary_content" role="button" aria-expanded="false" aria-controls="vocabulary_content">語彙</p>
               </div>
+              <div class="collapse" id="vocabulary_content">
                 {% for vocabulary in lesson.lessonvocabulary_set.all %}
                   {% if vocabulary.word %}
                     {% if vocabulary.casual %}
@@ -163,21 +164,23 @@
                     </div>
                   {% endif %}
                 {% endfor %}
+              </div>
             </div>
           {% endif %}
 
           {% if lesson.lessongrammar_set.all %}
             <div class="section lesson-grammar">
-                <div class="section-head">
-                  {% if not lesson.exercise and not lesson.vocab %}
-                    <p class="section-name">文法</p>
-                  {% endif %}
-                  {% if lesson.exercise %}
-                    <p class="section-name">解説</p>
-                  {% endif %}
-                  {% if lesson.vocab %}
-                  {% endif %}
-                </div>
+              <div class="section-head">
+                {% if not lesson.exercise and not lesson.vocab %}
+                  <p class="section-name btn" data-toggle="collapse" href="#grammar_content" role="button" aria-expanded="false" aria-controls="grammar_content">文法</p>
+                {% endif %}
+                {% if lesson.exercise %}
+                  <p class="section-name btn" data-toggle="collapse" href="#grammar_content" role="button" aria-expanded="false" aria-controls="grammar_content">解説</p>
+                {% endif %}
+                {% if lesson.vocab %}
+                {% endif %}
+              </div>
+              <div class="collapse" id="grammar_content">
                 {% for grammar in lesson.lessongrammar_set.all|dictsort:"id" %}
                     {% if not grammar.casual %}
                       <div class="grammar-name">
@@ -192,14 +195,16 @@
                   {{ grammar.markdown | safe}}
                 </div>
                 {% endfor %}
+              </div>
             </div>
           {% endif %}
 
           {% if lesson.lessonkanji_set.all %}
             <div class="section lesson-kanji">
               <div class="section-head">
-                <p class="section-name">漢字</p>
+                <p class="section-name btn" data-toggle="collapse" href="#kanji_content" role="button" aria-expanded="false" aria-controls="kanji_content">漢字</p>
               </div>
+              <div id="kanji_content" class="collapse">
                 {% for kanji in lesson.lessonkanji_set.all  %}
                   {% if kanji.kanji %}
                     <div class="dictionary-kanji">
@@ -257,6 +262,7 @@
                       </div>
                     {% endif %}
                 {% endfor %}
+              </div>
             </div>
           {% endif %}
 

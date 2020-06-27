@@ -232,6 +232,7 @@ class LessonBody(models.Model):
 
 class LessonVocabulary(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    order = models.IntegerField(default=1)
     word = models.CharField(blank=True, max_length=300, null=True)
     yomi = models.CharField(blank=True, max_length=300, null=True)
     definition = models.CharField(blank=True, max_length=300, null=True)
@@ -239,7 +240,7 @@ class LessonVocabulary(models.Model):
     casual = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['lesson', 'id']
+        ordering = ['lesson', 'order']
 
 
 class LessonQuestion(models.Model):
