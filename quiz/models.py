@@ -124,6 +124,51 @@ class ChoicesDetail(models.Model):
     choice_explanation_4 = models.CharField(blank=True, max_length=200)
 
 
+
+
+# Articles
+
+
+class ArticlesCategory(models.Model):
+    name = models.CharField(null=True, max_length=255)
+    slug = models.CharField(blank=False, max_length=255)
+    order = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+
+
+
+class Articles(models.Model):
+    title = models.CharField(null=True, max_length=255)
+    category = models.ForeignKey(ArticlesCategory, on_delete=models.CASCADE)
+    content = MarkdownxField(null=True)
+    order = models.IntegerField(null=True)
+    public = models.BooleanField(default=True)
+    related_basics = models.ManyToManyField('self', blank=True, null=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+    def markdown(self):
+        return markdownify(self.content)
+
+
+class ArticleImage(models.Model):
+    article = models.ForeignKey(Articles, on_delete=models.CASCADE)
+    article_image = models.ImageField(upload_to='article_image/', null=True, blank=True)
+
+
+
+# Basics
+
 class BasicsCategory(models.Model):
     name = models.CharField(null=True, max_length=255)
     slug = models.CharField(blank=False, max_length=255)
@@ -143,6 +188,8 @@ class Basics(models.Model):
     order = models.IntegerField(null=True)
     public = models.BooleanField(default=True)
     image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
+    related_basics = models.ManyToManyField('self', blank=True, null=True)
+    related_articles = models.ManyToManyField(Articles, blank=True, null=True )
 
     class Meta:
         ordering = ['order']
@@ -159,41 +206,6 @@ class BasicImage(models.Model):
     basic_image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
 
 
-# Articles
-
-
-class ArticlesCategory(models.Model):
-    name = models.CharField(null=True, max_length=255)
-    slug = models.CharField(blank=False, max_length=255)
-    order = models.IntegerField(null=True)
-
-    class Meta:
-        ordering = ['order']
-
-    def __str__(self):
-        return self.name
-
-
-class Articles(models.Model):
-    title = models.CharField(null=True, max_length=255)
-    category = models.ForeignKey(ArticlesCategory, on_delete=models.CASCADE)
-    content = MarkdownxField(null=True)
-    order = models.IntegerField(null=True)
-    public = models.BooleanField(default=True)
-
-    class Meta:
-        ordering = ['order']
-
-    def __str__(self):
-        return self.title
-
-    def markdown(self):
-        return markdownify(self.content)
-
-
-class ArticleImage(models.Model):
-    article = models.ForeignKey(Articles, on_delete=models.CASCADE)
-    article_image = models.ImageField(upload_to='article_image/', null=True, blank=True)
 
 
 # Lessons

@@ -30,6 +30,16 @@
           <div class="content">
             {{ object.markdown | safe}}
           </div>
+          <div class="related_posts">
+            {% if object.related_basics or object.related_articles %}
+              <p class="section-title">Related</p>
+              <div class="related_basics">
+                {% for related in object.related_basics.all  %}
+                  <li><a href="{% url 'quiz:article_post' related.pk  %}">{{ related }}</a></li>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>

@@ -20,16 +20,10 @@
   <body>
     <div class="container">
       <h1 class="top-menu mt-5">習 - Courses </h1>
-      <div class="row list-row">
-        <div class="col-12 col-md-4">
-          <a class="list-name chapter" href="{% url 'quiz:lesson_grammar' %}">Grammar List</a>
-        </div>
-        <div class="col-12 col-md-4">
-          <a class="list-name chapter" href="{% url 'quiz:lesson_vocabulary' %}">Vocabulary List</a>
-        </div>
-        <div class="col-12 col-md-4">
-          <a class="list-name chapter" href="{% url 'quiz:lesson_kanji' %}">Kanji List</a>
-        </div>
+      <div class="row list-row d-flex justify-content-around">
+        <a class="list-name chapter col-md-3 chapter_info" href="{% url 'quiz:lesson_grammar' %}">Grammar List</a>
+        <a class="list-name chapter col-md-3 chapter_info" href="{% url 'quiz:lesson_vocabulary' %}">Vocabulary List</a>
+        <a class="list-name chapter col-md-3 chapter_info" href="{% url 'quiz:lesson_kanji' %}">Kanji List</a>
       </div>
       <div class="row d-flex justify-content-around">
         <div class="col-md-5 lesson-chapter chapter-1"><!--cp 1-->
