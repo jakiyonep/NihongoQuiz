@@ -31,8 +31,8 @@
           <a class="list-name chapter" href="{% url 'quiz:lesson_kanji' %}">Kanji List</a>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6 lesson-chapter"><!--cp 1-->
+      <div class="row d-flex justify-content-around">
+        <div class="col-md-5 lesson-chapter chapter-1"><!--cp 1-->
           <p class="chapter">Chapter 1</p>
           {% for lesson in object_list %}
             {% if lesson.chapter == 1 %}
@@ -50,7 +50,7 @@
           {% endfor %}
         </div>
 
-        <div class="col-md-6 lesson-chapter">
+        <div class="col-md-5 lesson-chapter chapter-2">
           <p class="chapter">Chapter 2</p>
           {% for lesson in object_list %}
             {% if lesson.chapter == 2 %}
@@ -66,7 +66,7 @@
           {% endfor %}
         </div>
 
-        <div class="col-md-6 lesson-chapter">
+        <div class="col-md-5 lesson-chapter chapter-3">
           <p class="chapter">Chapter 3</p>
           {% for lesson in object_list %}
             {% if lesson.chapter == 3 %}
@@ -80,6 +80,10 @@
               </div>
             {% endif %}
           {% endfor %}
+        </div>
+
+        <div class="col-md-5 r">
+
         </div>
 
       </div>
