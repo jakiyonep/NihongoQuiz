@@ -33,7 +33,7 @@
             {{ object.markdown | safe}}
           </div>
           <div class="related_posts">
-            {% if object.related_basics or object.related_articles %}
+            {% if object.related_basics.all or object.related_articles.all %}
               <p class="section-title">Related</p>
               <div class="related_basics">
                 {% for related in object.related_basics.all  %}

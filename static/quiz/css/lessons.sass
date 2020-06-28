@@ -4,6 +4,7 @@ $color-3: rgb(41, 190, 203)
 $color-4: rgb(107, 189, 72)
 $color-5: rgb(233, 186, 36)
 $color-6: rgb(237, 125, 60)
+$color: rgb(135, 189, 238)
 
 /*lesson_index*/
 .row
@@ -125,6 +126,38 @@ $casual-color: rgb(8, 214, 0)
     .section-title
       font-size: 1.8em
 
+  span
+    color: red
+  .f
+    color: rgb(86, 207, 32)
+  .japa
+    padding: 0.5em 1em
+    color: #494949
+    background: transparent
+    border-left: solid 5px rgb(185, 211, 223)
+    margin: 2em 0
+    li
+      list-style: none
+      padding-left: 0
+      font-style: italic
+      line-height: 2.5em
+  .line
+    color: rgb(111, 111, 111) !important
+    background: linear-gradient(transparent 10%, rgb(201, 255, 210) 70%)
+    font-weight: 500
+  h4
+    margin: 2.5em 0
+    padding: 0.5em
+    font-size: 1.2em
+    color: #010101
+    background: rgba(232, 246, 251, 0.28)
+    border-bottom: solid 3px $color
+    display: inline-block
+    border-radius: 0 2em 2em 0
+    color: inherit
+  h5
+    margin: 2em 0
+
 /*body*/
 .lesson-body
   margin: $base-margin 0
@@ -184,6 +217,7 @@ $casual-color: rgb(8, 214, 0)
 
 /*vocabulary*/
 .lesson-vocab
+  margin-bottom: 1em !important
   .word
     margin-bottom: $base-margin/2
     font-size: 1.1em
@@ -207,6 +241,7 @@ $casual-color: rgb(8, 214, 0)
 
 /*grammar*/
 .lesson-grammar
+  margin-bottom: 1em !important
   .grammar-name
     color: rgb(242, 129, 107)
     font-size: 1.5em
@@ -224,6 +259,7 @@ $casual-color: rgb(8, 214, 0)
     list-style-position: inside
 /*Kanji*/
 .lesson-kanji
+  margin-bottom: 1em !important
   .dictionary-kanji
     margin-bottom: $base-margin/2
     color: rgb(242, 129, 107)
