@@ -13,6 +13,15 @@ $color: rgb(135, 189, 238)
     border-radius: 20px
     margin: 0 0.5em 3em 0.5em
     padding: 1em
+    a
+      text-decoration: none
+      color: inherit
+      border-bottom: 1px solid rgba(185, 185, 185, 0.2)
+      transition: 0.3s
+      &:hover
+        border-bottom: none
+        letter-spacing: 0.1em
+        transition: 0.2s
   .chapter-1
     box-shadow: 2px 2px 2px $color-1
     .chapter
@@ -145,18 +154,43 @@ $casual-color: rgb(8, 214, 0)
     color: rgb(111, 111, 111) !important
     background: linear-gradient(transparent 10%, rgb(201, 255, 210) 70%)
     font-weight: 500
-  h4
-    margin: 2.5em 0
+  h3
+    position: relative
     padding: 0.5em
-    font-size: 1.2em
-    color: #010101
-    background: rgba(232, 246, 251, 0.28)
-    border-bottom: solid 3px $color
-    display: inline-block
-    border-radius: 0 2em 2em 0
+    background: $color
+    color: white
+    margin: 3em auto
+    &::before
+      position: absolute
+      content: ''
+      top: 100%
+      left: 0
+      border: none
+      border-bottom: solid 15px transparent
+      border-right: solid 20px rgb(149, 158, 155)
+  h4
     color: inherit
+    border-bottom: solid 3px $color
+    padding: 0.5em
+    margin: 3em 0
   h5
+    position: relative
+    padding-left: 1.2em
+    line-height: 1.4
     margin: 2em 0
+    &::before
+      font-family: "Font Awesome 5 Free"
+      content: "\f00c"
+      font-weight: 900
+      position: absolute
+      font-size: 1em
+      left: 0
+      top: 0
+      color: #5ab9ff
+      font-weight: 900
+
+
+
 
 /*body*/
 .lesson-body

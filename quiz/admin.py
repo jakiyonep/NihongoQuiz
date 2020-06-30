@@ -37,7 +37,7 @@ class BasicsImage(admin.TabularInline):
     extra = 1
 
 class BasicsAdmin(MarkdownxModelAdmin):
-    list_display = ('title', 'category','order')
+    list_display = ('title','category','order','public')
     list_editable = ['order']
     inlines = [BasicsImage]
 
@@ -49,8 +49,8 @@ class ArticlesImage(admin.TabularInline):
     extra = 1
 
 class ArticlesAdmin(MarkdownxModelAdmin):
-    list_display = ('title', 'category','order')
-    list_editable = ['order']
+    list_display = ('title','category','order','public')
+    list_editable = ['order',]
     inlines = [ArticlesImage]
 
 #lesson
