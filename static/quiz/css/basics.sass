@@ -43,6 +43,7 @@ body
   border-top: 1px solid rgb(222, 222, 222)
   padding-top: 2em
   border-bottom: 1px solid rgb(222, 222, 222)
+  padding-bottom: 3em
   p
     margin-bottom: 3em
   ul
@@ -79,20 +80,12 @@ body
     padding: 0.5em
     margin: 3em 0
   h5
-    position: relative
-    padding-left: 1.2em
-    line-height: 1.4
-    margin: 2em 0
-    &::before
-      font-family: "Font Awesome 5 Free"
-      content: "\f00c"
-      font-weight: 900
-      position: absolute
-      font-size: 1em
-      left: 0
-      top: 0
-      color: #5ab9ff
-      font-weight: 900
+    border: 2px solid $color
+    display: inline-block
+    border-radius: 10px
+    padding: 0.5em 1em
+    margin-bottom: 3em
+
 
   span
     color: red
@@ -107,7 +100,9 @@ body
     list-style: none
     padding-left: 0
     font-style: italic
-    line-height: 2.5em
+    margin-bottom: 1em
+    &:last-child
+      margin-bottom: 0
 .line
   color: rgb(111, 111, 111) !important
   background: linear-gradient(transparent 10%, rgb(201, 255, 210) 70%)

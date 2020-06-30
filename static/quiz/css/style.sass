@@ -199,8 +199,9 @@ $square-color: rgb(71, 71, 71)
 .tag
   background: linear-gradient(transparent 80%, rgb(230, 230, 230) 90%)
 .card-quiz
-  margin-bottom: 3em
+  margin: auto auto 3em auto
   padding: 2em 0.3em
+  width: 85%
   .card-text
     border-bottom: 1px solid rgb(218, 218, 218)
     padding-bottom: 1em
@@ -359,6 +360,7 @@ $square-color: rgb(71, 71, 71)
     font-weight: bold
 
 .choices-description
+  margin-bottom: 2em
   p
     font-weight: bold
     border-top: 1px solid rgb(212, 212, 212)
@@ -572,3 +574,32 @@ $square-color: rgb(71, 71, 71)
     padding: 0.2em 0.5em
     border-radius: 5px
     background-color: rgb(185, 211, 223)
+
+
+.vocab-table
+  overflow-x: auto
+  margin-bottom: 3em
+  tr
+  tr:nth-child(odd)
+      background-color: rgba(236, 236, 236, 0.2)
+  th
+    padding: 0.5em 2em
+    min-width: 50px
+    white-space: nowrap
+  td
+    padding: 0.5em 1.5em
+    min-width: 150px
+
+ol
+  li
+    ul
+      padding-left: 1em !important
+      li
+        padding-left: 1em !important
+        &:last-child
+          margin-bottom: 1em
+
+
+@media screen and (max-width:480px)
+  .card-quiz
+    width: 95%
