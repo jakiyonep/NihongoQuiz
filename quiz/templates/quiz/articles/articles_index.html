@@ -1,8 +1,8 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
-{% block title %}Articles{% endblock %}
+{% block title %}Advanced{% endblock %}
 {% block description %}
-  Here are detailed articles on the Japanese language and culture
+  Here are more advanced articles on the Japanese language!
 {% endblock %}
 {% block content %}
 <head>
@@ -18,41 +18,41 @@
   </script>
 </head>
 <div class="container mb-5">
-  <h1 class="top-menu mt-5">記 - Articles</h1>
-
-  <div class="row d-flex justify-content-around">
-    <div class="col-md-5 basic-category">
-      <div class=basics-letter">
-        <p class="category-title">Keigo</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "keigo"  %}
+  <h1 class="top-menu mt-5">上 - Advanced</h1>
+    <div class="row d-flex justify-content-between">
+      <div class="col-12 col-md-7 articles_list">
+        {% for basic in object_list %}
             {% if basic.public %}
-              <li><a href="{% url 'quiz:article_post' basic.pk %}">{{ basic.title }}</a></li>
+              <div class="article_container">
+                <div class="article_title">
+                  <a href="{% url 'quiz:article_post' basic.pk %}">{{ basic.title }}</a>
+                </div>
+                <div class="article_info">
+                  {% if basic.summary %}
+                  <div class="article_summary">
+                    {{ basic.summary | safe }}
+                  </div>
+                  {% endif %}
+                  <div class="article_date">
+                    {{ basic.update |date:"M j, Y"}}
+                  </div>
+                  <div class="article_tags">
+                    {% for tag in basic.tag.all %}
+                    <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
+                  {{ tag }}
+                </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
             {% endif %}
-            {% endif%}
-          {% endfor %}
+        {% endfor %}
+        </div>
+
+        <div class="col-12 col-md-3 sidebar">
+          {% include 'quiz/articles/article_tags.html' %}
+        </div>
       </div>
-    </div>
-
-    <div class="col-md-5 basic-category">
-      <div class=basics-letter">
-        <p class="category-title">Particle</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "particle"  %}
-              {% if basic.public %}
-                <li><a href="{% url 'quiz:article_post' basic.pk %}">{{ basic.title }}</a></li>
-              {% endif %}
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
-
-
   </div>
-</div>
-<div class="empty">
-
-</div>
 
 {% endblock %}

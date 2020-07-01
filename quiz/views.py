@@ -14,10 +14,9 @@ from quiz.models import (
     Tag,
     Category,
     Level,
-    DescriptionDetail,
-    ChoicesDetail,
     Basics,
     Articles,
+    ArticlesTag,
     Lesson,
     LessonGrammar,
     LessonVocabulary,
@@ -184,6 +183,27 @@ class ArticleDetailView(DetailView):
         if not obj.public and not self.request.user.is_authenticated:
             raise Http404
         return obj
+
+class ArticlesTagList(ListView):
+    queryset = ArticlesTag.objects.annotate(
+        num_posts=Count('articles', filter=Q(articles__public=True)))
+
+
+
+class ArticleTagsView(ListView):
+    model = Articles
+    template_name = 'quiz/articles/article_tag_post.html'
+
+    def get_queryset(self):
+        article_tag_slug = self.kwargs['article_tag_slug']
+        self.tag = get_object_or_404(ArticlesTag, slug=article_tag_slug)
+        qs = super().get_queryset().filter(tag=self.tag)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article_tag_slug'] = self.tag
+        return context
 
 
 ##### Lessons ######

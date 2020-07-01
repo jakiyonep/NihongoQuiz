@@ -129,7 +129,7 @@ class ChoicesDetail(models.Model):
 # Articles
 
 
-class ArticlesCategory(models.Model):
+class ArticlesTag(models.Model):
     name = models.CharField(null=True, max_length=255)
     slug = models.CharField(blank=False, max_length=255)
     order = models.IntegerField(null=True)
@@ -145,14 +145,18 @@ class ArticlesCategory(models.Model):
 
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
-    category = models.ForeignKey(ArticlesCategory, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
-    order = models.IntegerField(null=True)
+    summary = models.TextField(null=True, blank=True, max_length=100)
+    order = models.IntegerField(null=True, blank=True)
     public = models.BooleanField(default=True)
+    update = models.DateTimeField(auto_now=True)
+
+
     related_basics = models.ManyToManyField('self', blank=True, null=True)
 
     class Meta:
-        ordering = ['order']
+        ordering = ['-update']
 
     def __str__(self):
         return self.title

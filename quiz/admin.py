@@ -49,7 +49,7 @@ class ArticlesImage(admin.TabularInline):
     extra = 1
 
 class ArticlesAdmin(MarkdownxModelAdmin):
-    list_display = ('title','category','order','public')
+    list_display = ('title','order','public')
     list_editable = ['order',]
     inlines = [ArticlesImage]
 
@@ -126,7 +126,7 @@ admin.site.register(BasicsCategory)
 admin.site.register(Basics, BasicsAdmin)
 
 #Aritlces
-admin.site.register(ArticlesCategory)
+admin.site.register(ArticlesTag)
 admin.site.register(Articles, ArticlesAdmin)
 
 #Lessons

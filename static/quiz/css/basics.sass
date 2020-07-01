@@ -65,7 +65,7 @@ body
     padding: 0.5em
     background: $color
     color: white
-    margin: 3em auto
+    margin: 5em auto
     &::before
       position: absolute
       content: ''
@@ -78,35 +78,18 @@ body
     color: inherit
     border-bottom: solid 3px $color
     padding: 0.5em
-    margin: 3em 0
+    margin: 4em 0
   h5
     border: 2px solid $color
     display: inline-block
     border-radius: 10px
     padding: 0.5em 1em
-    margin-bottom: 3em
+    margin-bottom: 4em
 
 
   span
     color: red
 
-.japa
-  padding: 0.5em 1em
-  color: #494949
-  background: transparent
-  border-left: solid 5px rgb(185, 211, 223)
-  margin: 2em 0
-  li
-    list-style: none
-    padding-left: 0
-    font-style: italic
-    margin-bottom: 1em
-    &:last-child
-      margin-bottom: 0
-.line
-  color: rgb(111, 111, 111) !important
-  background: linear-gradient(transparent 10%, rgb(201, 255, 210) 70%)
-  font-weight: 500
 
 .toc
   margin: 1.5em 0
@@ -172,3 +155,68 @@ body
   a
     font-size: 1.2em
     color: rgb(32, 126, 181)
+
+
+
+/*articles*/
+.articles_list
+  .article_container
+    background-color: white
+    margin-bottom: 7em
+    .article_title
+      margin-bottom: 1em
+      a
+        color: rgb(32, 126, 181)
+        font-size: 1.3em
+        text-transform: uppercase
+        font-family: "Mincho"
+    .article_info
+      .article_summary
+        margin-bottom: 0.5em
+      .article_date
+        margin-bottom: 0.5em
+      .article_tags
+        .article_tag
+          display: inline-block
+          position: relative
+          background-color: rgb(209, 209, 209)
+          display: inline-block
+          padding: 0.3em 1em 0.3em 0.5em
+          text-decoration: none
+          font-size: 1em
+          border-radius: 0 1em 1em 0
+          color: white
+          &:before
+            content: ''
+            width: 0.5em
+            height: 0.5em
+            background-color: white
+            display: inline-block
+            border-radius: 0.5em
+
+.sidebar
+  .article_tags
+    .sidebar_head
+      font-size: 1.1em
+      padding-bottom: 0.5em
+      border-bottom: 1px solid grey
+    ul
+      padding-top: 2em
+      a
+        display: inline-block
+        position: relative
+        background-color: rgb(209, 209, 209)
+        display: inline-block
+        padding: 0.3em 1em 0.3em 0.6em
+        color: #fff
+        text-decoration: none
+        font-size: 1em
+        border-radius: 0 1em 1em 0
+        &:before
+          content: ''
+          width: 0.5em
+          height: 0.5em
+          background-color: white
+          display: inline-block
+          border-radius: 0.5em
+        span

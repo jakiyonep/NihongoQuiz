@@ -1,0 +1,20 @@
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
+
+
+
+
+  <div class="article_tags">
+    <div class="sidebar_head">
+      <p>Article Tags</p>
+    </div>
+    <ul>
+      {% for tag in article_tags %}
+        <a href="{% url 'quiz:article_tag_post' tag.slug %}"> {{ tag }} <span>{{ tag.num_posts }}</span></a>
+      {% endfor %}
+    </ul>
+  </div>
+
+
+{% endblock %}

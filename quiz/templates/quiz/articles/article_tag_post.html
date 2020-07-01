@@ -1,0 +1,57 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %}Articles on {{ article_tag_slug.name }}{% endblock %}
+{% block description %}
+  Here are more advanced articles on the Japanese language!
+{% endblock %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-167867160-1');
+  </script>
+</head>
+<div class="container mb-5">
+  <h1 class="top-menu mt-5">{{ article_tag_slug.name }}</h1>
+  <div class="row d-flex justify-content-between">
+    <div class="col-12 col-md-7 articles_list">
+      {% for basic in object_list %}
+        {% if basic.public %}
+          <div class="article_container">
+            <div class="article_title">
+              <a href="{% url 'quiz:article_post' basic.pk %}">{{ basic.title }}</a>
+            </div>
+            <div class="article_info">
+              {% if basic.summary %}
+              <div class="article_summary">
+                {{ basic.summary | safe }}
+              </div>
+              {% endif %}
+              <div class="article_date">
+                {{ basic.update |date:"M j, Y"}}
+              </div>
+              <div class="article_tags">
+                {% for tag in basic.tag.all %}
+                  <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
+                {{ tag }}
+              </a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="col-12 col-md-3 sidebar">
+      {% include 'quiz/articles/article_tags.html' %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
