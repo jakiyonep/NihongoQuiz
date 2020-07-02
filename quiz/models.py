@@ -145,11 +145,12 @@ class ArticlesTag(models.Model):
 
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
+    title_slug = models.TextField(null=True, blank=True, max_length=255)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
     summary = models.TextField(null=True, blank=True, max_length=100)
     order = models.IntegerField(null=True, blank=True)
-    public = models.BooleanField(default=True)
+    public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
 
 
@@ -187,10 +188,11 @@ class BasicsCategory(models.Model):
 
 class Basics(models.Model):
     title = models.CharField(null=True, max_length=255)
+    title_slug = models.TextField(null=True, blank=True, max_length=255)
     category = models.ForeignKey(BasicsCategory, on_delete=models.CASCADE)
     content = MarkdownxField(null=True)
     order = models.IntegerField(null=True)
-    public = models.BooleanField(default=True)
+    public = models.BooleanField(default=False)
     image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
     related_basics = models.ManyToManyField('self', blank=True, null=True)
     related_articles = models.ManyToManyField(Articles, blank=True, null=True )
@@ -218,7 +220,8 @@ class Lesson(models.Model):
     chapter = models.IntegerField(null=True)
     number = models.IntegerField(null=True)
     title = models.TextField(null=True, max_length=300)
-    public = models.BooleanField(default=True)
+    title_slug = models.TextField(null=True, blank=True, max_length=255)
+    public = models.BooleanField(default=False)
 
     reading = models.BooleanField(default=False)
     vocab = models.BooleanField(default=False)

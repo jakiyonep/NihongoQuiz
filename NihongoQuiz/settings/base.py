@@ -40,8 +40,12 @@ INSTALLED_APPS = [
     'quiz',
     'storages',
     'markdownx',
-    'markdownify'
+    'markdownify',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
