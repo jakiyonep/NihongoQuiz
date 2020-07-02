@@ -146,8 +146,7 @@ class SearchPostView(ListView):
 
 ##### Basics #####
 
-class ToppageView(ListView):
-    model = Quiz
+class ToppageView(TemplateView):
     template_name = 'quiz/toppage.html'
 
 

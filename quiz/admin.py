@@ -109,8 +109,8 @@ class CorrectionAdmin(MarkdownxModelAdmin):
     inlines=[
         CorrectionInline,
     ]
-    list_display = ('title','title_slug','public')
-    list_editable = ('public','title_slug')
+    list_display = ('title','public')
+    list_editable = ['public']
 
 #BeforeYouStart
 admin.site.register(BeforeYouStart, BeforeYouStartAdmin)

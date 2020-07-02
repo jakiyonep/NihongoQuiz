@@ -145,7 +145,7 @@ class ArticlesTag(models.Model):
 
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
-    title_slug = models.TextField(null=True, blank=True, max_length=255)
+    title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
     summary = models.TextField(null=True, blank=True, max_length=100)
@@ -188,7 +188,7 @@ class BasicsCategory(models.Model):
 
 class Basics(models.Model):
     title = models.CharField(null=True, max_length=255)
-    title_slug = models.TextField(null=True, blank=True, max_length=255)
+    title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
     category = models.ForeignKey(BasicsCategory, on_delete=models.CASCADE)
     content = MarkdownxField(null=True)
     order = models.IntegerField(null=True)
@@ -311,7 +311,7 @@ class LessonKanji(models.Model):
 
 class Correction(models.Model):
     title = models.TextField(max_length=100, null=True, blank=True, default="New!")
-    title_slug=models.TextField(max_length=100, null=True, blank=True)
+    title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
     public = models.BooleanField(default=False)
     name = models.CharField(max_length=100, null=True, blank=True)
     text = models.TextField(max_length=500,
