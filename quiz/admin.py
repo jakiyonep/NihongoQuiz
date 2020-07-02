@@ -91,8 +91,8 @@ class LessonAdmin(MarkdownxModelAdmin):
         LessonGrammarInline,
         LessonKanjiInline,
     ]
-    list_display = ('title', 'chapter', 'number')
-    list_editable = ('chapter', 'number')
+    list_display = ('title', 'title_slug' , 'chapter', 'number')
+    list_editable = ('chapter', 'number', 'title_slug')
 
 class BeforeImage(admin.TabularInline):
     model = BeforeYouStartImage
@@ -109,8 +109,8 @@ class CorrectionAdmin(MarkdownxModelAdmin):
     inlines=[
         CorrectionInline,
     ]
-    list_display = ('title','public')
-    list_editable = ('public',)
+    list_display = ('title','title_slug','public')
+    list_editable = ('public','title_slug')
 
 #BeforeYouStart
 admin.site.register(BeforeYouStart, BeforeYouStartAdmin)

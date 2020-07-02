@@ -312,6 +312,7 @@ class LessonKanji(models.Model):
 
 class Correction(models.Model):
     title = models.TextField(max_length=100, null=True, blank=True, default="New!")
+    title_slug=models.CharField(max_length=100, null=True, blank=True)
     public = models.BooleanField(default=False)
     name = models.CharField(max_length=100, null=True, blank=True)
     text = models.TextField(max_length=500,
