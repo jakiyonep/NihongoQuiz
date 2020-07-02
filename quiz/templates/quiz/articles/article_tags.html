@@ -10,7 +10,7 @@
       <p>Article Tags</p>
     </div>
     <ul>
-      {% for tag in article_tags %}
+      {% for tag in article_tags|dictsortreversed:"num_posts" %}
         <a href="{% url 'quiz:article_tag_post' tag.slug %}"> {{ tag }} <span>{{ tag.num_posts }}</span></a>
       {% endfor %}
     </ul>

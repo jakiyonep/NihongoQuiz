@@ -86,7 +86,7 @@ class StaticViewSitemap(Sitemap):
 
     def items(self):
         return [
-            'quiz:toppage',
+            'quiz:before_you_start',
             'quiz:quiz',
             'quiz:basics',
             'quiz:articles',
