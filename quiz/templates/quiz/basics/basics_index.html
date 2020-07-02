@@ -27,7 +27,7 @@
           {% for basic in object_list %}
             {% if basic.category.slug == "letter"  %}
             {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
             {% endif %}
             {% endif%}
           {% endfor %}
@@ -40,7 +40,7 @@
           {% for basic in object_list %}
             {% if basic.category.slug == "numbers"  %}
             {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
             {% endif %}
             {% endif%}
           {% endfor %}
@@ -53,7 +53,7 @@
           {% for basic in object_list %}
             {% if basic.category.slug == "grammar"  %}
             {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
             {% endif%}
             {% endif%}
           {% endfor %}
@@ -66,7 +66,7 @@
           {% for basic in object_list %}
             {% if basic.category.slug == "verb"  %}
             {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
             {% endif%}
             {% endif%}
           {% endfor %}
@@ -79,7 +79,7 @@
           {% for basic in object_list %}
             {% if basic.category.slug == "adjective"  %}
             {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
             {% endif%}
             {% endif%}
           {% endfor %}
@@ -92,7 +92,7 @@
           {% for basic in object_list %}
             {% if basic.category.slug == "noun"  %}
             {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.pk %}">{{ basic.title }}</a></li>
+              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
             {% endif%}
             {% endif%}
           {% endfor %}

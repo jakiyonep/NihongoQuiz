@@ -159,12 +159,16 @@ class BasicsIndex(ListView):
 class BasicsDetailView(DetailView):
     model = Basics
     template_name = 'quiz/basics/basic_post.html'
+    slug_field = 'title_slug'
+    slug_url_kwarg = "title_slug"
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
         if not obj.public and not self.request.user.is_authenticated:
             raise Http404
         return obj
+
+
 
 
 ##### Articles ######
@@ -177,6 +181,8 @@ class ArticlesIndex(ListView):
 class ArticleDetailView(DetailView):
     model = Articles
     template_name = 'quiz/articles/article_post.html'
+    slug_field = 'title_slug'
+    slug_url_kwarg = "title_slug"
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
@@ -266,6 +272,8 @@ class AfterSubmit(TemplateView):
 class CorrectionDetail(DetailView):
     model = Correction
     template_name = 'quiz/corrections/correction_post.html'
+    slug_field = 'title_slug'
+    slug_url_kwarg = "title_slug"
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)

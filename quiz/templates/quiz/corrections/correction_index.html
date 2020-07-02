@@ -46,7 +46,7 @@
               {% if correction.public %}
                 <div class="correction_entry row">
                   <div class="correction_title col-8">
-                    <a href="{% url 'quiz:correction_post' correction.pk %}">{{correction.title}}</a>
+                    <a href="{% url 'quiz:correction_post' correction.title_slug %}">{{correction.title}}</a>
                   </div>
                   <div class="correction_type col-4">
                     {% if correction.type == 1 %}
