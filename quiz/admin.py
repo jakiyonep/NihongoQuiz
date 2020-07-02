@@ -91,8 +91,8 @@ class LessonAdmin(MarkdownxModelAdmin):
         LessonGrammarInline,
         LessonKanjiInline,
     ]
-    list_display = ('title', 'title_slug' , 'chapter', 'number')
-    list_editable = ('chapter', 'number', 'title_slug')
+    list_display = ('title', 'chapter', 'number')
+    list_editable = ('chapter', 'number')
 
 class BeforeImage(admin.TabularInline):
     model = BeforeYouStartImage

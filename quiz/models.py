@@ -220,7 +220,6 @@ class Lesson(models.Model):
     chapter = models.IntegerField(null=True)
     number = models.IntegerField(null=True)
     title = models.TextField(null=True, max_length=300)
-    title_slug = models.TextField(null=True, blank=True, max_length=255)
     public = models.BooleanField(default=False)
 
     reading = models.BooleanField(default=False)
@@ -312,7 +311,7 @@ class LessonKanji(models.Model):
 
 class Correction(models.Model):
     title = models.TextField(max_length=100, null=True, blank=True, default="New!")
-    title_slug=models.CharField(max_length=100, null=True, blank=True)
+    title_slug=models.TextField(max_length=100, null=True, blank=True)
     public = models.BooleanField(default=False)
     name = models.CharField(max_length=100, null=True, blank=True)
     text = models.TextField(max_length=500,
