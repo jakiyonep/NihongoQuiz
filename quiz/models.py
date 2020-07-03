@@ -153,7 +153,7 @@ class Articles(models.Model):
     category = models.IntegerField(choices=article_category, blank=True, null=True)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
-    summary = models.TextField(null=True, blank=True, max_length=100)
+    summary = models.TextField(null=True, blank=True, max_length=200)
     order = models.IntegerField(null=True, blank=True)
     public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
