@@ -170,17 +170,18 @@ body
         font-size: 1.3em
         text-transform: uppercase
         font-family: "Mincho"
+    .article_date
+      margin-bottom: 0.5em
+      font-size: 0.9em
     .article_thumbnail
       img
         width: 100%
         display: block
-        height: 200px
+        height: 400px
         object-fit: cover
         margin-bottom: 0.5em
     .article_info
       .article_summary
-        margin-bottom: 0.5em
-      .article_date
         margin-bottom: 0.5em
       .article_tags
         .article_tag
@@ -231,3 +232,19 @@ body
           display: inline-block
           border-radius: 0.5em
         span
+
+
+
+@media screen and (max-width:480px)
+  .card-quiz
+    width: 95%
+
+  .articles_list
+    .article_container
+      .article_thumbnail
+        img
+          width: 100%
+          display: block
+          height: 200px
+          object-fit: cover
+          margin-bottom: 0.5em

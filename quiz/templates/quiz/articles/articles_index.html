@@ -19,15 +19,18 @@
 <div class="container mb-5">
   <h1 class="top-menu mt-5">上 - Advanced</h1>
     <div class="row d-flex justify-content-between">
-      <div class="col-12 col-md-9 articles_list">
+      <div class="col-12 col-lg-9 articles_list">
         <div class="row d-flex justify-content-between">
 
         {% for basic in object_list %}
             {% if basic.public %}
-              <div class = "article_container col-12 col-sm-6"">
+              <div class = "article_container col-12">
                 <a href="{% url 'quiz:article_post' basic.title_slug %}">
                   <div class="article_title">
                     <p>{{ basic.title }}</p>
+                  </div>
+                  <div class="article_date">
+                    {{ basic.update |date:"M j, Y"}}
                   </div>
                   <div class="article_thumbnail">
                     {% if basic.thumbnail  %}
@@ -40,9 +43,6 @@
                       {{ basic.summary | safe }}
                     </div>
                     {% endif %}
-                    <div class="article_date">
-                      {{ basic.update |date:"M j, Y"}}
-                    </div>
                     <div class="article_tags">
                       {% for tag in basic.tag.all %}
                       <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
@@ -55,10 +55,10 @@
               </div>
             {% endif %}
         {% endfor %}
-      </div>
+          </div>
         </div>
 
-        <div class="col-12 col-md-3 sidebar">
+        <div class="col-12 col-lg-3 sidebar">
           {% include 'quiz/articles/article_tags.html' %}
         </div>
       </div>
