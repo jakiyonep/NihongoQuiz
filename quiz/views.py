@@ -279,3 +279,5 @@ class CorrectionDetail(DetailView):
         if not obj.public and not self.request.user.is_authenticated:
             raise Http404
         return obj
+
+

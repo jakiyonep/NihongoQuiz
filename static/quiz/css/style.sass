@@ -3,6 +3,8 @@ $yomi-color: rgb(255, 183, 158)
 
 body
   width: 100%
+  margin-top: 10em
+
 *
   font-family: 'hiragino'
   color: rgb(111, 111, 111)
@@ -42,6 +44,7 @@ a:hover
   margin-right: 15vw
 .navbar
   position: sticky
+  transition: top 0.5s
   .form-control
     display: inline-block
   .btn
@@ -75,6 +78,19 @@ a:hover
   font-family: "Sawarabi Mincho"
 .navbar-collapse
   text-align: right
+
+.smart-scroll
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  z-index: 1030
+
+.scrolled-down
+   transform: translateY(-100%); transition: all 0.3s ease-in-out
+
+.scrolled-up
+   transform: translateY(0); transition: all 0.3s ease-in-out
 
 
 /*filter*/
@@ -606,12 +622,12 @@ $square-color: rgb(71, 71, 71)
   tr:nth-child(odd)
       background-color: rgba(236, 236, 236, 0.2)
   th
-    padding: 0.5em 2em
+    padding: 0.5em 1.5em
     min-width: 50px
-    white-space: nowrap
   td
     padding: 0.5em 1.5em
-    min-width: 150px
+    min-width: 50px
+    max-width: 100px
 
 ol
   li
@@ -621,6 +637,10 @@ ol
         padding-left: 1em !important
         &:last-child
           margin-bottom: 1em
+
+.content
+  line-height: 2em
+  font-size: 1.1em
 
 
 @media screen and (max-width:480px)

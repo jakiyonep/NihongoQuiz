@@ -60,7 +60,7 @@ body
     margin: 5em 0
     box-shadow: 2px 2px 2px 2px
 
-  h3
+  h2
     position: relative
     padding: 0.5em
     background: $color
@@ -74,12 +74,12 @@ body
       border: none
       border-bottom: solid 15px transparent
       border-right: solid 20px rgb(149, 158, 155)
-  h4
+  h3
     color: inherit
     border-bottom: solid 3px $color
     padding: 0.5em
     margin: 2em 0
-  h5
+  h4
     border: 2px solid $color
     display: inline-block
     border-radius: 10px
@@ -165,11 +165,18 @@ body
     margin-bottom: 6em
     .article_title
       margin-bottom: 1em
-      a
+      p
         color: rgb(32, 126, 181)
         font-size: 1.3em
         text-transform: uppercase
         font-family: "Mincho"
+    .article_thumbnail
+      img
+        width: 100%
+        display: block
+        height: 200px
+        object-fit: cover
+        margin-bottom: 0.5em
     .article_info
       .article_summary
         margin-bottom: 0.5em
@@ -197,6 +204,7 @@ body
             border-radius: 0.5em
 
 .sidebar
+  margin-right: 0
   .article_tags
     .sidebar_head
       font-size: 1.1em

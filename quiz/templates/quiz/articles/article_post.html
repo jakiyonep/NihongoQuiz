@@ -14,7 +14,7 @@
     gtag('js', new Date());
 
     gtag('config', 'UA-167867160-1');
-  </script>  
+  </script>
 </head>
   <body>
     <div class="container">
@@ -25,7 +25,7 @@
           </div>
           <div class="content">
             {{ object.markdown | safe}}
-          </div>
+          </>
           <div class="related_posts">
             {% if object.related_basics.all  %}
               <p class="section-title">Related</p>

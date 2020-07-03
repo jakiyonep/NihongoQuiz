@@ -142,16 +142,22 @@ class ArticlesTag(models.Model):
 
 
 
-
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
     title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
+
+    article_category = (
+        (1, 'Nihongo'),
+        (2, 'Nihon'),
+    )
+    category = models.IntegerField(choices=article_category, blank=True, null=True)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
     summary = models.TextField(null=True, blank=True, max_length=100)
     order = models.IntegerField(null=True, blank=True)
     public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
+    thumbnail = models.ImageField(upload_to='article_thumbnail/', null=True, blank=True)
 
 
     related_basics = models.ManyToManyField('self', blank=True, null=True)

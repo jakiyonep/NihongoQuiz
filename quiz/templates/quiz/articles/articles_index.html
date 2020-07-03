@@ -19,33 +19,43 @@
 <div class="container mb-5">
   <h1 class="top-menu mt-5">上 - Advanced</h1>
     <div class="row d-flex justify-content-between">
-      <div class="col-12 col-md-7 articles_list">
+      <div class="col-12 col-md-9 articles_list">
+        <div class="row d-flex justify-content-between">
+
         {% for basic in object_list %}
             {% if basic.public %}
-              <div class="article_container">
-                <div class="article_title">
-                  <a href="{% url 'quiz:article_post' basic.title_slug %}">{{ basic.title }}</a>
-                </div>
-                <div class="article_info">
-                  {% if basic.summary %}
-                  <div class="article_summary">
-                    {{ basic.summary | safe }}
+              <div class = "article_container col-12 col-sm-6"">
+                <a href="{% url 'quiz:article_post' basic.title_slug %}">
+                  <div class="article_title">
+                    <p>{{ basic.title }}</p>
                   </div>
-                  {% endif %}
-                  <div class="article_date">
-                    {{ basic.update |date:"M j, Y"}}
+                  <div class="article_thumbnail">
+                    {% if basic.thumbnail  %}
+                    <img src="{{ basic.thumbnail.url }}" alt="">
+                    {% endif %}
                   </div>
-                  <div class="article_tags">
-                    {% for tag in basic.tag.all %}
-                    <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
-                  {{ tag }}
-                </a>
+                  <div class="article_info">
+                    {% if basic.summary %}
+                    <div class="article_summary">
+                      {{ basic.summary | safe }}
+                    </div>
+                    {% endif %}
+                    <div class="article_date">
+                      {{ basic.update |date:"M j, Y"}}
+                    </div>
+                    <div class="article_tags">
+                      {% for tag in basic.tag.all %}
+                      <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
+                    {{ tag }}
+                  </a>
                     {% endfor %}
                   </div>
                 </div>
+              </a>
               </div>
             {% endif %}
         {% endfor %}
+      </div>
         </div>
 
         <div class="col-12 col-md-3 sidebar">
