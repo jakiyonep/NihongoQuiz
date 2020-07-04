@@ -66,6 +66,7 @@ body
     background: $color
     color: white
     margin: 2em auto
+    font-size: 1.5em
     &::before
       position: absolute
       content: ''
@@ -79,12 +80,14 @@ body
     border-bottom: solid 3px $color
     padding: 0.5em
     margin: 2em 0
+    font-size: 1.3em
   h4
     border: 2px solid $color
     display: inline-block
     border-radius: 10px
     padding: 0.5em 1em
     margin-bottom: 2em
+    font-size: 1.2em
 
 
   span
@@ -148,13 +151,19 @@ body
 
 /*related_posts*/
 .related_posts
-  margin-top: 4em
+  margin-top: 10em
+  border-top: 1px solid rgb(222, 222, 222)
+  padding-top: 4em
   li
     list-style: none
     margin-bottom: 1.5em
   a
     font-size: 1.2em
     color: rgb(32, 126, 181)
+  img
+    box-shadow: None
+    border: none
+
 
 
 
@@ -216,9 +225,20 @@ body
             background-color: white
             display: inline-block
             border-radius: 0.5em
+.article_info
+  h1
+    text-transform: uppercase !important
+  .article_top_thumbnail
+    width: 100%
+    display: block
+    object-fit: contain
+    object-position: center
+    margin-bottom: 0.5em
+
 
 .sidebar
   margin-right: 0
+
   .sidebar_card
 
   .article_tags
@@ -246,7 +266,6 @@ body
           background-color: white
           display: inline-block
           border-radius: 0.5em
-        span
   .article_category
     margin-bottom: 5em
     .sidebar_head
@@ -294,3 +313,8 @@ body
           object-fit: contain
           object-position: center
           margin-bottom: 0.5em
+
+  .article_pagination
+    margin-bottom: 8em
+  .sidebar
+    margin-top: 5em

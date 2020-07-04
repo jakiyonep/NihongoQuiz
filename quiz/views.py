@@ -163,7 +163,7 @@ class ArticlesIndex(ListView):
     model = Articles
     template_name = 'quiz/articles/articles_index.html'
 
-    paginate_by = 2
+    paginate_by = 15
 
 
 class ArticleDetailView(DetailView):
@@ -187,7 +187,7 @@ class ArticlesTagList(ListView):
 class ArticleTagsView(ListView):
     model = Articles
     template_name = 'quiz/articles/article_tag_post.html'
-    paginate_by = 2
+    paginate_by = 15
 
     def get_queryset(self):
         article_tag_slug = self.kwargs['article_tag_slug']
@@ -203,7 +203,7 @@ class ArticleTagsView(ListView):
 class ArticleCategoryView(ListView):
     model = Articles
     template_name = 'quiz/articles/article_category_post.html'
-    paginate_by = 2
+    paginate_by = 15
 
     def get_queryset(self):
         article_category2_slug = self.kwargs['article_category2_slug']

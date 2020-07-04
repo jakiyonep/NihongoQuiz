@@ -1,6 +1,6 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
-{% block title %}Articles on {{ article_tag_slug.name }}{% endblock %}
+{% block title %}Articles on {{ article_category2_slug.name }}{% endblock %}
 {% block description %}
   Here are more advanced articles on the Japanese language!
 {% endblock %}
@@ -17,72 +17,83 @@
 </script>
 </head>
 <div class="container mb-5">
-  <h1 class="top-menu mt-5">{{ article_category2_slug.name }}</h1>
-  <div class="row d-flex justify-content-between">
-    <div class="col-12 col-md-7 articles_list">
-      {% for basic in object_list %}
-        {% if basic.public %}
-          <div class="article_container">
-            <div class="article_title">
-              <a href="{% url 'quiz:article_post' basic.title_slug %}">{{ basic.title }}</a>
-            </div>
-            <div class="article_info">
-              {% if basic.summary %}
-              <div class="article_summary">
-                {{ basic.summary | safe }}
+  <h1 class="top-menu mt-5">{{article_category2_slug.name}}</h1>
+    <div class="row d-flex justify-content-between">
+      <div class="col-12 col-lg-9 articles_list order-1 order-lg-1">
+        <div class="row d-flex justify-content-between">
+
+        {% for basic in object_list %}
+            {% if basic.public %}
+              <div class = "article_container col-12">
+                <div class="article_title">
+                  <a href="{% url 'quiz:article_post' basic.title_slug %}">{{ basic.title }}</a>
+                </div>
+                <div class="article_top_info">
+                  {% if basic.category2 %}
+                    <a href="{% url 'quiz:article_category_post' basic.category2.slug %}" class="article_category article_category_{{basic.category2.slug}}">{{ basic.category2.name }}</a>
+                  {% endif %}
+                  <span>{{ basic.update |date:"M j, Y"}}</span>
+                </div>
+                <div class="article_thumbnail">
+                  {% if basic.thumbnail  %}
+                  <a href="{% url 'quiz:article_post' basic.title_slug %}"><img src="{{ basic.thumbnail.url }}" alt=""></a>
+                  {% endif %}
+                </div>
+                <div class="article_info">
+                  {% if basic.summary %}
+                  <div class="article_summary">
+                    <p>{{ basic.summary | safe }}</p>
+                  </div>
+                  {% endif %}
+                  <div class="article_tags">
+                    {% for tag in basic.tag.all %}
+                    <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
+                  {{ tag }}
+                  </a>
+                  {% endfor %}
+                  </div>
+                </div>
               </div>
-              {% endif %}
-              <div class="article_date">
-                {{ basic.update |date:"M j, Y"}}
-              </div>
-              <div class="article_tags">
-                {% for tag in basic.tag.all %}
-                  <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
-                {{ tag }}
-              </a>
-                {% endfor %}
-              </div>
-            </div>
+            {% endif %}
+        {% endfor %}
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="col-12 col-md-3 sidebar">
-      {% include 'quiz/articles/article_tags.html' %}
+      </div>
+
+      <div class="col-12 col-lg-3 sidebar order-3 order-lg-2">
+        {% include 'quiz/articles/article_tags.html' %}
+      </div>
+
+      <div class="article_pagination col-12 col-lg-9 order-2 order-lg-3">
+        <nav aria-label="navigation article_pagination">
+          <ul class="pagination justify-content-center">
+            {% if page_obj.number|add:"-3" > 1 %}
+              <li class="page-item">
+                <a class="page-link page-side" href="?page=1">1&laquo;</a>
+              </li>
+            {% endif %}
+
+          {% for num in paginator.page_range %}
+            {% if  num == page_obj.number|add:"-1" or num == page_obj.number|add:"-2" or num == page_obj.number|add:"1" or num == page_obj.number|add:"2" or num == page_obj.number|add:"-3" or num == page_obj.number|add:"3"  %}
+              <li class="page-item "><a class="page-link other-num" href="?page={{num}}">{{num}}</a></li>
+            {% endif %}
+
+            {% if page_obj.number == num %}
+              <li class="page-item disabled"><a class="page-link current_number">{{num}}</a></li>
+            {% endif %}
+          {% endfor %}
+
+          {% if page_obj.paginator.num_pages > page_obj.number|add:"3" %}
+            <li class="page-item">
+              <a class="page-link page-side" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                <span class="page-side" aria-hidden="true">&raquo;{{page_obj.paginator.num_pages}}</span>
+              </a>
+            </li>
+          {% endif %}
+
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
-
-  <div class="article_pagination col-12 col-lg-9 order-2 order-lg-3">
-    <nav aria-label="navigation article_pagination">
-      <ul class="pagination justify-content-center">
-        {% if page_obj.number|add:"-3" > 1 %}
-          <li class="page-item">
-            <a class="page-link page-side" href="?page=1">1&laquo;</a>
-          </li>
-        {% endif %}
-
-      {% for num in paginator.page_range %}
-        {% if  num == page_obj.number|add:"-1" or num == page_obj.number|add:"-2" or num == page_obj.number|add:"1" or num == page_obj.number|add:"2" or num == page_obj.number|add:"-3" or num == page_obj.number|add:"3"  %}
-          <li class="page-item "><a class="page-link other-num" href="?page={{num}}">{{num}}</a></li>
-        {% endif %}
-
-        {% if page_obj.number == num %}
-          <li class="page-item disabled"><a class="page-link current_number">{{num}}</a></li>
-        {% endif %}
-      {% endfor %}
-
-      {% if page_obj.paginator.num_pages > page_obj.number|add:"3" %}
-        <li class="page-item">
-          <a class="page-link page-side" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
-            <span class="page-side" aria-hidden="true">&raquo;{{page_obj.paginator.num_pages}}</span>
-          </a>
-        </li>
-      {% endif %}
-
-      </ul>
-    </nav>
-  </div>
-
-</div>
 
 {% endblock %}
