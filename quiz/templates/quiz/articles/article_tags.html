@@ -1,13 +1,21 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-
-
-
-
-  <div class="article_tags">
+<div class="sidebar">
+  <div class="article_category sidebar_card">
     <div class="sidebar_head">
-      <p>Article Tags</p>
+      <p>Categories</p>
+    </div>
+    <ul>
+      {% for category in article_category|dictsortreversed:"num_posts" %}
+        <a href="{% url 'quiz:article_category_post' category.slug %}" class="sidebar_category category_{{category.slug}}"> {{ category }} <span>{{ category.num_posts }}</span></a>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="article_tags sidebar_card">
+    <div class="sidebar_head">
+      <p>Tags</p>
     </div>
     <ul>
       {% for tag in article_tags|dictsortreversed:"num_posts" %}
@@ -15,6 +23,6 @@
       {% endfor %}
     </ul>
   </div>
-
+</div>
 
 {% endblock %}

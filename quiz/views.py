@@ -8,20 +8,7 @@ from django.core.paginator import Paginator
 from quiz.forms import Correction
 from . import forms
 
-from quiz.models import (
-    BeforeYouStart,
-    Quiz,
-    Tag,
-    Category,
-    Level,
-    Basics,
-    Articles,
-    ArticlesTag,
-    Lesson,
-    LessonGrammar,
-    LessonVocabulary,
-    LessonKanji,
-)
+from quiz.models import *
 
 from .filters import QuizFilter
 
@@ -176,6 +163,8 @@ class ArticlesIndex(ListView):
     model = Articles
     template_name = 'quiz/articles/articles_index.html'
 
+    paginate_by = 2
+
 
 class ArticleDetailView(DetailView):
     model = Articles
@@ -198,6 +187,7 @@ class ArticlesTagList(ListView):
 class ArticleTagsView(ListView):
     model = Articles
     template_name = 'quiz/articles/article_tag_post.html'
+    paginate_by = 2
 
     def get_queryset(self):
         article_tag_slug = self.kwargs['article_tag_slug']
@@ -209,6 +199,23 @@ class ArticleTagsView(ListView):
         context = super().get_context_data(**kwargs)
         context['article_tag_slug'] = self.tag
         return context
+
+class ArticleCategoryView(ListView):
+    model = Articles
+    template_name = 'quiz/articles/article_category_post.html'
+    paginate_by = 2
+
+    def get_queryset(self):
+        article_category2_slug = self.kwargs['article_category2_slug']
+        self.category2 = get_object_or_404(ArticlesCategory, slug=article_category2_slug)
+        qs = super().get_queryset().filter(category2=self.category2)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article_category2_slug'] = self.category2
+        return context
+
 
 
 ##### Lessons ######

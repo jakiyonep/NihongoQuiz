@@ -165,14 +165,23 @@ body
     margin-bottom: 6em
     .article_title
       margin-bottom: 1em
-      p
+      a
         color: rgb(32, 126, 181)
         font-size: 1.3em
         text-transform: uppercase
         font-family: "Mincho"
-    .article_date
-      margin-bottom: 0.5em
+    .article_top_info
+      display: inline-block
+      margin-bottom: 1em
       font-size: 0.9em
+      a
+        background-color: rgb(255, 100, 71)
+        color: white
+        border-radius: 5px
+        padding: 0.2em 1em
+        margin-right: 1em
+      .article_category_japan
+        background-color: rgb(91, 154, 255)
     .article_thumbnail
       img
         width: 100%
@@ -210,9 +219,11 @@ body
 
 .sidebar
   margin-right: 0
+  .sidebar_card
+
   .article_tags
     .sidebar_head
-      font-size: 1.1em
+      font-size: 1.3em
       padding-bottom: 0.5em
       border-bottom: 1px solid grey
     ul
@@ -236,6 +247,36 @@ body
           display: inline-block
           border-radius: 0.5em
         span
+  .article_category
+    margin-bottom: 5em
+    .sidebar_head
+      font-size: 1.3em
+      padding-bottom: 0.5em
+      border-bottom: 1px solid grey
+    .sidebar_category
+      background-color: rgb(255, 100, 71)
+      color: white
+      border-radius: 5px
+      padding: 0.2em 1em
+      margin-right: 1em
+      white-space: nowrap
+      line-height: 3em
+    .category_japan
+      background-color: rgb(91, 154, 255)
+    span
+      color: white
+
+.article_pagination
+  width: 100%
+  .current_number
+    background-color: grey  !important
+    color: white !important
+    border-radius: 20%
+  .page-side
+    background-color: grey  !important
+    color: white !important
+  .other-num
+    background-color: rgba(240, 240, 240, 0.85) !important
 
 
 
@@ -250,6 +291,6 @@ body
           width: 100%
           display: block
           height: 300px
-          object-fit: cover
+          object-fit: contain
           object-position: center
           margin-bottom: 0.5em

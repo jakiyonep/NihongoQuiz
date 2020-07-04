@@ -127,6 +127,7 @@ admin.site.register(Basics, BasicsAdmin)
 
 #Aritlces
 admin.site.register(ArticlesTag)
+admin.site.register(ArticlesCategory)
 admin.site.register(Articles, ArticlesAdmin)
 
 #Lessons

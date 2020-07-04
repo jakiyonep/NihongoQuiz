@@ -132,25 +132,22 @@ class ChoicesDetail(models.Model):
 class ArticlesTag(models.Model):
     name = models.CharField(null=True, max_length=255)
     slug = models.CharField(blank=False, max_length=255)
-    order = models.IntegerField(null=True)
-
-    class Meta:
-        ordering = ['order']
 
     def __str__(self):
         return self.name
 
+class ArticlesCategory(models.Model):
+    name = models.CharField(null=True, max_length=255)
+    slug = models.CharField(blank=False, max_length=255)
 
+    def __str__(self):
+        return self.name
 
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
     title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
 
-    article_category = (
-        (1, 'Nihongo'),
-        (2, 'Nihon'),
-    )
-    category = models.IntegerField(choices=article_category, blank=True, null=True)
+    category2 = models.ForeignKey(ArticlesCategory, null=True, blank=True, on_delete=models.CASCADE)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
     summary = models.TextField(null=True, blank=True, max_length=200)

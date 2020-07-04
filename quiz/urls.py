@@ -17,6 +17,7 @@ urlpatterns = [
     path('advanced/', ArticlesIndex.as_view(), name="articles"),
     path('advanced/<str:title_slug>/', ArticleDetailView.as_view(), name="article_post"),
     path('advanced/tag/<str:article_tag_slug>/', ArticleTagsView.as_view(), name='article_tag_post'),
+    path('advanced/category/<str:article_category2_slug>/', ArticleCategoryView.as_view(), name="article_category_post"),
     path('lessons/', LessonsIndex.as_view(), name="lessons"),
     path('lesson/<str:pk>/', LessonDetailView.as_view(), name="lesson_post"),
     path('lessonvocabulary/', LessonVocabularyIndex.as_view(), name="lesson_vocabulary"),
