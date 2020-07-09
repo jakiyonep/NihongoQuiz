@@ -7,8 +7,7 @@
 {% block content %}
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-    <link rel="stylesheet" href="{% static 'quiz/css/toppage.min.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
     <script>
@@ -20,9 +19,10 @@
     </script>
   </head>
   <body>
-    <div class="correction">
-      <div class="container">
-        <form class="correction_form" action="{% url 'quiz:correction_add' %}" method="post">
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper correction_add_wrapper">
+      <div class="container correction_add_container">
+        <form class="correction_form" action="{% url 'quiz:correction_add' %}" method="POST">
           <div class="correction_name">
             <p class="correction_label">Name<span class="span">(Optional)</span></p>
             {{form.name}}
@@ -32,18 +32,18 @@
             {{form.type}}
           </div>
           <div class="correction_text">
-            <p class="correction_label">Text</p>
+            <p class="correction_label">Your text</p>
             {{form.text}}
           </div>
           <div class="correction_desc">
-            <p class="correction_label">Description<span class="span">(Optional)</span><br>
-            <span class="span">Add a description about your text if you want(Who is the reader?/In what context?...), so I can give you a detailed feedback</span>
+            <p class="correction_label">Description <br>
+							<span>Add a description about your text if you want(Who is the reader?/In what context?...), so I can give you a detailed feedback</span>
             </p>
             {{form.desc}}
           </div>
           <span class="correction_error">{{form.text.errors}}</span>
 
-          <button type="submit" name="button" class="submit_button" onclick="confirmation()">Submit</button>
+          <button type="submit" name="button" class="correction_submit_button">Submit</button>
           {% csrf_token %}
         </form>
       </div>

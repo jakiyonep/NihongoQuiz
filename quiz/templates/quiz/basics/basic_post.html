@@ -9,7 +9,7 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-    <link rel="stylesheet" href="{% static 'quiz/css/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/content.min.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
     <script>
@@ -21,36 +21,30 @@
     </script>
   </head>
   <body>
-    <div class="body">
-
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="post-info">
-            <h1 class="section-title">{{ object.title }}</h1>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper basics_wrapper">
+      <h1 class="post-title">{{ object.title }}</h1>
+      <article class="content basics_content">
+        {{ object.markdown | safe}}
+      </article>
+      <div class="related_posts">
+        {% if object.related_basics.all or object.related_articles.all %}
+          <p class="section-title">Related</p>
+          <div class="related_basics">
+            {% for related in object.related_basics.all  %}
+              <li><a href="{% url 'quiz:basic_post' related.pk  %}">{{ related }}</a></li>
+            {% endfor %}
           </div>
-          <div class="content">
-            {{ object.markdown | safe}}
+          <div class="related_articles">
+            {% for related in object.related_articles.all  %}
+              <li><a href="{% url 'quiz:article_post' related.pk %}">{{ related }}</a></li>
+            {% endfor %}
           </div>
-          <div class="related_posts">
-            {% if object.related_basics.all or object.related_articles.all %}
-              <p class="section-title">Related</p>
-              <div class="related_basics">
-                {% for related in object.related_basics.all  %}
-                  <li><a href="{% url 'quiz:basic_post' related.pk  %}">{{ related }}</a></li>
-                {% endfor %}
-              </div>
-              <div class="related_articles">
-                {% for related in object.related_articles.all  %}
-                  <li><a href="{% url 'quiz:article_post' related.pk %}">{{ related }}</a></li>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-        </div>
+        {% endif %}
       </div>
     </div>
-  </div>
+
+
   </body>
 </html>
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
-{% block title %} Top Page {% endblock %}
+{% block title %} Nihongo Tatsujin {% endblock %}
 {% block description %}
-  Welcome to 日本語Tatsujin. This is the toppage.
+  Welcome to Nihongo Tatsujin
 {% endblock %}
 {% block content %}
 <html lang="en" dir="ltr">
@@ -14,86 +14,66 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-167867160-1');
     </script>
   </head>
   <body>
-    <div class="body">
+    {% include 'quiz/navbar.html' %}
 
-    <div class="container">
-      <div class="row">
-        <div class="col-12 section before_you_start">
-          <a href="{% url 'quiz:before_you_start' %}">
-            <div class="card h-100">
-              <div class="card-body ">
-                <h1 class="top-menu mb-5 card-title">準 - Before You Start</h1>
-                <p class="desc card-text">If you are completely new to here, take some time to read this and learn how to use 日本語Tatsujin</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
+    <div class="wrapper toppage_wrapper">
+      <section class="toppage_container toppage_beforeyoustart"><!-- Before You Start-->
+        <a href="{% url 'quiz:before_you_start' %}">
+	        <div class="toppage_content">
+						<h2 class="toppage_content_head">準 - Before You Start</h2>
+						<p class="toppage_content_desc">If you are completely new to here, take some time to read this and learn how to use Nihongo Tatsujin.</p>
+	        </div>
+				</a>
+      </section>
 
-      <div class="row">
-        <div class="col-md-6 section">
-          <a href="{% url 'quiz:basics' %}">
-            <div class="card h-100">
-              <div class="card-body ">
-                <h1 class="top-menu mb-5 card-title">基 - Basics</h1>
-                <p class="desc card-text">New to Nihongo? Here are some crash tutorials on the Japanese writing system and grammar for those of you who are wondering where to start.</p>
-              </div>
-            </div>
-          </a>
-        </div>
+			<section class="toppage_container toppage_basics"><!-- Basics-->
+        <a href="{% url 'quiz:basics' %}">
+	        <div class="toppage_content">
+						<h2 class="toppage_content_head">基 - Basics</h2>
+						<p class="toppage_content_desc">New to Nihongo? Here are some crash tutorials on the Japanese writing system and grammar for those of you who are wondering where to start.</p>
+	        </div>
+				</a>
+      </section>
 
-        <div class="col-md-6 section">
-          <a href="{% url 'quiz:articles' %}">
-            <div class="card h-100">
-              <div class="card-body">
-                <h1 class="top-menu mb-5 card-title" href="{% url 'quiz:quiz' %}">記 - Articles</h1>
-                <p class="desc card-text">Want to explore the Nihongo world more? You can read articles on more advanced Nihongo as well as the Japanese culture. Let's dive into it!</p>
-              </div>
-            </div>
-          </a>
-        </div>
+			<section class="toppage_container toppage_articles"><!-- Articles-->
+				<a href="{% url 'quiz:articles' %}">
+					<div class="toppage_content">
+						<h2 class="toppage_content_head">記 - Articles</h2>
+						<p class="toppage_content_desc">Want to explore the Nihongo world more? You can read articles on more advanced Nihongo as well as the Japanese culture. Let's dive into it!</p>
+					</div>
+				</a>
+			</section>
 
-        <div class="col-md-6 section">
-          <a href="{% url 'quiz:lessons' %}">
-            <div class="card h-100">
-              <div class="card-body ">
-                <h1 class="top-menu mb-5 card-title">習 - Courses</h1>
-                <p class="desc card-text">You don't have to buy textbooks! Here are 日本語Tatsujin's original courses. Let's learn practical Japanese here.</p>
-              </div>
-            </div>
-          </a>
-        </div>
+			<section class="toppage_container toppage_courses"><!--Courses-->
+				<a href="{% url 'quiz:lessons' %}">
+					<div class="toppage_content">
+						<h2 class="toppage_content_head">習 - Courses</h2>
+						<p class="toppage_content_desc">You don't have to buy textbooks! Here are 日本語Tatsujin's original courses. Let's learn practical Japanese here.</p>
+					</div>
+				</a>
+			</section>
 
-        <div class="col-md-6 section">
-          <a href="{% url 'quiz:quiz' %}">
-            <div class="card h-100">
-              <div class="card-body">
-                <h1 class="top-menu mb-5 card-title">問 - Quizzes</h1>
-                <p class="desc card-text">Practice makes perfect. A bunch of quick quizzes are waiting for you!</p>
-              </div>
-            </div>
-          </a>
-        </div>
+			<section class="toppage_container toppage_quizzes"><!--Quizzes -->
+				<a href="{% url 'quiz:quiz' %}">
+					<div class="toppage_content">
+						<h2 class="toppage_content_head">問 - Quizzes</h2>
+						<p class="toppage_content_desc">Practice makes perfect. A bunch of quick quizzes are waiting for you!</p>
+					</div>
+				</a>
+			</section>
 
-        <div class="col-md-6 section">
-          <a href="{% url 'quiz:correction' %}">
-            <div class="card h-100">
-              <div class="card-body">
-                <h1 class="top-menu mb-5 card-title">修 - Correction</h1>
-                <p class="desc card-text">Looking for someone who can correct your Japanese writing? I'm here! You also can read others' works!</p>
-              </div>
-            </div>
-          </a>
-        </div>
-
-      </div>
-    </div>
-    </div>
+			<section class="toppage_container toppage_correction"><!-- Correction -->
+				<a href="{% url 'quiz:correction' %}">
+					<div class="toppage_content">
+						<h2 class="toppage_content_head">修 - Correction</h2>
+						<p class="toppage_content_desc">Looking for someone who can correct your Japanese writing? I'm here! You also can read others' works!</p>
+					</div>
+				</a>
+			</section>
   </body>
 </html>
 

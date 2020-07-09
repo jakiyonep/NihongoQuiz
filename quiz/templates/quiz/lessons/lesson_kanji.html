@@ -23,40 +23,41 @@
     </script>
   </head>
   <body>
-    <div class="container info_list">
-      <h1 class="top-menu mt-5">Kanji List </h1>
-      <div class="row table-top">
-        <div class="col-1">
+		{% include 'quiz/navbar.html' %}
+		<div class="wrapper lesson_info_list_wrapper kanji_list_wrapper">
+      <h1 class="section_head">Kanji List </h1>
+      <div class="list_container">
+        <div class="list_chapter list_head">
           <p>CP</p>
         </div>
-        <div class="col-2">
+        <div class="list_kanji list_head">
           <p>Kanji</p>
         </div>
-        <div class="col-4">
+        <div class="list_yomi list_head">
           <p>Yomi</p>
         </div>
-        <div class="col-4">
+        <div class="list_definition list_head">
           <p>Deninition</p>
         </div>
-      </div>
       {% for kanji in object_list %}
         {% if kanji.kanji %}
-          <div class="row table-content">
-            <div class="col-1 table-body">
+          <div class="list_row">
+            <div class="list_chapter">
               {{ kanji.lesson.chapter }}
             </div>
-            <div class="col-2 table-body">
+            <div class="list_kanji">
               <a class="table-word" href="{% url 'quiz:lesson_post' kanji.lesson.pk %}">{{ kanji.kanji }}</a>
             </div>
-            <div class="col-4 table-body">
+            <div class="list_yomi">
               {{ kanji.yomi }}
             </div>
-            <div class="col-4 table-body">
+            <div class="list_definition">
               {{ kanji.definition }}
             </div>
           </div>
         {% endif %}
       {% endfor %}
+		</div>
     </div>
   </body>
 </html>

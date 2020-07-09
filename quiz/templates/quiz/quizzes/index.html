@@ -1,0 +1,206 @@
+{% extends 'quiz/base.html' %}
+{% load bootstrap %}
+{% load static%}
+{% load quiz_filter %}
+{% block title %}Quizzes{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+		<link rel="stylesheet" href="{% static 'quiz/css/quiz.min.css' %}">
+  </head>
+  <body>
+		{% include 'quiz/navbar.html' %}
+		<div class="wrapper quizzes_wrapper">
+
+  		<h1 class="section_head">問 - Quizzes</h1>
+
+			<div class="quizzes_container">
+	      {% for quiz in quiz_page_obj %}
+				<div class="quiz_container">
+	        <div class="quiz_question"><!--question-->
+	        	{% if user.is_authenticated or quiz.public %}
+	          	{% if not quiz.public %} Draft {% endif %}<h2>{{quiz.question | safe}}</h2>
+	        </div>
+	        <div class="quiz_body_container">
+	          {% if quiz.choice_long %}
+	            <div class="quiz_choices long"><!--choices_long-->
+	              <div class="choice choice_1">
+	                <span>1. </span>{{quiz.choice1 | safe}}
+	              </div>
+	              <div class="choice choice_2">
+                 	<span>2. </span> {{quiz.choice2 | safe}}
+	              </div>
+	              {% if quiz.choice3 %}
+	                <div class="choice choice_3">
+                  	<span>3. </span>{{quiz.choice3 | safe}}
+	                </div>
+	              {% endif %}
+	              {% if quiz.choice4  %}
+	                <div class="choice choice_4">
+	                  <span>4. </span>{{quiz.choice4  | safe}}
+	                </div>
+	              {% endif %}
+	            </div>
+	          {% endif%}
+	          {% if not quiz.choice_long %}
+	            <div class="quiz_choices"><!--choices-->
+	              <div class="choice choice_1">
+	                <span>1. </span>{{quiz.choice1 | safe}}
+	              </div>
+	              <div class="choice choice_2">
+	                <span>2. </span>{{quiz.choice2 | safe}}
+	              </div>
+	              {% if quiz.choice3 %}
+	                <div class="choice choice_3">
+	                   <span>3. </span>{{quiz.choice3 | safe}}
+	                </div>
+	              {% endif %}
+	              {% if quiz.choice4  %}
+	                <div class="choice choice_4">
+	                  <span>4. </span>{{quiz.choice4 | safe}}
+	                </div>
+	              {% endif %}
+	            </div>
+	          {% endif%}
+						<div class="quiz_bottom">
+	          <div class="quiz_info"><!--quiz_info-->
+	            <div class="level_category"><!--level_category-->
+	              <a class="level {{quiz.level.slug}}" href="{% url 'quiz:level_post' quiz.level.slug %}">{{quiz.level}}</a>
+	              <a class="category {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
+	            </div>
+							<div class="answer_button">
+								<a class="answer_button_a" id="{{quiz.pk}}">
+									Answer
+								</a>
+							</div>
+	            <div class="quiz_tags"><!--tags-->
+	              {% for tag in quiz.tags.all %}
+	                <a class="tag" href="{% url 'quiz:tag_post' tag.slug %}">{{ tag.name }}</a>
+	              {% endfor %}
+	            </div>
+
+	        	</div>
+	          <div class="quiz_collapse" id="collapse-{{quiz.pk}}">
+	            <span class="correct_answer">{{quiz.answer}}</span>
+							<div class="question_description">
+								{% if quiz.question_yomi %}
+									<div class="question_yomi">
+										{{ quiz.question_yomi |safe }}
+									</div>
+								{% endif %}
+								{% if quiz.question_en %}
+									<div class="question_en">
+										{{ quiz.question_en | safe }}
+									</div>
+								{% endif %}
+							</div>
+	            <div class="choices_description">
+	              {% if quiz.choice1_detail %}
+	                <p>Choices</p>
+	              {% endif %}
+	              {% if quiz.choice1_detail %}
+	                <div class="answer answer_choice1">
+	                  <span>1. </span>{{ quiz.choice1_detail | safe }}
+	                </div>
+	              {% endif %}
+	              {% if quiz.choice2_detail %}
+	                <div class="answer answer_choice2">
+	                  <span>2. </span>{{ quiz.choice2_detail | safe }}
+	                </div>
+	              {% endif %}
+	              {% if quiz.choice3_detail %}
+	                <div class="answer answer_choice3">
+	                  <span>3. </span>{{ quiz.choice3_detail | safe}}
+	                </div>
+	              {% endif %}
+	              {% if quiz.choice4_detail %}
+	                <div class="answer answer_choice4">
+	                  <span>4. </span>{{ quiz.choice4_detail | safe }}
+	                </div>
+	              {% endif %}
+
+	              {% if quiz.choicesdetail_set.all %}
+	              	<p>Choices</p>
+	              {% endif %}
+	              {% for choice in quiz.choicesdetail_set.all %}
+	                {% if choice.choice_explanation_1 %}
+	                  <div class="explanation explanation_choice1">
+	                    {{ choice.choice_explanation_1 }}
+	                  </div>
+	                {% endif %}
+	                {% if choice.choice_explanation_2 %}
+	                  <div class="explanation explanation_choice2">
+	                    {{ choice.choice_explanation_2 }}
+	                  </div>
+	                {% endif %}
+	                {% if choice.choice_explanation_3 %}
+	                  <div class="explanation explanation_choice3">
+	                    {{ choice.choice_explanation_3 }}
+	                  </div>
+	                {% endif %}
+	                {% if choice.choice_explanation_4 %}
+	                  <div class="explanation explanation_choice4">
+	                    {{ choice.choice_explanation_4 }}
+	                  </div>
+	                {% endif %}
+	              {% endfor %}
+	            </div>
+	            <div class="description"><!--DetailDescription-->
+                {% for detail in quiz.descriptiondetail_set.all  %}
+									<div class="detail_description">
+	                  {% if detail.word %}
+	                    <div class="detail_word">
+	                      {{ detail.word  |safe }}
+	                    </div>
+	                  {% endif %}
+	                  {% if detail.yomi %}
+	                    <div class="detail_yomi">
+	                      <span>読:</span>{{ detail.yomi  |safe }}
+	                    </div>
+	                  {% endif %}
+	                  {% if detail.definition %}
+	                    <div class="detail_definition">
+	                      <span>義:</span>{{ detail.markdown_definition  |safe }}
+	                    </div>
+	                  {% endif %}
+	                  {% if detail.usage %}
+	                    <div class="detail_usage">
+                      	<span>用:</span>{{ detail.markdown_usage | safe}}
+	                    </div>
+	                  {% endif %}
+	                  {% if detail.example_ja %}
+	                    <div class="detail_example_ja">
+                      	<span>日:</span>{{ detail.example_ja |safe }}
+	                    </div>
+	                  {% endif %}
+	                  {% if detail.example_yomi %}
+	                    <div class="detail_example_yomi">
+	                      <span>読:</span>{{ detail.example_yomi |safe }}
+	                    </div>
+	                  {% endif %}
+	                  {% if detail.example_en %}
+	                    <div class="detail_example_en">
+                      	<span>英:</span>{{ detail.example_en | safe}}
+	                    </div>
+	                  {% endif %}
+									</div>
+                {% endfor %}
+
+	            </div>
+	          </div>
+	        </div>
+	        {% endif %}
+				</div>
+				</div>
+      	{% endfor %}
+			</div>
+
+			{% include "quiz/quizzes/quiz_sidebar.html" %}
+
+			{% include "quiz/quizzes/quiz_pagination.html" %}
+		</div>
+
+	</body>
+</html>
+{% endblock %}

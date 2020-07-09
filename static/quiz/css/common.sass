@@ -1,0 +1,123 @@
+$base_bacground_color: rgb(247, 247, 247)
+$base_letter_color: rgb(111, 111, 111)
+$strong_red: rgb(255, 102, 102)
+$yomi-color: rgb(255, 183, 158)
+$en-color: rgb(82, 200, 254)
+$answer-color: rgb(255, 70, 70)
+$casual-color: rgb(8, 214, 0)
+
+
+*
+	box-sizing: border-box
+	font-size: 1rem
+	line-height: 2rem
+	font-family: 'Sans-serif'
+body
+	background-color: $base_bacground_color
+a, p, h1, h2, h3, h4, span, div
+	color: $base_letter_color
+
+.wrapper
+	transform: translateY(-200px)
+	width: 80vw
+	margin: 0 auto
+.sawarabi
+  font-family: "Sawarabi Mincho"
+.section_head
+	color: $strong_red
+	font-size: 2rem
+	margin-bottom: 7rem
+	font-family: "Sawarabi Mincho" !important
+	width: 100%
+
+.toc
+	margin: 1.5em 0
+	border: 1px solid black
+	border-radius: 0.5em
+	padding: 3em 1em
+	&::before
+	  content: "Contents"
+	  margin-bottom: 1em
+	  width: 100%
+	  display: block
+	  font-weight: bold
+	li
+		margin-left: 1rem
+		list-style: disc
+		ul
+			margin-bottom: 0
+		li
+			margin-left: 1rem
+			list-style: circle
+			li
+				margin-left: 1rem
+				list-style: square
+.vocab-table
+  overflow-x: auto
+  margin-bottom: 3em
+  tr
+  tr:nth-child(odd)
+    background-color: rgba(236, 236, 236, 0.2)
+  th
+    padding: 0.5em 1.5em
+		width: 400px
+		min-width: 400px
+  td
+    padding: 0.5em 1.5em
+		width: 400px
+		min-width: 400px
+.list
+	list-style: none
+  margin: 3rem 0
+	border: 1px solid rgb(156, 156, 156)
+	border-radius: 10px
+	padding: 2rem 1rem
+	li
+		margin-bottom: 1rem
+		list-style: circle
+		list-style-position: outside
+	li:last-child
+		margin-bottom: 0
+.japa
+  padding: 0.5em 1em
+  color: #494949
+  background: transparent
+  border-left: solid 5px rgb(185, 211, 223)
+  margin: 3em 0
+  li
+    list-style: none
+    padding-left: 0
+    font-style: italic
+    margin-bottom: 1em
+    &:last-child
+      margin-bottom: 0
+.japa-wrong
+  border-left: solid 5px rgb(255, 138, 138)
+  li:first-child::after
+    content: "\f00d"
+    font-weight: bold
+    font-family: "Font Awesome 5 free"
+    color: rgb(255, 138, 138)
+.voca-list
+  margin-bottom: 4em
+  position: relative
+  li
+    margin-bottom: 0.5em
+    list-style-position: inside
+    list-style: none
+  &::before
+    content: 'Vocab'
+    height: auto
+    width: auto
+    display: inline-block
+    margin-bottom: 1.5em
+    color: white
+    padding: 0.2em 0.5em
+    border-radius: 5px
+    background-color: rgb(185, 211, 223)
+
+
+@media screen and (max-width:800px)
+	.wrapper
+		transform: translateY(-250px)
+		width: 90vw

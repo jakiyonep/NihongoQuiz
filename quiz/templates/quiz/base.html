@@ -1,21 +1,19 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ed">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}NihongoTatsujin{% endblock %}</title>
-
-    <meta name="description" content="{% block description %}{% endblock %}">
+    <title>{% block title %}日本語Tatsujin{% endblock %}</title>
+    <meta name="description" content="{% block description %}Welcome to 日本語Tatsujin!{% endblock %}">
     <link rel="icon" href="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/favicon/favicon.ico">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-    <link rel="stylesheet" href="{% static 'quiz/css/style.min.css' %}">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
 
+    <!-- New CSS -->
+    <link rel="stylesheet" href="{% static 'quiz/css/destyle.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/common.min.css' %}">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167369199-1"></script>
@@ -26,16 +24,9 @@
 
       gtag('config', 'UA-167369199-1');
     </script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="{% static 'quiz/js/all.js' %}"></script>
   </head>
-  <body>
-    {% include 'quiz/navbar.html' %}
-    {% block content %}
-    {% endblock %}
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+  {% block content %}
+  {% endblock %}
 </html>

@@ -6,74 +6,86 @@
 {% endblock %}
 {% block content %}
 <head>
+  <link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
+  <link rel="stylesheet" href="{% static 'quiz/css/content.min.css' %}">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-167867160-1');
   </script>
 </head>
-  <body>
-    <div class="container">
-      <div class="row d-flex justify-content-between">
-        <div class="col-12 col-lg-8 articles_list order-1 order-lg-1">
-          <div class="post-info article_info">
-            <h1 class="article-title">{{ object.title }}</h1>
-            {% if object.thumbnail  %}
-            <img class="article_top_thumbnail" src="{{ object.thumbnail.url }}" alt="">
-            {% endif %}
-          </div>
-          <div class="content">
-            {{ object.markdown | safe}}
-          </>
-          {% if object.related_basics.all  %}
-            <div class="related_posts">
-              <p class="section-title">Related</p>
-              <div class="related_basics">
-                {% for basic in object.related_basics.all  %}
-                <div class = "article_container col-12">
-                  <div class="article_title">
-                    <a href="{% url 'quiz:article_post' basic.title_slug %}">{{ basic.title }}</a>
-                  </div>
-                  <div class="article_top_info">
-                    {% if basic.category2 %}
-                      <a href="{% url 'quiz:article_category_post' basic.category2.slug %}" class="article_category article_category_{{basic.category2.slug}}">{{ basic.category2.name }}</a>
-                    {% endif %}
-                    <span>{{ basic.update |date:"M j, Y"}}</span>
-                  </div>
-                  <div class="article_thumbnail">
-                    {% if basic.thumbnail  %}
-                    <a href="{% url 'quiz:article_post' basic.title_slug %}"><img src="{{ basic.thumbnail.url }}" alt=""></a>
-                    {% endif %}
-                  </div>
-                  <div class="article_info">
-                    {% if basic.summary %}
-                    <div class="article_summary">
-                      <p>{{ basic.summary | safe }}</p>
-                    </div>
-                    {% endif %}
-                    <div class="article_tags">
-                      {% for tag in basic.tag.all %}
-                      <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
-                    {{ tag }}
-                    </a>
-                    {% endfor %}
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
+<body>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper articles_wrapper articles_post_wrapper content_wrapper">
+      <main class="container articles_container">
+        <div class="article-post_info">
+          <h1 class="article-post_title">{{ object.title }}</h1>
+						<span class="article_date">{{ object.update |date:"M j, Y"}}</span>
+						{% if object.category2 %}
+							<a class="article_category article_category_{{object.category2.slug}}" href="{% url 'quiz:article_category_post' object.category2.slug %}">{{ object.category2.name }}</a>
+						{% endif %}
+							{% for tag in object.tag.all %}
+							<a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
+								{{ tag }}
+							</a>
+							{% endfor %}
+
+          {% if object.thumbnail  %}
+          	<img class="article-post_thumbnail" src="{{ object.thumbnail.url }}" alt="">
           {% endif %}
         </div>
-      </div>
-      <div class="col-12 col-lg-3 sidebar order-3 order-lg-2">
-        {% include 'quiz/articles/article_tags.html' %}
-      </div>
-    </div>
+        <article class="content article-post_content">
+          {{ object.markdown | safe}}
+        </article>
+			</main>
+      {% if object.related_basics.all  %}
+        <section class="related_posts">
+          <p class="section-head">Related</p>
+					<div class="articlesindex_container">
+						{% for basic in object_list %}
+							{% if basic.public %}
+								<article class = "article_container">
+									<div class="article_title">
+										<a href="{% url 'quiz:article_post' basic.title_slug %}">{{ basic.title }}</a>
+									</div>
+									<div class="article_top_info">
+										{% if basic.category2 %}
+											<a class="article_category article_category_{{basic.category2.slug}}" href="{% url 'quiz:article_category_post' basic.category2.slug %}">{{ basic.category2.name }}</a>
+										{% endif %}
+											<span class="article_date">{{ basic.update |date:"M j, Y"}}</span>
+									</div>
+									<div class="article_thumbnail">
+										{% if basic.thumbnail  %}
+										<a href="{% url 'quiz:article_post' basic.title_slug %}"><img src="{{ basic.thumbnail.url }}" alt=""></a>
+										{% endif %}
+									</div>
+									<div class="article_info">
+										{% if basic.summary %}
+										<div class="article_summary">
+											<p>{{ basic.summary | safe }}</p>
+										</div>
+										{% endif %}
+										<div class="article_tags">
+											{% for tag in basic.tag.all %}
+											<a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
+												{{ tag }}
+											</a>
+											{% endfor %}
+										</div>
+									</div>
+								</article>
+							{% endif %}
+						{% endfor %}
+					</div>
+        </section>
+      {% endif %}
+			<aside class="sidebar articles_sidebar" id="articles_sidebar"><!--Sidebar-->
+		      {% include 'quiz/articles/article_tags.html' %}
+		    </aside>
+		</div>
   </body>
 </html>
 {% endblock %}

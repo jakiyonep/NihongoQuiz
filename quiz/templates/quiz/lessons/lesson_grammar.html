@@ -23,39 +23,39 @@
     </script>
   </head>
   <body>
-    <div class="container info_list">
-      <h1 class="top-menu mt-5">Grammar List </h1>
-      <div class="row table-top">
-        <div class="col-1">
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper lesson_info_list_wrapper grammar_list_wrapper">
+      <h1 class="section_head">Grammar List </h1>
+      <div class="list_container grammar_list_container">
+        <div class="list_chapter list_head">
           <p>CP</p>
         </div>
-        <div class="col-5">
+        <div class="list_grammar list_head">
           <p>Grammar</p>
         </div>
-      </div>
       {% for grammar in object_list %}
         {% if not grammar.lesson.vocab %}
           {% if not grammar.lesson.exercise %}
-            <div class="row table-content">
-              <div class="col-1 table-body">
+            <div class="list_row">
+              <div class="list_chapter">
                 {{ grammar.lesson.chapter }}
               </div>
                 {% if not grammar.casual %}
-                  <div class="col-5 table-body">
-                    <a class="table-word" href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar | safe}}</a>
+                  <div class="list_grammar">
+                    <a href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar | safe}}</a>
                   </div>
                 {% else %}
-                  <div class="col-5 table-body">
-                    <a class="table-word casual" href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar | safe}}</a>
+                  <div class="list_grammar casual">
+                    <a href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar | safe}}</a>
                   </div>
                 {% endif %}
-
             </div>
           {% endif %}
         {% endif %}
         {% if grammar.lesson.vocab %}
         {% endif %}
       {% endfor %}
+		</div>
     </div>
   </body>
 </html>

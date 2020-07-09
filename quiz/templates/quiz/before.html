@@ -2,13 +2,12 @@
 {% load static %}
 {% block title %} Before You Start {% endblock %}
 {% block description %}
-  Learn how to use 日本語Tatsujin
+  Learn how to use Nihongo Tatsujin
 {% endblock %}
 {% block content %}
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-    <link rel="stylesheet" href="{% static 'quiz/css/toppage.min.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/content.min.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
     <script>
@@ -20,16 +19,14 @@
     </script>
   </head>
   <body>
-    <div class="body">
-      <div class="container before_you_start">
-        <p class="welcome">Welcome to 日本語Tatsujin!</p>
-        <div class="before_content content">
-
+	  {% include 'quiz/navbar.html' %}
+    <div class="wrapper beforeyoustart_wrapper">
+      <h1 class="welcome"></h1>
+      <div class="content beforeyoustart_content">
         {% for object in object_list %}
           {{ object.markdown|safe }}
         {% endfor %}
-      </div>
-      </div>
+  		</div>
     </div>
   </body>
 </html>

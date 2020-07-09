@@ -1,0 +1,107 @@
+$base_bacground_color: rgba(242, 242, 242, 1)
+$base_letter_color: rgb(111, 111, 111)
+$strong_red: rgb(255, 102, 102)
+$link_color: rgb(63, 130, 138)
+
+
+
+.content_wrapper
+	width: 80vw
+	margin: 0 auto
+	margin-bottom: 5rem
+	display: flex
+.article-post_info
+	margin-bottom: 2rem
+	.article-post_title
+		font-size: 1.5rem
+		text-transform: uppercase
+		margin-bottom: 1rem
+	.article_date
+		display: block
+	.article_category
+		color: white
+		padding: 0.2rem 1rem
+		border-radius: 10px
+		display: inline-block
+	.article_category_japan
+	.article_tag
+		background-color: rgb(203, 203, 203)
+		color: white
+		padding: 0.2em 1em 0.2em 0.2em
+		border-radius: 0 2rem 2rem 0
+		white-space: nowrap
+		display: inline-block
+		margin-bottom: 1rem
+		&:before
+			content: ''
+			width: 0.5em
+			height: 0.5em
+			background-color: white
+			border-radius: 50%
+			display: inline-block
+	.article-post_thumbnail
+		max-width: 100%
+		margin-top: 1rem
+		margin-bottom: 3rem
+.content
+	border-bottom: 1px double black
+	padding: 5rem 0
+	h1, h2, h3, h4, p, img, div, ul
+		margin-bottom: 1rem
+	h1
+	h2
+		font-size: 1.4rem
+		margin-top: 7rem
+		background: rgb(106, 106, 106)
+		padding: 1rem
+		border-radius: 0 10px 0 10px
+		color: #fff
+		&:first-child
+			margin-top: 1rem
+	h3
+		font-size: 1.3rem
+		margin-top: 4rem
+		padding: 1rem
+		border-radius: 0 10px 0 10px
+		background-color: rgb(205, 205, 205)
+		color: white
+	h4
+		font-size: 1.3rem
+		margin-top: 4rem
+		padding: 5px 15px
+		border-bottom: 2px solid  rgb(106, 106, 106)
+		color: inherit
+	p
+	a
+		color: $link_color
+		font-weight: 550
+		border-bottom: 1px solid $link_color
+		padding-bottom: 0
+	img
+		max-width: 100%
+		object-fit: contain
+	span
+		color: red
+	.line
+		background: linear-gradient(transparent 90%, #ff8171 80%)
+		color: inherit
+		font-weight: 560
+
+
+
+
+
+	.articles_post_wrapper
+		.articles_container
+			width: 100% !important
+		.articles_sidebar
+			display: block
+			height: auto
+
+
+
+
+@media screen and (max-width:800px)
+	.toc
+		ul
+			padding-left: 0

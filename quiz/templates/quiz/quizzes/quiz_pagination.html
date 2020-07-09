@@ -1,0 +1,28 @@
+{% load static %}
+{% load quiz_filter %}
+<link rel="stylesheet" href="{% static 'quiz/css/pagination.min.css' %}">
+
+<nav class="quiz_pagination_container pagination">
+	<ul >
+		{% if quiz_page_obj.number|add:"-3" > 1 %}
+			<li class="page-item">
+				<a class="page-link page-side" href="{% my_url 1 'page' request.GET.urlencode %}">1&laquo;</a>
+			</li>
+		{% endif %}
+
+		{% for num in quiz_page_obj.paginator.page_range %}
+			{% if  num == quiz_page_obj.number|add:"-1" or num == quiz_page_obj.number|add:"-2" or num == quiz_page_obj.number|add:"1" or num == quiz_page_obj.number|add:"2" or num == quiz_page_obj.number|add:"-3" or num == quiz_page_obj.number|add:"3"  %}
+				<li class="page-item"><a class="page-link other-num" href="{% my_url num 'page' request.GET.urlencode  %}">{{num}}</a></li>
+			{% elif quiz_page_obj.number == num %}
+				<li class="page-item current_number"><a class="page-link">{{num}}</a></li>
+			{% endif %}
+		{% endfor%}
+		{% if quiz_page_obj.paginator.num_pages > quiz_page_obj.number|add:"3" %}
+			<li class="page-item">
+				<a class="page-link page-side" href="{% my_url quiz_page_obj.next_page_number 'page' request.GET.urlencode %}">
+					&raquo;{{quiz_page_obj.paginator.num_pages}}
+				</a>
+			</li>
+		{% endif %}
+	</ul>
+</nav>

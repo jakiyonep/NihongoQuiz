@@ -1,320 +1,61 @@
-$color: rgb(135, 189, 238)
+$base_bacground_color: rgb(247, 247, 247)
+$base_letter_color: rgb(111, 111, 111)
+$strong_red: rgb(255, 102, 102)
 
-/*index*/
-body
-  width: 100vw
+.basics_wrapper
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+	.section_head
+		width: 100%
+	.basic_container
+		width: 46%
+		margin-bottom: 3em
+		border-radius: 1em
+		border: 1px solid rgb(218, 218, 218)
+		padding: 1.5em
+		transition: 0.3s
+	.basic_head
+		font-size: 1.5rem
+		margin-bottom: 1rem
+		border-bottom: 1px solid rgb(122, 122, 122)
+	.basic_list
+		li
+			list-style: none
+			padding-left: 1rem
+			a
+				border-bottom: 1px solid rgba(238, 238, 238, 0.86)
+				transition: 0.5s
+			a:hover
+				letter-spacing: 0.1rem
+				transition: 0.5s
+				border-bottom: 1px solid $strong_red
+	ul
+		list-style: circle
+		list-style-position: outside
+		padding-left: 2rem
+		li
+			margin-bottom: 1rem
+		li:last-child
+			margin-bottom: 0
 
-.col-md-6
-  margin-bottom: 3em
-
-.basic-category
-  border: 1px solid rgb(226, 226, 226)
-  border-radius: 20px
-  margin: 0 0.5em 3em 0.5em
-  padding: 1em
-  background-color: rgba(237, 237, 237, 0.18)
-  .category-title
-    font-size: 1.5em
-    border-bottom: 1.5px solid rgb(168, 171, 163)
-  li
-    padding-left: 1em
-    margin-bottom: 1em
-    list-style-type: none
-    list-style-position: outside
-  a
-    text-decoration: none
-    color: inherit
-    border-bottom: 1px solid rgba(185, 185, 185, 0.2)
-    transition: 0.3s
-    &:hover
-      border-bottom: none
-      letter-spacing: 0.1em
-      transition: 0.2s
-
-
-
-/*basic_post*/
-.post-info
-  margin-top: 3em
-  .section-title
-  .section-category
-    font-size: 1.2em
-.content
-  border-top: 1px solid rgb(222, 222, 222)
-  padding-top: 2em
-  border-bottom: 1px solid rgb(222, 222, 222)
-  padding-bottom: 3em
-  p
-    margin-bottom: 3em
-  ul
-    padding-left: 2em
-  ol
-    padding-left: 2em
-  li
-    padding-left: 1em
-
-  img
-    max-width: 100%
-    margin: auto
-    display: block
-    margin: 5em 0
-    box-shadow: 2px 2px 2px 2px
-
-  h2
-    position: relative
-    padding: 0.5em
-    background: $color
-    color: white
-    margin: 2em auto
-    font-size: 1.5em
-    &::before
-      position: absolute
-      content: ''
-      top: 100%
-      left: 0
-      border: none
-      border-bottom: solid 15px transparent
-      border-right: solid 20px rgb(149, 158, 155)
-  h3
-    color: inherit
-    border-bottom: solid 3px $color
-    padding: 0.5em
-    margin: 2em 0
-    font-size: 1.3em
-  h4
-    border: 2px solid $color
-    display: inline-block
-    border-radius: 10px
-    padding: 0.5em 1em
-    margin-bottom: 2em
-    font-size: 1.2em
-
-
-  span
-    color: red
-
-
-.toc
-  margin: 1.5em 0
-  border: 1px solid $color
-  border-radius: 0.5em
-
-  padding: 3em 1em
-  &::before
-    content: "Contents"
-    margin-bottom: 1em
-    width: 100%
-    display: block
-    font-weight: bold
-
-  li
-    padding-left: 0
-  a
-    color: $color !important
-
-.before_you_start
-  h3
-    border-bottom: 3px solid $color
-    padding: 0.5em 0
-    margin: 2em 0
-  h3::first-letter
-    font-size: 1.3em
-  h4
-    margin: 1.5em 0
-    padding: 0.5em
-    color: #010101
-    background: rgba(244, 252, 255, 0.07)
-    border-bottom: solid 3px rgb(194, 236, 247)
-    display: inline-block
-    border-radius: 0 2em 2em 0
-    color: inherit
-
-.empty
-  height: 400px
+	ol
+		list-style: decimal
+		list-style-position: outside
+		padding-left: 2rem
+		li
+			margin-bottom: 1rem
+		li:last-child
+			margin-bottom: 0
 
 
 
-/*before you start*/
+.basics_wrapper
+	.post-title
+		font-size: 1.5rem
+		border-bottom: 2px solid rgb(179, 179, 179)
+		display: block
 
-.before_you_start
-  .welcome
-    text-align: center
-    font-size: 1.5em
-    margin: 0 auto
-  .before_content
-    margin: 5em 0
-  img
-    display: block
-    max-width: 100%
-    margin: 0 auto
-
-
-/*related_posts*/
-.related_posts
-  margin-top: 10em
-  border-top: 1px solid rgb(222, 222, 222)
-  padding-top: 4em
-  li
-    list-style: none
-    margin-bottom: 1.5em
-  a
-    font-size: 1.2em
-    color: rgb(32, 126, 181)
-  img
-    box-shadow: None
-    border: none
-
-
-
-
-/*articles*/
-.articles_list
-  .article_container
-    background-color: white
-    margin-bottom: 6em
-    .article_title
-      margin-bottom: 1em
-      a
-        color: rgb(32, 126, 181)
-        font-size: 1.3em
-        text-transform: uppercase
-        font-family: "Mincho"
-    .article_top_info
-      display: inline-block
-      margin-bottom: 1em
-      font-size: 0.9em
-      a
-        background-color: rgb(255, 100, 71)
-        color: white
-        border-radius: 5px
-        padding: 0.2em 1em
-        margin-right: 1em
-      .article_category_japan
-        background-color: rgb(91, 154, 255)
-    .article_thumbnail
-      img
-        width: 100%
-        display: block
-        height: 540px
-        object-fit: contain
-        object-position: center
-        margin-bottom: 1em
-    .article_info
-      p
-        text-justify: inter-word
-      .article_summary
-        margin-bottom: 1em
-        font-size: 1em
-      .article_tags
-        .article_tag
-          display: inline-block
-          position: relative
-          background-color: rgb(209, 209, 209)
-          display: inline-block
-          padding: 0.3em 1em 0.3em 0.5em
-          text-decoration: none
-          font-size: 1em
-          border-radius: 0 1em 1em 0
-          color: white
-          margin-right: 1em
-          margin-bottom: 1em
-          &:before
-            content: ''
-            width: 0.5em
-            height: 0.5em
-            background-color: white
-            display: inline-block
-            border-radius: 0.5em
-.article_info
-  h1
-    text-transform: uppercase !important
-  .article_top_thumbnail
-    width: 100%
-    display: block
-    object-fit: contain
-    object-position: center
-    margin-bottom: 0.5em
-
-
-.sidebar
-  margin-right: 0
-
-  .sidebar_card
-
-  .article_tags
-    .sidebar_head
-      font-size: 1.3em
-      padding-bottom: 0.5em
-      border-bottom: 1px solid grey
-    ul
-      padding-top: 2em
-      a
-        display: inline-block
-        position: relative
-        background-color: rgb(209, 209, 209)
-        display: inline-block
-        padding: 0.3em 1em 0.3em 0.6em
-        color: #fff
-        text-decoration: none
-        font-size: 1em
-        border-radius: 0 1em 1em 0
-        margin-bottom: 1em
-        &:before
-          content: ''
-          width: 0.5em
-          height: 0.5em
-          background-color: white
-          display: inline-block
-          border-radius: 0.5em
-  .article_category
-    margin-bottom: 5em
-    .sidebar_head
-      font-size: 1.3em
-      padding-bottom: 0.5em
-      border-bottom: 1px solid grey
-    .sidebar_category
-      background-color: rgb(255, 100, 71)
-      color: white
-      border-radius: 5px
-      padding: 0.2em 1em
-      margin-right: 1em
-      white-space: nowrap
-      line-height: 3em
-    .category_japan
-      background-color: rgb(91, 154, 255)
-    span
-      color: white
-
-.article_pagination
-  width: 100%
-  .current_number
-    background-color: grey  !important
-    color: white !important
-    border-radius: 20%
-  .page-side
-    background-color: grey  !important
-    color: white !important
-  .other-num
-    background-color: rgba(240, 240, 240, 0.85) !important
-
-
-
-@media screen and (max-width:480px)
-  .card-quiz
-    width: 95%
-
-  .articles_list
-    .article_container
-      .article_thumbnail
-        img
-          width: 100%
-          display: block
-          height: 300px
-          object-fit: contain
-          object-position: center
-          margin-bottom: 0.5em
-
-  .article_pagination
-    margin-bottom: 8em
-  .sidebar
-    margin-top: 5em
+@media screen and (max-width:800px)
+	.basic_container
+		width: 100%!important

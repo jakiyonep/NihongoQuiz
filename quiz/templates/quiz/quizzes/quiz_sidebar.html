@@ -1,0 +1,44 @@
+<div class="quiz_filter_container">
+	<div class="open_button">
+		<i class="fas fa-chevron-down" id="filter_button"></i>
+	</div>
+	<div class="filter_collapse">
+		<form class="quiz_search" action="{% url 'quiz:search_post' %}" method="GET">
+			<input class="search_input" type="search" name="q" value="{{ request.GET.q }}" placeholder="Keywords">
+				<button class="search_button" type="submit">Search</button>
+		</form>
+		<div class="quiz_filter">
+			<form method="GET">
+				<div class="quiz_filter_choices">
+					<div class="input level">
+						<div class="label">
+							{{filtered_quiz.form.level.label}}
+						</div>
+						<div class="select">
+							{{filtered_quiz.form.level}}
+						</div>
+					</div>
+					<div class="input category">
+						<div class="label">
+							{{filtered_quiz.form.category.label}}
+						</div>
+						<div class="select">
+							{{filtered_quiz.form.category}}
+						</div>
+					</div>
+					<div class="input tags">
+						<div class="label">
+							{{filtered_quiz.form.tags.label}}
+						</div>
+						<div class="select">
+							{{filtered_quiz.form.tags}}
+						</div>
+					</div>
+				</div>
+				{% if filtered_quiz.form %}
+					<button type="submit" name="button" class ="btn button">Find Quizzes</button>
+				{% endif %}
+			</form>
+		</div>
+	</div>
+</div>

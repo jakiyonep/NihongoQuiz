@@ -1,0 +1,242 @@
+$base_bacground_color: rgb(247, 247, 247)
+$base_letter_color: rgb(111, 111, 111)
+$strong_red: rgb(255, 102, 102)
+$yomi-color: rgb(255, 183, 158)
+$en-color: rgb(82, 200, 254)
+$answer-color: rgb(255, 70, 70)
+$casual-color: rgb(8, 214, 0)
+$border-thin-color: rgb(186, 186, 186)
+
+$n6-color: rgb(57, 93, 255)
+$n5-color: rgb(57, 187, 255)
+$n4-color: rgb(57, 255, 184)
+$n3-color: rgb(57, 255, 66)
+$n2-color: rgb(211, 255, 57)
+$n1-color: rgb(57, 255, 184)
+$n0-color: rgb(255, 87, 57)
+
+$kanji-color: rgb(255, 148, 124)
+$grammar-color: rgb(151, 255, 124)
+$vocabulary-color: rgb(124, 171, 255)
+
+
+.quizzes_wrapper
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+	& *
+		font-size: 1.1rem
+	.section_head
+		width: 100%
+	.quizzes_container
+		width: 70%
+		.quiz_container
+			margin-bottom: 5rem
+			.quiz_question
+				font-size: 1.2rem
+				margin-bottom: 2rem
+				background: rgb(106, 106, 106)
+				padding: 1rem
+				border-radius: 0 10px 0 10px
+				color: red
+				h2
+					color: white
+			.quiz_body_container
+				.quiz_choices
+					width: 100%
+					display: flex
+					flex-wrap: wrap
+					justify-content: space-between
+					margin-bottom: 1.5rem
+					.choice
+						width: 50%
+						background-color: rgb(235, 235, 235)
+						padding: 0.5rem
+						margin-bottom: 1.5rem
+						border: 2px solid $base_bacground_color
+				.long
+					.choice
+						width: 100%
+				.quiz_bottom
+					border: 1px solid $border-thin-color
+					padding: 0.7rem
+					border-radius: 5px
+					.quiz_info
+						display: flex
+						flex-wrap: wrap
+						align-items: center
+						margin-bottom: 1.5rem
+						.level_category
+							width: 70%
+							margin-bottom: 1rem
+							.level
+							  padding: 0.4em 0.5em
+							  color: #494949
+							  background: #f4f4f4
+							  border-left: solid 5px $n6-color
+							  border-bottom: solid 3px #d7d7d7
+							.category
+								background: linear-gradient(transparent 60%, $kanji-color 90%)
+								margin-left: 1rem
+							.n5
+								border-left: solid 5px $n5-color
+							.n4
+								border-left: solid 5px $n4-color
+							.n3
+								border-left: solid 5px $n3-color
+							.n2
+								border-left: solid 5px $n2-color
+							.n1
+								border-left: solid 5px $n1-color
+							.n0
+								border-left: solid 5px $n0-color
+							.grammar
+								background: linear-gradient(transparent 60%, $grammar-color 90%)
+							.vocabulary
+								background: linear-gradient(transparent 60%, $vocabulary-color 90%)
+						.answer_button
+							width: 30%
+							text-align: right
+							a
+								display: inline-block
+								padding: 0.5rem 1rem
+								border-radius: 5px
+								color: white
+								transition: 0.5s
+								background-color: $strong_red
+								&:hover
+									background-color: rgba(255, 102, 102, 0.6)
+									transition: 0.5s
+									cursor: pointer
+						.quiz_tags
+							width: 70%
+							.tag
+								background-color: rgb(203, 203, 203)
+								color: white
+								padding: 0.2em 1em 0.2em 0.2em
+								border-radius: 0 2rem 2rem 0
+								white-space: nowrap
+								display: inline-block
+								margin-bottom: 1rem
+								&:before
+									content: ''
+									width: 0.5em
+									height: 0.5em
+									background-color: white
+									border-radius: 50%
+									display: inline-block
+									margin-right: 0.5rem
+					.quiz_collapse
+						display: none
+						.correct_answer
+							color: $strong_red
+							font-size: 1.2rem
+							margin-bottom: 1rem
+						.question_description
+							margin-bottom: 1rem
+							.question_yomi
+								margin-bottom: 1rem
+							.question_en
+								font-style: italic
+						.choices_description
+							margin-bottom: 1rem
+							padding-top: 1rem
+							padding-bottom: 1rem
+							border-bottom: 1px solid $border-thin-color
+							border-top: 1px solid $border-thin-color
+							p
+								font-size: 1.1rem
+								font-weight: bold
+								margin-bottom: 1rem
+							.answer
+								padding-left: 1rem
+						.description
+							padding-bottom: 1rem
+							.detail_description
+								margin-bottom: 3rem
+								&>div
+									padding-left: 1rem
+									display: flex
+									align-items: flex-start
+									margin-bottom: 0.7rem
+									&>span
+										margin-right: 1.5rem
+										font-weight: bold
+								&>div:before
+								li
+									list-style-type: circle
+									list-style-position: outside
+
+								.detail_word
+									color: $strong_red
+									padding: 0
+									margin-bottom: 1rem
+									font-weight: bold
+								.detail_yomi
+								.detail_definition
+								.detail_usage
+								.detail_example_ja
+									margin-top: 1rem
+								.detail_example_yomi
+								.detail_example_en
+
+	.quiz_filter_container
+		width: 20%
+		.open_button
+			text-align: center
+			padding: 0.1rem 0
+			width: 100%
+			background: linear-gradient(rgb(228, 228, 228), rgb(201, 201, 201))
+			display: none
+		.quiz_search
+			margin-bottom: 5rem
+			.search_input
+				background-color: white
+				width: 100%
+				border: 1px solid $border-thin-color
+			.search_button
+				background-color: $strong_red
+				color: white
+				width: 100%
+				text-align: center
+				margin-top: 0.5rem
+				border-radius: 5px
+		.quiz_filter
+			.quiz_filter_choices
+				select
+					width: 100%
+					background-color: white
+					border: 1px solid $border-thin-color
+					margin-bottom: 1rem
+					.label
+			.button
+				background-color: $strong_red
+				color: white
+				width: 100%
+				text-align: center
+				margin-top: 0.5rem
+				border-radius: 5px
+	.quiz_pagination_container
+		width: 70%
+
+@media screen and (max-width:800px)
+	.quizzes_wrapper
+		.quizzes_container
+			width: 100% !important
+			order: 2
+		.quiz_filter_container
+			width: 100% !important
+			order: 1
+			margin-bottom: 4rem
+			.open_button
+				display: block
+				margin-bottom: 3rem
+			.filter_collapse
+				display: none
+		.quiz_pagination_container
+			width: 100% !important
+			order: 3
+		.answer_button
+			a
+				font-size: 1rem
+				padding: 0.3rem!important

@@ -1,0 +1,11 @@
+{% extends "quiz/base.html" %}
+
+{% block title %}{% if query %}{{ query }}{% endif %} | {{ block.super }}{% endblock %}
+{% block description %}Quizzes about {% if query %}{{ query }}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="body">
+
+    {% include 'quiz/quizzes/quiz_list.html' %}
+</div>
+{% endblock %}

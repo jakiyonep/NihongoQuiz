@@ -1,26 +1,44 @@
+$strong_red: rgb(255, 102, 102)
+*
+  color: rgb(120, 120, 120)
+.toppage_wrapper
+	width: 70%
+	margin: 0 auto
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+	.toppage_container
+		width: 49%
+		margin-bottom: 3em
+		border-radius: 1em
+		border: 1px solid rgb(218, 218, 218)
+		padding: 1.5em
+		transition: 0.3s
+	.toppage_container:hover
+		border-radius: 0
+		border: 1px solid $strong_red
+		transition: 0.3s
+	.toppage_content_head
+		color: $strong_red
+		font-size: 2rem
+		margin-bottom: 1em
+		font-family: "Sawarabi Mincho" !important
+	.toppage_content_desc
+			font-size: 1.1rem
+	.toppage_beforeyoustart
+		width: 100%
 
-.section
-  margin-bottom: 2em
-  .as
-    transition: 0.4s
-  a:hover
-    color: inherit
-    text-decoration: none
-  a:hover .card-body
-    background-color: rgba(237, 237, 237, 0.83)
-    transition: 0.4s
-
-  .top-menu
-    text-decoration: none
-    color: rgb(255, 110, 110)
-    font-size: 1.7em
-    font-family: "Sawarabi Mincho"
-    margin-bottom: 3em
 
 
-.desc
-  margin-top: 1em
-.row
-  padding-left: 0
-.empty
-  height: 400px
+@media screen and (max-width:800px)
+	.toppage_wrapper
+		width: 90%
+
+		.toppage_container
+			width: 100%
+			margin-bottom: 3em
+			border: 1px solid rgb(218, 218, 218)
+		.toppage_content_head
+			font-size: 1.2rem
+		.toppage_content_desc
+			font-size: 1rem

@@ -5,9 +5,5 @@ from .models import Correction
 class CorrectionForm(forms.ModelForm):
     class Meta():
         model = Correction
-        fields = '__all__'
+        fields = ('name', 'type', 'text', 'desc')
 
-    categories=(
-        ('1', 'hahah'),
-        ('2','hehe'),
-   )

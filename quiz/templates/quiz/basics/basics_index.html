@@ -17,92 +17,78 @@
     gtag('config', 'UA-167867160-1');
   </script>
 </head>
-<div class="container mb-5">
-  <h1 class="top-menu mt-5">基 - Basics</h1>
+{% include 'quiz/navbar.html' %}
+<div class="wrapper basics_wrapper">
+  <h1 class="section_head">基 - Basics</h1>
 
-  <div class="row d-flex justify-content-around">
-    <div class="col-md-5 basic-category">
-      <div class=basics-letter">
-        <p class="category-title">ひらがな/カタカナ/漢字</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "letter"  %}
-            {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
-            {% endif %}
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
-    <div class="col-md-5 basic-category">
-      <div class=basics-number">
-        <p class="category-title">Numbers</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "numbers"  %}
-            {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
-            {% endif %}
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
-    <div class="col-md-5 basic-category">
-      <div class="basics-grammar">
-        <p class="category-title">Grammar</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "grammar"  %}
-            {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
-            {% endif%}
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
-    <div class="col-md-5 basic-category">
-      <div class="basics-verb">
-        <p class="category-title">Verb</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "verb"  %}
-            {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
-            {% endif%}
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
-    <div class="col-md-5 basic-category">
-      <div class="basics-adjective">
-        <p class="category-title">Adjective</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "adjective"  %}
-            {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
-            {% endif%}
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
-    <div class="col-md-5 basic-category">
-      <div class="basics-noun">
-        <p class="category-title">Noun</p>
-          {% for basic in object_list %}
-            {% if basic.category.slug == "noun"  %}
-            {% if basic.public %}
-              <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
-            {% endif%}
-            {% endif%}
-          {% endfor %}
-      </div>
-    </div>
-
+  <div class="basic_container"><!--Letters-->
+    <h2 class="basic_head">Letters</h2>
+		<div class="basic_list">
+	    {% for basic in object_list %}
+	      {% if basic.category.slug == "letter" and basic.public %}
+	        <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
+	      {% endif%}
+    {% endfor %}
+		</div>
   </div>
-</div>
-<div class="empty">
+
+	<div class="basic_container"><!--Numbers-->
+    <h2 class="basic_head">Numbers</h2>
+		<div class="basic_list">
+	    {% for basic in object_list %}
+	      {% if basic.category.slug == "number" and basic.public %}
+	        <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
+	      {% endif%}
+    {% endfor %}
+		</div>
+  </div>
+
+	<div class="basic_container"><!--Grammar-->
+		<h2 class="basic_head">Grammar</h2>
+		<div class="basic_list">
+			{% for basic in object_list %}
+				{% if basic.category.slug == "grammar" and basic.public %}
+					<li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
+				{% endif%}
+		{% endfor %}
+		</div>
+	</div>
+
+	<div class="basic_container"><!--Verb-->
+		<h2 class="basic_head">Verb</h2>
+		<div class="basic_list">
+			{% for basic in object_list %}
+				{% if basic.category.slug == "verb" and basic.public %}
+					<li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
+				{% endif%}
+		{% endfor %}
+		</div>
+	</div>
+
+	<div class="basic_container"><!--Adjective-->
+		<h2 class="basic_head">Adjective</h2>
+		<div class="basic_list">
+			{% for basic in object_list %}
+				{% if basic.category.slug == "adjective" and basic.public %}
+					<li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
+				{% endif%}
+		{% endfor %}
+		</div>
+	</div>
+
+	<div class="basic_container"><!--Noun-->
+		<h2 class="basic_head">Noun</h2>
+		<div class="basic_list">
+			{% for basic in object_list %}
+				{% if basic.category.slug == "noun" and basic.public %}
+					<li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
+				{% endif%}
+		{% endfor %}
+		</div>
+	</div>
 
 </div>
+
+
 
 {% endblock %}

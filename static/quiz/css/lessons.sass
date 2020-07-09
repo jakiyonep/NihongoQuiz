@@ -1,86 +1,76 @@
 $color-1: rgb(168, 233, 255)
 $color-2: rgb(74, 164, 238)
-$color-3: rgb(41, 190, 203)
+$color-3: rgb(41, 203, 202)
 $color-4: rgb(107, 189, 72)
 $color-5: rgb(233, 186, 36)
 $color-6: rgb(237, 125, 60)
-$color: rgb(135, 189, 238)
+
+$base_bacground_color: rgb(247, 247, 247)
+$base_letter_color: rgb(111, 111, 111)
+$strong_red: rgb(255, 102, 102)
+
+@keyframes height_collapse
+    from
+        height: 0
+
+    to
+      	height: 100%
 
 /*lesson_index*/
-.row
-  .lesson-chapter
-    border: 1px solid rgb(226, 226, 226)
-    border-radius: 20px
-    margin: 0 0.5em 3em 0.5em
-    padding: 1em
-    a
-      text-decoration: none
-      color: inherit
-      border-bottom: 1px solid rgba(185, 185, 185, 0.2)
-      transition: 0.3s
-      &:hover
-        border-bottom: none
-        letter-spacing: 0.1em
-        transition: 0.2s
-  .chapter-1
-    box-shadow: 2px 2px 2px $color-1
-    .chapter
-      border-bottom: 2px solid $color-1
-  .chapter-2
-    box-shadow: 2px 2px 2px $color-2
-    .chapter
-      border-bottom: 2px solid $color-2
-  .chapter-3
-    box-shadow: 2px 2px 2px $color-3
-    .chapter
-      border-bottom: 2px solid $color-3
-.list-row
+.lessons_wrapper
+	.lesson_info_container
+		width: 100%
+		display: flex
+		text-align: center
+		justify-content: space-between
+		margin-bottom: 10rem
+		flex-wrap: wrap
+		.lesson_info
+			width: 30%
+			font-size: 1.3rem
+			border: 1px solid rgb(212, 212, 212)
+			border-radius: 10px
+			padding: 1rem
+			transition: 0.5s
+		.lesson_info:hover
+			border: 1px solid $strong_red
+			transition: 0.5s
+	.lessons_container
+	 width: 100%
+	 display: flex
+	 flex-wrap: wrap
+	 justify-content: space-between
+	.lesson_container
+		width: 46%
+		border: 1px solid rgb(212, 212, 212)
+		border-radius: 10px
+		padding: 1rem
+		margin-bottom: 5rem
+		.chapter_head
+			border-bottom: 1px solid rgb(140, 140, 140)
+			font-size: 1.3rem
+			margin-bottom: 1rem
+		.lesson_item
+			padding-left: 1.5rem
+			li
+				list-style: decimal
+				a
+					border-bottom: 1px solid rgba(238, 238, 238, 0.86)
+					transition: 0.5s
+				a:hover
+					letter-spacing: 0.1rem
+					transition: 0.5s
+					border-bottom: 1px solid $strong_red
 
-/*lessons_detail*/
-img
-  margin: 0 auto
-  display: block
-
-.col-md-6
-  margin-bottom: 3em
-
-.lesson-chapter
-  .chapter
-    font-size: 1.5em
-  .lesson
-    display: flex
-    flex-direction: row
-    padding-left: 1em
-    .lesson-num
-      width: 10%
-    li
-      width: 90%
-      margin-bottom: 1em
-      list-style-type: none
-      display: inline-block
-      a
-        text-decoration: none
-        color: inherit
-        border-bottom: 1px solid rgb(185, 185, 185)
-.chapter
-  border-bottom: 1.5px solid rgb(168, 171, 163)
-.list-row
-  margin-bottom: 5em
-  .chapter_info
-    border: 1px solid rgb(226, 226, 226)
-    border-radius: 20px
-    margin: 0 0.5em 2em 0.5em
-    padding: 0.5em
-    text-align: center
-    background-color: rgba(238, 238, 238, 0.2)
-  .list-name
-    color: inherit
-    font-size: 1.5em
-  div
-    margin-bottom: 2em
+	.chapter_1
+		box-shadow: 2px 2px 2px $color-1
+	.chapter_2
+		box-shadow: 2px 2px 2px $color-2
+	.chapter_3
+		box-shadow: 2px 2px 2px $color-3
 
 
-  /*lesson_post*/
+/*lesson detail*/
 
 $base-margin: 2em
 $base-border: 1px solid rgb(191, 191, 191)
@@ -89,209 +79,225 @@ $en-color: rgb(82, 200, 254)
 $answer-color: rgb(255, 70, 70)
 $casual-color: rgb(8, 214, 0)
 
-.lesson_post
-  .section
-    margin-bottom: $base-margin*5
-  .section-head
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    justify-content: space-between
-    align-items: baseline
-    padding: $base-margin $base-margin/2 $base-margin 0
-    margin-bottom: $base-margin
-    .section-name
-      font-size: 1.3em
-      margin-bottom: 0
-      font-family: "Sawarabi Mincho"
-      background: linear-gradient(transparent 90%, rgb(181, 181, 181) 90%)
-      background-color: rgb(236, 236, 236)
-      border-radius: 10px
-      padding: 0 $base-margin/2
-    .buttons
-      .btn-yomi
-        background-color: $yomi-color
-        color: rgb(237, 237, 237)
-      .btn-en
-        background-color: $en-color
-        color: rgb(237, 237, 237)
-      .btn-answer
-        background-color: $answer-color
-        color: rgb(237, 237, 237)
-      .btn-casual
-        background-color: $casual-color
-        color: rgb(237, 237, 237)
-  .yomi
-    color: $yomi-color
-  .en
-    color: $en-color
-  .answer
-    color: $answer-color
-  .casual
-    color: $casual-color
-  .post-info
-    .section-number
-      font-size: 1.5em
-    .section-title
-      font-size: 1.8em
-
-  span
-    color: red
-  .f
-    color: rgb(86, 207, 32)
-
-  h2
-    position: relative
-    padding: 0.5em
-    background: $color
-    color: white
-    margin: 5em auto
-    &::before
-      position: absolute
-      content: ''
-      top: 100%
-      left: 0
-      border: none
-      border-bottom: solid 15px transparent
-      border-right: solid 20px rgb(149, 158, 155)
-  h3
-    color: inherit
-    border-bottom: solid 3px $color
-    padding: 0.5em
-    margin: 4em 0
-  h4
-    border: 2px solid $color
-    display: inline-block
-    border-radius: 10px
-    padding: 0.5em 1em
-    margin-bottom: 4em
+.body_yomi
+	color: $yomi-color!important
+.body_en
+	color: $en-color!important
+.body_casual
+	color: $casual-color!important
+.btn_casual
+	background-color: $casual-color !important
+.btn_yomi
+	background-color: $yomi-color !important
+.btn_en
+	background-color: $en-color !important
 
 
+.lesson_detail_wrapper
+	.post_info
+		margin-bottom: 5rem
+		.section-number
+			font-size: 1.1rem
+			margin-bottom: 1rem
+		.section-title
+			font-size: 1.5rem
+	.container
+		padding-bottom: 7rem
+		.section_head
+			display: flex
+			justify-content: space-between
+			p
+				font-size: 1.1rem
+				padding: 0.5rem 1rem
+				background-color: rgb(113, 113, 113)
+				color: rgb(237, 237, 237)
+				display: inline-block
+				border-radius: 0.5rem
+			.lesson_buttons
+				display: inline-block
+				.btn
+					font-size: 1rem
+					padding: 0.5rem 1rem
+					background-color: rgb(113, 113, 113)
+					color: rgb(237, 237, 237)
+					display: inline-block
+					border-radius: 0.5rem
+		.sentences_container
+			.sentence_row
+				display: flex
+				justify-content: space-between
+				flex-wrap: wrap
+				margin-bottom: 2rem
+				.lesson_left
+					width: 15%
+				.sentences_person::after
+					content: ':'
+				.lesson_right
+					width: 85%
+					.sentence
+						display: none
+					.sentence_japa
+						display: block
+						width: 100%
+	/*question*/
+	.question_container
+		.lesson_question_buttons
+			.btn_answer
+				background-color: $answer-color!important
+				color: white!important
+			.btn_yomi
+				background-color: $yomi-color
+				color: white
+			.btn_en
+				background-color: $en-color
+				color: white
+		.question_question
+			&>div
+				padding-left: 1.5rem
+			.question_number
+				padding-left: 0
+				font-size: 1.1rem
+				border-bottom: 1px solid rgb(159, 159, 159)
+				display: inline-block
+				margin: 1.5rem 0
+				&:first-child
+					margin-top: 0
+			.question_answer
+				display: none
+				p
+					color: $answer-color
+					border-bottom: 1px solid rgb(159, 159, 159)
+					font-size: 1.1rem
+					display: inline-block
+					margin: 1rem auto
+			.question_yomi, .question_en
+				display: none
+			.question_visible
+				display: block
+				width: 100%
+				transition: 0.5s
 
 
-/*body*/
-.lesson-body
-  margin: $base-margin 0
-  border-bottom: $base-border
-  .section-head
-    margin-bottom: $base-margin
-    border-bottom: $base-border
-  .sentence-container
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    margin-bottom: $base-margin
-    .body-left
-      width: 15%
-      .body-person
-        font-size: 0.9em
-        font-weight: 600
-    .body-middle
-      width: 5%
-    .body-right
-      width: 80%
-      .body-sentence
-        margin-bottom: $base-margin/2
-        span
-          color: rgb(255, 74, 74)
-        .under
-          border-bottom: 1px solid black
-          color: rgb(255, 74, 74)
+	/*vocab*/
+	.vocab_container
+		.vocab_head
+		.vocab_vocab
+			.vocab_word
+				font-size: 1.2rem
+				margin-top: 2rem
+				margin-bottom: 1rem
+				color: $strong_red
+				display: inline-block
+				&:first-child
+					margin-top: 0
+			.vocab_word_casual
+				color: $casual-color
+			.vocab_dictionary
+				padding-left: 1rem
+				display: flex
+				margin-bottom: 1rem
+				p
+					font-size: 1.1rem
+				.vocab_left
+					display: inline-block
+				.vocab_right
+					display: inline-block
+					padding-left: 2rem
 
-
-/*question*/
-.lesson-question
-  margin-bottom: $base-margin
-  .section-head
-    .section-name
-    .buttons
-  .questions>*
-    padding-left: 1em
-    /*margin-bottom: $base-margin/2*/
-  .question-number
-    margin-bottom: $base-margin/2
-    padding-left: 0
-    font-weight: 600
-  .question-question
-    margin-bottom: $base-margin/2
-  .question-question-yomi
-  .question-question-en
-  .question-kotae
-    padding-left: $base-margin
-  .question-answer
-    padding-left: $base-margin
-  .question-answer-yomi
-    padding-left: $base-margin
-  .question-answer-en
-    padding-left: $base-margin
-
-
-/*vocabulary*/
-.lesson-vocab
-  margin-bottom: 1em !important
-  .word
-    margin-bottom: $base-margin/2
-    font-size: 1.1em
-    color: rgb(242, 129, 107)
-  .casual
-    color: $casual-color
-.dictionary
-  display: flex
-  flex-direction: row
-  justify-content: flex-start
-  padding-left: $base-margin/2
-  margin-bottom: $base-margin/2
-  .word-left
-    width: 10vw
-    font-weight: bold
-    margin-bottom: 0
-  .word-right
-    width: 90vw
-    padding-left: 0
-
-
-/*grammar*/
-.lesson-grammar
-  margin-bottom: 1em !important
-  .grammar-name
-    color: rgb(242, 129, 107)
-    font-size: 1.5em
-    margin-bottom: $base-margin
-  .grammar-desc
-    margin-bottom: $base-margin*2
-  .casual
-    color: $casual-color
-  img
-    max-width: 100%
-    margin: 5em 0
-    display: block
-    box-shadow: 2px 2px 2px 2px rgb(227, 227, 227)
-  li
-    list-style-position: inside
-/*Kanji*/
-.lesson-kanji
-  margin-bottom: 1em !important
-  .dictionary-kanji
-    margin-bottom: $base-margin/2
-    color: rgb(242, 129, 107)
-    font-size: 1.2em
-
+	/*grammar*/
+	.grammar_container
+		.grammar_head
+			margin-bottom: 0
+		.content
+			border-bottom: none
+	/*kanji*/
+	.kanji_container
+		.kanji_name
+			font-size: 1.2rem
+			margin-top: 2rem
+			margin-bottom: 1rem
+			color: $strong_red
+			display: inline-block
+			&:first-child
+				margin-top: 0
+		.kanji_dictionary
+			padding-left: 1rem
+			display: flex
+			margin-bottom: 1rem
+			p
+				font-size: 1.1rem
+			.kanji_left
+				display: inline-block
+			.kanji_right
+				display: inline-block
+				padding-left: 2rem
+.btn_active
+	opacity: 0.2
 
 
 /*list*/
+.lesson_info_list_wrapper
+	.section-head
+	.list_container
+		display: flex
+		flex-wrap: wrap
+		.list_chapter
+			width: 10%
+		.list_grammar
+			width: 90%
+		.list_head
+			font-size: 1.2rem
+			font-weight: bold
+			margin-bottom: 1rem
+			padding-bottom: 1rem
+			border-bottom: 1px solid rgb(133, 133, 133)
+		.list_row
+			display: flex
+			flex-wrap: wrap
+			margin-bottom: 1rem
+			width: 100%!important
+			.list_grammar
+				a
+					color: $strong_red
+			.casual
+				a
+					color: $casual-color
+.kanji_list_wrapper
+	.list_chapter
+		width: 10%
+	.list_kanji
+		width: 20%
+	.list_yomi
+		width: 30%
+	.list_definition
+		width: 40%
+	.list_row
+		.list_chapter
+		.list_kanji
+			a
+				color: $strong_red
+		.list_yomi
+		.list_definition
+.vocabulary_list_wrapper
+	.list_chapter
+		width: 5%
+	.list_word
+		width: 30%
+		padding-right: 1rem
+	.list_definition
+		width: 60%
+	.list_row
+		.list_chapter
+		.list_word
+			a
+				color: $strong_red
+		.list_definition
 
-.info_list
-  margin-bottom: 10em
-  .table-top
-    font-weight: bold
-    font-size: 1.10em
-    border-bottom: 1px solid rgb(199, 199, 199)
-  .table-content
-    .table-body
-      padding: 1em
-    .table-word
-      text-decoration: none
-      color: rgb(242, 129, 107)
-      border-bottom: 1px solid rgb(199, 199, 199)
-  .casual
-    color: $casual-color !important
+@media screen and (max-width:800px)
+	.lessons_wrapper
+		width: 90vw
+		.lesson_info
+			width: 100%!important
+			margin-bottom: 2rem
+		.lesson_container
+			width: 100%

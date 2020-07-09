@@ -7,8 +7,7 @@
 {% block content %}
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-    <link rel="stylesheet" href="{% static 'quiz/css/toppage.min.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
     <script>
@@ -20,61 +19,49 @@
     </script>
   </head>
   <body>
-    <div class="body correction_index">
-      <div class="container">
-        <h1 class="top-menu mb-5 card-title">修 - Correction</h1>
-        <div class="section-top row">
-          <div class="col-12 col-md-8">
-            <p class="desc card-text">Here you can read other's Japanese composition with my correction. I'm willing to correct your Japanese writing too, so feel free to send me yours!</p>
-          </div>
-          <div class="col-12 col-md-4 d-flex justify-content-center d-flex align-items-center">
-            <a class="button" href="{% url 'quiz:correction_add' %}">Submit</a>
-          </div>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper correction_wrapper">
+      <h1 class="section_head">修 - Correction</h1>
+      <section class="correction_top_container">
+        <div class="correction_desc">
+          <p>Here you can read other's Japanese composition with my correction. I'm willing to correct your Japanese writing too, so feel free to send me yours!</p>
+        </div>
+          <a class="button correction_submit" href="{% url 'quiz:correction_add' %}">Submit</a>
+      </section>
+
+      <main class="correction_contents_container">
+        <div class="correction_title list_head">
+          <span>Title</span>
+        </div>
+        <div class="correction_type list_head">
+          <span>Type</span>
         </div>
 
-        <div class="correction_content">
-          <div class="correction_list container">
-            <div class="row list_head">
-              <div class="col-8">
-                <span>Title</span>
+        {% for correction in object_list %}
+          {% if correction.public %}
+            <div class="correction_entry">
+              <div class="correction_title">
+                <a href="{% url 'quiz:correction_post' correction.title_slug %}">{{correction.title}}</a>
               </div>
-              <div class="col-4">
-                <span>Type</span>
+              <div class="correction_type">
+                {% if correction.type == 1 %}
+                <span>SUPER Casual</span>
+                {% endif %}
+                {% if correction.type == 2 %}
+                <span>Casual</span>
+                {% endif %}
+                {% if correction.type == 3 %}
+                <span>Formal</span>
+                {% endif %}
+                {% if correction.type == 4 %}
+                <span>SUPER Formal</span>
+                {% endif %}
               </div>
             </div>
-            {% for correction in object_list %}
-              {% if correction.public %}
-                <div class="correction_entry row">
-                  <div class="correction_title col-8">
-                    <a href="{% url 'quiz:correction_post' correction.title_slug %}">{{correction.title}}</a>
-                  </div>
-                  <div class="correction_type col-4">
-                    {% if correction.type == 1 %}
-                    <span>SUPER Casual</span>
-                    {% endif %}
-                    {% if correction.type == 2 %}
-                    <span>Casual</span>
-                    {% endif %}
-                    {% if correction.type == 3 %}
-                    <span>Formal</span>
-                    {% endif %}
-                    {% if correction.type == 4 %}
-                    <span>SUPER Formal</span>
-                    {% endif %}
-                  </div>
-                </div>
-
-              {% endif %}
-            {% endfor %}
-          </div>
-
-        </div>
-
-      </div>
+          {% endif %}
+        {% endfor %}
+      </main>
     </div>
-
-
-
   </body>
 </html>
 

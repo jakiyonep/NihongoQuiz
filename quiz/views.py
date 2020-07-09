@@ -1,4 +1,5 @@
 from django.db.models import Count, Q
+from django.contrib import messages
 from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
@@ -30,13 +31,17 @@ def QuizListView(request):
 
     context['filtered_quiz'] = filtered_quiz
 
-    paginator = Paginator(filtered_quiz.qs, 20)
+    paginator = Paginator(filtered_quiz.qs, 15)
     page_number = request.GET.get('page')
     quiz_page_obj = paginator.get_page(page_number)
 
     context['quiz_page_obj'] = quiz_page_obj
 
-    return render(request, 'quiz/index.html', context)
+
+
+    return render(request, 'quiz/quizzes/index.html', context)
+
+
 
 
 class LevelListView(ListView):
@@ -59,7 +64,7 @@ class TagListView(ListView):
 
 class LevelPostView(ListView):
     model = Quiz
-    template_name = 'quiz/level_post.html'
+    template_name = 'quiz/quizzes/level_post.html'
 
     def get_queryset(self):
         level_slug = self.kwargs['level_slug']
@@ -75,7 +80,7 @@ class LevelPostView(ListView):
 
 class CategoryPostView(ListView):
     model = Quiz
-    template_name = 'quiz/category_post.html'
+    template_name = 'quiz/quizzes/category_post.html'
 
     def get_queryset(self):
         category_slug = self.kwargs['category_slug']
@@ -91,7 +96,7 @@ class CategoryPostView(ListView):
 
 class TagPostView(ListView):
     model = Quiz
-    template_name = 'quiz/tag_post.html'
+    template_name = 'quiz/quizzes/tag_post.html'
 
     def get_queryset(self):
         tag_slug = self.kwargs['tag_slug']
@@ -107,7 +112,7 @@ class TagPostView(ListView):
 
 class SearchPostView(ListView):
     model = Quiz
-    template_name = 'quiz/search_post.html'
+    template_name = 'quiz/quizzes/search_post.html'
 
     def get_queryset(self):
         query = self.request.GET.get('q', None)
@@ -165,6 +170,26 @@ class ArticlesIndex(ListView):
 
     paginate_by = 15
 
+    def get_queryset(self):
+        query = self.request.GET.get('q', None)
+        lookups = (
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(category2__slug__icontains=query) |
+                Q(tag__slug__icontains=query)
+        )
+        if query is not None:
+            qs = super().get_queryset().filter(lookups).distinct()
+            return qs
+        qs = super().get_queryset()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        context['query'] = query
+        return context
+
 
 class ArticleDetailView(DetailView):
     model = Articles
@@ -174,9 +199,15 @@ class ArticleDetailView(DetailView):
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
+
         if not obj.public and not self.request.user.is_authenticated:
             raise Http404
         return obj
+
+
+
+
+
 
 class ArticlesTagList(ListView):
     queryset = ArticlesTag.objects.annotate(
@@ -215,6 +246,33 @@ class ArticleCategoryView(ListView):
         context = super().get_context_data(**kwargs)
         context['article_category2_slug'] = self.category2
         return context
+
+""""
+class SearchArticleVIew(ListView):
+    model = Articles
+    template_name = 'quiz/articles/article_post.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q', None)
+        lookups = (
+                Q(title__icontains=query) |
+                Q(category2__slug__icontains=query) |
+                Q(content__icontains=query)
+        )
+        if query is not None:
+            qs = super().get_queryset().filter(lookups).distinct()
+            return qs
+        qs = super().get_queryset()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        context['query'] = query
+        return context
+"""
+
+
 
 
 
@@ -264,11 +322,11 @@ def CorrectionAdd(request):
         form = forms.CorrectionForm(request.POST)
         if form.is_valid():
             form.save()
-
+            print("検証に成功しました。データを保存します")
             return render(request, 'quiz/corrections/after_submit.html')
-
-
-
+        else:
+            print("検証に失敗したので、データを保存しません。検証に失敗した理由を次に表示します。")
+            print(form.errors)
 
     return render(request, 'quiz/corrections/correction_add.html', {'form': form})
 

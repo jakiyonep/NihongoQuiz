@@ -1,44 +1,68 @@
 {% load static %}
 <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
-<link rel="icon" type="image/png" href="{% static 'quiz/img/favicon.ico' %}">
-
-<nav class="smart-scroll navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between" id="navbar">
-  <div class="logo">
-    <a class="navbar-brand" href="/">日本語Tatsujin</a>
-  </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="{% url 'quiz:basics' %}">
-            Basics
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url 'quiz:articles' %}">
-            Articles
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url 'quiz:lessons' %}">
-            Courses
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url 'quiz:quiz' %}">
-            Quizzes
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url 'quiz:correction' %}">
-            Correction
-          </a>
-        </li>
-
-
-      </ul>
-  </div>
+<link rel="stylesheet" href="{% static 'quiz/css/common.min.css' %}">
+<link rel="stylesheet" href="{% static 'quiz/css/navbar.min.css' %}">
+<body>
+<div class="navbar_wrapper" id="navbar">
+<nav class="navbar">
+	<div class="navbar_logo">
+	  <a href="/"><img class="logo_img" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/logo/380ac91c-2c70-49c4-ae0e-958f43ecf2df_200x200.png" alt="Nihongo Tatsujin"> </a>
+	</div>
+  <ul class="navbar_list">
+    <li class="navbar_item">
+      <a href="{% url 'quiz:basics' %}">
+        Basics
+      </a>
+    </li>
+    <li class="navbar_item">
+      <a href="{% url 'quiz:articles' %}">
+        Articles
+      </a>
+    </li>
+    <li class="navbar_item">
+      <a href="{% url 'quiz:lessons' %}">
+        Courses
+      </a>
+    </li>
+    <li class="navbar_item">
+      <a href="{% url 'quiz:quiz' %}">
+        Quizzes
+      </a>
+    </li>
+    <li class="navbar_item">
+      <a href="{% url 'quiz:correction' %}">
+        Correction
+      </a>
+    </li>
+  </ul>
+  <a class="navbar_button" href="#" onclick="drop()" ><i class="fas fa-bars"></i></a>
 </nav>
-<script type="text/javascript" src="{% static 'quiz/js/all.js' %}"></script>
+</div>
+<ul class="navbar_list_collapse" id="navbar_collapse">
+	<li class="navbar_item_collapse">
+		<a href="{% url 'quiz:basics' %}">
+			Basics
+		</a>
+	</li>
+	<li class="navbar_item_collapse">
+		<a href="{% url 'quiz:articles' %}">
+			Articles
+		</a>
+	</li>
+	<li class="navbar_item_collapse">
+		<a href="{% url 'quiz:lessons' %}">
+			Courses
+		</a>
+	</li>
+	<li class="navbar_item_collapse">
+		<a href="{% url 'quiz:quiz' %}">
+			Quizzes
+		</a>
+	</li>
+	<li class="navbar_item_collapse">
+		<a href="{% url 'quiz:correction' %}">
+			Correction
+		</a>
+	</li>
+</ul>
+</body>

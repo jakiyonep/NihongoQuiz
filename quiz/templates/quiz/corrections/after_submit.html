@@ -7,8 +7,7 @@
 {% block content %}
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-    <link rel="stylesheet" href="{% static 'quiz/css/toppage.min.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
     <script>
@@ -20,15 +19,13 @@
     </script>
   </head>
   <body>
-    <div class="body">
-      <div class="container after_submit">
-        <p>
-          Thank you for submitting your text! <br>
-          I'll revise your writing ASAP!
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper after_submit_wrapper">
+        <p class="thanks">
+          ありがとう for submitting your writing! <br>
+          I'll revise it ASAP!
         </p>
-
-        <p>Go back to<a href="{% url 'quiz:correction' %}">修 - Correction</a></p>
-      
+        <p class="goback">Go back to<a href="{% url 'quiz:correction' %}">修 - Correction</a></p>
       </div>
 
 

@@ -18,74 +18,69 @@
     </script>
   </head>
   <body>
-    <div class="container">
-      <h1 class="top-menu mt-5">習 - Courses </h1>
-      <div class="row list-row d-flex justify-content-around">
-        <a class="list-name chapter col-md-3 chapter_info" href="{% url 'quiz:lesson_grammar' %}">Grammar List</a>
-        <a class="list-name chapter col-md-3 chapter_info" href="{% url 'quiz:lesson_vocabulary' %}">Vocabulary List</a>
-        <a class="list-name chapter col-md-3 chapter_info" href="{% url 'quiz:lesson_kanji' %}">Kanji List</a>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper lessons_wrapper"><!--wrapper-->
+      <h1 class="section_head">習 - Courses </h1><!--head-->
+      <div class="container lesson_info_container"><!--lesson_info-->
+        <a class="lesson_info" href="{% url 'quiz:lesson_grammar' %}">Grammar List</a>
+        <a class="lesson_info" href="{% url 'quiz:lesson_vocabulary' %}">Vocabulary List</a>
+        <a class="lesson_info" href="{% url 'quiz:lesson_kanji' %}">Kanji List</a>
       </div>
-      <div class="row d-flex justify-content-around">
-        <div class="col-md-5 lesson-chapter chapter-1"><!--cp 1-->
-          <p class="chapter">Chapter 1</p>
+
+      <div class="container lessons_container"><!--lessons_container-->
+        <div class="lesson_container chapter_1"><!--cp 1-->
+          <p class="chapter_head">Chapter 1</p>
+					<ol class="lesson_item">
           {% for lesson in object_list %}
             {% if lesson.chapter == 1 %}
-            {% if lesson.public  %}
-              <div class="lesson">
-                <p class="lesson-num">{{ lesson.number }}.</p>
+            	{% if lesson.public  %}
                 <li>
                   <a href="{% url 'quiz:lesson_post' lesson.pk %}">
                     {{lesson.title}}
                   </a>
                 </li>
-              </div>
-            {% endif %}
-            {% endif %}
-          {% endfor %}
-        </div>
-
-        <div class="col-md-5 lesson-chapter chapter-2">
-          <p class="chapter">Chapter 2</p>
-          {% for lesson in object_list %}
-            {% if lesson.chapter == 2 %}
-              <div class="lesson">
-                <p class="lesson-num">{{ lesson.number }}.</p>
-                <li>
-                  <a href="{% url 'quiz:lesson_post' lesson.pk %}">
-                    {{lesson.title}}
-                  </a>
-                </li>
-              </div>
+            	{% endif %}
             {% endif %}
           {% endfor %}
+					</ol>
         </div>
 
-        <div class="col-md-5 lesson-chapter chapter-3">
-          <p class="chapter">Chapter 3</p>
-          {% for lesson in object_list %}
-            {% if lesson.chapter == 3 %}
-              <div class="lesson">
-                <p class="lesson-num">{{ lesson.number }}.</p>
-                <li>
-                  <a href="{% url 'quiz:lesson_post' lesson.pk %}">
-                    {{lesson.title}}
-                  </a>
-                </li>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
+				<div class="lesson_container chapter_2"><!--cp 2-->
+					<p class="chapter_head">Chapter 2</p>
+					<ol class="lesson_item">
+					{% for lesson in object_list %}
+						{% if lesson.chapter == 2 %}
+							{% if lesson.public  %}
+								<li>
+									<a href="{% url 'quiz:lesson_post' lesson.pk %}">
+										{{lesson.title}}
+									</a>
+								</li>
+								{% endif %}
+						{% endif %}
+					{% endfor %}
+					</ol>
+				</div>
 
-        <div class="col-md-5 r">
-
+				<div class="lesson_container chapter_3"><!--cp 3-->
+          <p class="chapter_head">Chapter 3</p>
+					<ol class="lesson_item">
+	          {% for lesson in object_list %}
+	            {% if lesson.chapter == 3 %}
+	            	{% if lesson.public  %}
+	                <li>
+	                  <a href="{% url 'quiz:lesson_post' lesson.pk %}">
+	                    {{lesson.title}}
+	                  </a>
+	                </li>
+	            	{% endif %}
+	            {% endif %}
+	          {% endfor %}
+					</ol>
         </div>
 
       </div>
     </div>
-
-
-
-
   </body>
 </html>
 

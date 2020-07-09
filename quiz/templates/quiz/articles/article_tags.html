@@ -1,28 +1,31 @@
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-<div class="sidebar">
-  <div class="article_category sidebar_card">
-    <div class="sidebar_head">
-      <p>Categories</p>
-    </div>
-    <ul>
-      {% for category in article_category|dictsortreversed:"num_posts" %}
-        <a href="{% url 'quiz:article_category_post' category.slug %}" class="sidebar_category category_{{category.slug}}"> {{ category }} <span>{{ category.num_posts }}</span></a>
-      {% endfor %}
-    </ul>
-  </div>
+	<form class="search_form" action="{% url "quiz:articles" %}" method="get" accept-charset="utf-8">
+    <input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Search...">
+    <button class="search_form_button" type="submit"><span class="icon"><i class="fas fa-search"></i></span></button>
+	</form>
 
-  <div class="article_tags sidebar_card">
-    <div class="sidebar_head">
-      <p>Tags</p>
-    </div>
-    <ul>
-      {% for tag in article_tags|dictsortreversed:"num_posts" %}
-        <a href="{% url 'quiz:article_tag_post' tag.slug %}"> {{ tag }} <span>{{ tag.num_posts }}</span></a>
-      {% endfor %}
-    </ul>
+
+<div class="sidebar_list article_category_list">
+  <div class="sidebar_head">
+    <p>Categories</p>
   </div>
+  <ul>
+    {% for category in article_category|dictsortreversed:"num_posts" %}
+      <a href="{% url 'quiz:article_category_post' category.slug %}" class="sidebar_category article_category_{{category.slug}}"> {{ category }} <span>{{ category.num_posts }}</span></a>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="sidebar_list article_tag_list">
+  <div class="sidebar_head">
+    <p>Tags</p>
+  </div>
+  <ul>
+    {% for tag in article_tags|dictsortreversed:"num_posts" %}
+      <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}"> {{ tag }} <span>{{ tag.num_posts }}</span></a>
+    {% endfor %}
+  </ul>
 </div>
 
 {% endblock %}

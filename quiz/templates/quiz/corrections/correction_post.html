@@ -9,73 +9,58 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-    <link rel="stylesheet" href="{% static 'quiz/css/style.min.css' %}">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-167867160-1');
-    </script>
+    <link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
   </head>
   <body>
-    <div class="body correction_post">
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper correction_post_wrapper">
+	    <div class="container correction_post_container">
+	      <div class="correction_post_info">
+	        {% if object.name %}
+	          <p class="writer">Written by <span class="written_by">{{object.name}}</span></p>
+	        {% endif %}
+	        {% if not object.name %}
+	          <p class="writer">Written by <span class="written_by">John Doe</span></p>
+	        {% endif %}
 
-    <div class="container">
-      <div class="correction_info">
-        {% if object.name %}
-          <p >Written by <span class="writer">{{object.name}}</span></p>
-        {% endif %}
-        {% if not object.name %}
-          <p >Written by <span class="writer">John Doe</span></p>
-        {% endif %}
+	        {% if correction.type %}
+	          <p class="type">Type: <span>{% if correction.type == 1 %}
+	          SUPER Casual
+	          {% endif %}
+	          {% if correction.type == 2 %}
+	          Casual
+	          {% endif %}
+	          {% if correction.type == 3 %}
+	          Formal
+	          {% endif %}
+	          {% if correction.type == 4 %}
+	          SUPER Formal
+	          {% endif %}
+	        {% endif %}
 
-        {% if correction.type %}
-          <p>Type: <span class="writer">{% if correction.type == 1 %}
-          SUPER Casual
-          {% endif %}
-          {% if correction.type == 2 %}
-          Casual
-          {% endif %}
-          {% if correction.type == 3 %}
-          Formal
-          {% endif %}
-          {% if correction.type == 4 %}
-          SUPER Formal
-          {% endif %}
-        {% endif %}
+	        {% if correction.desc %}
+	          <p class="correction_info_desc">{{object.desc}}</p>
+	        {% endif %}
+			    </span>
+			    </p>
+		    </div>
 
-        {% if correction.desc %}
-          <p class="correction_info_desc">{{object.desc}}</p>
-        {% endif %}
-    </span>
-    </p>
-    </div>
-
-            {% for desc in correction.correctionsentences_set.all %}
-            <div class="correction-wrapper">
-
-              <div class="row correction_row">
-                <div class="col-10 left">
-                  <p class="original " id="original-{{desc.pk}}">{{ desc.original | safe }}</p>
-
-                  <div class="correction_desc collapse " id="desc-{{desc.pk}}">
-                    <p class="corrected">{{ desc.markdown_corrected | safe }}</p>
-                    <p class="corrected_yomi">{{ desc.corrected_yomi | safe }}</p>
-                    <p class="desc">{{ desc.markdown | safe }}</p>
-                  </div>
-                </div>
-                <div class="col-1 right">
-                    <button class="btn btn-casual" type="button" onclick="color_change({{desc.pk}})" data-toggle="collapse" data-target="#desc-{{desc.pk}}" aria-expanded="false" aria-controls="desc-{{desc.pk}}" id="button-{{desc.pk}}">&laquo;</button>
-                  </div>
-              </div>
-            </div>
-            {% endfor %}
-
-      </div>
+		    {% for desc in correction.correctionsentences_set.all %}
+		      <div class="container correction_content_container">
+		        <div class="correction_left">
+		          <p class="correction_original" id="original-{{desc.pk}}">{{ desc.original | safe }}</p>
+		          <div class="correction_desc " id="desc-{{desc.pk}}">
+		            <div class="corrected">{{ desc.markdown_corrected | safe }}</div>
+		            <div class="corrected_yomi">{{ desc.corrected_yomi | safe }}</div>
+		            <div class="content correction_content">{{ desc.markdown | safe }}</div>
+		          </div>
+		        </div>
+		        <div class="correction_right">
+		          <button class="correction_btn" type="button" onclick="color_change({{desc.pk}})" id="{{desc.pk}}">&laquo;</button>
+		        </div>
+		      </div>
+		    {% endfor %}
+		</div>
   </div>
   <script type="text/javascript" src="{% static 'quiz/js/all.js' %}">
   </script>
