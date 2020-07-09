@@ -7,15 +7,6 @@
 {% block content %}
 <head>
   <link rel="stylesheet" href="{% static 'quiz/css/basics.min.css' %}">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167867160-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-167867160-1');
-  </script>
 </head>
 {% include 'quiz/navbar.html' %}
 <div class="wrapper basics_wrapper">
@@ -36,7 +27,7 @@
     <h2 class="basic_head">Numbers</h2>
 		<div class="basic_list">
 	    {% for basic in object_list %}
-	      {% if basic.category.slug == "number" and basic.public %}
+	      {% if basic.category.slug == "numbers" and basic.public %}
 	        <li><a href="{% url 'quiz:basic_post' basic.title_slug %}">{{ basic.title }}</a></li>
 	      {% endif%}
     {% endfor %}
