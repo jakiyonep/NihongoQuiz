@@ -5,14 +5,12 @@ function confirmation(){
 
 function color_change(pk){
 	document.getElementById('original-' + pk).classList.toggle('correction_visible')
-
-	document.getElementById('button-' + pk).classList.toggle('correction_button')
 }
 
 $('.correction_btn').on('click', function(){
     var id =  $(this).attr("id");
-		
     $('#desc-' + id).slideToggle('normal');
+		$('#' + id).toggleClass('correction_button')
 });
 
 
