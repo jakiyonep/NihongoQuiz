@@ -21,32 +21,50 @@ $link_color: rgb(63, 130, 138)
 		flex-wrap: wrap
 		justify-content: space-between
 		.article_container
-			width: 45%
+			width: 100%
 			margin-bottom: 5rem
-			.article_title
-				margin-bottom: 1.5rem
-				a
-					color: $link_color
-					font-size: 1.4rem
-					text-transform: uppercase
-			.article_top_info
-				margin-bottom: 1rem
-				.article_category
-					color: white
-					padding: 0.2rem 1rem
-					border-radius: 10px
-				.article_date
+			background-color: $base_bacground_color
+			border-radius: 5px
+			.article_link
+				display: flex
+				flex-wrap: wrap
 			.article_thumbnail
-				margin-bottom: 1rem
-				a
+				width: 45%
 				img
 					width: 100%
 					object-fit: contain
-			.article_info
+			.article_top
+				width: 55%
+				span
+					font-size: 1.1rem
+					display: block
+					background: rgb(106, 106, 106)
+					padding: 0.5rem
+					border-radius: 0 10px 0 10px
+					color: #fff
 				.article_summary
-					margin-bottom: 1rem
+					padding: 0.5rem
 					p
+						font-size: 1rem
+						line-height: 1.7rem
+			.article_bottom
+				width: 100%
+				display: flex
+				background-color: $base_bacground_color
+				align-items: center
+				padding: 0.5rem
+				.article_categories
+					width: 45%
+					.article_category
+						color: white
+						padding: 0.2rem 0.5rem
+						border-radius: 10px
+					.article_date
 				.article_tags
+					width: 55%
+					display: flex
+					padding-left: 0.5rem
+					flex-wrap: wrap
 					.article_tag
 						background-color: rgb(203, 203, 203)
 						color: white
@@ -54,7 +72,7 @@ $link_color: rgb(63, 130, 138)
 						border-radius: 0 2rem 2rem 0
 						white-space: nowrap
 						display: inline-block
-						margin-bottom: 1rem
+						margin-right: 1rem
 						&:before
 							content: ''
 							width: 0.5em
@@ -115,7 +133,7 @@ $link_color: rgb(63, 130, 138)
 
 
 
-@media screen and (max-width:800px)
+@media screen and (max-width:1100px)
 	.wrapper
 		width: 90vw!important
 		.sidebar_button
@@ -126,6 +144,26 @@ $link_color: rgb(63, 130, 138)
 			.article_container
 				width: 100%
 				margin-top: 3rem
+				.article_thumbnail
+					width: 100% !important
+				.article_top
+					width: 100% !important
+					span
+						margin-bottom: 1rem
+					.article_summary
+						margin-bottom: 1rem
+				.article_bottom
+					flex-wrap: wrap
+					.article_categories
+						width: 100% !important
+						margin-bottom: 1rem
+						display: flex
+						justify-content: space-between
+					.article_tags
+						width: 100% !important
+						padding-left: 0
+						.article_tag
+							margin-bottom: 1rem
 		.articles_sidebar
 			order: 1
 			width: 100%
@@ -134,8 +172,9 @@ $link_color: rgb(63, 130, 138)
 			.search_form
 				margin-top: 3rem
 			.article_tag_list
-				white-space: nowrap
-				overflow-X: scroll
+				ul
+					white-space: nowrap
+					overflow-X: scroll
 		.articles_pagination
 			width: 100%
 			order: 3
