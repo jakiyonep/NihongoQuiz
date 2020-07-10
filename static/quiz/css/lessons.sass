@@ -8,13 +8,8 @@ $color-6: rgb(237, 125, 60)
 $base_bacground_color: rgb(247, 247, 247)
 $base_letter_color: rgb(111, 111, 111)
 $strong_red: rgb(255, 102, 102)
+$border-thin-color: rgb(186, 186, 186)
 
-@keyframes height_collapse
-    from
-        height: 0
-
-    to
-      	height: 100%
 
 /*lesson_index*/
 .lessons_wrapper
@@ -130,8 +125,8 @@ $casual-color: rgb(8, 214, 0)
 				margin-bottom: 2rem
 				.lesson_left
 					width: 15%
-				.sentences_person::after
-					content: ':'
+					.sentences_person
+						font-weight: bold
 				.lesson_right
 					width: 85%
 					.sentence
@@ -301,3 +296,7 @@ $casual-color: rgb(8, 214, 0)
 			margin-bottom: 2rem
 		.lesson_container
 			width: 100%
+		.lesson_left
+			width: 25% !important
+		.lesson_right
+			width: 70% !important
