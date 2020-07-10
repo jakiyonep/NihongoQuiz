@@ -88,16 +88,109 @@ $link_color: rgb(63, 130, 138)
 		color: inherit
 		font-weight: 560
 
+.convo
+	margin-top: 3rem!important
+	margin-bottom: 5rem!important
+	.fuki
+		.serif
+			display: inline-block
+			width: 65%
+			p
+				display: inline-block
+				height: auto
+
+		.left_wrapper
+			width: 100%
+			margin-right: 0
+			display: flex
+			p
+				border: 3px solid rgb(145, 222, 139)
+				padding: 1rem
+				border-radius: 10px
+				background-color: white
+				position: relative
+				&::before
+		      position: absolute
+		      content: ''
+		      border: 13px solid transparent
+		      border-right: 13px solid rgb(145, 222, 139)
+		      top: 40%
+		      left: -28px
+			&::before
+				content: ''
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/sensei_normal.png)
+				display: inline-block
+				width: 25%
+				height: 16vw
+				background-size: cover
+		  	vertical-align: middle
+				transform: scale(-1, 1)
+		.right_wrapper
+			width: 100%
+			display: flex
+			justify-content: flex-end
+			.serif
+				text-align: right
+			p
+				border: 3px solid rgb(249, 255, 157)
+				padding: 1rem
+				border-radius: 10px
+				background-color: white
+				position: relative
+				text-align: left
+				&::before
+		      position: absolute
+		      content: ''
+		      border: 13px solid transparent
+		      border-left: 13px solid rgb(249, 255, 157)
+		      top: 40%
+		      right: -28px
+			&::after
+				content: ''
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_normal.png)
+				display: inline-block
+				width: 25%
+				height: 16vw
+				background-size: cover
+		  	vertical-align: middle
+
+	.fuki_left
+		.confuse
+			&::before
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/sensei_confused.png)
+		.angry
+			&::before
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/sensei_angry.png)
+		.tongue
+			&::before
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/sensei_toungue.png)
+		.surprise
+			&::before
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/sensei_surprised.png)
+	.fuki_right
+		.confuse
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_confuse.png)
+		.angry
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_angry.png)
+		.cry
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_cry.png)
+		.gamau
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_gamau.png)
+		.sunglasses
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_sunglasses.png)
+		.smart
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_smart.png)
+		.tongue
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_tongue.png)
 
 
-
-
-	.articles_post_wrapper
-		.articles_container
-			width: 100% !important
-		.articles_sidebar
-			display: block
-			height: auto
 
 
 
@@ -106,3 +199,25 @@ $link_color: rgb(63, 130, 138)
 	.toc
 		ul
 			padding-left: 0
+
+	.serif
+		p
+			width: 100%
+	.fuki_left
+		.left_wrapper
+			&::before
+				width: 30% !important
+				height: 30vw!important
+		p
+			&::before
+				top: 5% !important
+	.fuki_right
+		.right_wrapper
+			.serif
+				text-align: left!important
+			&::after
+				width: 30% !important
+				height: 30vw!important
+		p
+			&::before
+				top: 5% !important
