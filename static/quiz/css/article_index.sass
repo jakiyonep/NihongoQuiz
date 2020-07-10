@@ -25,9 +25,15 @@ $link_color: rgb(63, 130, 138)
 			margin-bottom: 5rem
 			background-color: $base_bacground_color
 			border-radius: 5px
+			transition: 0.3s
+			&:hover
+				transform: translateY(-10px)
+				transition: 0.3s
+				box-shadow: 2px 2px 2px rgb(195, 195, 195)
 			.article_link
 				display: flex
 				flex-wrap: wrap
+
 			.article_thumbnail
 				width: 45%
 				img
@@ -131,7 +137,17 @@ $link_color: rgb(63, 130, 138)
 	background: linear-gradient(rgb(228, 228, 228), rgb(201, 201, 201))
 	display: none
 
-
+.article_tag
+	transition: 0.3s
+	&:hover
+		color: $strong_red !important
+		transition: 0.3s
+.article_category
+	transition: 0.3s
+	&:hover
+		color: $strong_red !important
+		background-color: $base_bacground_color
+		transition: 0.3s
 
 @media screen and (max-width:1100px)
 	.wrapper

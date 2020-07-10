@@ -12,7 +12,7 @@
   </div>
   <ul>
     {% for category in article_category|dictsortreversed:"num_posts" %}
-      <a href="{% url 'quiz:article_category_post' category.slug %}" class="sidebar_category article_category_{{category.slug}}"> {{ category }} <span>{{ category.num_posts }}</span></a>
+      <a href="{% url 'quiz:article_category_post' category.slug %}" class="sidebar_category article_category article_category_{{category.slug}}"> {{ category }} <span>{{ category.num_posts }}</span></a>
     {% endfor %}
   </ul>
 </div>
