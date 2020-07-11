@@ -81,6 +81,8 @@ $link_color: rgb(63, 130, 138)
 	img
 		max-width: 100%
 		object-fit: contain
+		margin-top: 3rem
+		margin-bottom: 3rem
 	span
 		color: red
 	.line
@@ -89,7 +91,7 @@ $link_color: rgb(63, 130, 138)
 		font-weight: 560
 
 .convo
-	margin-top: 3rem!important
+	margin-top: 5em!important
 	margin-bottom: 5rem!important
 	.fuki
 		.serif
@@ -98,8 +100,8 @@ $link_color: rgb(63, 130, 138)
 			p
 				display: inline-block
 				height: auto
-
-		.left_wrapper
+	.fuki_left
+		.fuki_wrapper
 			width: 100%
 			margin-right: 0
 			display: flex
@@ -125,7 +127,8 @@ $link_color: rgb(63, 130, 138)
 				background-size: cover
 		  	vertical-align: middle
 				transform: scale(-1, 1)
-		.right_wrapper
+	.fuki_right
+		.fuki_wrapper
 			width: 100%
 			display: flex
 			justify-content: flex-end
@@ -167,6 +170,9 @@ $link_color: rgb(63, 130, 138)
 		.surprise
 			&::before
 				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/sensei_surprised.png)
+		.frown
+			&::before
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/sensei_frown.png)
 	.fuki_right
 		.confuse
 			&::after
@@ -189,11 +195,18 @@ $link_color: rgb(63, 130, 138)
 		.tongue
 			&::after
 				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_tongue.png)
-
-
-
-
-
+		.kiri
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_kiri.png)
+		.mo-
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_mo-.png)
+		.shonbori
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_shonbori.png)
+		.shonbori
+			&::after
+				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_shirome.png)
 
 @media screen and (max-width:800px)
 	.toc
@@ -204,7 +217,7 @@ $link_color: rgb(63, 130, 138)
 		p
 			width: 100%
 	.fuki_left
-		.left_wrapper
+		.fuki_wrapper
 			&::before
 				width: 30% !important
 				height: 30vw!important
@@ -212,7 +225,7 @@ $link_color: rgb(63, 130, 138)
 			&::before
 				top: 5% !important
 	.fuki_right
-		.right_wrapper
+		.fuki_wrapper
 			.serif
 				text-align: left!important
 			&::after
