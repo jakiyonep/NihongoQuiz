@@ -17,6 +17,14 @@
 
     <div class="articles_container">
       {% for basic in object_list %}
+				{% if not basic.public and request.user.is_authenticated%}
+					<a class="article_link" href="{% url 'quiz:article_post' basic.title_slug %}">
+						{{basic.title}}
+					</a>
+					{% if basic.thumbnail  %}
+						<img src="{{ basic.thumbnail.url }}" alt="" style="width:100px;">
+					{% endif %}
+				{% endif %}
         {% if basic.public %}
           <article class = "article_container">
 						<a class="article_link" href="{% url 'quiz:article_post' basic.title_slug %}">

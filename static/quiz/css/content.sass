@@ -39,6 +39,10 @@ $link_color: rgb(63, 130, 138)
 			background-color: white
 			border-radius: 50%
 			display: inline-block
+	.thumbnail_attr
+		a
+			background: linear-gradient(transparent 90%, $base_letter_color 80%)
+			font-size: 0.9rem
 	.article-post_thumbnail
 		max-width: 100%
 		margin-top: 1rem
@@ -47,8 +51,10 @@ $link_color: rgb(63, 130, 138)
 	border-bottom: 1px double black
 	padding: 5rem 0
 	width: 100%
-	h1, h2, h3, h4, p, img, div, ul
+	p, img, div, ul
 		margin-bottom: 1rem
+	h1, h2, h3, h4
+		margin-bottom: 2rem
 	h1
 	h2
 		font-size: 1.4rem
@@ -73,6 +79,7 @@ $link_color: rgb(63, 130, 138)
 		border-bottom: 2px solid  rgb(106, 106, 106)
 		color: inherit
 	p
+		margin-top: 1rem
 	a
 		color: $link_color
 		font-weight: 550
@@ -85,6 +92,8 @@ $link_color: rgb(63, 130, 138)
 		margin-bottom: 3rem
 	span
 		color: red
+	.f
+		color: rgb(49, 228, 141)
 	.line
 		background: linear-gradient(transparent 90%, #ff8171 80%)
 		color: inherit
@@ -204,7 +213,7 @@ $link_color: rgb(63, 130, 138)
 		.shonbori
 			&::after
 				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_shonbori.png)
-		.shonbori
+		.shirome
 			&::after
 				background-image: url(https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/convo_icons/student_shirome.png)
 
