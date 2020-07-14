@@ -26,7 +26,7 @@
 								{% endif %}
 							</div>
 	            <div class="article_top">
-	              <span>{{ basic.title }}</span>
+	              <span>{{ basic.title|title }}</span>
 								{% if basic.summary %}
 								<div class="article_summary">
 									<p>{{ basic.summary | safe }}</p>
