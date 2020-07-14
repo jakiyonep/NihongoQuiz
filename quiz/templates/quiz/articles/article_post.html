@@ -30,7 +30,7 @@
 							<div class="thumbnail_attr">
 								<a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by rawpixel.com - www.freepik.com</a>
 							</div>
-						
+
           {% endif %}
         </div>
         <article class="content article-post_content">
@@ -80,6 +80,11 @@
 						{% endif %}
 					{% endfor %}
       </section>
+			<section class="article_comment">
+				<h2 class="section_head">Comments</h2>
+		  <a class="comment_submit" href="{% url 'quiz:comment_form' object.pk %}">Leave a comment</a>
+			{% include 'quiz/articles/comment/comments.html' %}
+			</section>
 		</div>
   </body>
 </html>

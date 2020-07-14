@@ -1,15 +1,18 @@
 from django.db.models import Count, Q
+from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from quiz.forms import Correction
 from . import forms
 
 from quiz.models import *
+from quiz.forms import CommentForm,ReplyForm
 
 from .filters import QuizFilter
 
@@ -246,6 +249,79 @@ class ArticleCategoryView(ListView):
         context = super().get_context_data(**kwargs)
         context['article_category2_slug'] = self.category2
         return context
+
+
+class CommentFormView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'quiz/articles/comment/comment_form.html'
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        post_pk = self.kwargs['pk']
+        comment.article = get_object_or_404(Articles, pk=post_pk)
+        comment.save()
+        article_title_slug = comment.article.title_slug
+        return redirect('quiz:article_post', title_slug=article_title_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post_pk = self.kwargs['pk']
+        context['post'] = get_object_or_404(Articles, pk=post_pk)
+        return context
+
+
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    article_title_slug = comment.article.title_slug
+    return redirect('quiz:article_post', title_slug=article_title_slug)
+
+
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+
+    article_title_slug = comment.article.title_slug
+    return redirect('quiz:article_post', title_slug=article_title_slug)
+
+
+class ReplyFormView(CreateView):
+    model = Reply
+    form_class = ReplyForm
+    template_name = 'quiz/articles/comment/reply_form.html'
+
+    def form_valid(self, form):
+        reply = form.save(commit=False)
+        comment_pk = self.kwargs['pk']
+        reply.comment = get_object_or_404(Comment, pk=comment_pk)
+        reply.save()
+        article_title_slug = reply.comment.article.title_slug
+        return redirect('quiz:article_post', title_slug=article_title_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comment_pk = self.kwargs['pk']
+        context['comment'] = get_object_or_404(Comment, pk=comment_pk)
+        return context
+
+
+@login_required
+def reply_approve(request, pk):
+    reply = get_object_or_404(Reply, pk=pk)
+    reply.approve()
+    article_title_slug = reply.comment.article.title_slug
+    return redirect('quiz:article_post', title_slug=article_title_slug)
+
+
+@login_required
+def reply_remove(request, pk):
+    reply = get_object_or_404(Reply, pk=pk)
+    reply.delete()
+    article_title_slug = reply.comment.article.title_slug
+    return redirect('quiz:article_post', title_slug=article_title_slug)
 
 """"
 class SearchArticleVIew(ListView):

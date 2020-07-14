@@ -1,0 +1,27 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %}Comment Form{% endblock %}
+{% block description %}
+
+{% endblock %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
+</head>
+<body>
+	{% include 'quiz/navbar.html' %}
+	<div class="comment_form wrapper">
+	  <main>
+	    <h2 class="section_head">Comment Form</h1>
+	    <p class="to">To: <span>{{ comment.author }}</span> さん</p>
+			<p class="comment_content">{{ comment.text }}</p>
+	    <form class="comment_text" method="POST">{% csrf_token %}
+	      {{ form.as_p }}
+	      <button type="submit" class="comment_submit_button">Submit</button>
+	    </form>
+	  </main>
+	  <aside>
+	  </aside>
+	</div>
+</body>
+{% endblock %}

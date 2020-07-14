@@ -175,6 +175,43 @@ class ArticleImage(models.Model):
     article_image = models.ImageField(upload_to='article_image/', null=True, blank=True)
 
 
+#  Article Comments
+
+class Comment(models.Model):
+    article = models.ForeignKey(
+        Articles, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
+    author = models.CharField(max_length=50)
+
+    text = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=True)
+
+
+    class Meta:
+        ordering = ['-timestamp']
+
+    def approve(self):
+        self.approved = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
+
+class Reply(models.Model):
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name='replies')
+    author = models.CharField(max_length=50)
+    text = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved = True
+        self.save()
+
+    def __str__(self):
+        return self.text
 
 # Basics
 

@@ -2,6 +2,13 @@ $base_bacground_color: rgba(242, 242, 242, 1)
 $base_letter_color: rgb(111, 111, 111)
 $strong_red: rgb(255, 102, 102)
 $link_color: rgb(63, 130, 138)
+$yomi-color: rgb(255, 183, 158)
+$en-color: rgb(82, 200, 254)
+$answer-color: rgb(255, 70, 70)
+$casual-color: rgb(8, 214, 0)
+$secondary-important: rgb(106, 106, 106)
+
+
 
 .article_category_nihongo
 	background-color: rgb(254, 124, 80)
@@ -155,6 +162,186 @@ $link_color: rgb(63, 130, 138)
 		background-color: $base_bacground_color
 		transition: 0.3s
 
+
+.article_comment
+	width: 75%
+	border-top: 1px solid $base_letter_color
+	padding-top: 4rem
+	.comment_submit
+		background-color: $strong_red
+		color: white
+		padding: 0.5rem 1rem
+		border-radius: 5px
+		transition: 0.4s
+		&:hover
+			background-color: $base_bacground_color
+			color: $strong_red
+			transition: 0.4s
+	.comments_container
+		margin-top: 3rem
+		padding: 2rem 0
+
+		.comment_container
+			margin-top: 1rem
+			padding: 2rem 0
+			border-top: 1px solid  rgb(193, 193, 193)
+			.comment_inner_container
+				width: 100%
+				display: flex
+				justify-content: space-between
+			.comment_left
+				width: 7%
+			.comment_right
+				width: 93%
+				padding-left: 2rem
+			.comment_info
+				display: flex
+
+				.author_pic
+					width: 80%
+				.comment_author
+					display: inline-block
+					font-size: 1.1rem
+					font-weight: bold
+					margin-right: 1.2rem
+				.comment_date
+					display: inline-block
+			.comment_text
+				padding: 1rem 0
+			.comment_buttons
+				padding-top: 1rem
+				a
+					margin-right: 1rem
+				.comment_reply
+					background-color: rgb(107, 181, 200)
+					padding: 0.3rem 0.7rem
+					border-radius: 5px
+					color: white
+					transition: 0.4s
+					&:hover
+						color: rgb(107, 181, 200)
+						background-color: $base_bacground_color
+						transition: 0.4s
+				.approve
+					background-color: $strong_red
+					padding: 0.3rem 0.7rem
+					border-radius: 5px
+					color: white
+					transition: 0.4s
+					&:hover
+						color: $strong_red
+						background-color: $base_bacground_color
+						transition: 0.4s
+				.delete
+					background-color: rgb(0, 0, 0)
+					padding: 0.3rem 0.7rem
+					border-radius: 5px
+					color: white
+					transition: 0.4s
+					&:hover
+						color: black
+						background-color: $base_bacground_color
+						transition: 0.4s
+		.replies_container
+			.reply_container
+				margin-top: 2rem
+				padding: 2rem 0
+				.comment_inner_container
+					width: 100%
+					display: flex
+				.reply_empty
+					width: 7%
+				.comment_left
+					padding-left: 2rem
+					width: 10%
+				.comment_right
+					width: 80%
+					padding-left: 2rem
+					height: 100%
+				.comment_info
+					display: flex
+					.comment_left
+						border-top: 1px solid rgb(193, 193, 193)
+						padding-top: 2rem
+					.comment_right
+						border-top: 1px solid rgb(193, 193, 193)
+						padding: 1rem
+					.author_pic
+						width: 75%
+					.comment_author
+						display: inline-block
+						font-size: 1.1rem
+						font-weight: bold
+						margin-right: 1.2rem
+					.comment_date
+						display: inline-block
+				.comment_text
+					padding: 1rem 0
+				.comment_buttons
+					a
+						margin-right: 1rem
+					.comment_reply
+						background-color: rgb(107, 181, 200)
+						padding: 0.3rem 0.7rem
+						border-radius: 5px
+						color: white
+						transition: 0.4s
+						&:hover
+							color: rgb(107, 181, 200)
+							background-color: $base_bacground_color
+							transition: 0.4s
+					.approve
+						background-color: $strong_red
+						padding: 0.3rem 0.7rem
+						border-radius: 5px
+						color: white
+						transition: 0.4s
+						&:hover
+							color: $strong_red
+							background-color: $base_bacground_color
+							transition: 0.4s
+					.delete
+						background-color: rgb(0, 0, 0)
+						padding: 0.3rem 0.7rem
+						border-radius: 5px
+						color: white
+						transition: 0.4s
+						&:hover
+							color: black
+							background-color: $base_bacground_color
+							transition: 0.4s
+
+.comment_form
+	.to
+		font-weight: bold
+		margin-bottom: 1rem
+	.comment_content
+		margin: 1rem 0
+		padding: 1rem 0
+		rgb(228, 228, 228)
+	.comment_text
+		#id_author
+			background-color:	white
+			border: 1px solid $base_letter_color
+			margin-bottom: 2rem
+			width: 60%
+		#id_text
+			background-color: white
+			border: 1px solid $base_letter_color
+			width: 100%
+	.comment_submit_button
+		margin-top: 2rem
+		background-color: $strong_red
+		padding: 0.3rem 0.7rem
+		border-radius: 5px
+		color: white
+		transition: 0.4s
+		&:hover
+			color: $strong_red
+			background-color: $base_bacground_color
+			transition: 0.4s
+
+
 @media screen and (max-width:1100px)
 	.wrapper
 		width: 90vw!important
@@ -203,3 +390,26 @@ $link_color: rgb(63, 130, 138)
 		.open_nav
 			transition: 1s
 			height: 150vw
+
+.article_comment
+	width: 100%
+	order: 4
+	.comment_container
+		.comment_left
+			width: 10% !important
+		.comment_right
+			width: 90% !important
+		.author_pic
+			width: 100% !important
+	.reply_container
+		.reply_empty
+			width: 5% !important
+		.comment_left
+			width: 10% !important
+			padding-left: 0 !important
+		.comment_right
+			width: 85% !important
+			padding-right: 0 !important
+		.author_pic
+			width: 90% !important
+		.comment_text

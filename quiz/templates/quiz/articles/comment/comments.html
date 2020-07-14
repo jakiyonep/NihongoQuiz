@@ -1,0 +1,86 @@
+<div class="comments_container">
+
+		{% for comment in object.comments.all %}
+			{% if user.is_authenticated or comment.approved %}
+		<div class="comment_container">
+			<div class="comment_inner_container comment_info">
+				<div class="comment_left">
+					<img class="author_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E7%A6%8F%E5%8A%A9%E4%BA%BA%E5%BD%A2%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88+(1).png" alt="">
+				</div>
+				<div class="comment_right">
+					<p class="comment_author">{{ comment.author }}</p>
+					<p class="comment_date">{{ comment.timestamp }}</p>
+				</div>
+			</div>
+			<div class="comment_inner_container comment_text">
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+					<p class="comment_text">{{ comment.text|linebreaksbr }}</p>
+				</div>
+			</div>
+			<div class="comment_inner_container comment_buttons">
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+					<a class="comment_reply" href="{% url 'quiz:reply_form' comment.pk %}">Reply</a>
+					{% if user.is_authenticated %}
+						<a class="approve" href="{% url 'quiz:comment_approve' comment.pk %}">Approve</a>
+						<a class="delete" href="{% url 'quiz:comment_remove' comment.pk %}">Delete</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	<div class="replies_container">
+
+	  {% for reply in comment.replies.all %}
+	  {% if user.is_authenticated or reply.approved %}
+		<div class="reply_container">
+			<div class="comment_inner_container comment_info">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					<img class="author_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E8%83%BD%E9%9D%A2%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
+				</div>
+				<div class="comment_right">
+					<p class="comment_author">{{ reply.author }}</p>
+					<p class="comment_date">{{ reply.timestamp }}</p>
+				</div>
+			</div>
+			<div class="comment_inner_container comment_text">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+					<p class="comment_text">{{ reply.text|linebreaksbr }}</p>
+				</div>
+			</div>
+			<div class="comment_inner_container comment_buttons">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+
+					{% if user.is_authenticated %}
+						<a class="approve" href="{% url 'quiz:comment_approve' comment.pk %}">Approve</a>
+						<a class="delete" href="{% url 'quiz:comment_remove' comment.pk %}">Delete</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	  {% endif %}
+	  {% endfor %}
+	</div>
+
+	{% endif %}
+	{% endfor %}
+</div>
