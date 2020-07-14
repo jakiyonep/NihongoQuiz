@@ -48,10 +48,17 @@ class ArticlesImage(admin.TabularInline):
     model = ArticleImage
     extra = 1
 
+class ArticlesReferences(admin.TabularInline):
+    model = ArticleReferences
+    extra = 1
+
 class ArticlesAdmin(MarkdownxModelAdmin):
     list_display = ('title','order','public')
     list_editable = ['order',]
-    inlines = [ArticlesImage]
+    inlines = [
+        ArticlesReferences,
+        ArticlesImage,
+               ]
 
 #lesson
 

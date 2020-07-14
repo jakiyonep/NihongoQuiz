@@ -174,6 +174,9 @@ class ArticleImage(models.Model):
     article = models.ForeignKey(Articles, on_delete=models.CASCADE)
     article_image = models.ImageField(upload_to='article_image/', null=True, blank=True)
 
+class ArticleReferences(models.Model):
+    article = models.ForeignKey(Articles, on_delete=models.CASCADE)
+    reference = models.CharField(max_length=500, null=True, blank=True)
 
 #  Article Comments
 
