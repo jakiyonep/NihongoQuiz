@@ -130,6 +130,7 @@ admin.site.register(ArticlesTag)
 admin.site.register(ArticlesCategory)
 admin.site.register(Articles, ArticlesAdmin)
 admin.site.register(Comment)
+admin.site.register(Reply)
 
 #Lessons
 admin.site.register(Lesson, LessonAdmin)

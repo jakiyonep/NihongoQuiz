@@ -185,7 +185,7 @@ class Comment(models.Model):
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)
-
+    aki = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-timestamp']
@@ -204,7 +204,8 @@ class Reply(models.Model):
     author = models.CharField(max_length=50)
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
+    aki = models.BooleanField(default=False)
 
     def approve(self):
         self.approved = True

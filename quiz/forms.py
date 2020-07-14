@@ -12,7 +12,7 @@ class CorrectionForm(forms.ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('author', 'text')
+        fields = ('author', 'text', 'aki')
         widgets = {
             'author': TextInput(attrs={
                 'class': 'form-control',
@@ -32,7 +32,7 @@ class CommentForm(ModelForm):
 class ReplyForm(ModelForm):
     class Meta:
         model = Reply
-        fields = ('author', 'text')
+        fields = ('author', 'text', 'aki')
         widgets = {
             'author': TextInput(attrs={
                 'class': 'form-control',
