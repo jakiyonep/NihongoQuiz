@@ -16,7 +16,11 @@
 	    <p class="to">To: <span>{{ comment.author }}</span> さん</p>
 			<p class="comment_content">{{ comment.text }}</p>
 	    <form class="comment_text" method="POST">{% csrf_token %}
-	      {{ form.as_p }}
+				{{ form.author }}
+				{{ form.text }}
+				{% if user.is_authenticated %}
+				{{ form.aki }}
+				{% endif %}
 	      <button type="submit" class="comment_submit_button">Submit</button>
 	    </form>
 	  </main>
