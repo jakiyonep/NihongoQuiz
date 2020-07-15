@@ -35,11 +35,22 @@
         </div>
         <article class="content article-post_content">
           {{ object.markdown | safe}}
+					<section class="article_references"><!--references-->
+						{% if articles.articlereferences_set.all %}
+							<p class="section_head reference_head">References</p>
+							{% for reference in articles.articlereferences_set.all %}
+								<div class="article_reference">
+									{{ reference.reference |safe}}
+								</div>
+							{% endfor %}
+						{% endif %}
+					</section>
         </article>
 			</main>
 			<aside class="sidebar articles_sidebar" id="articles_sidebar"><!--Sidebar-->
 					{% include 'quiz/articles/article_tags.html' %}
 			</aside>
+
       <section class="related_posts articles_container"><!--related-->
         <p class="section_head">Related</p>
 					{% for basic in object.related_basics.all %}
