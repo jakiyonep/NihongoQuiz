@@ -161,7 +161,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # AWS S3
 
-
+AUTH_USER_MODEL = 'quiz.User'
 
 
 if DEBUG:

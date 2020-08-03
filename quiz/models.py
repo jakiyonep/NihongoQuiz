@@ -4,9 +4,15 @@ from markdownx.utils import markdownify
 from django.utils import timezone
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 from datetime import datetime
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 # BeforeYouStart
+
+
+class User(AbstractUser):
+    class Meta:
+        db_table='auth_user'
 
 class BeforeYouStart(models.Model):
     content = MarkdownxField(null=True, blank=True)
