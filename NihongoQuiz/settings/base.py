@@ -168,3 +168,22 @@ if DEBUG:
 else:
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_URL, 'static')
 
+
+AUTH_USER_MODEL = 'quiz.User'
+LOGIN_URL = 'sensei_app:login'
+LOGIN_REDIRECT_URL = 'sensei_app:toppage'
+
+#Email Test
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Email Production
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
+""" DON'T FORFET CONFIGURE THE FOLLOWING VALUES!!! """
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'atsumarenihongokyoushi@gmail.com'
+EMAIL_USE_TLS = True

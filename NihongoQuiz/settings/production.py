@@ -27,5 +27,8 @@ DATABASES['default'].update(db_from_env)
 import django_heroku
 django_heroku.settings(locals())
 
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+
 #AWS
 from NihongoQuiz.aws.conf import *
