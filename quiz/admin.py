@@ -119,6 +119,8 @@ class CorrectionAdmin(MarkdownxModelAdmin):
     list_display = ('title','public')
     list_editable = ['public']
 
+admin.site.register(User)
+
 #BeforeYouStart
 admin.site.register(BeforeYouStart, BeforeYouStartAdmin)
 
