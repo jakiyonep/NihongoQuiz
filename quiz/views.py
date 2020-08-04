@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from quiz.forms import Correction
 from . import forms
+from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 
 from quiz.models import *
 from quiz.forms import CommentForm,ReplyForm
@@ -34,7 +35,7 @@ def QuizListView(request):
 
     context['filtered_quiz'] = filtered_quiz
 
-    paginator = Paginator(filtered_quiz.qs, 15)
+    paginator = Paginator(filtered_quiz.qs, 2)
     page_number = request.GET.get('page')
     quiz_page_obj = paginator.get_page(page_number)
 
@@ -48,6 +49,7 @@ def QuizListView(request):
 
 
 class LevelListView(ListView):
+
     queryset = Level.objects.annotate(
         num_posts=Count('quiz', filter=Q(quiz__public=True))
     )
@@ -65,78 +67,107 @@ class TagListView(ListView):
     )
 
 
-class LevelPostView(ListView):
-    model = Quiz
-    template_name = 'quiz/quizzes/level_post.html'
+def LevelPost(request, level_slug):
+    quiz_list = Quiz.objects.all()
+    selected_level = get_object_or_404(Level, slug=level_slug)
+    selected_level_quiz_list = quiz_list.filter(level__slug=level_slug)
 
-    def get_queryset(self):
-        level_slug = self.kwargs['level_slug']
-        self.level = get_object_or_404(Level, slug=level_slug)
-        qs = super().get_queryset().filter(level=self.level)
-        return qs
+    # Create a paginator to split your products queryset
+    paginator = Paginator(selected_level_quiz_list, 10)
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    selected_level_quiz_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['level'] = self.level
-        return context
-
-
-class CategoryPostView(ListView):
-    model = Quiz
-    template_name = 'quiz/quizzes/category_post.html'
-
-    def get_queryset(self):
-        category_slug = self.kwargs['category_slug']
-        self.category = get_object_or_404(Category, slug=category_slug)
-        qs = super().get_queryset().filter(category=self.category)
-        return qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = self.category
-        return context
+    return render(request, 'quiz/quizzes/level_post.html', {
+        'object_list': selected_level_quiz_list,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+        'selected_level': selected_level,
+    })
 
 
-class TagPostView(ListView):
-    model = Quiz
-    template_name = 'quiz/quizzes/tag_post.html'
 
-    def get_queryset(self):
-        tag_slug = self.kwargs['tag_slug']
-        self.tag = get_object_or_404(Tag, slug=tag_slug)
-        qs = super().get_queryset().filter(tags=self.tag)
-        return qs
+def CategoryPost(request, category_slug):
+    quiz_list = Quiz.objects.all()
+    selected_category = get_object_or_404(Category, slug=category_slug)
+    selected_category_quiz_list = quiz_list.filter(category__slug=category_slug)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tag'] = self.tag
-        return context
+    # Create a paginator to split your products queryset
+    paginator = Paginator(selected_category_quiz_list, 10)
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    selected_category_quiz_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    return render(request, 'quiz/quizzes/category_post.html', {
+        'object_list': selected_category_quiz_list,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+        'selected_category': selected_category,
+    })
 
 
-class SearchPostView(ListView):
-    model = Quiz
-    template_name = 'quiz/quizzes/search_post.html'
+def TagPost(request, tag_slug):
+    quiz_list = Quiz.objects.all()
+    selected_tag = get_object_or_404(Tag, slug=tag_slug)
 
-    def get_queryset(self):
-        query = self.request.GET.get('q', None)
-        lookups = (
-                Q(question__icontains=query) |
-                Q(description__icontains=query) |
-                Q(category__name__icontains=query) |
-                Q(tags__name__icontains=query) |
-                Q(descriptiondetail__word__icontains=query)
-        )
-        if query is not None:
-            qs = super().get_queryset().filter(lookups).distinct()
-            return qs
-        qs = super().get_queryset()
-        return qs
+    selected_tag_quiz_list = quiz_list.filter(tags__slug=tag_slug)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('q')
-        context['query'] = query
-        return context
+    # Create a paginator to split your products queryset
+    paginator = Paginator(selected_tag_quiz_list, 10)
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    selected_category_quiz_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    return render(request, 'quiz/quizzes/tag_post.html', {
+        'object_list': selected_category_quiz_list,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+        'selected_tag': selected_tag,
+    })
+
+
+def QuizSearchList(request):
+    quiz_search_list = Quiz.objects.all()
+    query = request.GET.get('q')
+
+    if query:
+        quiz_search_list = Quiz.objects.filter(
+            Q(question__icontains=query) |
+            Q(choice1__icontains=query) |
+            Q(choice2__icontains=query) |
+            Q(choice3__icontains=query) |
+            Q(choice4__icontains=query)
+        ).distinct()
+
+    # Create a paginator to split your products queryset
+    paginator = Paginator(quiz_search_list, 10)
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    article_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    return render(request, 'quiz/quizzes/search_post.html', {
+        'object_list': quiz_search_list,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+        'query': query,
+    })
+
 
 
 ##### Basics #####
@@ -178,7 +209,7 @@ def ArticleList(request):
         ).distinct()
 
     # Create a paginator to split your products queryset
-    paginator = Paginator(article_list, 3)
+    paginator = Paginator(article_list, 10)
     # Get the current page number
     page = request.GET.get('page')
     # Get the current slice (page) of products

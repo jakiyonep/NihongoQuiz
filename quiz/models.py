@@ -137,7 +137,6 @@ class Level(models.Model):
 
 
 class Quiz(models.Model):
-    description = models.TextField(blank=True)
     public = models.BooleanField(default=True)
     level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)

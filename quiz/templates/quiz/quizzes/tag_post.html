@@ -1,12 +1,12 @@
 {% extends 'quiz/base.html' %}
 
-{% block title %}{{tag.name}}{% endblock %}
+{% block title %}{{selected_tag.name|title}}{% endblock %}
 
 {% block content %}
 {% include 'quiz/navbar.html' %}
 <div class="wrapper quizzes_wrapper">
 
-	<h1 class="section_head">{{tag.name}}</h1>
+	<h1 class="section_head">{{selected_tag.name|title}}</h1>
   {% include 'quiz/quizzes/quiz_list.html' %}
 
 {% endblock %}

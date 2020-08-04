@@ -1,10 +1,10 @@
 {% extends 'quiz/base.html' %}
-{% block title %}{{level.name}}{% endblock %}
+{% block title %}{{selected_level.name}}{% endblock %}
 {% block content %}
 {% include 'quiz/navbar.html' %}
 <div class="wrapper quizzes_wrapper">
 
-	<h1 class="section_head">{{level.name}}</h1>
+	<h1 class="section_head">{{selected_level.name}}</h1>
     {% include 'quiz/quizzes/quiz_list.html' %}
 
 {% endblock %}
