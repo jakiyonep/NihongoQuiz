@@ -167,31 +167,31 @@ class BasicsDetailView(DetailView):
 
 ##### Articles ######
 
-class ArticlesIndex(ListView):
-    model = Articles
-    template_name = 'quiz/articles/articles_index.html'
+def ArticleList(request):
+    article_list = Articles.objects.all()
+    query = request.GET.get('q')
 
-    paginate_by = 15
+    if query:
+        article_list = Articles.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query)
+        ).distinct()
 
-    def get_queryset(self):
-        query = self.request.GET.get('q', None)
-        lookups = (
-                Q(title__icontains=query) |
-                Q(content__icontains=query) |
-                Q(category2__slug__icontains=query) |
-                Q(tag__slug__icontains=query)
-        )
-        if query is not None:
-            qs = super().get_queryset().filter(lookups).distinct()
-            return qs
-        qs = super().get_queryset()
-        return qs
+    # Create a paginator to split your products queryset
+    paginator = Paginator(article_list, 3)
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    article_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('q')
-        context['query'] = query
-        return context
+    return render(request, 'quiz/articles/articles_index.html', {
+        'article_list': article_list,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+    })
 
 
 class ArticleDetailView(DetailView):

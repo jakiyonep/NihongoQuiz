@@ -16,7 +16,7 @@
 		<span class="sidebar_button" id="sidebar_button" onclick="openNav()"><i class="fas fa-chevron-down"></i></span>
 
     <div class="articles_container">
-      {% for basic in object_list %}
+      {% for basic in article_list %}
 				{% if not basic.public and request.user.is_authenticated%}
 					<a class="article_link" href="{% url 'quiz:article_post' basic.title_slug %}">
 						{{basic.title}}
