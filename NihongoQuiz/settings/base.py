@@ -169,7 +169,7 @@ else:
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_URL, 'static')
 
 
-AUTH_USER_MODEL = 'quiz.User'
+#AUTH_USER_MODEL = 'quiz.User'
 LOGIN_URL = 'sensei_app:login'
 LOGIN_REDIRECT_URL = 'sensei_app:toppage'
 
