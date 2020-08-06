@@ -1,0 +1,419 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+{% load markdownify %}
+{% load static %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/user_info.min.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/quiz.min.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
+
+</head>
+<body>
+	{% include 'quiz/navbar.html' %}
+	<div class="wrapper user_info_wrapper">
+		<p class="section_head">
+			{% if user.nickname %}
+				{{user.nickname}}'s page
+			{% endif %}
+		</p>
+		<div class="user_info_top">
+			<div class="user_info">
+				<div class="user_info_row">
+					<div class="user_info_left">
+						User ID <br>
+						(Only visible to you)
+					</div>
+					<div class="user_info_right">
+						<p>{{user.email}}</p>
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						Nickname
+					</div>
+					<div class="user_info_right">
+						{{user.nickname}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						Registration Date
+					</div>
+					<div class="user_info_right">
+						{{user.date_joined|date:'Y-m-d'}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						Liked Quizzes
+					</div>
+					<div class="user_info_right">
+						{{user.liked_quiz.count}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						Liked Articles
+					</div>
+					<div class="user_info_right">
+						{{user.liked_article.count}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						Submitted Compositions
+					</div>
+					<div class="user_info_right">
+						{{user.submitted_corrections.count}}
+					</div>
+				</div>
+			</div>
+			<div class="user_info_menu">
+				<li>
+					<a class="nav-item nav-link" href="{% url 'quiz:user_update' user.pk %}">Change Nickname</a>
+				</li>
+				<li>
+					<a class="nav-item nav-link" href="{% url 'quiz:password_change' %}">Chanve Password</a>
+				</li>
+				<li>
+					<a class="nav-item nav-link" href="{% url 'quiz:email_change' %}">Change Email</a>
+				</li>
+			</div>
+		</div>
+
+		<div class="favorite_list">
+			<p class="section_head">Your Activities</p>
+			<div class="top_row">
+				<div class="top_item active" id='quiz'>
+					<p class="top_link">Quizzes</a>
+				</div>
+				<div class="top_item" id='article'>
+					<p class="top_link">Articles</a>
+				</div>
+				<div class="top_item" id='correction'>
+					<p class="top_link">Corrections</a>
+				</div>
+			</div>
+			<div class="top_row_empty">
+			</div>
+			<div class="favorite_content">
+
+				<div class="quizzes_wrapper" id='quiz_wrapper'>
+					<div class="quizzes_container">
+						{% for quiz in object_list %}
+						<div class="quiz_container">
+							<div class="quiz_question"><!--question-->
+								{% if user.is_authenticated or quiz.public %}
+									{% if not quiz.public %} Draft {% endif %}<h2>{{quiz.question | safe}}</h2>
+							</div>
+							<div class="quiz_body_container">
+								{% if quiz.choice_long %}
+									<div class="quiz_choices long"><!--choices_long-->
+										<div class="choice choice_1">
+											<span>1. </span>{{quiz.choice1 | safe}}
+										</div>
+										<div class="choice choice_2">
+											<span>2. </span> {{quiz.choice2 | safe}}
+										</div>
+										{% if quiz.choice3 %}
+											<div class="choice choice_3">
+												<span>3. </span>{{quiz.choice3 | safe}}
+											</div>
+										{% endif %}
+										{% if quiz.choice4  %}
+											<div class="choice choice_4">
+												<span>4. </span>{{quiz.choice4  | safe}}
+											</div>
+										{% endif %}
+									</div>
+								{% endif%}
+								{% if not quiz.choice_long %}
+									<div class="quiz_choices"><!--choices-->
+										<div class="choice choice_1">
+											<span>1. </span>{{quiz.choice1 | safe}}
+										</div>
+										<div class="choice choice_2">
+											<span>2. </span>{{quiz.choice2 | safe}}
+										</div>
+										{% if quiz.choice3 %}
+											<div class="choice choice_3">
+												 <span>3. </span>{{quiz.choice3 | safe}}
+											</div>
+										{% endif %}
+										{% if quiz.choice4  %}
+											<div class="choice choice_4">
+												<span>4. </span>{{quiz.choice4 | safe}}
+											</div>
+										{% endif %}
+									</div>
+								{% endif%}
+								<div class="quiz_bottom">
+								<div class="quiz_info"><!--quiz_info-->
+									<div class="level_category"><!--level_category-->
+										<a class="level {{quiz.level.slug}}" href="{% url 'quiz:level_post' quiz.level.slug %}">{{quiz.level}}</a>
+										<a class="category {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
+									</div>
+
+									<div class="answer_button">
+										<a class="answer_button_a" id="{{quiz.pk}}">
+											Answer
+										</a>
+										<div class="like_section quiz_like_section" id="quiz_{{quiz.pk}}_like_section">
+											{% include 'quiz/quizzes/like.html' %}
+										</div>
+									</div>
+									<div class="quiz_tags"><!--tags-->
+										{% for tag in quiz.tags.all %}
+											<a class="tag" href="{% url 'quiz:tag_post' tag.slug %}">{{ tag.name }}</a>
+										{% endfor %}
+									</div>
+
+								</div>
+								<div class="quiz_collapse" id="collapse-{{quiz.pk}}">
+									<span class="correct_answer">{{quiz.answer}}</span>
+									<div class="question_description">
+										{% if quiz.question_yomi %}
+											<div class="question_yomi">
+												{{ quiz.question_yomi |safe }}
+											</div>
+										{% endif %}
+										{% if quiz.question_en %}
+											<div class="question_en">
+												{{ quiz.question_en | safe }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="choices_description">
+										{% if quiz.choice1_detail %}
+											<p>Choices</p>
+										{% endif %}
+										{% if quiz.choice1_detail %}
+											<div class="answer answer_choice1">
+												<span>1. </span>{{ quiz.choice1_detail | safe }}
+											</div>
+										{% endif %}
+										{% if quiz.choice2_detail %}
+											<div class="answer answer_choice2">
+												<span>2. </span>{{ quiz.choice2_detail | safe }}
+											</div>
+										{% endif %}
+										{% if quiz.choice3_detail %}
+											<div class="answer answer_choice3">
+												<span>3. </span>{{ quiz.choice3_detail | safe}}
+											</div>
+										{% endif %}
+										{% if quiz.choice4_detail %}
+											<div class="answer answer_choice4">
+												<span>4. </span>{{ quiz.choice4_detail | safe }}
+											</div>
+										{% endif %}
+
+										{% if quiz.choicesdetail_set.all %}
+											<p>Choices</p>
+										{% endif %}
+										{% for choice in quiz.choicesdetail_set.all %}
+											{% if choice.choice_explanation_1 %}
+												<div class="explanation explanation_choice1">
+													{{ choice.choice_explanation_1 }}
+												</div>
+											{% endif %}
+											{% if choice.choice_explanation_2 %}
+												<div class="explanation explanation_choice2">
+													{{ choice.choice_explanation_2 }}
+												</div>
+											{% endif %}
+											{% if choice.choice_explanation_3 %}
+												<div class="explanation explanation_choice3">
+													{{ choice.choice_explanation_3 }}
+												</div>
+											{% endif %}
+											{% if choice.choice_explanation_4 %}
+												<div class="explanation explanation_choice4">
+													{{ choice.choice_explanation_4 }}
+												</div>
+											{% endif %}
+										{% endfor %}
+									</div>
+									<div class="description"><!--DetailDescription-->
+										{% for detail in quiz.descriptiondetail_set.all  %}
+											<div class="detail_description">
+												{% if detail.word %}
+													<div class="detail_word">
+														{{ detail.word  |safe }}
+													</div>
+												{% endif %}
+												{% if detail.yomi %}
+													<div class="detail_yomi">
+														<span>読:</span>{{ detail.yomi  |safe }}
+													</div>
+												{% endif %}
+												{% if detail.definition %}
+													<div class="detail_definition">
+														<span>義:</span>{{ detail.markdown_definition  |safe }}
+													</div>
+												{% endif %}
+												{% if detail.usage %}
+													<div class="detail_usage">
+														<span>用:</span>{{ detail.markdown_usage | safe}}
+													</div>
+												{% endif %}
+												{% if detail.example_ja %}
+													<div class="detail_example_ja">
+														<span>日:</span>{{ detail.example_ja |safe }}
+													</div>
+												{% endif %}
+												{% if detail.example_yomi %}
+													<div class="detail_example_yomi">
+														<span>読:</span>{{ detail.example_yomi |safe }}
+													</div>
+												{% endif %}
+												{% if detail.example_en %}
+													<div class="detail_example_en">
+														<span>英:</span>{{ detail.example_en | safe}}
+													</div>
+												{% endif %}
+											</div>
+										{% endfor %}
+
+									</div>
+								</div>
+							</div>
+							{% endif %}
+						</div>
+						</div>
+						{% endfor %}
+						<div class="button">
+							<a class="more_button" href="{% url 'quiz:all_quizzes_of_user' user.pk %}">More</a>
+						</div>
+					</div>
+				</div><!-- quiz end-->
+				<div class="articles_wrapper" id='article_wrapper' style="display:none;">
+					<div class="articles_container">
+			      {% for basic in liked_articles %}
+							{% if not basic.public and request.user.is_authenticated%}
+								<a class="article_link" href="{% url 'quiz:article_post' basic.title_slug %}">
+									{{basic.title}}
+								</a>
+								{% if basic.thumbnail  %}
+									<img src="{{ basic.thumbnail.url }}" alt="" style="width:100px;">
+								{% endif %}
+							{% endif %}
+			        {% if basic.public %}
+			          <article class = "article_container">
+									<a class="article_link" href="{% url 'quiz:article_post' basic.title_slug %}">
+										<div class="article_thumbnail">
+											{% if basic.thumbnail  %}
+											<img src="{{ basic.thumbnail.url }}" alt="">
+											{% endif %}
+										</div>
+				            <div class="article_top">
+				              <span>{{ basic.title|title }}</span>
+											{% if basic.summary %}
+											<div class="article_summary">
+												<p>{{ basic.summary | safe }}</p>
+											</div>
+											{% endif %}
+				            </div>
+									</a>
+									<div class="article_bottom">
+				            <div class="article_categories">
+				              {% if basic.category2 %}
+				                <a class="article_category article_category_{{basic.category2.slug}}" href="{% url 'quiz:article_category_post' basic.category2.slug %}">{{ basic.category2.name }}</a>
+				              {% endif %}
+				              	<span class="article_date">{{ basic.update |date:"M j, Y"}}</span>
+
+				            </div>
+										<div class="like_section article_like_section" id="article_{{basic.pk}}_like_section">
+											{% include 'quiz/articles/like.html' %}
+										</div>
+				            <div class="article_tags">
+			                {% for tag in basic.tag.all %}
+			                <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
+			              		{{ tag }}
+			              	</a>
+			              	{% endfor %}
+										</div>
+									</div>
+								</article>
+			        {% endif %}
+			      {% endfor %}
+						<div class="button">
+							<a class="more_button" href="{% url 'quiz:all_articles_of_user' user.pk %}">More</a>
+						</div>
+			    </div>
+				</div><!-- article end-->
+				<div class="correction_wrapper" id="correction_wrapper" style="display:none">
+					<div class="correction_contents_container">
+						<div class="correction_title list_head">
+							<span>Title</span>
+						</div>
+						<div class="correction_type list_head">
+							<span>Type</span>
+						</div>
+
+						{% for correction in submitted_corrections %}
+							{% if correction.public %}
+								<a href="{% url 'quiz:correction_post' correction.title_slug %}" class="correction_entry">
+									<div class="correction_title">
+										<p>{{correction.title}}</p>
+									</div>
+									<div class="correction_type">
+										{% if correction.type == 1 %}
+										<span>SUPER Casual</span>
+										{% endif %}
+										{% if correction.type == 2 %}
+										<span>Casual</span>
+										{% endif %}
+										{% if correction.type == 3 %}
+										<span>Formal</span>
+										{% endif %}
+										{% if correction.type == 4 %}
+										<span>SUPER Formal</span>
+										{% endif %}
+									</div>
+								</a>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div><!-- correction end-->
+			</div>
+		</div><!-- favorite list end-->
+	</div>
+
+		<script type="text/javascript">
+		$(document).on('click', '.quiz_like_button',function(event){
+			event.preventDefault();
+			var quiz_id = $(this).attr('id')
+			var quiz_id_like_section = '#quiz_' + quiz_id + '_like_section'
+					$.ajax({
+									 type: "POST",
+									 url: "{% url 'quiz:quiz_like' %}",
+									 data: {'pk': quiz_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+									 dataType: "json",
+									 success: function(response) {
+											$(quiz_id_like_section).html(response['form'])
+										},
+
+							});
+				})
+
+				$(document).on('click', '.article_like_button',function(event){
+					event.preventDefault();
+					var article_id = $(this).attr('id')
+					var article_id_like_section = '#article_' + article_id + '_like_section'
+							$.ajax({
+											 type: "POST",
+											 url: "{% url 'quiz:article_like' %}",
+											 data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+											 dataType: "json",
+											 success: function(response) {
+												 console.log('ok')
+													$(article_id_like_section).html(response['form'])
+												},
+
+									});
+						})
+		</script>
+	</body>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "quiz/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/register.min.css' %}">
+</head>
+<body>
+	{% include 'quiz/navbar.html' %}
+	<div class="wrapper register_wrapper plain_wrapper">
+		<p>The email has been sent. Please click on the link and finalize the procedure.</p>
+		<a href="{% url 'quiz:toppage' %}">Go back to Toppage.</a>
+
+	</div>
+</body>
+{% endblock %}

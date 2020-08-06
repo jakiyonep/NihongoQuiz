@@ -9,21 +9,32 @@
 	  <a href="/"><img class="logo_img" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/logo/380ac91c-2c70-49c4-ae0e-958f43ecf2df_200x200.png" alt="Nihongo Tatsujin"> </a>
 	</div>
   <ul class="navbar_list">
+		{% if user.is_authenticated %}
+		<li class="navbar_item">
+			<a href="{% url 'quiz:user_detail' request.user.pk %}">
+				MyPage
+			</a>
+		</li>
+		{% endif %}
+		<!--
     <li class="navbar_item">
       <a href="{% url 'quiz:basics' %}">
         Basics
       </a>
     </li>
+	-->
     <li class="navbar_item">
       <a href="{% url 'quiz:articles' %}">
         Articles
       </a>
     </li>
+		<!--
     <li class="navbar_item">
       <a href="{% url 'quiz:lessons' %}">
         Courses
       </a>
     </li>
+	-->
     <li class="navbar_item">
       <a href="{% url 'quiz:quiz' %}">
         Quizzes
@@ -34,26 +45,50 @@
         Correction
       </a>
     </li>
+		{% if not user.is_authenticated %}
+			<li class="navbar_item">
+				<a href="{% url 'quiz:login' %}">
+					Login
+				</a>
+			</li>
+		{% else %}
+			<li class="navbar_item">
+				<a href="{% url 'quiz:logout' %}">
+					Logout
+				</a>
+			</li>
+		{% endif %}
   </ul>
   <a class="navbar_button" href="#" onclick="drop()" ><i class="fas fa-bars"></i></a>
 </nav>
 </div>
 <ul class="navbar_list_collapse" id="navbar_collapse">
+	{% if user.is_authenticated %}
+	<li class="navbar_item_collapse">
+		<a href="{% url 'quiz:user_detail' request.user.pk %}">
+			MyPage
+		</a>
+	</li>
+	{% endif %}
+	<!--
 	<li class="navbar_item_collapse">
 		<a href="{% url 'quiz:basics' %}">
 			Basics
 		</a>
 	</li>
+-->
 	<li class="navbar_item_collapse">
 		<a href="{% url 'quiz:articles' %}">
 			Articles
 		</a>
 	</li>
+	<!--
 	<li class="navbar_item_collapse">
 		<a href="{% url 'quiz:lessons' %}">
 			Courses
 		</a>
 	</li>
+-->
 	<li class="navbar_item_collapse">
 		<a href="{% url 'quiz:quiz' %}">
 			Quizzes
@@ -64,5 +99,18 @@
 			Correction
 		</a>
 	</li>
+	{% if not user.is_authenticated %}
+		<li class="navbar_item_collapse">
+			<a href="{% url 'quiz:login' %}">
+				Login
+			</a>
+		</li>
+	{% else %}
+		<li class="navbar_item_collapse">
+			<a href="{% url 'quiz:logout' %}">
+				Logout
+			</a>
+		</li>
+	{% endif %}
 </ul>
 </body>

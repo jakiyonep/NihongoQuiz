@@ -170,8 +170,8 @@ else:
 
 
 AUTH_USER_MODEL = 'quiz.User'
-LOGIN_URL = 'sensei_app:login'
-LOGIN_REDIRECT_URL = 'sensei_app:toppage'
+LOGIN_URL = 'quiz:login'
+LOGIN_REDIRECT_URL = 'quiz:toppage'
 
 #Email Test
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -185,5 +185,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'atsumarenihongokyoushi@gmail.com'
+EMAIL_HOST_USER = 'nihongotatsujin.web@gmail.com'
 EMAIL_USE_TLS = True

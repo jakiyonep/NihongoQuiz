@@ -42,6 +42,9 @@
 	              {% endif %}
 	              	<span class="article_date">{{ basic.update |date:"M j, Y"}}</span>
 	            </div>
+							<div class="like_section article_like_section" id="article_{{basic.pk}}_like_section">
+								{% include 'quiz/articles/like.html' %}
+							</div>
 	            <div class="article_tags">
                 {% for tag in basic.tag.all %}
                 <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
@@ -63,5 +66,24 @@
       {% include 'quiz/pagination.html' %}
     </nav>
   </div>
+	<script type="text/javascript">
+
+	$(document).on('click', '.article_like_button',function(event){
+		event.preventDefault();
+		var article_id = $(this).attr('id')
+		var article_id_like_section = '#article_' + article_id + '_like_section'
+				$.ajax({
+								 type: "POST",
+								 url: "{% url 'quiz:article_like' %}",
+								 data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+								 dataType: "json",
+								 success: function(response) {
+									 console.log('ok')
+										$(article_id_like_section).html(response['form'])
+									},
+
+						});
+			})
+	</script>
 </body>
 {% endblock %}

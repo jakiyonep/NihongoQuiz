@@ -7,6 +7,7 @@ $en-color: rgb(82, 200, 254)
 $answer-color: rgb(255, 70, 70)
 $casual-color: rgb(8, 214, 0)
 $secondary-important: rgb(106, 106, 106)
+$border-thin-color: rgb(186, 186, 186)
 
 
 
@@ -40,7 +41,6 @@ $secondary-important: rgb(106, 106, 106)
 			border-radius: 10px
 			transition: 0.3s
 			&:hover
-				transform: translateY(-10px)
 				transition: 0.3s
 				box-shadow: 2px 2px 2px rgb(195, 195, 195)
 			.article_link
@@ -73,12 +73,14 @@ $secondary-important: rgb(106, 106, 106)
 				align-items: center
 				padding: 0.5rem
 				.article_categories
-					width: 45%
+					width: 35%
 					.article_category
 						color: white
 						padding: 0.2rem 0.5rem
 						border-radius: 10px
 					.article_date
+				.article_like_section
+					width: 10%
 				.article_tags
 					width: 55%
 					display: flex
@@ -105,39 +107,34 @@ $secondary-important: rgb(106, 106, 106)
 		width: 20%
 		transition:  0.5s
 		.search_form
-			margin-bottom: 3rem
-			.search_form_input
-				border: 1px solid
-				border-radius: 0.5rem
-		.sidebar_list
-			.sidebar_head
-				p
-					font-size: 1.1rem
-					border-bottom: 1px solid $base_letter_color
-					margin-bottom: 1rem
-			ul
-				.sidebar_category
-					color: white
-					padding: 0.2rem 1rem
-					border-radius: 10px
-		.article_category_list
 			margin-bottom: 5rem
-		.article_tag_list
-			.article_tag
-				background-color: rgb(203, 203, 203)
+			.search_form_input
+				background-color: white
+				width: 100%
+				border: 1px solid $border-thin-color
+			.search_form_button
+				background-color: $strong_red
 				color: white
-				padding: 0.2em 1em 0.2em 0.2em
-				border-radius: 0 2rem 2rem 0
-				white-space: nowrap
-				display: inline-block
-				margin-bottom: 1rem
-				&:before
-					content: ''
-					width: 0.5em
-					height: 0.5em
+				width: 100%
+				text-align: center
+				margin-top: 0.5rem
+				border-radius: 5px
+		.article_filter
+			.article_filter_choices
+				select
+					width: 100%
 					background-color: white
-					border-radius: 50%
-					display: inline-block
+					border: 1px solid $border-thin-color
+					margin-bottom: 1rem
+					.label
+			.button
+				background-color: $strong_red
+				color: white
+				width: 100%
+				text-align: center
+				margin-top: 0.5rem
+				border-radius: 5px
+
 
 	.article_references
 		width: 100%
@@ -378,9 +375,14 @@ $secondary-important: rgb(106, 106, 106)
 						margin-bottom: 1rem
 						display: flex
 						justify-content: space-between
+						order: 1
+					.article_like_section
+						width: 100%!important
+						order: 3
 					.article_tags
 						width: 100% !important
 						padding-left: 0
+						order: 2
 						.article_tag
 							margin-bottom: 1rem
 		.articles_sidebar
@@ -394,7 +396,7 @@ $secondary-important: rgb(106, 106, 106)
 				ul
 					white-space: nowrap
 					overflow-X: scroll
-		.articles_pagination
+		.pagination
 			width: 100%
 			order: 3
 		.open_nav

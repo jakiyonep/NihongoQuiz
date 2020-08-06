@@ -30,9 +30,9 @@
 
         {% for correction in object_list %}
           {% if correction.public %}
-            <div class="correction_entry">
+            <a href="{% url 'quiz:correction_post' correction.title_slug %}" class="correction_entry">
               <div class="correction_title">
-                <a href="{% url 'quiz:correction_post' correction.title_slug %}">{{correction.title}}</a>
+                <p>{{correction.title}}</p>
               </div>
               <div class="correction_type">
                 {% if correction.type == 1 %}
@@ -48,7 +48,7 @@
                 <span>SUPER Formal</span>
                 {% endif %}
               </div>
-            </div>
+            </a>
           {% endif %}
         {% endfor %}
       </main>

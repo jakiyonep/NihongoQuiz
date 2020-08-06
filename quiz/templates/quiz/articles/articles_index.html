@@ -11,12 +11,17 @@
 <body>
   {% include 'quiz/navbar.html' %}
 	<div class="wrapper articles_wrapper">
+		{% if login_user%}
+			<h1 class="section_head">{{login_user.nickname}}'s Favorite Articles</h1>
+		{% else %}
+			<h1 class="section_head">記 - Articles</h1> <!-- Advanced Head-->
+		{% endif %}
 
-  	<h1 class="section_head">記 - Articles</h1> <!-- Advanced Head-->
+
 		<span class="sidebar_button" id="sidebar_button" onclick="openNav()"><i class="fas fa-chevron-down"></i></span>
 
     <div class="articles_container">
-      {% for basic in article_list %}
+      {% for basic in page_obj %}
 				{% if not basic.public and request.user.is_authenticated%}
 					<a class="article_link" href="{% url 'quiz:article_post' basic.title_slug %}">
 						{{basic.title}}
@@ -48,7 +53,11 @@
 	                <a class="article_category article_category_{{basic.category2.slug}}" href="{% url 'quiz:article_category_post' basic.category2.slug %}">{{ basic.category2.name }}</a>
 	              {% endif %}
 	              	<span class="article_date">{{ basic.update |date:"M j, Y"}}</span>
+
 	            </div>
+							<div class="like_section article_like_section" id="article_{{basic.pk}}_like_section">
+								{% include 'quiz/articles/like.html' %}
+							</div>
 	            <div class="article_tags">
                 {% for tag in basic.tag.all %}
                 <a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
@@ -66,9 +75,28 @@
       {% include 'quiz/articles/article_tags.html' %}
     </aside>
 
-    <nav class="pagination articles_pagination"><!--Pagination-->
+
       {% include 'quiz/pagination.html' %}
-    </nav>
+
   </div>
+	<script type="text/javascript">
+
+	$(document).on('click', '.article_like_button',function(event){
+		event.preventDefault();
+		var article_id = $(this).attr('id')
+		var article_id_like_section = '#article_' + article_id + '_like_section'
+				$.ajax({
+								 type: "POST",
+								 url: "{% url 'quiz:article_like' %}",
+								 data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+								 dataType: "json",
+								 success: function(response) {
+									 console.log('ok')
+										$(article_id_like_section).html(response['form'])
+									},
+
+						});
+			})
+	</script>
 </body>
 {% endblock %}

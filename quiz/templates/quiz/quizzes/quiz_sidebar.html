@@ -3,39 +3,51 @@
 		<i class="fas fa-chevron-down"></i>
 	</div>
 	<div class="filter_collapse">
-		<form class="quiz_search" action="{% url 'quiz:search_post' %}" method="GET">
+		{% if quiz_index_query %}
+			<form class="quiz_search" action="{% url 'quiz:quiz' %}" method="GET">
+				<input class="search_input" type="search" name="q" value="{{ request.GET.q }}" placeholder="Keywords">
+					<button class="search_button" type="submit">Search</button>
+			</form>
+		{% elif quizzes_of_user_query %}
+		<form class="quiz_search" action="{% url 'quiz:all_quizzes_of_user' request.user.pk %}" method="GET">
 			<input class="search_input" type="search" name="q" value="{{ request.GET.q }}" placeholder="Keywords">
 				<button class="search_button" type="submit">Search</button>
 		</form>
+		{% else %}
+		<form class="quiz_search" action="{% url 'quiz:all_quizzes_of_user' request.user.pk %}" method="GET">
+			<input class="search_input" type="search" name="q" value="{{ request.GET.q }}" placeholder="Keywords">
+				<button class="search_button" type="submit">Search</button>
+		</form>
+		{% endif %}
 		<div class="quiz_filter">
 			<form method="GET">
 				<div class="quiz_filter_choices">
 					<div class="input level">
 						<div class="label">
-							{{filtered_quiz.form.level.label}}
+							{{quizzes.form.level.label}}
 						</div>
 						<div class="select">
-							{{filtered_quiz.form.level}}
+							{{quizzes.form.level}}
 						</div>
 					</div>
 					<div class="input category">
 						<div class="label">
-							{{filtered_quiz.form.category.label}}
+							{{quizzes.form.category.label}}
 						</div>
 						<div class="select">
-							{{filtered_quiz.form.category}}
+							{{quizzes.form.category}}
 						</div>
 					</div>
 					<div class="input tags">
 						<div class="label">
-							{{filtered_quiz.form.tags.label}}
+							{{quizzes.form.tags.label}}
 						</div>
 						<div class="select">
-							{{filtered_quiz.form.tags}}
+							{{quizzes.form.tags}}
 						</div>
 					</div>
 				</div>
-				{% if filtered_quiz.form %}
+				{% if quizzes.form %}
 					<button type="submit" name="button" class ="btn button">Find Quizzes</button>
 				{% endif %}
 			</form>

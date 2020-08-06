@@ -16,10 +16,11 @@
     <div class="wrapper correction_post_wrapper">
 	    <div class="container correction_post_container">
 	      <div class="correction_post_info">
-	        {% if object.name %}
+					{% if object.login_name.nickname %}
+						<p class="writer">Written by <span class="written_by">{{object.login_name.nickname}}</span></p>
+	        {% elif object.name %}
 	          <p class="writer">Written by <span class="written_by">{{object.name}}</span></p>
-	        {% endif %}
-	        {% if not object.name %}
+	        {% else %}
 	          <p class="writer">Written by <span class="written_by">John Doe</span></p>
 	        {% endif %}
 

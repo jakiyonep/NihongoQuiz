@@ -1,12 +1,15 @@
 from django.db import models
+
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from django.utils import timezone
 from django.core.validators import MaxLengthValidator, MinLengthValidator
-from datetime import datetime
-from django.core.mail import send_mail
+
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin, AbstractUser
+
+from django.core.mail import send_mail, BadHeaderError
+
 
 # Create your models here.
 # BeforeYouStart
@@ -17,7 +20,7 @@ class CustomUserManager(UserManager):
 
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError('メールアドレスを入力してください')
+            raise ValueError('Please enter an email address')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -42,8 +45,8 @@ class CustomUserManager(UserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
 
-    email = models.EmailField(_('メールアドレス'), unique=True)
-    nickname = models.CharField(_('ニックネーム'), max_length=150, blank=True, unique=True)
+    email = models.EmailField(_('Email'), unique=True)
+    nickname = models.CharField(_('Nickname'), max_length=150, blank=True, unique=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -138,6 +141,7 @@ class Level(models.Model):
 
 class Quiz(models.Model):
     public = models.BooleanField(default=True)
+    likes = models.ManyToManyField(User, null=True, related_name='liked_quiz')
     level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -177,6 +181,10 @@ class Quiz(models.Model):
 
     def __str__(self):
         return self.question
+    def total_likes(self):
+        return self.likes.count()
+
+
 
 
 class DescriptionDetail(models.Model):
@@ -227,7 +235,7 @@ class ArticlesCategory(models.Model):
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
     title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
-
+    likes = models.ManyToManyField(User, null=True, related_name='liked_article')
     category2 = models.ForeignKey(ArticlesCategory, null=True, blank=True, on_delete=models.CASCADE)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
@@ -236,8 +244,6 @@ class Articles(models.Model):
     public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
     thumbnail = models.ImageField(upload_to='article_thumbnail/', null=True, blank=True)
-
-
     related_basics = models.ManyToManyField('self', blank=True, null=True)
 
     class Meta:
@@ -249,6 +255,8 @@ class Articles(models.Model):
     def markdown(self):
         return markdownify(self.content)
 
+    def total_likes(self):
+        return self.likes.count()
 
 class ArticleImage(models.Model):
     article = models.ForeignKey(Articles, on_delete=models.CASCADE)
@@ -360,7 +368,6 @@ class Lesson(models.Model):
     def __str__(self):
         return self.title
 
-
 class LessonBody(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     person = models.CharField(null=True, max_length=300, blank=True)
@@ -371,7 +378,6 @@ class LessonBody(models.Model):
 
     class Meta:
         ordering = ['lesson', 'id']
-
 
 class LessonVocabulary(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
@@ -385,7 +391,6 @@ class LessonVocabulary(models.Model):
     class Meta:
         ordering = ['lesson', 'order']
 
-
 class LessonQuestion(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     number = models.IntegerField(default=1, blank=True, null=True)
@@ -398,7 +403,6 @@ class LessonQuestion(models.Model):
 
     class Meta:
         ordering = ['lesson', 'id']
-
 
 class LessonGrammar(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
@@ -415,11 +419,9 @@ class LessonGrammar(models.Model):
     def markdown(self):
         return markdownify(self.desc)
 
-
 class LessonGrammarImage(models.Model):
     lesson_grammar = models.ForeignKey(LessonGrammar, on_delete=models.CASCADE)
     lesson_gramamr_image = models.ImageField(upload_to='grammar_image/', null=True, blank=True)
-
 
 class LessonKanji(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
@@ -433,12 +435,14 @@ class LessonKanji(models.Model):
     class Meta:
         ordering = ['lesson', 'id']
 
+# Correction
 
 class Correction(models.Model):
     title = models.TextField(max_length=100, null=True, blank=True, default="New!")
     title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
     public = models.BooleanField(default=False)
     name = models.CharField(max_length=100, null=True, blank=True)
+    login_name = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name="submitted_corrections")
     text = models.TextField(max_length=500,
                             validators=[
                                 MaxLengthValidator(500, 'Text should be less than 500 characters! Suimasen!'),
@@ -462,8 +466,6 @@ class Correction(models.Model):
             self.title = "New!!"
 
         return self.title
-
-
 
 class CorrectionSentences(models.Model):
     correction = models.ForeignKey(Correction, on_delete=models.CASCADE)

@@ -11,7 +11,6 @@
   </head>
   <body>
     {% include 'quiz/navbar.html' %}
-
     <div class="wrapper toppage_wrapper">
       <section class="toppage_container toppage_beforeyoustart"><!-- Before You Start-->
         <a href="{% url 'quiz:before_you_start' %}">
@@ -21,8 +20,37 @@
 	        </div>
 				</a>
       </section>
-
+			{% if user.is_authenticated %}
+			<section class="toppage_container"><!-- Logout-->
+				<a href="{% url 'quiz:user_detail' request.user.pk %}">
+					<div class="toppage_content">
+						<h2 class="toppage_content_head">My Page</h2>
+						<p class="toppage_content_desc">See your activities here</p>
+					</div>
+				</a>
+			</section>
+			
+			<section class="toppage_container"><!-- Logout-->
+				<a href="{% url 'quiz:logout' %}">
+					<div class="toppage_content">
+						<h2 class="toppage_content_head">出 - Logout</h2>
+						<p class="toppage_content_desc">さようなら!</p>
+					</div>
+				</a>
+			</section>
+			{% else %}
 			<section class="toppage_container toppage_basics"><!-- Basics-->
+        <a href="{% url 'quiz:login' %}">
+	        <div class="toppage_content">
+						<h2 class="toppage_content_head">員 - Login/Register</h2>
+						<p class="toppage_content_desc">Stay logged in and keep your favorite Articles and Quizzes. Not have an account yet? You can register here!</p>
+	        </div>
+				</a>
+      </section>
+			{% endif %}
+
+	<!--
+			<section class="toppage_container toppage_basics">
         <a href="{% url 'quiz:basics' %}">
 	        <div class="toppage_content">
 						<h2 class="toppage_content_head">基 - Basics</h2>
@@ -30,6 +58,7 @@
 	        </div>
 				</a>
       </section>
+	-->
 
 			<section class="toppage_container toppage_articles"><!-- Articles-->
 				<a href="{% url 'quiz:articles' %}">
@@ -39,8 +68,8 @@
 					</div>
 				</a>
 			</section>
-
-			<section class="toppage_container toppage_courses"><!--Courses-->
+<!--
+			<section class="toppage_container toppage_courses">
 				<a href="{% url 'quiz:lessons' %}">
 					<div class="toppage_content">
 						<h2 class="toppage_content_head">習 - Courses</h2>
@@ -48,7 +77,7 @@
 					</div>
 				</a>
 			</section>
-
+-->
 			<section class="toppage_container toppage_quizzes"><!--Quizzes -->
 				<a href="{% url 'quiz:quiz' %}">
 					<div class="toppage_content">

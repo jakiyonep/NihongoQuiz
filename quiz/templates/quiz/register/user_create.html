@@ -1,0 +1,30 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+{% load static %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/register.min.css' %}">
+</head>
+<body>
+	{% include 'quiz/navbar.html' %}
+	<div class="wrapper register_wrapper">
+		<div class="form_container">
+			<p class="form_head">Registration</p>
+			<p class="form_desc">Fill in the forms below, and we will send you a link for the registration.</p>
+			<form action="" method="POST">
+		    {{ form.non_field_errors }}
+				<div class="form_groups">
+			    {% for field in form %}
+			    <div class="form_group">
+		        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+		        <span>{{ field }}</span>
+		        <span>{{ field.errors }}</span>
+			    </div>
+			    {% endfor %}
+				</div>
+		    {% csrf_token %}
+		    <button type="submit" class="form_button">Submit</button>
+			</form>
+		</div>
+	</div>
+</body>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "quiz/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/register.min.css' %}">
+</head>
+<body>
+	{% include 'quiz/navbar.html' %}
+	<div class="wrapper register_wrapper plain_wrapper">
+		<p>メールアドレスを変更しました</p>
+		<a href="{% url 'quiz:toppage' %}">トップページに戻る</a>
+
+	</div>
+</body>
+{% endblock %}

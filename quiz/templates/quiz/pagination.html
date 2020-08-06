@@ -1,10 +1,11 @@
 {% load static %}
 {% load quiz_filter %}
 <link rel="stylesheet" href="{% static 'quiz/css/pagination.min.css' %}">
+
 <nav class="pagination">
 
 {% if page_obj.has_next or page_obj.has_previous%}
-<ul>
+<ul class="pagination_ul">
 	{% if page_obj.number|add:"-3" > 1 %}
 		<li class="page-item">
 			<a class="page-link page-side" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">1&laquo;</a>
@@ -29,5 +30,5 @@
 		</li>
 	{% endif %}
 </ul>
-{% endif %}
 </nav>
+{% endif %}

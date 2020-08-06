@@ -13,11 +13,13 @@
 		{% include 'quiz/navbar.html' %}
     <div class="wrapper correction_add_wrapper">
       <div class="container correction_add_container">
-        <form class="correction_form" action="{% url 'quiz:correction_add' %}" method="POST">
-          <div class="correction_name">
-            <p class="correction_label">Name<span class="span">(Optional)</span></p>
-            {{form.name}}
-          </div>
+        <form class="correction_form" action="{% url 'quiz:correction_add' %}" method="POST" onsubmit="return confirm('Are you sure you want to submit this?');">
+					{% if not request.user.is_authenticated %}
+	        	<div class="correction_name">
+	            <p class="correction_label">Name<span class="span">(Optional)</span></p>
+	            {{form.name}}
+	          </div>
+					{% endif %}
           <div class="correction_level">
             <p class="correction_label">Formality<span class="span">(Optional)</span></p>
             {{form.type}}
@@ -32,9 +34,9 @@
             </p>
             {{form.desc}}
           </div>
-          <span class="correction_error">{{form.text.errors}}</span>
 
-          <button type="submit" name="button" class="correction_submit_button">Submit</button>
+
+          <button type="submit" name="button" class="correction_submit_button" >Submit</button>
           {% csrf_token %}
         </form>
       </div>

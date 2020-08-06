@@ -4,8 +4,6 @@
 		<link rel="stylesheet" href="{% static 'quiz/css/quiz.min.css' %}">
 	</head>
 	<body>
-
-
 			<div class="quizzes_container">
 				{% for quiz in object_list %}
 				<div class="quiz_container">
@@ -60,10 +58,14 @@
 								<a class="level {{quiz.level.slug}}" href="{% url 'quiz:level_post' quiz.level.slug %}">{{quiz.level}}</a>
 								<a class="category {{quiz.category.slug}}" href="{% url 'quiz:category_post' quiz.category.slug %}">{{quiz.category}}</a>
 							</div>
+
 							<div class="answer_button">
 								<a class="answer_button_a" id="{{quiz.pk}}">
 									Answer
 								</a>
+								<div class="quiz_like_section like_section" id="quiz_{{quiz.pk}}_like_section">
+									{% include 'quiz/quizzes/like.html' %}
+								</div>
 							</div>
 							<div class="quiz_tags"><!--tags-->
 								{% for tag in quiz.tags.all %}
@@ -191,6 +193,23 @@
 
 			{% include 'quiz/pagination.html' %}
 		</div>
+		<script type="text/javascript">
 
+		$(document).on('click', '.quiz_like_button',function(event){
+			event.preventDefault();
+			var quiz_id = $(this).attr('id')
+			var quiz_id_like_section = '#quiz_' + quiz_id + '_like_section'
+					$.ajax({
+									 type: "POST",
+									 url: "{% url 'quiz:quiz_like' %}",
+									 data: {'pk': quiz_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+									 dataType: "json",
+									 success: function(response) {
+											$(quiz_id_like_section).html(response['form'])
+										},
+
+							});
+				})
+		</script>
 	</body>
 </body>

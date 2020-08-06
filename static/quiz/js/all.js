@@ -98,3 +98,20 @@ $(function(){
 
 })
 });
+
+
+$(document).on('click', '.top_item', function(event){
+	event.preventDefault();
+	var selected_id = $(this).attr('id')
+	var selected_wrapper = $('#' + selected_id + '_wrapper')
+	if($(this).hasClass('active')){
+
+	}else{
+		$(this).addClass('active')
+		$(this).siblings().removeClass('active')
+
+
+		$(selected_wrapper).siblings().hide()
+		$(selected_wrapper).show()
+	}
+})

@@ -1,7 +1,10 @@
 .pagination
 	width: 75%
 	text-align: center
-	ul
+	margin-bottom: 5rem
+
+	.pagination_ul
+		margin: 0 auto
 	.page-item
 		background-color: rgb(98, 98, 98)
 		display: inline-block
@@ -13,3 +16,10 @@
 		background-color: rgb(143, 143, 143)
 		display: inline-block
 		border-radius: 0.5rem
+
+
+@media screen and (max-width:800px)
+	.pagination
+		width: 100%
+		.page-item
+			margin-right: 0!important
