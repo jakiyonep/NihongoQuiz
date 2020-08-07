@@ -39,6 +39,7 @@ from django.contrib.auth.views import (
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, BadHeaderError
 from datetime import datetime
+from django.utils import timezone
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.db.models import Count, Q
@@ -101,6 +102,76 @@ def QuizLike(request):
         html = render_to_string('quiz/quizzes/like.html', ctx, request=request)
         return JsonResponse({'form':html})
 
+def QuizPoll(request):
+    user = request.user
+    pk = request.POST.get('pk', None)
+    quiz = get_object_or_404(Quiz, pk=pk)
+    first_try = 10
+    is_tried = False
+
+    if user in quiz.answered_user.filter(pk=user.pk):
+        is_tried = True
+
+    if request.method == 'POST':
+        if not quiz.answered_user.filter(pk=user.pk).exists():
+
+            ctx = {
+                'quiz': quiz,
+            }
+
+    if request.is_ajax():
+        choice = request.POST['selected_choice']
+        correct_choice = request.POST['correct_choice']
+
+        if not quiz.answered_user.filter(pk=user.pk).exists():
+            if choice == "1":
+                quiz.choice1_count.add(user)
+            if choice == "2":
+                quiz.choice2_count.add(user)
+            if choice == "3":
+                quiz.choice3_count.add(user)
+            if choice == "4":
+                quiz.choice4_count.add(user)
+            quiz.answered_user.add(user)
+
+
+        if is_tried == False:
+
+            if choice == correct_choice:
+                quiz.first_try_correct.add(user)
+                print('first_try_correct')
+                first_try = 1
+
+            else:
+                print('first_try_wrong')
+                first_try = 0
+
+        else:
+
+            if quiz.first_try_correct.filter(pk=user.pk).exists():
+                print('non_first_correct')
+                first_try = 1
+            else:
+                print('non_first_wrong')
+                first_try = 0
+
+
+        ctx = {
+            'choice_1': quiz.choice1_count,
+            'choice_2': quiz.choice2_count,
+            'choice_3': quiz.choice3_count,
+            'choice_4': quiz.choice4_count,
+            'quiz':quiz,
+            'total_user_answered': quiz.total_user_answered(),
+            'first_try': first_try,
+            'choice': choice,
+            'correct_choice': correct_choice,
+        }
+
+
+
+        html = render_to_string('quiz/quizzes/choice_section.html', ctx, request=request)
+        return JsonResponse({'form':html})
 
 class LevelListView(ListView):
 
@@ -300,18 +371,16 @@ def ArticleLike(request):
         html = render_to_string('quiz/articles/like.html', ctx, request=request)
         return JsonResponse({'form':html})
 
-class ArticleDetailView(DetailView):
-    model = Articles
-    template_name = 'quiz/articles/article_post.html'
-    slug_field = 'title_slug'
-    slug_url_kwarg = "title_slug"
+def ArticleDetail(request, title_slug):
+    article = get_object_or_404(Articles, title_slug=title_slug)
+    comments = Comment.objects.all()
+    article_comments = comments.filter(article=article)
+    context = {
+        "article": article,
+        "comments": article_comments,
+    }
 
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-
-        if not obj.public and not self.request.user.is_authenticated:
-            raise Http404
-        return obj
+    return render(request, "quiz/articles/article_post.html", context)
 
 class ArticlesTagList(ListView):
     queryset = ArticlesTag.objects.annotate(
@@ -365,24 +434,36 @@ def ArticleCategoryView(request, article_category2_slug):
         'selected_category2': selected_category2,
     })
 
-class CommentFormView(CreateView):
-    model = Comment
-    form_class = CommentForm
-    template_name = 'quiz/articles/comment/comment_form.html'
 
-    def form_valid(self, form):
-        comment = form.save(commit=False)
-        post_pk = self.kwargs['pk']
-        comment.article = get_object_or_404(Articles, pk=post_pk)
+def CommentAdd(request):
+    context={}
+    if request.is_ajax():
+        login_author = None
+        author = request.POST['comment_author']
+        comment_content = request.POST['comment_content']
+        article_pk = request.POST['article_id']
+        article = get_object_or_404(Articles, pk=article_pk)
+        if request.user.is_authenticated:
+            login_author = request.user
+            print(login_author)
+        comment = Comment(
+            article = article,
+            author = author,
+            text = comment_content,
+            timestamp = timezone.now(),
+            login_author = login_author,
+        )
         comment.save()
-        article_title_slug = comment.article.title_slug
-        return redirect('quiz:article_post', title_slug=article_title_slug)
+        all_comments = Comment.objects.all()
+        comments = all_comments.filter(article=article)
+        context = {
+            'comments': comments,
+        }
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        post_pk = self.kwargs['pk']
-        context['post'] = get_object_or_404(Articles, pk=post_pk)
-        return context
+        html = render_to_string('quiz/articles/comment/comments.html', context, request=request)
+        print('ss')
+        return JsonResponse({'form':html})
+
 
 @login_required
 def comment_approve(request, pk):
@@ -399,24 +480,35 @@ def comment_remove(request, pk):
     article_title_slug = comment.article.title_slug
     return redirect('quiz:article_post', title_slug=article_title_slug)
 
-class ReplyFormView(CreateView):
-    model = Reply
-    form_class = ReplyForm
-    template_name = 'quiz/articles/comment/reply_form.html'
-
-    def form_valid(self, form):
-        reply = form.save(commit=False)
-        comment_pk = self.kwargs['pk']
-        reply.comment = get_object_or_404(Comment, pk=comment_pk)
+def ReplyAdd(request):
+    context={}
+    if request.is_ajax():
+        print('ajax start')
+        login_author = None
+        author = request.POST['reply_author']
+        reply_content = request.POST['reply_content']
+        comment_pk = request.POST['comment_id']
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        if request.user.is_authenticated:
+            login_author = request.user
+            print(login_author)
+        reply = Reply(
+            comment = comment,
+            author = author,
+            text = reply_content,
+            timestamp = timezone.now(),
+            login_author = login_author,
+        )
         reply.save()
-        article_title_slug = reply.comment.article.title_slug
-        return redirect('quiz:article_post', title_slug=article_title_slug)
+        all_replies = Reply.objects.all()
+        replies = all_replies.filter(comment=comment)
+        context = {
+            'replies': replies
+        }
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        comment_pk = self.kwargs['pk']
-        context['comment'] = get_object_or_404(Comment, pk=comment_pk)
-        return context
+        html = render_to_string('quiz/articles/comment/replies.html', context, request=request)
+        return JsonResponse({'form':html})
+
 
 @login_required
 def reply_approve(request, pk):
@@ -537,7 +629,8 @@ class UserCreate(generic.CreateView):
 
         # アクティベーションURLの送付
         current_site = get_current_site(self.request)
-        domain = current_site.domain
+        #domain = current_site.domain
+        domain = '127.0.0.1:8000'
 
         context = {
             'protocol': 'https' if self.request.is_secure() else 'http',
@@ -609,7 +702,20 @@ def UserDetail(request, pk):
     liked_quizzes = Quiz.objects.all().filter(likes=request.user)
     sliced_liked_quizzes = liked_quizzes[:5]
     liked_quizzes_num = len(liked_quizzes)
+    #Correct_Wrong
+    answered_quizzes = Quiz.objects.all().filter(answered_user=login_author)
+    answered_quizzes_num = len(answered_quizzes)
+    correct_quizzes = Quiz.objects.all().filter(first_try_correct=request.user)
+    correct_quizzes_num = len(correct_quizzes)
+    sliced_correct_quizzes = correct_quizzes[:5]
+    wrong_quizzes = Quiz.objects.all().exclude(first_try_correct=request.user)
+    wrong_quizzes_num = len(wrong_quizzes)
+    sliced_wrong_quizzes = wrong_quizzes[:5]
 
+    if not int(correct_quizzes_num ) == 0 and not int(answered_quizzes_num) == 0:
+        correct_rate = "{:.0%}".format((int(correct_quizzes_num) / int(answered_quizzes_num)))
+    else:
+        correct_rate = 0
     #Article
     liked_articles = Articles.objects.all().filter(likes=request.user)
     sliced_liked_articles = liked_articles[:5]
@@ -624,6 +730,11 @@ def UserDetail(request, pk):
         #Quiz
         'object_list': sliced_liked_quizzes,
         'liked_quizzes_num': liked_quizzes_num,
+        'correct_quizzes':sliced_correct_quizzes,
+        'correct_quizzes_num': correct_quizzes_num,
+        'wrong_quizzes': sliced_wrong_quizzes,
+        'wrong_quizzes_num': wrong_quizzes_num,
+        'correct_rate': correct_rate,
         #Articles
         'liked_articles': sliced_liked_articles,
         'liked_articles_num': liked_articles_num,
@@ -679,8 +790,74 @@ def AllQuizzesofUser(request, pk):
         'num': page_number,
         'paginator': paginator,
         'quizzes_of_user_query': 1,
-    })
+     })
 
+def CorrectQuizzesofUser(request,pk):
+    login_author = get_object_or_404(User, pk=pk)
+    correct_quizzes = Quiz.objects.all().filter(first_try_correct=request.user)
+
+
+    quizzes_of_user_query = request.GET.get('q')
+    if quizzes_of_user_query:
+        correct_quizzes = correct_quizzes.filter(
+            Q(question__icontains=quizzes_of_user_query) |
+            Q(choice1__icontains=quizzes_of_user_query) |
+            Q(choice2__icontains=quizzes_of_user_query) |
+            Q(choice3__icontains=quizzes_of_user_query) |
+            Q(choice4__icontains=quizzes_of_user_query)
+        ).distinct()
+
+    correct_quizzes = QuizFilter(
+        request.GET,
+        queryset=correct_quizzes,
+    )
+
+    paginator = Paginator(correct_quizzes.qs, 10)
+    page_number = request.GET.get('page')
+    quiz_page_obj = paginator.get_page(page_number)
+
+    return render(request, 'quiz/quizzes/correct_quizzes_of_user.html', {
+        'login_user': login_author,
+        'quizzes': correct_quizzes,
+        'correct_quizzes': 1,
+        'quiz_page_obj': quiz_page_obj,
+        'num': page_number,
+        'paginator': paginator,
+        'quizzes_of_user_query': 1,
+     })
+
+def WrongQuizzesofUser(request,pk):
+    login_author = get_object_or_404(User, pk=pk)
+    wrong_quizzes = Quiz.objects.all().exclude(first_try_correct=request.user)
+
+    quizzes_of_user_query = request.GET.get('q')
+    if quizzes_of_user_query:
+        correct_quizzes = wrong_quizzes.filter(
+            Q(question__icontains=quizzes_of_user_query) |
+            Q(choice1__icontains=quizzes_of_user_query) |
+            Q(choice2__icontains=quizzes_of_user_query) |
+            Q(choice3__icontains=quizzes_of_user_query) |
+            Q(choice4__icontains=quizzes_of_user_query)
+        ).distinct()
+
+    wrong_quizzes = QuizFilter(
+        request.GET,
+        queryset=wrong_quizzes,
+    )
+
+    paginator = Paginator(wrong_quizzes.qs, 10)
+    page_number = request.GET.get('page')
+    quiz_page_obj = paginator.get_page(page_number)
+
+    return render(request, 'quiz/quizzes/wrong_quizzes_of_user.html', {
+        'login_user': login_author,
+        'quizzes': wrong_quizzes,
+        'wrong_quizzes': 1,
+        'quiz_page_obj': quiz_page_obj,
+        'num': page_number,
+        'paginator': paginator,
+        'quizzes_of_user_query': 1,
+    })
 
 def AllArticlesofUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
@@ -707,9 +884,6 @@ def AllArticlesofUser(request, pk):
         'paginator':paginator,
         'answer_of_user_query': 1,
     })
-
-
-
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):
     """ユーザー情報更新ページ"""

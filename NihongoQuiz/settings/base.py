@@ -66,19 +66,16 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 ]
 MARKDOWNIFY_STRIP = False
 MARKDOWNIFY_WHITELIST_TAGS = {
-    'p'
-    'h1'
-    'h2'
-    'h3'
-    'h4'
-    'h5'
-    'span'
-    'li'
-    'ol'
-    'ul'
-    'a'
+    'a', 'p',
+    'h1', 'h2', 'h3','h4', 'h5', 'h6', 'h7',
+    'ul', 'li', 'span', 'ol',
+    'strong', 'img',
 
 }
+MARKDOWNIFY_WHITELIST_ATTRS = [
+    'src',
+]
+
 
 
 TEMPLATES = [
@@ -99,6 +96,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'NihongoQuiz.wsgi.application'
+
 
 
 # Database

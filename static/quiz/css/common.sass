@@ -5,6 +5,18 @@ $yomi-color: rgb(255, 183, 158)
 $en-color: rgb(82, 200, 254)
 $answer-color: rgb(255, 70, 70)
 $casual-color: rgb(8, 214, 0)
+$nihongo-bg: rgb(251, 136, 74)
+$sensei-bg: rgb(52, 117, 242)
+$jltct-bg: rgb(76, 230, 118)
+$others-bg: rgb(41, 112, 129)
+$question-bg: rgb(230, 230, 230)
+$border-primary: rgb(121, 121, 121)
+$border-secondary: rgb(228, 228, 228)
+$strong-color: rgb(255, 112, 112)
+$sub-strong-color: rgb(111, 181, 218)
+$link-color: rgb(3, 196, 214)
+$base_bacground_color: rgb(247, 247, 247)
+$base_letter_color: rgb(111, 111, 111)
 
 
 *
@@ -122,6 +134,36 @@ tr:nth-child(odd)
     border-radius: 5px
     background-color: rgb(185, 211, 223)
 
+
+
+
+.user_content
+	&>*
+		margin-top: 1rem
+	h1, h2, h3, h4
+		border-bottom: 1px solid $border-secondary
+		font-size: 1.5rem
+	h2
+		font-size: 1.4rem
+	h3
+		font-size: 1.3rem
+	h4
+		font-size: 1.2rem
+	ul
+		li
+			list-style: circle
+			list-style-position: inside
+	ol
+		li
+			list-style: decimal
+			list-style-position: inside
+	strong
+		background: linear-gradient(transparent 90%, #ff8171 80%)
+		color: inherit
+	a
+		color: $link-color
+		&:hover
+			cursor: pointer
 
 @media screen and (max-width:800px)
 	.wrapper

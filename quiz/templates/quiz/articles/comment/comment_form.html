@@ -1,29 +1,13 @@
-{% extends 'quiz/base.html' %}
-{% load static %}
-{% block title %}Comment Form{% endblock %}
-{% block description %}
-
-{% endblock %}
-{% block content %}
-<head>
-	<link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
-</head>
-<body>
-	{% include 'quiz/navbar.html' %}
-	<div class="comment_form wrapper">
-	  <main>
-	    <h2 class="section_head">Comment Form</h1>
-
-	    <p class="article">To: <span>{{ post.title }}</span></p>
-	    <form class="comment_text" method="POST">{% csrf_token %}
-	      {{ form.author }}
-				{{ form.text }}
-				{% if user.is_authenticated %}
-				{{ form.aki }}
-				{% endif %}
-	      <button type="submit" class="comment_submit_button">Submit</button>
-	    </form>
-	  </main>
-	</div>
-</body>
-{% endblock %}
+<form class="comment_form" method="POST">{% csrf_token %}
+	{% if not user.is_authenticated%}
+		<div class="author">
+			<label>Name(optional)</label>
+			<input type="text" name="author" id ="comment_author_id">
+		</div>
+	{% endif %}
+		<div class="comment_content">
+			<label>Comment</label>
+			<textarea id="comment_content_id" name="comment_content" rows="8" cols="80"></textarea>
+		</div>
+    <button type="submit" class="comment_submit_button" id="comment_submit" name="{{article.pk}}">Submit</button>
+</form>

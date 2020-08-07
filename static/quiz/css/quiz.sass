@@ -46,26 +46,66 @@ $vocabulary-color: rgb(124, 171, 255)
 				margin-bottom: 2rem
 				background: rgb(106, 106, 106)
 				padding: 1rem
-				border-radius: 0 10px 0 10px
+	
 				color: red
 				h2
 					color: white
 			.quiz_body_container
-				.quiz_choices
-					width: 100%
-					display: flex
-					flex-wrap: wrap
-					justify-content: space-between
-					margin-bottom: 1.5rem
-					.choice
-						width: 50%
-						background-color: rgb(235, 235, 235)
-						padding: 0.5rem
-						margin-bottom: 1.5rem
-						border: 2px solid $base_bacground_color
-				.long
-					.choice
+				.choice_section
+					.total_user
+						display: flex
 						width: 100%
+						border: 1px solid $border-thin-color
+						border-radius: 0.5rem
+						padding: 0.5rem
+						margin-bottom: 1rem
+						flex-wrap: wrap
+						p
+							display: inline-block
+							i
+								margin-right: 0.5rem
+						.user_num
+							width: 50%
+							span
+								font-size: 1.2rem
+								font-weight: bold
+						.request_user_status
+							width: 50%
+
+						.quiz_correct
+							color: $casual-color
+						.quiz_wrong
+							color: red
+					.quiz_choices
+						width: 100%
+						display: flex
+						flex-wrap: wrap
+						justify-content: space-between
+						margin-bottom: 1.5rem
+						.choice
+							width: 50%
+							background-color: rgb(235, 235, 235)
+							padding: 0.5rem
+							margin-bottom: 1.5rem
+							border: 2px solid $base_bacground_color
+							.quiz_choice_button
+								display: flex
+								width: 100%
+
+								p
+									width: 90%
+									display: inline-block
+								.choice_count
+									width: 10%
+									text-align: center
+							.choice_count
+								font-size: 1.1rem
+								font-weight: bold
+					.long
+						.choice
+							width: 100%!important
+
+
 				.quiz_bottom
 					border: 1px solid $border-thin-color
 					padding: 0.7rem
@@ -147,8 +187,18 @@ $vocabulary-color: rgb(124, 171, 255)
 							margin-bottom: 1rem
 							.question_yomi
 								margin-bottom: 1rem
+								color: $yomi-color
 							.question_en
 								font-style: italic
+								color: $en-color
+						.quiz_explanation
+							margin-bottom: 1rem
+							padding-top: 1rem
+							padding-bottom: 1rem
+							border-top: 1px solid $border-thin-color
+						.content
+							border-bottom: none
+							margin-bottom: 0
 						.choices_description
 							margin-bottom: 1rem
 							padding-top: 1rem
@@ -189,7 +239,9 @@ $vocabulary-color: rgb(124, 171, 255)
 								.detail_example_ja
 									margin-top: 1rem
 								.detail_example_yomi
+									color: $yomi-color
 								.detail_example_en
+									color: $en-color
 
 	.quiz_filter_container
 		width: 20%
@@ -239,6 +291,11 @@ $vocabulary-color: rgb(124, 171, 255)
 			width: 100% !important
 			order: 1
 			margin-bottom: 4rem
+		.total_user
+			.user_num
+				width: 100%!important
+			.request_user_status
+				width: 100%!important
 			.open_button
 				display: block
 				margin-bottom: 3rem
@@ -253,3 +310,9 @@ $vocabulary-color: rgb(124, 171, 255)
 			a
 				font-size: 1rem
 				padding: 0.3rem!important
+
+
+.selected_one
+	border: 1px solid red !important
+.correct_one
+	border: 1px solid green !important

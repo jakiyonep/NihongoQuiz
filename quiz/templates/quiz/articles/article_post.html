@@ -1,8 +1,8 @@
 {% extends 'quiz/base.html' %}
 {% load static %}
-{% block title %} {{object.title}} {% endblock %}
+{% block title %} {{article.title}} {% endblock %}
 {% block description %}
-  {{object.summary}}
+  {{article.summary}}
 {% endblock %}
 {% block content %}
 <head>
@@ -14,19 +14,19 @@
     <div class="wrapper articles_wrapper articles_post_wrapper content_wrapper">
       <main class="container articles_container">
         <div class="article-post_info">
-          <h1 class="article-post_title">{{ object.title }}</h1>
-						<span class="article_date">{{ object.update |date:"M j, Y"}}</span>
-						{% if object.category2 %}
-							<a class="article_category article_category_{{object.category2.slug}}" href="{% url 'quiz:article_category_post' object.category2.slug %}">{{ object.category2.name }}</a>
+          <h1 class="article-post_title">{{ article.title }}</h1>
+						<span class="article_date">{{ article.update |date:"M j, Y"}}</span>
+						{% if article.category2 %}
+							<a class="article_category article_category_{{article.category2.slug}}" href="{% url 'quiz:article_category_post' article.category2.slug %}">{{ article.category2.name }}</a>
 						{% endif %}
-							{% for tag in object.tag.all %}
+							{% for tag in article.tag.all %}
 							<a class="article_tag" href="{% url 'quiz:article_tag_post' tag.slug %}">
 								{{ tag }}
 							</a>
 							{% endfor %}
 
-          {% if object.thumbnail  %}
-          	<img class="article-post_thumbnail" src="{{ object.thumbnail.url }}" alt="">
+          {% if article.thumbnail  %}
+          	<img class="article-post_thumbnail" src="{{ article.thumbnail.url }}" alt="">
 							<div class="thumbnail_attr">
 								<a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by rawpixel.com - www.freepik.com</a>
 							</div>
@@ -34,26 +34,26 @@
           {% endif %}
         </div>
         <article class="content article-post_content">
-          {{ object.markdown | safe}}
+          {{ article.markdown | safe}}
+					{% if articles.articlereferences_set.all %}
 					<section class="article_references"><!--references-->
-						{% if articles.articlereferences_set.all %}
 							<p class="section_head reference_head">References</p>
 							{% for reference in articles.articlereferences_set.all %}
 								<div class="article_reference">
 									{{ reference.reference |safe}}
 								</div>
 							{% endfor %}
-						{% endif %}
 					</section>
+					{% endif %}
         </article>
 			</main>
 			<aside class="sidebar articles_sidebar" id="articles_sidebar"><!--Sidebar-->
 					{% include 'quiz/articles/article_tags.html' %}
 			</aside>
-
-      <section class="related_posts articles_container"><!--related-->
+			{% if article.related_basics.all %}
+      	<section class="related_posts articles_container"><!--related-->
         <p class="section_head">Related</p>
-					{% for basic in object.related_basics.all %}
+					{% for basic in article.related_basics.all %}
 						{% if basic.public %}
 						<article class = "article_container">
 							<a class="article_link" href="{% url 'quiz:article_post' basic.title_slug %}">
@@ -91,12 +91,98 @@
 						{% endif %}
 					{% endfor %}
       </section>
+			{% endif %}
 			<section class="article_comment">
 				<h2 class="section_head">Comments</h2>
-		  <a class="comment_submit" href="{% url 'quiz:comment_form' object.pk %}">Leave a comment</a>
-			{% include 'quiz/articles/comment/comments.html' %}
+		  <button class="comment_collapse_button">Leave a comment</button>
+			<div class="comment_form_wrapper comment_form_collapse" style="display:none;">
+				{% include 'quiz/articles/comment/comment_form.html' %}
+			</div>
+			<div class="comments_container">
+				{% include 'quiz/articles/comment/comments.html' %}
+			</div>
 			</section>
 		</div>
+		<script type="text/javascript">
+
+		$(document).on('click', '.article_like_button',function(event){
+			event.preventDefault();
+			var article_id = $(this).attr('id')
+			var article_id_like_section = '#article_' + article_id + '_like_section'
+					$.ajax({
+						 type: "POST",
+						 url: "{% url 'quiz:article_like' %}",
+						 data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+						 dataType: "json",
+						 success: function(response) {
+							 console.log('ok')
+								$(article_id_like_section).html(response['form'])
+							},
+
+					});
+				})
+		$(document).on('click', '#comment_submit',function(event){
+			event.preventDefault();
+			var article_id = $(this).attr('name')
+			var comment_author = $('#comment_author_id').val()
+			var comment_content = $('#comment_content_id').val()
+			console.log(comment_author)
+			if(comment_author == undefined || comment_author == ""){
+				comment_author = 'John Doe'
+			}
+
+			$.ajax({
+				 type: "POST",
+				 url: "{% url 'quiz:comment_add' %}",
+				 data: {
+					'article_id': article_id,
+					'comment_author': comment_author,
+					'comment_content': comment_content,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+			 },
+				 dataType: "json",
+				 success: function(response) {
+					 console.log('success')
+						$('.comments_container').html(response['form'])
+						$('#comment_author_id').val('')
+						$('#comment_content_id').val('')
+					},
+
+			});
+
+				})
+		$(document).on('click', '.reply_submit_button',function(event){
+			event.preventDefault();
+			var comment_id = $(this).attr('id')
+			var reply_author = $('#reply_author_id').val()
+			var reply_content = $('#reply_content_id').val()
+			console.log(reply_author)
+			if(reply_author == undefined || reply_author == ""){
+				reply_author = 'John Doe'
+			}
+			console.log(reply_author)
+			$.ajax({
+				 type: "POST",
+				 url: "{% url 'quiz:reply_add' %}",
+				 data: {
+					'comment_id': comment_id,
+					'reply_author': reply_author,
+					'reply_content': reply_content,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+			 },
+				 dataType: "json",
+				 success: function(response) {
+					 console.log('success')
+						$('.replies_container').html(response['form'])
+						$('#reply_author_id').val('')
+						$('#reply_content_id').val('')
+					},
+
+			});
+
+				})
+
+		</script>
   </body>
 </html>
 {% endblock %}

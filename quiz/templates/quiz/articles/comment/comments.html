@@ -1,106 +1,62 @@
-<div class="comments_container">
-
-		{% for comment in object.comments.all %}
-			{% if user.is_authenticated or comment.approved %}
-		<div class="comment_container">
-			<div class="comment_inner_container comment_info">
-				<div class="comment_left">
-					{% if comment.aki %}
-						<img class="author_pic aki_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%E9%A1%94%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
-					{% else %}
-						<img class="author_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E7%A6%8F%E5%8A%A9%E4%BA%BA%E5%BD%A2%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88+(1).png" alt="">
-					{% endif %}
+{% load markdownify %}
+	{% for comment in comments %}
+		{% if user.is_authenticated or comment.approved %}
+			<div class="comment_container">
+				<div class="comment_inner_container comment_info">
+					<div class="comment_left">
+						{% if comment.aki %}
+							<img class="author_pic aki_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%E9%A1%94%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
+						{% else %}
+							<img class="author_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E7%A6%8F%E5%8A%A9%E4%BA%BA%E5%BD%A2%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88+(1).png" alt="">
+						{% endif %}
+					</div>
+					<div class="comment_right">
+						{% if comment.aki %}
+							<p class="comment_author">Aki</p>
+							<p class="comment_date">{{ comment.timestamp }}</p>
+						{% endif %}
+						{% if not comment.aki %}
+							{% if comment.login_author %}
+								<p class="comment_author">
+									<i class="fas fa-user"></i>
+									{{ comment.login_author.nickname }}</p>
+							{% else %}
+								<p class="comment_author">{{ comment.author }}</p>
+							{% endif %}
+							<p class="comment_date">{{ comment.timestamp }}</p>
+						{% endif %}
+					</div>
 				</div>
-				<div class="comment_right">
-					{% if comment.aki %}
-						<p class="comment_author">Aki</p>
-						<p class="comment_date">{{ comment.timestamp }}</p>
-					{% endif %}
-					{% if not comment.aki %}
-						<p class="comment_author">{{ comment.author }}</p>
-						<p class="comment_date">{{ comment.timestamp }}</p>
-					{% endif %}
+				<div class="comment_inner_container comment_text">
+					<div class="comment_left">
+						<!--empty-->
+					</div>
+					<div class="comment_right">
+						<div class="comment_text user_content">{{ comment.text|markdownify }}</div>
+					</div>
 				</div>
-			</div>
-			<div class="comment_inner_container comment_text">
-				<div class="comment_left">
-					<!--empty-->
-				</div>
-				<div class="comment_right">
-					<p class="comment_text">{{ comment.text|linebreaksbr }}</p>
-				</div>
-			</div>
-			<div class="comment_inner_container comment_buttons">
-				<div class="comment_left">
-					<!--empty-->
-				</div>
-				<div class="comment_right">
-					<a class="comment_reply" href="{% url 'quiz:reply_form' comment.pk %}">Reply</a>
-					{% if user.is_authenticated %}
-						<a class="approve" href="{% url 'quiz:comment_approve' comment.pk %}">Approve</a>
-						<a class="delete" href="{% url 'quiz:comment_remove' comment.pk %}">Delete</a>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-	<div class="replies_container">
-
-	  {% for reply in comment.replies.all %}
-	  {% if user.is_authenticated or reply.approved %}
-		<div class="reply_container">
-			<div class="comment_inner_container comment_info">
-				<div class="reply_empty">
-					<!--empty-->
-				</div>
-				<div class="comment_left">
-					{% if reply.aki %}
-						<img class="author_pic aki_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%E9%A1%94%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
-					{% else %}
-					<img class="author_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E8%83%BD%E9%9D%A2%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
-					{% endif %}
-				</div>
-				<div class="comment_right">
-					{% if reply.aki %}
-						<p class="comment_author">Aki</p>
-						<p class="comment_date">{{ reply.timestamp }}</p>
-					{% endif %}
-					{% if not reply.aki %}
-						<p class="comment_author">{{ reply.author }}</p>
-						<p class="comment_date">{{ reply.timestamp }}</p>
-					{% endif %}
+				<div class="comment_inner_container comment_buttons">
+					<div class="comment_left">
+						<!--empty-->
+					</div>
+					<div class="comment_right">
+						<button class="reply_collapse_button" name="{{comment.pk}}">Reply</button>
+						<button class="show_replies" name="{{comment.pk}}">Show Replies</button>
+						<div class="comment_form_wrapper reply" id="reply_{{comment.pk}}_form_wrapper" style="display:none;">
+							{% include 'quiz/articles/comment/reply_form.html' %}
+						</div>
+						{% if user.is_superuser %}
+							<div class="admin_buttons">
+								<a class="approve" href="{% url 'quiz:comment_approve' comment.pk %}">Approve</a>
+								<a class="delete" href="{% url 'quiz:comment_remove' comment.pk %}">Delete</a>
+							</div>
+						{% endif %}
+					</div>
 				</div>
 			</div>
-			<div class="comment_inner_container comment_text">
-				<div class="reply_empty">
-					<!--empty-->
-				</div>
-				<div class="comment_left">
-					<!--empty-->
-				</div>
-				<div class="comment_right">
-					<p class="comment_text">{{ reply.text|linebreaksbr }}</p>
-				</div>
-			</div>
-			<div class="comment_inner_container comment_buttons">
-				<div class="reply_empty">
-					<!--empty-->
-				</div>
-				<div class="comment_left">
-					<!--empty-->
-				</div>
-				<div class="comment_right">
-
-					{% if user.is_authenticated %}
-						<a class="approve" href="{% url 'quiz:comment_approve' comment.pk %}">Approve</a>
-						<a class="delete" href="{% url 'quiz:comment_remove' comment.pk %}">Delete</a>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-	  {% endif %}
-	  {% endfor %}
-	</div>
+		<div class="replies_container" id="{{comment.pk}}_replies_container" style="display:none;">
+			{% include 'quiz/articles/comment/replies.html' %}
+		</div><!-- replies container end -->
 
 	{% endif %}
-	{% endfor %}
-</div>
+{% endfor %}

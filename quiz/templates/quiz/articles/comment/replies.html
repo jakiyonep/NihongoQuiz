@@ -1,0 +1,134 @@
+{% if replies %}
+	{% for reply in replies %}
+		{% if user.is_superuser or reply.approved %}
+		<div class="reply_container">
+			<div class="comment_inner_container comment_info">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					{% if reply.aki %}
+						<img class="author_pic aki_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%E9%A1%94%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
+					{% else %}
+					<img class="author_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E8%83%BD%E9%9D%A2%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
+					{% endif %}
+				</div>
+				<div class="comment_right">
+					{% if reply.aki %}
+						<p class="comment_author">Aki</p>
+						<p class="comment_date">{{ reply.timestamp }}</p>
+					{% endif %}
+					{% if not reply.aki %}
+						{% if reply.login_author %}
+							<p class= "reply_author">
+								<i class="fas fa-user"></i>
+								{{ reply.login_author.nickname }}</p>
+						{% else %}
+							<p class="comment_author">{{ reply.author }}</p>
+						{% endif %}
+						<p class="comment_date">{{ reply.timestamp }}</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="comment_inner_container comment_text">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+					<p class="comment_text">{{ reply.text|linebreaksbr }}</p>
+				</div>
+			</div>
+			<div class="comment_inner_container comment_buttons">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+
+					{% if user.is_superuser %}
+						<a class="approve" href="{% url 'quiz:comment_approve' reply.pk %}">Approve</a>
+						<a class="delete" href="{% url 'quiz:comment_remove' reply.pk %}">Delete</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
+{% elif comment.replies.all %}
+	{% for reply in comment.replies.all %}
+		{% if user.is_superuser or reply.approved %}
+		<div class="reply_container">
+			<div class="comment_inner_container comment_info">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					{% if reply.aki %}
+						<img class="author_pic aki_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%E9%A1%94%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
+					{% else %}
+					<img class="author_pic" src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/comment_icon/%E8%83%BD%E9%9D%A2%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
+					{% endif %}
+				</div>
+				<div class="comment_right">
+					{% if reply.aki %}
+						<p class="comment_author">Aki</p>
+						<p class="comment_date">{{ reply.timestamp }}</p>
+					{% endif %}
+					{% if not reply.aki %}
+						{% if reply.login_author %}
+							<p class= "reply_author">
+								<i class="fas fa-user"></i>
+								{{ reply.login_author.nickname }}</p>
+						{% else %}
+							<p class="comment_author">{{ reply.author }}</p>
+						{% endif %}
+						<p class="comment_date">{{ reply.timestamp }}</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="comment_inner_container comment_text">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+					<p class="comment_text">{{ reply.text|linebreaksbr }}</p>
+				</div>
+			</div>
+			<div class="comment_inner_container comment_buttons">
+				<div class="reply_empty">
+					<!--empty-->
+				</div>
+				<div class="comment_left">
+					<!--empty-->
+				</div>
+				<div class="comment_right">
+
+					{% if user.is_superuser %}
+						<a class="approve" href="{% url 'quiz:comment_approve' reply.pk %}">Approve</a>
+						<a class="delete" href="{% url 'quiz:comment_remove' reply.pk %}">Delete</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
+{% else %}
+	<div class="reply_container">
+		<div class="comment_inner_container">
+			<div class="comment_left">
+
+			</div>
+			<div class="comment_right">
+				No replies yet
+			</div>
+		</div>
+	</div>
+{% endif %}

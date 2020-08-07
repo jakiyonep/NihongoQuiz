@@ -13,20 +13,21 @@ urlpatterns = [
     path('quiz/tag/<str:tag_slug>/', TagPost, name ="tag_post"),
     path('quiz/search/', QuizSearchList, name='search_post'),
     path('quiz/like', views.QuizLike, name='quiz_like'),
+    path('quiz/choice', views.QuizPoll, name='quiz_choice'),
 
     path('basics/', BasicsIndex.as_view(), name="basics"),
     path('basic/<str:title_slug>/', BasicsDetailView.as_view(), name="basic_post"),
 
     path('articles/', ArticleList, name="articles"),
-    path('article/<str:title_slug>/', ArticleDetailView.as_view(), name="article_post"),
+    path('article/<str:title_slug>/', ArticleDetail, name="article_post"),
     path('articles/tag/<str:article_tag_slug>/', ArticleTagsView, name='article_tag_post'),
     path('articles/category/<str:article_category2_slug>/', ArticleCategoryView, name="article_category_post"),
     path('article/like', views.ArticleLike, name='article_like'),
 
-    path('comment/<int:pk>/', CommentFormView.as_view(), name='comment_form'),
+    path('comment/add', views.CommentAdd, name='comment_add'),
     path('comment/<int:pk>/approve/', comment_approve, name='comment_approve'),
     path('comment/<int:pk>/remove/', comment_remove, name='comment_remove'),
-    path('reply/<int:pk>/', ReplyFormView.as_view(), name='reply_form'),
+    path('reply/add', views.ReplyAdd, name='reply_add'),
     path('reply/<int:pk>/approve/', reply_approve, name='reply_approve'),
     path('reply/<int:pk>/remove/', reply_remove, name='reply_remove'),
 
@@ -49,6 +50,8 @@ urlpatterns = [
     path('user_detail/<int:pk>/', views.UserDetail, name='user_detail'),
     path('user_detail/<int:pk>/questions', AllQuizzesofUser, name="all_quizzes_of_user"),
     path('user_detail/<int:pk>/articles', AllArticlesofUser, name='all_articles_of_user'),
+    path('user_detail/<int:pk>/questions/correct', CorrectQuizzesofUser, name="correct_quizzes_of_user"),
+    path('user_detail/<int:pk>/questions/wrong', WrongQuizzesofUser, name="wrong_quizzes_of_user"),
     #path('user_detail/<int:pk>/question_list', ActivitiesOfUser, name='activities_of_user'),
     path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='user_update'),
     path('password_change/', views.PasswordChange.as_view(), name='password_change'),

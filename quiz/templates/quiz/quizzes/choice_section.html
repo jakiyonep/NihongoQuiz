@@ -1,0 +1,66 @@
+{% if request.is_ajax %}
+	<div class="total_user">
+		<p class="user_num"><i class="fas fa-user-alt"></i><span>{{total_user_answered}}</span> tried this quiz</p>
+		<p class="request_user_status">
+			{% if first_try == 1 %}
+				<i class="fas fa-check quiz_correct"></i><span>Your First Try: Correct</span>
+			{% else %}
+				<i class="fas fa-times quiz_wrong"></i><span>Your First Try: Wrong</span>
+			{% endif %}
+		</p>
+	</div>
+	<div class="quiz_choices {% if quiz.choice_long %} long {% endif %}"><!--choices-->
+		<div class="choice choice_1 {% if correct_choice == "1" %} correct_one {% endif %}{% if choice == "1" %} selected_one {% endif %}">
+			<button action="post" class="quiz_choice_button" type="button"  name="1" id="1_{{quiz.pk}}"><p><span>1. </span>{{quiz.choice1 | safe}}</p><span class="choice_count after_answer_count">{{choice_1.count}}</span> </button>
+		</div>
+		<div class="choice choice_2 {% if correct_choice == "2" %} correct_one {% endif %}{% if choice == "2" %} selected_one {% endif %}">
+			<button action="post" class="quiz_choice_button" type="button"  name="2" id="2_{{quiz.pk}}"><p><span>2. </span>{{quiz.choice2 | safe}}</p><span class="choice_count after_answer_count">{{choice_2.count}}</span> </button>
+		</div>
+		{% if quiz.choice3 %}
+		<div class="choice choice_3 {% if correct_choice == "3" %} correct_one {% endif %}{% if choice == "3" %} selected_one {% endif %}">
+			<button action="post" class="quiz_choice_button" type="button"  name="3" id="3_{{quiz.pk}}"><p><span>3. </span>{{quiz.choice3 | safe}}</p><span class="choice_count after_answer_count">{{choice_3.count}}</span> </button>
+		</div>
+		{% endif %}
+		{% if quiz.choice4 %}
+		<div class="choice choice_4 {% if correct_choice == "4" %} correct_one {% endif %}{% if choice == "4" %} selected_one {% endif %}">
+			<button action="post" class="quiz_choice_button" type="button"  name="4" id="4_{{quiz.pk}}"><p><span>4. </span>{{quiz.choice4 | safe}}</p><span class="choice_count after_answer_count">{{choice_4.count}}</span> </button>
+		</div>
+		{% endif %}
+	</div>
+{% else %}
+		<div class="total_user">
+			<p class="user_num">
+				<i class="fas fa-user-alt"></i><span>{{quiz.answered_user.count}}</span> tried this quiz
+			</p>
+			<p class="request_user_status">
+				{% if request.user in quiz.answered_user.all %}
+					{% if request.user in quiz.first_try_correct.all %}
+						<i class="fas fa-check quiz_correct"></i><span>Your First Try: Correct</span>
+					{% else %}
+						<i class="fas fa-times quiz_wrong"></i><span>Your First Try: Wrong</span>
+					{% endif %}
+				{% else %}
+					---<span>Not Tried Yet</span>
+				{% endif %}
+			</p>
+		</div>
+		<div class="quiz_choices {% if quiz.choice_long %} long {% endif %}" ><!--choices-->
+			<div class="choice choice_1">
+				<button action="post" class="quiz_choice_button" type="button"  name="1" id="1_{{quiz.pk}}"><p><span>1. </span>{{quiz.choice1 | safe}}</p><span class="choice_count"></span> </button>
+			</div>
+			<div class="choice choice_2">
+				<button action="post" class="quiz_choice_button" type="button"  name="2" id="2_{{quiz.pk}}"><p><span>2. </span>{{quiz.choice2 | safe}}</p><span class="choice_count"></span> </button>
+			</div>
+			{% if quiz.choice3 %}
+			<div class="choice choice_3">
+				<button action="post" class="quiz_choice_button" type="button"  name="3" id="3_{{quiz.pk}}"><p><span>3. </span>{{quiz.choice3 | safe}}</p><span class="choice_count"></span> </button>
+			</div>
+			{% endif %}
+			{% if quiz.choice4 %}
+			<div class="choice choice_4">
+				<button action="post" class="quiz_choice_button" type="button"  name="4" id="4_{{quiz.pk}}"><p><span>4. </span>{{quiz.choice4 | safe}}</p><span class="choice_count"></span> </button>
+			</div>
+			{% endif %}
+		</div>
+
+{% endif %}

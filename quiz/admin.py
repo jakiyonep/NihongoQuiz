@@ -6,8 +6,6 @@ from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 
 
-
-
 class DescriptionDetailInline(admin.TabularInline):
     model = DescriptionDetail
     extra = 4
@@ -16,17 +14,15 @@ class ChoiceDetailInline(admin.TabularInline):
     model = ChoicesDetail
     extra = 1
 
+class QuizAdmin(admin.ModelAdmin):
 
-
-class QuizAdmin(SummernoteModelAdmin):
-    summernote_fields = 'description'
     inlines = [
         DescriptionDetailInline,
         ChoiceDetailInline
     ]
     list_display = ('question', 'level', 'category',)
     search_fields = ['question', 'choice1','choice2','choice3','choice4','descriptiondetail__word']
-
+    exclude = ('answered_user', 'first_try_correct', 'choice1_count', 'choice2_count', 'choice3_count', 'choice4_count', 'likes')
 
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'order')

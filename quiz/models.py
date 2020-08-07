@@ -10,7 +10,6 @@ from django.contrib.auth.models import UserManager, AbstractBaseUser, Permission
 
 from django.core.mail import send_mail, BadHeaderError
 
-
 # Create your models here.
 # BeforeYouStart
 
@@ -41,12 +40,11 @@ class CustomUserManager(UserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         return self._create_user(email, password, **extra_fields)
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
 
     email = models.EmailField(_('Email'), unique=True)
-    nickname = models.CharField(_('Nickname'), max_length=150, blank=True, unique=True)
+    nickname = models.CharField(_('Nickname'), max_length=150, blank=False, unique=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -88,24 +86,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         return self.email
 
-
-
-
-
 class BeforeYouStart(models.Model):
     content = MarkdownxField(null=True, blank=True)
 
     def markdown(self):
         return markdownify(self.content)
 
-
 class BeforeYouStartImage(models.Model):
     before = models.ForeignKey(BeforeYouStart, on_delete=models.CASCADE)
     before_image = models.ImageField(upload_to='before_image/', null=True, blank=True)
 
-
 # Quiz
-
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -113,7 +104,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
@@ -127,7 +117,6 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-
 class Level(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
@@ -138,10 +127,9 @@ class Level(models.Model):
     def __str__(self):
         return self.name
 
-
 class Quiz(models.Model):
     public = models.BooleanField(default=True)
-    likes = models.ManyToManyField(User, null=True, related_name='liked_quiz')
+    likes = models.ManyToManyField(User, null=True, related_name='liked_quiz', blank=True)
     level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -157,6 +145,13 @@ class Quiz(models.Model):
     choice3_detail = models.TextField(blank=True, max_length=100)
     choice4 = models.TextField(blank=True, max_length=100)
     choice4_detail = models.TextField(blank=True, max_length=100)
+    explanation = models.TextField(blank=True, null=True)
+    answered_user = models.ManyToManyField(User, null=True, blank=True, related_name='answered_quiz')
+    choice1_count = models.ManyToManyField(User, null=True, blank=True, related_name='choice1_users')
+    choice2_count = models.ManyToManyField(User, null=True, blank=True, related_name='choice2_users')
+    choice3_count = models.ManyToManyField(User, null=True, blank=True, related_name='choice3_users')
+    choice4_count = models.ManyToManyField(User, null=True, blank=True, related_name='choice4_users')
+    first_try_correct = models.ManyToManyField(User, null=True, blank=True, related_name='question_first_try_correct')
 
     class Answer(models.IntegerChoices):
         choice1 = 1
@@ -181,14 +176,15 @@ class Quiz(models.Model):
 
     def __str__(self):
         return self.question
+
     def total_likes(self):
         return self.likes.count()
 
-
-
+    def total_user_answered(self):
+        return self.answered_user.count()
 
 class DescriptionDetail(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     word = models.CharField(blank=True, max_length=200)
     yomi = models.CharField(blank=True, max_length=200)
     definition = models.TextField(blank=True, max_length=200)
@@ -203,8 +199,6 @@ class DescriptionDetail(models.Model):
     def markdown_usage(self):
         return markdownify(self.usage)
 
-
-
 class ChoicesDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
     choice_explanation_1 = models.CharField(blank=True, max_length=200)
@@ -212,11 +206,7 @@ class ChoicesDetail(models.Model):
     choice_explanation_3 = models.CharField(blank=True, max_length=200)
     choice_explanation_4 = models.CharField(blank=True, max_length=200)
 
-
-
-
 # Articles
-
 
 class ArticlesTag(models.Model):
     name = models.CharField(null=True, max_length=255)
@@ -271,8 +261,8 @@ class ArticleReferences(models.Model):
 class Comment(models.Model):
     article = models.ForeignKey(
         Articles, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
-    author = models.CharField(max_length=50)
-
+    author = models.CharField(max_length=50, null=True, blank=True)
+    login_author = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)
@@ -288,11 +278,11 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
-
 class Reply(models.Model):
     comment = models.ForeignKey(
         Comment, on_delete=models.CASCADE, related_name='replies')
     author = models.CharField(max_length=50)
+    login_author = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)
@@ -318,7 +308,6 @@ class BasicsCategory(models.Model):
     def __str__(self):
         return self.name
 
-
 class Basics(models.Model):
     title = models.CharField(null=True, max_length=255)
     title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
@@ -339,13 +328,9 @@ class Basics(models.Model):
     def markdown(self):
         return markdownify(self.content)
 
-
 class BasicImage(models.Model):
     basic = models.ForeignKey(Basics, on_delete=models.CASCADE)
     basic_image = models.ImageField(upload_to='basics_image/', null=True, blank=True)
-
-
-
 
 # Lessons
 

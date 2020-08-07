@@ -31,12 +31,13 @@ class CorrectionForm(forms.ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('author', 'text', 'aki')
+        fields = ('author','login_author', 'text', 'aki')
         widgets = {
             'author': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Name',
             }),
+            'login_author': forms.HiddenInput(),
             'text': Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Comment',
@@ -50,12 +51,13 @@ class CommentForm(ModelForm):
 class ReplyForm(ModelForm):
     class Meta:
         model = Reply
-        fields = ('author', 'text', 'aki')
+        fields = ('author','login_author', 'text', 'aki')
         widgets = {
             'author': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Name',
             }),
+            'login_author': forms.HiddenInput(),
             'text': Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Reply',

@@ -8,12 +8,17 @@
 <html lang="en" dir="ltr">
   <head>
 		<link rel="stylesheet" href="{% static 'quiz/css/quiz.min.css' %}">
+		<link rel="stylesheet" href="{% static 'quiz/css/content.min.css' %}">
   </head>
   <body>
 		{% include 'quiz/navbar.html' %}
 		<div class="wrapper quizzes_wrapper">
 
-			{% if login_user%}
+			{% if correct_quizzes %}
+				<h1 class="section_head">Quizzes You Got Right</h1>
+			{% elif wrong_quizzes %}
+				<h1 class="section_head">Quizzes You Got Wrong</h1>
+			{% elif login_user %}
 				<h1 class="section_head">{{login_user.nickname}}'s Favorite Quizzes</h1>
 			{% else %}
   			<h1 class="section_head">問 - Quizzes</h1>
@@ -31,47 +36,10 @@
 	        	{% if user.is_authenticated or quiz.public %}
 	          	{% if not quiz.public %} Draft {% endif %}<h2>{{quiz.question | safe}}</h2>
 	        </div>
-	        <div class="quiz_body_container">
-	          {% if quiz.choice_long %}
-	            <div class="quiz_choices long"><!--choices_long-->
-	              <div class="choice choice_1">
-	                <span>1. </span>{{quiz.choice1 | safe}}
-	              </div>
-	              <div class="choice choice_2">
-                 	<span>2. </span> {{quiz.choice2 | safe}}
-	              </div>
-	              {% if quiz.choice3 %}
-	                <div class="choice choice_3">
-                  	<span>3. </span>{{quiz.choice3 | safe}}
-	                </div>
-	              {% endif %}
-	              {% if quiz.choice4  %}
-	                <div class="choice choice_4">
-	                  <span>4. </span>{{quiz.choice4  | safe}}
-	                </div>
-	              {% endif %}
-	            </div>
-	          {% endif%}
-	          {% if not quiz.choice_long %}
-	            <div class="quiz_choices"><!--choices-->
-	              <div class="choice choice_1">
-	                <span>1. </span>{{quiz.choice1 | safe}}
-	              </div>
-	              <div class="choice choice_2">
-	                <span>2. </span>{{quiz.choice2 | safe}}
-	              </div>
-	              {% if quiz.choice3 %}
-	                <div class="choice choice_3">
-	                   <span>3. </span>{{quiz.choice3 | safe}}
-	                </div>
-	              {% endif %}
-	              {% if quiz.choice4  %}
-	                <div class="choice choice_4">
-	                  <span>4. </span>{{quiz.choice4 | safe}}
-	                </div>
-	              {% endif %}
-	            </div>
-	          {% endif%}
+	        <div class="quiz_body_container" name="{{quiz.answer}}">
+						<div class="choice_section" id="quiz_{{quiz.pk}}_choice_section" name="{{quiz.pk}}">
+		          {% include 'quiz/quizzes/choice_section.html' %}
+						</div>
 						<div class="quiz_bottom">
 	          <div class="quiz_info"><!--quiz_info-->
 	            <div class="level_category"><!--level_category-->
@@ -105,6 +73,11 @@
 									<div class="question_en">
 										{{ quiz.question_en | safe }}
 									</div>
+								{% endif %}
+							</div>
+							<div class="quiz_explanation content">
+								{% if quiz.explanation %}
+									{{quiz.explanation|safe}}
 								{% endif %}
 							</div>
 	            <div class="choices_description">
@@ -229,6 +202,31 @@
 
 		          });
 		    })
+
+			$(document).on('click', '.quiz_choice_button',function(event){
+				event.preventDefault();
+				var selected_choice = $(this).attr('name')
+				var quiz_id = $(this).parent().parent().parent().attr('name')
+				var choice_and_id = $(this).attr('id')
+				var quiz_id_choice_section = '#quiz_' + quiz_id + '_choice_section'
+				var correct_choice = $(this).parent().parent().parent().parent().attr('name')
+						$.ajax({
+										 type: "POST",
+										 url: "{% url 'quiz:quiz_choice' %}",
+										 data: {
+											'pk': quiz_id,
+											'csrfmiddlewaretoken': '{{ csrf_token }}',
+											'selected_choice': selected_choice,
+											'correct_choice': correct_choice,
+										},
+										 dataType: "json",
+										 success: function(response) {
+
+												$(quiz_id_choice_section).html(response['form'])
+											},
+
+								});
+					})
 		</script>
 	 </body>
 	</body>
