@@ -185,6 +185,8 @@ class Quiz(models.Model):
 
 class DescriptionDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    word_in_sentence = models.CharField(blank=True, max_length=200, null=True)
+    word_form = models.CharField(blank=True, max_length=200, null=True)
     word = models.CharField(blank=True, max_length=200)
     yomi = models.CharField(blank=True, max_length=200)
     definition = models.TextField(blank=True, max_length=200)

@@ -75,62 +75,38 @@
 									</div>
 								{% endif %}
 							</div>
-							<div class="quiz_explanation content">
-								{% if quiz.explanation %}
+							{% if quiz.explanation %}
+								<div class="quiz_explanation content">
 									{{quiz.explanation|safe}}
-								{% endif %}
-							</div>
-	            <div class="choices_description">
-	              {% if quiz.choice1_detail %}
-	                <p>Choices</p>
-	              {% endif %}
-	              {% if quiz.choice1_detail %}
-	                <div class="answer answer_choice1">
-	                  <span>1. </span>{{ quiz.choice1_detail | safe }}
-	                </div>
-	              {% endif %}
-	              {% if quiz.choice2_detail %}
-	                <div class="answer answer_choice2">
-	                  <span>2. </span>{{ quiz.choice2_detail | safe }}
-	                </div>
-	              {% endif %}
-	              {% if quiz.choice3_detail %}
-	                <div class="answer answer_choice3">
-	                  <span>3. </span>{{ quiz.choice3_detail | safe}}
-	                </div>
-	              {% endif %}
-	              {% if quiz.choice4_detail %}
-	                <div class="answer answer_choice4">
-	                  <span>4. </span>{{ quiz.choice4_detail | safe }}
-	                </div>
-	              {% endif %}
-
-	              {% if quiz.choicesdetail_set.all %}
-	              	<p>Choices</p>
-	              {% endif %}
-	              {% for choice in quiz.choicesdetail_set.all %}
-	                {% if choice.choice_explanation_1 %}
-	                  <div class="explanation explanation_choice1">
-	                    {{ choice.choice_explanation_1 }}
-	                  </div>
-	                {% endif %}
-	                {% if choice.choice_explanation_2 %}
-	                  <div class="explanation explanation_choice2">
-	                    {{ choice.choice_explanation_2 }}
-	                  </div>
-	                {% endif %}
-	                {% if choice.choice_explanation_3 %}
-	                  <div class="explanation explanation_choice3">
-	                    {{ choice.choice_explanation_3 }}
-	                  </div>
-	                {% endif %}
-	                {% if choice.choice_explanation_4 %}
-	                  <div class="explanation explanation_choice4">
-	                    {{ choice.choice_explanation_4 }}
-	                  </div>
-	                {% endif %}
-	              {% endfor %}
-	            </div>
+								</div>
+							{% endif %}
+							{% if quiz.choice1_detail %}
+		            <div class="choices_description">
+		              {% if quiz.choice1_detail %}
+		                <p>Choices</p>
+		              {% endif %}
+		              {% if quiz.choice1_detail %}
+		                <div class="answer answer_choice1">
+		                  <span>1. </span>{{ quiz.choice1_detail | safe }}
+		                </div>
+		              {% endif %}
+		              {% if quiz.choice2_detail %}
+		                <div class="answer answer_choice2">
+		                  <span>2. </span>{{ quiz.choice2_detail | safe }}
+		                </div>
+		              {% endif %}
+		              {% if quiz.choice3_detail %}
+		                <div class="answer answer_choice3">
+		                  <span>3. </span>{{ quiz.choice3_detail | safe}}
+		                </div>
+		              {% endif %}
+		              {% if quiz.choice4_detail %}
+		                <div class="answer answer_choice4">
+		                  <span>4. </span>{{ quiz.choice4_detail | safe }}
+		                </div>
+		              {% endif %}
+	            	</div>
+							{% endif %}
 	            <div class="description"><!--DetailDescription-->
                 {% for detail in quiz.descriptiondetail_set.all  %}
 									<div class="detail_description">
@@ -139,6 +115,16 @@
 	                      {{ detail.word  |safe }}
 	                    </div>
 	                  {% endif %}
+										{% if detail.word_form %}
+											<div class="detail_word_form">
+												{{ detail.word_form  |safe }}:
+											</div>
+										{% endif %}
+										{% if detail.word_in_sentence %}
+											<div class="detail_word_in_sentence">
+												{{ detail.word_in_sentence  |safe }}
+											</div>
+										{% endif %}
 	                  {% if detail.yomi %}
 	                    <div class="detail_yomi">
 	                      <span>読:</span>{{ detail.yomi  |safe }}
