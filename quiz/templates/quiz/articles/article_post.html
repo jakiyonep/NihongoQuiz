@@ -115,7 +115,7 @@
 						 data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
 						 dataType: "json",
 						 success: function(response) {
-							 console.log('ok')
+
 								$(article_id_like_section).html(response['form'])
 							},
 
@@ -126,11 +126,10 @@
 			var article_id = $(this).attr('name')
 			var comment_author = $('#comment_author_id').val()
 			var comment_content = $('#comment_content_id').val()
-			console.log(comment_author)
 			if(comment_author == undefined || comment_author == ""){
 				comment_author = 'John Doe'
 			}
-
+			$('.comment_form_collapse').slideToggle()
 			$.ajax({
 				 type: "POST",
 				 url: "{% url 'quiz:comment_add' %}",
@@ -142,7 +141,6 @@
 			 },
 				 dataType: "json",
 				 success: function(response) {
-					 console.log('success')
 						$('.comments_container').html(response['form'])
 						$('#comment_author_id').val('')
 						$('#comment_content_id').val('')
@@ -156,11 +154,10 @@
 			var comment_id = $(this).attr('id')
 			var reply_author = $('#reply_author_id').val()
 			var reply_content = $('#reply_content_id').val()
-			console.log(reply_author)
 			if(reply_author == undefined || reply_author == ""){
 				reply_author = 'John Doe'
 			}
-			console.log(reply_author)
+			$('#reply_' + comment_id + '_form_wrapper').slideToggle()
 			$.ajax({
 				 type: "POST",
 				 url: "{% url 'quiz:reply_add' %}",
@@ -172,7 +169,6 @@
 			 },
 				 dataType: "json",
 				 success: function(response) {
-					 console.log('success')
 						$('.replies_container').html(response['form'])
 						$('#reply_author_id').val('')
 						$('#reply_content_id').val('')

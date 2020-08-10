@@ -41,7 +41,7 @@
 					</div>
 					<div class="comment_right">
 						<button class="reply_collapse_button" name="{{comment.pk}}">Reply</button>
-						<button class="show_replies" name="{{comment.pk}}">Show Replies</button>
+						<button class="show_replies" name="{{comment.pk}}">Show Replies({{comment.replies.all.count}})</button>
 						<div class="comment_form_wrapper reply" id="reply_{{comment.pk}}_form_wrapper" style="display:none;">
 							{% include 'quiz/articles/comment/reply_form.html' %}
 						</div>

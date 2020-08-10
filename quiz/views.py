@@ -503,7 +503,7 @@ def ReplyAdd(request):
         all_replies = Reply.objects.all()
         replies = all_replies.filter(comment=comment)
         context = {
-            'replies': replies
+            'ajax_replies': replies
         }
 
         html = render_to_string('quiz/articles/comment/replies.html', context, request=request)

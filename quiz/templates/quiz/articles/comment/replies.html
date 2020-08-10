@@ -1,5 +1,5 @@
-{% if replies %}
-	{% for reply in replies %}
+{% if ajax_replies %}
+	{% for reply in ajax_replies %}
 		{% if user.is_superuser or reply.approved %}
 		<div class="reply_container">
 			<div class="comment_inner_container comment_info">
