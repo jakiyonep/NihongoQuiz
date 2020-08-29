@@ -557,7 +557,7 @@ class LessonKanjiIndex(ListView):
 class CorrectionIndex(ListView):
     model = Correction
     template_name = 'quiz/corrections/correction_index.html'
-
+3
 def CorrectionAdd(request):
     form = forms.CorrectionForm(request.POST)
     user = request.user

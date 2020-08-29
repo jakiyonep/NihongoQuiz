@@ -45,6 +45,16 @@
 										{{ quiz.question_yomi |safe }}
 									</div>
 								{% endif %}
+								{% if quiz.question_reading %}
+									<div class="question_reading">
+										<audio
+										 controls
+										 src="{{quiz.question_reading}}">
+												 Your browser does not support the
+												 <code>audio</code> element.
+								 		 </audio>
+									</div>
+								{% endif %}
 								{% if quiz.question_en %}
 									<div class="question_en">
 										{{ quiz.question_en | safe }}
