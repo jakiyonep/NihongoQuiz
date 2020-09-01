@@ -1,4 +1,4 @@
-#!c:\users\aktha\japanese\nihongoquiz\venv\scripts\python.exe
+#!C:\Users\aktha\PycharmProjects\NihongoQuiz\venv\Scripts\python.exe
 
 # Author: 
 # Contact: grubert@users.sf.net

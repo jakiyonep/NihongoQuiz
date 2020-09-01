@@ -1,4 +1,4 @@
-#!c:\users\aktha\japanese\nihongoquiz\venv\scripts\python.exe
+#!C:\Users\aktha\PycharmProjects\NihongoQuiz\venv\Scripts\python.exe
 
 # $Id: rst2s5.py 4564 2006-05-21 20:44:42Z wiemann $
 # Author: Chris Liechti <cliechti@gmx.net>

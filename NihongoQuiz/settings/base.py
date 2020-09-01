@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_summernote',
     'django_filters',
-    'bootstrapform',
     'quiz',
     'storages',
     'markdownx',

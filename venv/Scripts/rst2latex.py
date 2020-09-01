@@ -1,4 +1,4 @@
-#!c:\users\aktha\japanese\nihongoquiz\venv\scripts\python.exe
+#!C:\Users\aktha\PycharmProjects\NihongoQuiz\venv\Scripts\python.exe
 
 # $Id: rst2latex.py 5905 2009-04-16 12:04:49Z milde $
 # Author: David Goodger <goodger@python.org>

@@ -1,4 +1,4 @@
-#!c:\users\aktha\japanese\nihongoquiz\venv\scripts\python.exe
+#!C:\Users\aktha\PycharmProjects\NihongoQuiz\venv\Scripts\python.exe
 # -*- coding: utf8 -*-
 # :Copyright: © 2015 Günter Milde.
 # :License: Released under the terms of the `2-Clause BSD license`_, in short:
