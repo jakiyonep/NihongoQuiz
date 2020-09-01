@@ -1,5 +1,4 @@
 {% extends 'quiz/base.html' %}
-
 {% load static%}
 {% load quiz_filter %}
 {% block title %}Quizzes{% endblock %}
@@ -87,7 +86,7 @@
 							</div>
 							{% if quiz.explanation %}
 								<div class="quiz_explanation content">
-									{{quiz.explanation|safe}}
+									{{quiz.markdown_explanation | safe}}
 								</div>
 							{% endif %}
 							{% if quiz.choice1_detail %}

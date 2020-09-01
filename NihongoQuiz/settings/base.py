@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'django_filters',
     'quiz',
+    'bootstrapform',
     'storages',
     'markdownx',
     'markdownify',

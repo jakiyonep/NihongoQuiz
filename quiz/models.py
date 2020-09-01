@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
 
     email = models.EmailField(_('Email'), unique=True)
-    nickname = models.CharField(_('Nickname'), max_length=150, blank=False)
+    nickname = models.CharField(_('Nickname'), max_length=150, blank=False, unique=True, null=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -146,7 +146,7 @@ class Quiz(models.Model):
     choice3_detail = models.TextField(blank=True, max_length=100)
     choice4 = models.TextField(blank=True, max_length=100)
     choice4_detail = models.TextField(blank=True, max_length=100)
-    explanation = models.TextField(blank=True, null=True)
+    explanation = MarkdownxField(blank=True, null=True)
     answered_user = models.ManyToManyField(User, null=True, blank=True, related_name='answered_quiz')
     choice1_count = models.ManyToManyField(User, null=True, blank=True, related_name='choice1_users')
     choice2_count = models.ManyToManyField(User, null=True, blank=True, related_name='choice2_users')
@@ -169,6 +169,9 @@ class Quiz(models.Model):
 
     def markdown(self):
         return markdownify(self.description)
+
+    def markdown_explanation(self):
+        return markdownify(self.explanation)
 
     def save(self, *args, **kwargs):
         if self.public and not self.publish:

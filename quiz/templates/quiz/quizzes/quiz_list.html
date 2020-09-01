@@ -61,6 +61,12 @@
 									</div>
 								{% endif %}
 							</div>
+
+							{% if quiz.explanation %}
+								<div class="quiz_explanation content">
+									{{quiz.markdown_explanation | safe}}
+								</div>
+							{% endif %}
 							{% if quiz.choice1_detail %}
 								<div class="choices_description">
 									{% if quiz.choice1_detail %}
@@ -151,7 +157,7 @@
 			{% include "quiz/quizzes/quiz_sidebar.html" %}
 
 			{% include 'quiz/pagination.html' %}
-		</div>
+
 		<script type="text/javascript">
 
 		$(document).on('click', '.quiz_like_button',function(event){

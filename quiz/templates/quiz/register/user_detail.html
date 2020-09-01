@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="{% static 'quiz/css/quiz.min.css' %}">
 	<link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
 	<link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/content.min.css' %}">
 
 </head>
 <body>
@@ -115,10 +116,10 @@
 				<div class="favorite_container" id ="favorite_container" style="display:none;">
 					<div class="top_row">
 						<div class="top_item active" id='quiz_favorite'>
-							<p class="top_link">Quizzes</a>
+							<p class="top_link">Quizzes</p>
 						</div>
 						<div class="top_item" id='article_favorite'>
-							<p class="top_link">Articles</a>
+							<p class="top_link">Articles</p>
 						</div>
 					</div>
 					<div class="top_row_empty">
@@ -173,6 +174,11 @@
 													</div>
 												{% endif %}
 											</div>
+											{% if quiz.explanation %}
+												<div class="quiz_explanation content">
+													{{quiz.markdown_explanation | safe}}
+												</div>
+											{% endif %}
 											<div class="choices_description">
 												{% if quiz.choice1_detail %}
 													<p>Choices</p>
@@ -369,15 +375,17 @@
 					</div>
 				</div><!-- favorite list end-->
 			</div>
+
+			<style>/*
 			<div class="user_info_list tried_quiz">
 				<p class="user_info_list_section_head" id="tried">Quizzes You Answered</p>
 				<div class="tried_container" id="tried_container" style="display:none;">
 					<div class="top_row">
 						<div class="top_item active" id='correct_quiz'>
-							<p class="top_link">Correct</a>
+							<p class="top_link">Correct</p>
 						</div>
 						<div class="top_item" id='wrong_quiz'>
-							<p class="top_link">Wrong</a>
+							<p class="top_link">Wrong</p>
 						</div>
 					</div>
 					<div class="top_row_empty">
@@ -431,6 +439,11 @@
 												</div>
 											{% endif %}
 										</div>
+										{% if quiz.explanation %}
+											<div class="quiz_explanation content">
+												{{quiz.markdown_explanation | safe}}
+											</div>
+										{% endif %}
 										<div class="choices_description">
 											{% if quiz.choice1_detail %}
 												<p>Choices</p>
@@ -691,6 +704,8 @@
 				</div>
 
 			</div>
+			*/</style>
+
 			<div class="user_info_list correction_list">
 				<p class="user_info_list_section_head" id="correction">Submitted Compositions</p>
 				<div class="correction_container" id="correction_container" style="display:none;">
