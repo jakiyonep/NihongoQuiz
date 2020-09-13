@@ -3,7 +3,7 @@
 {% if answer_of_user_query %}
 <form class="search_form" action="{% url "quiz:all_articles_of_user" request.user.pk %}" method="get" accept-charset="utf-8">
 	<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Search...">
-	<button class="search_form_button" type="submit"><span class="icon"><i class="fas fa-search"></i></span></button>
+	<button class="search_form_button" type="submit">Search</button>
 </form>
 {% elif article_index_query %}
 	<form class="search_form" action="{% url "quiz:articles" %}" method="get" accept-charset="utf-8">

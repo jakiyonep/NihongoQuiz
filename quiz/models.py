@@ -231,7 +231,7 @@ class ArticlesCategory(models.Model):
 class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
     title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
-    likes = models.ManyToManyField(User, null=True, related_name='liked_article')
+    likes = models.ManyToManyField(User, null=True, blank=True, related_name='liked_article')
     category2 = models.ForeignKey(ArticlesCategory, null=True, blank=True, on_delete=models.CASCADE)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)

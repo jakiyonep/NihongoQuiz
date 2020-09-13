@@ -53,7 +53,7 @@
 				</div>
 				<div class="user_info_row">
 					<div class="user_info_left">
-						<a href="{% url 'quiz:all_quizzes_of_user' user.pk%}">Liked Quizzes</a>
+						<a class="user_info_link" href="{% url 'quiz:all_quizzes_of_user' user.pk%}">Liked Quizzes</a>
 					</div>
 					<div class="user_info_right">
 						{{user.liked_quiz.count}}
@@ -80,7 +80,7 @@
 				</div>
 				<div class="user_info_row">
 					<div class="user_info_left">
-						<a href="{% url 'quiz:all_articles_of_user' user.pk %}">Liked Articles</a>
+						<a class="user_info_link" href="{% url 'quiz:all_articles_of_user' user.pk %}">Liked Articles</a>
 					</div>
 					<div class="user_info_right">
 						{{user.liked_article.count}}

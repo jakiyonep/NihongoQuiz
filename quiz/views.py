@@ -872,14 +872,19 @@ def AllArticlesofUser(request, pk):
             Q(content__icontains=answers_of_user_query)
         ).distinct()
 
-    paginator = Paginator(articles, 10)
+    articles = ArticleFilter(
+        request.GET,
+        queryset=articles,
+    )
+
+    paginator = Paginator(articles.qs, 10)
     page_number = request.GET.get('page')
     article_page_obj = paginator.get_page(page_number)
 
     return render(request, 'quiz/articles/all_articles_of_user.html', {
         'login_user': login_author,
-        'articles': articles,
-        'article_list': article_page_obj,
+        'article_list': articles,
+        'page_obj': article_page_obj,
         'num': page_number,
         'paginator':paginator,
         'answer_of_user_query': 1,

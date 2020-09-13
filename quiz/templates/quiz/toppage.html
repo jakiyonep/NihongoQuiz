@@ -12,19 +12,11 @@
   <body>
     {% include 'quiz/navbar.html' %}
     <div class="wrapper toppage_wrapper">
-      <section class="toppage_container toppage_beforeyoustart"><!-- Before You Start-->
-        <a href="{% url 'quiz:before_you_start' %}">
-	        <div class="toppage_content">
-						<h2 class="toppage_content_head">準 - Before You Start</h2>
-						<p class="toppage_content_desc">If you are completely new to here, take some time to read this and learn how to use Nihongo Tatsujin.</p>
-	        </div>
-				</a>
-      </section>
 			{% if user.is_authenticated %}
-			<section class="toppage_container"><!-- Logout-->
+			<section class="toppage_container toppage_account" style="width:100%;"><!-- Logout-->
 				<a href="{% url 'quiz:user_detail' request.user.pk %}">
 					<div class="toppage_content">
-						<h2 class="toppage_content_head">My Page</h2>
+						<h2 class="toppage_content_head">Account</h2>
 						<p class="toppage_content_desc">See your activities here</p>
 					</div>
 				</a>
