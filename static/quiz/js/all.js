@@ -16,14 +16,13 @@ $('.correction_btn').on('click', function(){
 
 var dropIs = 0;
 
-function drop (){
-	if (dropIs == 0) {
-		document.getElementById('navbar_collapse').classList.toggle('menu_drop')
-		dropIs = 1;
-	} else{
-		dropIs = 0;
-	}
-}
+$(document).on('click', '.navbar_button', function(event){
+	$('#navbar_collapse').css('transform', 'translateY(0)')
+})
+
+$(document).scroll(function(){
+	$('#navbar_collapse').css('transform', 'translateY(-100%)')
+})
 
 
 var prevScrollpos = window.pageYOffset;

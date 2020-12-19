@@ -5,13 +5,14 @@ $strong_red: rgb(255, 102, 102)
 
 
 .navbar_wrapper
-	background-color: rgb(208, 208, 208)
+	background-color: $base_bacground_color
 	overflow-x: hidden
 	z-index: 2
 	position: relative
 	position: fixed
 	width: 100%
 	transition: top 0.5s
+
 	.navbar
 		width: 95vw
 		height: 5em
@@ -28,6 +29,7 @@ $strong_red: rgb(255, 102, 102)
 		.navbar_list
 			width: 80%
 			display: inline-block
+			text-align: right
 			.navbar_item
 				display: inline-block
 				height: 100%
@@ -58,10 +60,11 @@ $strong_red: rgb(255, 102, 102)
 	transform: translateY(-100%)
 	transition: 0.5s
 	z-index: 3
-	position: relative
+	position: fixed
 	padding-top: 3em
 	padding-bottom: 3em
 	background-color: rgb(255, 255, 255)
+	width: 100%
 	.navbar_item_collapse
 		text-align: center
 		margin-bottom: 1em
@@ -78,6 +81,8 @@ $strong_red: rgb(255, 102, 102)
 	transition: 0.5s
 	display: block
 
+.empty
+	height: 10rem
 
 @media screen and (max-width:800px)
 	.navbar
