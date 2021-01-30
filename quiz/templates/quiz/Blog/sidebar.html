@@ -4,12 +4,12 @@
 	</button>
   <div class="collapse_target">
     <form class="search_form" action="{% url "quiz:blog_index" %}" method="get" accept-charset="utf-8">
-      <input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="キーワード">
+      <input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Keyword">
       <button class="search_form_button" type="submit"><span class="icon"><i class="fas fa-search"></i></span></button>
     </form>
 
     <div class="sidebar_category_tag_container">
-      <p class="sidebar_head">カテゴリー</p>
+      <p class="sidebar_head">Category</p>
       <div class="category_tag_scroll">
         <div class="container">
           {% for category in blog_categories %}
@@ -19,7 +19,7 @@
           {% endfor %}
         </div>
       </div>
-      <p class="sidebar_head">タグ</p>
+      <p class="sidebar_head">Tag</p>
       <div class="category_tag_scroll">
         <div class="container tags">
           {% for tag in blog_tags %}

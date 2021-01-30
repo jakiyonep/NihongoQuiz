@@ -1,0 +1,221 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+{% load markdownify %}
+{% load static %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/user_info.min.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/quiz.min.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
+
+</head>
+<body>
+	{% include 'quiz/navbar.html' %}
+	<div class="wrapper user_info_wrapper quiz_wrapper article_wrapper correction_wrapper">
+		<p class="section_head">
+			{% if user.nickname %}
+				{{user.nickname}}'s page
+			{% endif %}
+		</p>
+		<div class="left_column">
+			<div class="user_activities_container">
+				<div class="user_activity_container">
+					<p class="subsection_head triger_user_info_subsection_head" id="favorite">Your Favorites</p>
+					<div class="user_activity_content_container" id ="favorite_container">
+						<div class="top_row">
+							<div class="top_item active" id='quiz_favorite'>
+								Quizzes
+							</div>
+							<div class="top_item" id='article_favorite'> 
+								Articles
+							</div>
+						</div>
+						<div class="user_activity_content">
+							<div class="quiz_collapse_container" id='quiz_favorite_wrapper'>
+								{% include "quiz/Quiz/quiz_list_snippet.html" %}
+								<a class="button weak_button" href="{% url 'quiz:all_quizzes_of_user' user.pk %}">More</a>
+							</div><!-- quiz end-->
+							<div class="articles_wrapper" id='article_favorite_wrapper' style="display:none;">
+								<div class="articles_container">
+
+									{% include 'quiz/Article/article_list_snippet.html' %}
+									<a class="button weak_button" href="{% url 'quiz:all_articles_of_user' user.pk %}">More</a>
+								</div>
+							</div><!-- article end-->
+						</div>
+					</div><!-- favorite list end-->
+				</div>
+				<div class="user_activity_container">
+					<p class="subsection_head triger_user_info_subsection_head" id="correction">Corrected Compositions</p>
+					<div class="correction_container" id="correction_container">
+						<div class="correction_wrapper">
+							<div class="correction_main_container">
+								{% include "quiz/Correction/correction_list_snippet.html" %}
+							</div>
+						</div><!-- correction end-->
+					</div>
+				</div>
+			</div>
+		</div><!-- /.left_column -->
+		<div class="right_column">
+			<div class="user_info_container">
+				<div class="user_info">
+					<div class="user_info_row user_info_row_top">
+						User Information
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							User ID <br>
+							(Only visible to you)
+						</div>
+						<div class="user_info_right">
+							{{user.email}}
+						</div>
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							Nickname
+						</div>
+						<div class="user_info_right">
+							{{user.nickname}}
+						</div>
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							Registration Date
+						</div>
+						<div class="user_info_right">
+							{{user.date_joined|date:'Y-m-d'}}
+						</div>
+					</div>
+					<div class="user_info_row user_info_row_top">
+						Quiz
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							<a class="user_info_link" href="{% url 'quiz:all_quizzes_of_user' user.pk%}">Liked Quizzes</a>
+						</div>
+						<div class="user_info_right">
+							{{user.liked_quiz.count}}
+						</div>
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							Answered Quizzes
+						</div>
+						<div class="user_info_right">
+							{{user.answered_quiz.count}}
+						</div>
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							Quiz Correct Rate
+						</div>
+						<div class="user_info_right">
+							{{correct_rate}}
+						</div>
+					</div>
+					<div class="user_info_row user_info_row_top">
+						Article
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							<a class="user_info_link" href="{% url 'quiz:all_articles_of_user' user.pk %}">Liked Articles</a>
+						</div>
+						<div class="user_info_right">
+							{{user.liked_article.count}}
+						</div>
+					</div>
+					<div class="user_info_row user_info_row_top">
+						Correction
+					</div>
+					<div class="user_info_row">
+						<div class="user_info_left">
+							Corrected Compositions
+						</div>
+						<div class="user_info_right">
+							{{user.submitted_corrections.count}}
+						</div>
+					</div>
+					<div class="user_info_row user_info_row_top">
+						Settings
+					</div>
+					<div class="user_info_row user_info_row_settings">
+						<div class="user_info_menu">
+							<a class="user_info_menu_item" href="{% url 'quiz:user_update' user.pk %}">Change Nickname</a>
+							<a class="user_info_menu_item" href="{% url 'quiz:password_change' %}">Chanve Password</a>
+							<a class="user_info_menu_item" href="{% url 'quiz:email_change' %}">Change Email</a>
+						</div>
+					</div><!-- /.user_info_row -->
+				</div>				
+			</div>
+		</div>
+	</div>
+
+		<script type="text/javascript">
+		$(document).on('click', '.quiz_like_button',function(event){
+			event.preventDefault();
+			var quiz_id = $(this).attr('id')
+			var quiz_id_like_section = '#quiz_' + quiz_id + '_like_section'
+					$.ajax({
+									type: "POST",
+									url: "{% url 'quiz:quiz_like' %}",
+									data: {'pk': quiz_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+									dataType: "json",
+									success: function(response) {
+										$(quiz_id_like_section).html(response['form'])
+										},
+
+							});
+				})
+
+			$(document).on('click', '.article_like_button',function(event){
+				event.preventDefault();
+				var article_id = $(this).attr('id')
+				var article_id_like_section = '#article_' + article_id + '_like_section'
+						$.ajax({
+										 type: "POST",
+										 url: "{% url 'quiz:article_like' %}",
+										 data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+										 dataType: "json",
+										 success: function(response) {
+											 console.log('ok')
+												$(article_id_like_section).html(response['form'])
+											},
+
+								});
+					})
+			$(document).on('click', '.quiz_choice_button',function(event){
+				event.preventDefault();
+				var selected_choice = $(this).attr('name')
+				var quiz_id = $(this).parent().parent().parent().attr('name')
+				var choice_and_id = $(this).attr('id')
+				var quiz_id_choice_section = '#quiz_' + quiz_id + '_choice_section'
+				var correct_choice = $(this).parent().parent().parent().parent().attr('name')
+
+				console.log(selected_choice)
+				console.log(quiz_id)
+				console.log(choice_and_id)
+				console.log(quiz_id_choice_section)
+				console.log(correct_choice)
+				console.log('============')
+						$.ajax({
+										 type: "POST",
+										 url: "{% url 'quiz:quiz_choice' %}",
+										 data: {
+											'pk': quiz_id,
+											'csrfmiddlewaretoken': '{{ csrf_token }}',
+											'selected_choice': selected_choice,
+											'correct_choice': correct_choice,
+										},
+										 dataType: "json",
+										 success: function(response) {
+
+												$(quiz_id_choice_section).html(response['form'])
+											},
+
+								});
+					})
+		</script>
+</body>
+{% endblock %}

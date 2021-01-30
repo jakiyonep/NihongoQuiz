@@ -7,11 +7,12 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5rem;
-    .correction-desc{
-      width: 45%;
+    width: 100%;
+    .correction_desc{
+      width: 50%;
     }
     .strong_button{
-      width: 40%;
+      width: 30%;
     }
   }
   .correction_main_container{
@@ -114,13 +115,27 @@
       }
     }
   }
+  .correction_add_container{
+    .correction_form{
+      .form_section{
+        margin-bottom: 2rem;
+        .form_label{
+          margin-bottom: 1rem;
+          font-size: 1.1rem;
+          span{
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 650px) {
   .correction_wrapper{
     .correction_top_container{
       flex-wrap: wrap;
-      .correctioN-desc{
+      .correction_desc{
         width: 100%;
       }
       .strong_button{

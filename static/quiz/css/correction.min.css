@@ -35,14 +35,15 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 5rem;
+  width: 100%;
 }
 
-.correction_wrapper .correction_top_container .correction-desc {
-  width: 45%;
+.correction_wrapper .correction_top_container .correction_desc {
+  width: 50%;
 }
 
 .correction_wrapper .correction_top_container .strong_button {
-  width: 40%;
+  width: 30%;
 }
 
 .correction_wrapper .correction_main_container {
@@ -175,12 +176,25 @@
   font-size: 1.4rem;
 }
 
+.correction_wrapper .correction_add_container .correction_form .form_section {
+  margin-bottom: 2rem;
+}
+
+.correction_wrapper .correction_add_container .correction_form .form_section .form_label {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.correction_wrapper .correction_add_container .correction_form .form_section .form_label span {
+  font-size: 0.9rem;
+}
+
 @media screen and (max-width: 650px) {
   .correction_wrapper .correction_top_container {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
-  .correction_wrapper .correction_top_container .correctioN-desc {
+  .correction_wrapper .correction_top_container .correction_desc {
     width: 100%;
   }
   .correction_wrapper .correction_top_container .strong_button {

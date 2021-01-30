@@ -11,32 +11,32 @@
   </head>
   <body>
 		{% include 'quiz/navbar.html' %}
-    <div class="wrapper correction_add_wrapper">
+    <div class="wrapper correction_wrapper">
       <div class="container correction_add_container">
         <form class="correction_form" action="{% url 'quiz:correction_add' %}" method="POST" onsubmit="return confirm('Are you sure you want to submit this?');">
-					{% if not request.user.is_authenticated %}
-	        	<div class="correction_name">
-	            <p class="correction_label">Name<span class="span">(Optional)</span></p>
-	            {{form.name}}
-	          </div>
-					{% endif %}
-          <div class="correction_level">
-            <p class="correction_label">Formality<span class="span">(Optional)</span></p>
+          {% if not request.user.is_authenticated %}
+            <div class="form_section">
+              <div class="form_label ">Name<span class="span">(Optional)</span></div>
+              {{form.name}}
+            </div>
+          {% endif %}
+          <div class="form_section">
+            <div class="form_label ">Formality<span class="span">(Optional)</span></div>
             {{form.type}}
           </div>
-          <div class="correction_text">
-            <p class="correction_label">Your text</p>
+          <div class="form_section">
+            <div class="form_label ">Your text</div>
             {{form.text}}
           </div>
-          <div class="correction_desc">
-            <p class="correction_label">Description <br>
+          <div class="form_section">
+            <div class="form_label ">Description <br>
 							<span>Add a description about your text if you want(Who is the reader?/In what context?...), so I can give you a detailed feedback</span>
-            </p>
+            </div>
             {{form.desc}}
           </div>
 
 
-          <button type="submit" name="button" class="correction_submit_button" >Submit</button>
+          <button type="submit" name="button" class="button strong_button">Submit</button>
           {% csrf_token %}
         </form>
       </div>
