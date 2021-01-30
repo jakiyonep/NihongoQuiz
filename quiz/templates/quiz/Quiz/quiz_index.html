@@ -1,0 +1,78 @@
+{% extends 'quiz/base.html' %}
+{% load static%}
+{% load quiz_filter %}
+{% block title %}Quizzes{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<link rel="stylesheet" href="{% static 'quiz/css/quiz.min.css' %}">
+	</head>
+	<body>
+		{% include 'quiz/navbar.html' %}
+		<div class="wrapper quiz_wrapper">			
+			{% if all_quizzes_of_user == 1 %}
+				<h1 class="section_head">Your favorite quizzes</h1>
+			{% else %}
+				<h1 class="section_head">問 - Quizzes</h1>
+			{% endif %}
+			<div class="left_column">
+				{% if result == 1 %}
+					<div class="result">
+						{% include "quiz/result_snippet.html" %}
+					</div>
+				{% endif %}
+				{% include "quiz/Quiz/quiz_list_snippet.html" %}
+				{% include "quiz/Quiz/quiz_pagination.html" %}
+			</div><!-- /.left_column -->
+			<div class="right_column">
+				{% include "quiz/Quiz/quiz_sidebar.html" %}
+			</div>
+		</div>
+		{% if user.is_authenticated %}
+			<script type="text/javascript">
+				$(document).on('click', '.quiz_like_button',function(event){
+					event.preventDefault();
+					var quiz_id = $(this).attr('id')
+					var quiz_id_like_section = '#quiz_' + quiz_id + '_like_section'
+							$.ajax({
+											type: "POST",
+											url: "{% url 'quiz:quiz_like' %}",
+											data: {'pk': quiz_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+											dataType: "json",
+											success: function(response) {
+													$(quiz_id_like_section).html(response['form'])
+												},
+
+									});
+						})
+
+				$(document).on('click', '.quiz_choice_button',function(event){
+					event.preventDefault();
+					var selected_choice = $(this).attr('name')
+					var quiz_id = $(this).parent().parent().parent().attr('name')
+					var choice_and_id = $(this).attr('id')
+					var quiz_id_choice_section = '#quiz_' + quiz_id + '_choice_section'
+					var correct_choice = $(this).parent().parent().parent().parent().attr('name')
+							$.ajax({
+											type: "POST",
+											url: "{% url 'quiz:quiz_choice' %}",
+											data: {
+												'pk': quiz_id,
+												'csrfmiddlewaretoken': '{{ csrf_token }}',
+												'selected_choice': selected_choice,
+												'correct_choice': correct_choice,
+											},
+											dataType: "json",
+											success: function(response) {
+
+													$(quiz_id_choice_section).html(response['form'])
+												},
+
+									});
+						})
+			</script>
+		{% endif %}
+	</body>
+</html>
+{% endblock %}

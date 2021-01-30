@@ -1,0 +1,34 @@
+{% load markdownify %}
+	{% for comment in comments %}
+		{% if user.is_authenticated or comment.approved %}
+			<div class="comment_container comment_container">
+				<div class="meta_info">
+					<p class="user">
+						{% if comment.aki %}							
+							Aki
+						{% elif comment.login_author %}
+							{{comment.login_author.nickname}}							
+						{% elif comment.author %}
+							{{comment.author}}
+						{% endif %}
+					</p>						
+					<p class="date">{{ comment.timestamp|date:"M j, Y f" }}</p>
+				</div>
+				<div class="content">{{ comment.text|markdownify }}</div>
+				<button class="inline_button weak_button reply_collapse_button" name="{{comment.pk}}">Reply</button>
+				<button class="inline_button weak_button show_replies" name="{{comment.pk}}">Show Replies({{comment.replies.all.count}})</button>
+				<div class="comment_form_wrapper reply" id="reply_{{comment.pk}}_form_wrapper" style="display:none;">
+					{% include 'quiz/Article/Comment/reply_form.html' %}
+				</div>
+				{% if user.is_superuser %}
+					<div class="admin_buttons">
+						<a class="inline_button friendly_button" href="{% url 'quiz:comment_approve' comment.pk %}" >Approve</a>
+						<a class="inline_button dangerous_button" href="{% url 'quiz:comment_remove' comment.pk %}">Delete</a>
+					</div>
+				{% endif %}
+				</div>
+		<div class="replies_container" id="{{comment.pk}}_replies_container" style="display:none;">
+			{% include 'quiz/Article/Comment/replies.html' %}
+		</div><!-- replies container end -->
+	{% endif %}
+{% endfor %}

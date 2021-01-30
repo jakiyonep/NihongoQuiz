@@ -1,0 +1,48 @@
+			<div class="articles_container">
+				{% for article in article_list %}
+					{% if not article.public and request.user.is_authenticated%}
+						<a class="title" href="{% url 'quiz:article_detail' article.title_slug %}">
+							{{article.title}}
+						</a>
+						{% if article.thumbnail  %}
+							<img src="{{ article.thumbnail.url }}" alt="" style="width:100px;">
+						{% endif %}
+					{% endif %}
+					{% if article.public %}
+						<article class="article_container">
+							<div class="article_left">
+								{% if article.thumbnail  %}
+									<img src="{{ article.thumbnail.url }}" alt="">
+								{% else %}
+									<img src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/article_thumbnail/undraw_japan_ubgk.png" alt="">
+								{% endif %}
+							</div>
+							<div class="article_right">
+								<div class="article_right_top">
+									<a class="title" href="{% url 'quiz:article_detail' article.title_slug %}">
+										{{ article.title|upper }}
+									</a>
+								</div>
+								<div class="article_right_bottom">
+									<div class="meta_info">
+										<span class="date">{{ article.update |date:"M j, Y"}}</span>
+										{% if article.category %}
+											<a class="category" href="{% url 'quiz:article_category_list' article.category.slug %}">{{ article.category.name }}</a>
+										{% endif %}										
+										<div class="tags">
+											{% for tag in article.tag.all %}
+											<a class="tag" href="{% url 'quiz:article_tag_list' tag.slug %}">
+												{{ tag }}
+											</a>
+											{% endfor %}
+										</div>
+										<div class="like_section article_like_section" id="article_{{article.pk}}_like_section">
+											{% include 'quiz/Article/like.html' %}
+										</div>
+									</div>
+								</div>
+							</div>							
+						</article>
+					{% endif %}					
+				{% endfor %}
+			</div>

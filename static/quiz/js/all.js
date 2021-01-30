@@ -92,13 +92,13 @@ $(function(){
 });
 
 $(function(){
-	$('#filter_button').on('click', function() {
-		$('.filter_collapse').slideToggle('normal	');
+	$('#collapse_open_button').on('click', function() {
+		$('.collapse_target').slideToggle('fast');
 
 })
 });
 
-$(document).on('click', '.user_info_list_section_head', function(event){
+$(document).on('click', '.triger_user_info_subsection_head', function(event){
 	event.preventDefault();
 	var selected_id = $(this).attr('id')
 	var selected_container = $('#' + selected_id + '_container')
@@ -115,8 +115,6 @@ $(document).on('click', '.top_item', function(event){
 	}else{
 		$(this).addClass('active')
 		$(this).siblings().removeClass('active')
-
-
 		$(selected_wrapper).siblings().hide()
 		$(selected_wrapper).show()
 	}
@@ -139,4 +137,23 @@ $(document).on('click', '.show_replies', function(event){
 	var comment_id = $(this).attr('name')
 
 	$('#' + comment_id + '_replies_container').slideToggle()
+})
+
+$(document).on('click', '.sidebar_head', function (event) {
+	$(this).next().slideToggle('fast')
+	$(this).classToggle('clicked')
+})
+
+/* difficulty switch */
+$(document).on('click', '.switch_button', function(event){
+	var selected_difficulty = $(this).attr('id')
+	var selected_container = "." + selected_difficulty + "_container"
+	if($(this).hasClass('active')){
+
+	}else{
+		$(this).addClass('active')
+		$(this).siblings().removeClass('active')
+		$(selected_container).siblings().hide()
+		$(selected_container).show()
+	}
 })

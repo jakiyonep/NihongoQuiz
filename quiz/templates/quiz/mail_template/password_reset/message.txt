@@ -1,6 +1,0 @@
-Hi {{ user.nickname }}!
-
-Click on the link below, and reset your password.
-
-
-{{ protocol}}://{{ domain }}{% url 'quiz:password_reset_confirm' uid token %}

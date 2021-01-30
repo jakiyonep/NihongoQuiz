@@ -1,0 +1,65 @@
+{% extends 'quiz/base.html' %}
+{% load static%}
+{% block title %}Blog{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<link rel="stylesheet" href="{% static 'quiz/css/blog.min.css' %}">
+	</head>
+	<body>
+		{% include 'quiz/navbar.html' %}
+	<div class="wrapper blog_wrapper">
+		<p class="section_head">日 - Blog</p>
+		<div class="left_column">
+			<div class="blogs_container">
+				{% if result == 1 %}
+					{% include "quiz/result_snippet.html" %}
+				{% endif %}
+				{% for blog in blog_list %}
+					{% if blog.public %}
+						<div class="blog_container">
+							<a class="blog_link" href="{% url 'quiz:blog_detail' blog.pk %}">
+								<div class="thumbnail">
+									{% if blog.thumbnail %}
+										<img src="{{blog.thumbnail.url}}">
+									{% else %}
+										<img
+											src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Design_thinking_re_644h.png"
+											alt="">
+									{% endif %}
+								</div>
+							</a>
+							<div class="bottom">
+								<div class="title">
+									{{blog.title}}
+								</div>
+								<div class="meta_info">
+									<div class="date">
+										{{blog.update|date:"Y/m/d f"}}
+									</div>
+									<a class="category" href="{% url 'quiz:blog_category_list' blog.category.category_slug %}">
+									{{blog.category.category}}
+									</a>
+									{% if blog.tag.all %}
+									<div class="tags">
+										{% for tag in blog.tag.all %}
+										<a class="tag" href="{% url 'quiz:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
+										{% endfor %}
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+      {% include 'quiz/pagination.html' %}
+		</div>
+		<div class="right_column">
+			{% include "quiz/Blog/sidebar.html" %}
+		</div>
+	</div>
+	</body>
+</html>
+{% endblock %}

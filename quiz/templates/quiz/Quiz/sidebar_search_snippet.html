@@ -1,0 +1,31 @@
+			<div class="search_section">
+				<span class="search_label level">Level</span>
+				<select name="level">				
+					<option value="">---</option>
+					{% for level in all_levels %}
+						<option value="{{level}}">{{level}}</option>
+					{% endfor %}
+				</select><!-- /level -->
+			</div>
+			<div class="search_section">
+				<span class="search_label category">Category</span>
+				<select name="category">
+					<option value="">---</option>
+					{% for category in all_categories %}
+						<option value="{{category}}">{{category}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="search_section">
+				<span class="search_label tag">Tag</span>
+				<select class="multiple_select" name="tag" multiple>
+					{% for tag in all_tags %}
+						<option value="{{tag}}">{{tag}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="search_section">
+				<span class="search_label">Keyword</span>
+				<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}">
+			</div>
+			<button class="button strong_button" name="search" type="submit">Find Quizzes</button>

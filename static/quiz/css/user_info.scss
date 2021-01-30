@@ -1,0 +1,101 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.user_info_wrapper{
+	.left_column{
+		.user_activities_container{
+			.user_activity_container{
+				margin-bottom: 8rem;
+				&:last-child{
+					margin-bottom: 2rem;
+				}
+				.subsection_head{
+					&:hover{
+						cursor:pointer;
+					}
+				}
+				.user_activity_content_container{					
+					.top_row{
+						width: 100%;
+						display: flex;
+						flex-wrap: nowrap;
+						margin-bottom: 1rem;
+						.top_item{
+							width: 100%;
+							text-align: center;
+							border: 1px solid $border-secondary;
+							font-size: 1.1rem;
+							padding: 0.5rem;
+							transition: 0.1s;
+							&:hover{
+								transition: 0.1s;
+								cursor: pointer;
+							}
+						}
+						.active{
+							background-color: $weak-blue;
+						}
+					}
+					.user_activity_content{
+
+					}
+				}	
+			}
+		}
+	}
+	.right_column{
+		width: 35%;
+		.user_info_container{
+			.user_info{
+				margin-bottom: 2rem;
+				.user_info_row{
+					width: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					margin-bottom: 1rem;
+					border: 1px solid $border-secondary;
+					&>*{
+						padding: 0.2rem;
+						width: 100%;
+					}
+					.user_info_left{
+						background-color: $border-secondary;
+						a{
+							&::after{
+								content: "\f35d";
+								color: $strong-blue;
+								@extend .fontawesome_before;
+							}
+						}
+					}
+					.user_info_right{
+					}
+				}				
+				.user_info_row_top{
+					border: none;
+					margin-top: 3rem;
+					font-size: 1.1rem;
+					border-left: 0.5rem solid $border-primary;
+					padding-left: 0.5rem;
+					&:first-child{
+						margin-top: 0;
+					}
+				}
+				.user_info_row_settings{
+					border: none;
+					.user_info_menu{
+						width: 100%;
+						display: flex;
+						flex-wrap: wrap;
+						.user_info_menu_item{
+							width: 100%;
+							margin-bottom: 0.5rem;
+							padding: 0.3rem;
+							color: $strong-blue;
+						}
+					}
+				}
+			}			
+		}
+	}
+}

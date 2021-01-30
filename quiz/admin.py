@@ -116,6 +116,39 @@ class CorrectionAdmin(MarkdownxModelAdmin):
     list_editable = ['public']
 
 
+# Blog
+
+class BlogJapanese1(admin.TabularInline):
+    model = BlogJapanese1
+    extra = 1
+
+
+class BlogDetail1(admin.TabularInline):
+    model = BlogJapanese1Detail
+    extra = 2
+
+
+class BlogJapanese2(admin.TabularInline):
+    model = BlogJapanese2
+    extra = 1
+
+
+class BlogDetail2(admin.TabularInline):
+    model = BlogJapanese2Detail
+    extra = 2
+
+
+class BlogAdmin(MarkdownxModelAdmin):
+    list_display = ('title', 'public')
+    list_editable = ['public']
+    inlines = (
+        BlogJapanese1,
+        BlogDetail1,
+        BlogJapanese2,
+        BlogDetail2,
+    )
+
+
 #User
 admin.site.register(User)
 
@@ -145,3 +178,8 @@ admin.site.register(LessonGrammar, LessonGrammarAdmin)
 
 #Correction
 admin.site.register(Correction, CorrectionAdmin)
+
+#Blog
+admin.site.register(Blog, BlogAdmin)
+admin.site.register(BlogCategory)
+admin.site.register(BlogTag)

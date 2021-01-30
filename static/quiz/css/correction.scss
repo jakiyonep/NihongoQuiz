@@ -1,0 +1,169 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.correction_wrapper{
+  .correction_top_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+    .correction-desc{
+      width: 45%;
+    }
+    .strong_button{
+      width: 40%;
+    }
+  }
+  .correction_main_container{
+    width: 100%;
+    .corrections_container{
+      .correction_entry{
+        margin-bottom: 0.5rem;
+        display: flex;
+        width: 100%;
+        flex-wrap: nowrap;
+        transition: 0.2s;
+        border: 1px solid white;        
+        padding: 0.5rem;
+        background-color: $light-bg-bolor;
+        &:hover{
+          transition: 0.2s;
+          border: 1px solid $strong-blue;
+        }
+        &>div{
+          padding: 0.5rem;
+        }
+        .correction_title{
+          width: 80%;
+        }
+        .correction_type{
+          width: 20%;
+        }
+      }
+    }
+  }
+  .correction_detail_container{
+    width: 100%;
+    .correction_detail_info{
+      width: 100%;
+      margin-bottom: 5rem;
+      &>div{
+        margin-bottom: 1rem;
+        span{
+          border-bottom: 1px solid $border-primary;
+        }
+      }
+    }
+    .correction_content{
+      width:100%;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      align-items: center;
+      .correction_left{
+        width: 90%;
+        .correction_original{
+          p{
+            margin-bottom: 0;
+          }
+        }
+        .correction_visible{
+          strong{
+            color: $warn-red;
+          }
+        }
+        .correction_desc{
+          margin-left: 1rem;
+          background-color: $light-bg-bolor;
+          padding: 0.5rem;
+          display: none;
+          p{
+            margin-bottom: 0;
+          }
+          .corrected{            
+            margin-bottom: 0.2rem;
+            strong{
+              color: $strong-blue;
+              font-weight: bold;
+            }
+            p{
+              font-weight: bold;
+            }
+          }
+          .corrected_yomi{
+
+          }
+          .correction_content{
+            margin-top: 3rem;
+            margin-bottom: 0;
+          }
+        }
+      }
+      .correction_right{ 
+        text-align: right;
+        display: flex;
+        align-items: flex-start;
+        height: 100%;
+        .correction_btn{
+          padding: 0.5rem;
+          i{
+            font-size: 1.4rem;          
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .correction_wrapper{
+    .correction_top_container{
+      flex-wrap: wrap;
+      .correctioN-desc{
+        width: 100%;
+      }
+      .strong_button{
+        width:100%;
+      }
+    }
+    .correction_main_container{
+      .corrections_container{
+        .correction_entry{
+          flex-wrap: wrap;
+          .correction_title{
+            width: 100%;
+          }
+          .correction_type{
+            width: 100%;
+            text-align: right;
+          }
+        }
+      }
+    }
+    .correction_detail_container{
+      .correction_detail_info{
+  
+      }
+      .correction_content{
+        .correction_left{
+          width: 90%;
+          .correction_original{
+  
+          }
+          .correction_desc{
+            margin-left: 0;
+          }
+        }
+        .correction_right{ 
+          .correction_btn{
+            padding: 0.1rem;
+            i{
+              font-size: 1.2rem;          
+            }
+          }
+        }
+      }
+    }
+  }
+}

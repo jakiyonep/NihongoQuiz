@@ -1,0 +1,9 @@
+
+Hi {{ user.nickname }}!
+
+Thank you for signing up.
+Note that the registration procedure is not finished yet.
+Click on the link below, and complete the procedure!
+
+Registration URL
+{{ protocol}}://{{ domain }}{% url 'quiz:user_create_complete' token %}

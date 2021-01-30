@@ -187,6 +187,36 @@ class Quiz(models.Model):
     def total_user_answered(self):
         return self.answered_user.count()
 
+    def quiz_result(self):
+        option_1_count = self.choice1_count.count()
+        option_2_count = self.choice2_count.count()
+        option_3_count = self.choice3_count.count()
+        option_4_count = self.choice4_count.count()
+        count_dict = [option_1_count, option_2_count, option_3_count, option_4_count]
+        option_1_percentage = 0
+        option_2_percentage = 0
+        option_3_percentage = 0
+        option_4_percentage = 0
+        total = option_1_count + option_2_count + option_3_count + option_4_count
+
+        if not option_1_count == 0:
+            option_1_percentage = round(option_1_count / total * 100)
+        if not option_2_count == 0:
+            option_2_percentage = round(option_2_count / total * 100)
+        if not option_3_count == 0:
+            option_3_percentage = round(option_3_count / total * 100)
+        if not option_4_count == 0:
+            option_4_percentage = round(option_4_count / total * 100)
+
+        context = {
+            "choice_1_percentage": option_1_percentage,
+            "choice_2_percentage": option_2_percentage,
+            "choice_3_percentage": option_3_percentage,
+            "choice_4_percentage": option_4_percentage,
+        }
+
+        return context
+
 class DescriptionDetail(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     word_in_sentence = models.CharField(blank=True, max_length=200, null=True)
@@ -232,7 +262,7 @@ class Articles(models.Model):
     title = models.CharField(null=True, max_length=255)
     title_slug=models.TextField(max_length=100, null=True, blank=False, unique=True)
     likes = models.ManyToManyField(User, null=True, blank=True, related_name='liked_article')
-    category2 = models.ForeignKey(ArticlesCategory, null=True, blank=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(ArticlesCategory, null=True, blank=True, on_delete=models.CASCADE)
     tag = models.ManyToManyField(ArticlesTag, null=True, blank=True)
     content = MarkdownxField(null=True)
     summary = models.TextField(null=True, blank=True, max_length=200)
@@ -240,7 +270,7 @@ class Articles(models.Model):
     public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
     thumbnail = models.ImageField(upload_to='article_thumbnail/', null=True, blank=True)
-    related_basics = models.ManyToManyField('self', blank=True, null=True)
+    related_articles = models.ManyToManyField('self', blank=True, null=True)
 
     class Meta:
         ordering = ['-update']
@@ -472,3 +502,51 @@ class CorrectionSentences(models.Model):
         return markdownify(self.corrected)
 
 
+# Blog
+
+class BlogCategory(models.Model):
+    category = models.CharField(max_length=50, blank=False, null=True)
+    category_slug = models.CharField(max_length=50, blank=False, null=True)
+
+    def __str__(self):
+        return self.category
+
+class BlogTag(models.Model):
+    tag = models.CharField(max_length=50, blank=False, null=True)
+    tag_slug = models.CharField(max_length=50, blank=False, null=True)
+
+    def __str__(self):
+        return self.tag
+
+class Blog(models.Model):
+    title = models.CharField(max_length=50, blank=False, null=True)
+    category = models.ForeignKey(BlogCategory, blank=False, null=True, on_delete=models.CASCADE, related_name="category_blogs")
+    tag = models.ManyToManyField(BlogTag, blank=False, null=True, related_name="tag_blogs")
+    update = models.DateTimeField(auto_now=True)
+    public = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+class BlogJapanese1(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="japanese_1")
+    content = MarkdownxField(blank=False, null=True)
+
+class BlogJapanese1Detail(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="japanese_1_detail")
+    word = models.CharField(blank=True, max_length=200)
+    usage = models.TextField(blank=True, max_length=200)
+    yomi = models.TextField(blank=True, max_length=200)
+    definition = models.TextField(blank=True, max_length=200)
+
+
+class BlogJapanese2(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="japanese_2")
+    content = MarkdownxField(blank=False, null=True)
+
+class BlogJapanese2Detail(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="japanese_2_detail")
+    word = models.CharField(blank=True, max_length=200)
+    usage = models.TextField(blank=True, max_length=200)
+    yomi = models.TextField(blank=True, max_length=200)
+    definition = models.TextField(blank=True, max_length=200)

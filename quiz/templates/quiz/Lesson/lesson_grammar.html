@@ -1,0 +1,53 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %}Course Grammar{% endblock %}
+{% block description %}
+  The list of grammars used in the lessons
+{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'quiz/css/lessons.min.css' %}">
+  </head>
+  <body>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper lesson_info_list_wrapper grammar_list_wrapper">
+      <h1 class="section_head">Grammar List </h1>
+      <div class="list_container grammar_list_container">
+        <div class="list_chapter list_head">
+          <p>CP</p>
+        </div>
+        <div class="list_grammar list_head">
+          <p>Grammar</p>
+        </div>
+      {% for grammar in object_list %}
+        {% if not grammar.lesson.vocab %}
+          {% if not grammar.lesson.exercise %}
+            <div class="list_row">
+              <div class="list_chapter">
+                {{ grammar.lesson.chapter }}
+              </div>
+                {% if not grammar.casual %}
+                  <div class="list_grammar">
+                    <a href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar | safe}}</a>
+                  </div>
+                {% else %}
+                  <div class="list_grammar casual">
+                    <a href="{% url 'quiz:lesson_post' grammar.lesson.pk %}">{{ grammar.grammar | safe}}</a>
+                  </div>
+                {% endif %}
+            </div>
+          {% endif %}
+        {% endif %}
+        {% if grammar.lesson.vocab %}
+        {% endif %}
+      {% endfor %}
+		</div>
+    </div>
+  </body>
+</html>
+
+{% endblock %}

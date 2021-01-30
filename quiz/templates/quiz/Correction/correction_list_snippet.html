@@ -1,0 +1,25 @@
+<div class="corrections_container">
+  {% for correction in correction_list %}
+    {% if correction.public %}
+      <a href="{% url 'quiz:correction_post' correction.title_slug %}" class="correction_entry">
+        <div class="correction_title">
+          {{correction.title}}
+        </div>
+        <div class="correction_type">
+          {% if correction.type == 1 %}
+            SUPER Casual
+          {% endif %}
+          {% if correction.type == 2 %}
+            Casual
+          {% endif %}
+          {% if correction.type == 3 %}
+            Formal
+          {% endif %}
+          {% if correction.type == 4 %}
+            SUPER Formal
+          {% endif %}
+        </div>
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>

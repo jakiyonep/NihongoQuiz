@@ -1,0 +1,56 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %}Course Vocabulary{% endblock %}
+{% block description %}
+  Let's learn Nihongo with me!
+{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'quiz/css/lessons.min.css' %}">
+  </head>
+  <body>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper lesson_info_list_wrapper vocabulary_list_wrapper">
+      <h1 class="section_head">Vocabulary List </h1>
+      <div class="container list_container">
+        <div class="list_chapter list_head">
+          <p>CP</p>
+        </div>
+        <div class="list_word list_head">
+          <p>Word</p>
+        </div>
+        <div class="list_definition list_head">
+          <p>Deninition</p>
+        </div>
+      {% for vocab in object_list %}
+        <div class="list_row">
+          <div class="list_chapter">
+            {{ vocab.lesson.chapter }}
+          </div>
+          {% if not vocab.casual %}
+            <div class="list_word">
+              <a href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word |safe}}</a>
+            </div>
+          {% else %}
+            <div class="list_word casual">
+              <a href="{% url 'quiz:lesson_post' vocab.lesson.pk %}">{{ vocab.word |safe}} </a>
+            </div>
+          {% endif %}
+          <div class="list_definition">
+            {{ vocab.definition |safe}}
+          </div>
+
+
+        </div>
+      {% endfor %}
+		</div>
+    </div>
+
+  </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %}Courses{% endblock %}
+{% block description %}
+  Here are 日本語Tatsujin's own courses for Japanese learners
+{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static 'quiz/css/lessons.min.css' %}">
+  </head>
+  <body>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper lessons_wrapper"><!--wrapper-->
+      <h1 class="section_head">習 - Courses </h1><!--head-->
+      <div class="container lesson_info_container"><!--lesson_info-->
+        <a class="lesson_info" href="{% url 'quiz:lesson_grammar' %}">Grammar List</a>
+        <a class="lesson_info" href="{% url 'quiz:lesson_vocabulary' %}">Vocabulary List</a>
+        <a class="lesson_info" href="{% url 'quiz:lesson_kanji' %}">Kanji List</a>
+      </div>
+
+      <div class="container lessons_container"><!--lessons_container-->
+        <div class="lesson_container chapter_1"><!--cp 1-->
+          <p class="chapter_head">Chapter 1</p>
+					<ol class="lesson_item">
+          {% for lesson in object_list %}
+            {% if lesson.chapter == 1 %}
+            	{% if lesson.public  %}
+                <li>
+                  <a href="{% url 'quiz:lesson_post' lesson.pk %}">
+                    {{lesson.title}}
+                  </a>
+                </li>
+            	{% endif %}
+            {% endif %}
+          {% endfor %}
+					</ol>
+        </div>
+
+				<div class="lesson_container chapter_2"><!--cp 2-->
+					<p class="chapter_head">Chapter 2</p>
+					<ol class="lesson_item">
+					{% for lesson in object_list %}
+						{% if lesson.chapter == 2 %}
+							{% if lesson.public  %}
+								<li>
+									<a href="{% url 'quiz:lesson_post' lesson.pk %}">
+										{{lesson.title}}
+									</a>
+								</li>
+								{% endif %}
+						{% endif %}
+					{% endfor %}
+					</ol>
+				</div>
+
+				<div class="lesson_container chapter_3"><!--cp 3-->
+          <p class="chapter_head">Chapter 3</p>
+					<ol class="lesson_item">
+	          {% for lesson in object_list %}
+	            {% if lesson.chapter == 3 %}
+	            	{% if lesson.public  %}
+	                <li>
+	                  <a href="{% url 'quiz:lesson_post' lesson.pk %}">
+	                    {{lesson.title}}
+	                  </a>
+	                </li>
+	            	{% endif %}
+	            {% endif %}
+	          {% endfor %}
+					</ol>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
+
+
+{% endblock %}

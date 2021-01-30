@@ -1,0 +1,49 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %}Advanced{% endblock %}
+{% block description %}
+  Here are more advanced articles on the Japanese language!
+{% endblock %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
+</head>
+<body>
+  {% include 'quiz/navbar.html' %}
+	<div class="wrapper article_wrapper">
+		{% if all_articles_of_user %}
+			<h1 class="section_head">Your favorite articles</h1>
+		{% else %}
+			<h1 class="section_head">記 - Articles</h1>
+		{% endif %}
+		<div class="left_column">
+			{% if result == 1 %}
+				{% include "quiz/result_snippet.html" %}
+			{% endif %}
+			{% include "quiz/Article/article_list_snippet.html" %}
+			{% include 'quiz/pagination.html' %}
+		</div><!--left_column-->
+		<div class="right_column">
+			{% include "quiz/Article/sidebar.html" %}
+		</div>
+  </div>
+	<script type="text/javascript">
+
+	$(document).on('click', '.article_like_button',function(event){
+		event.preventDefault();
+		var article_id = $(this).attr('id')
+		var article_id_like_section = '#article_' + article_id + '_like_section'
+				$.ajax({
+								type: "POST",
+								url: "{% url 'quiz:article_like' %}",
+								data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+								dataType: "json",
+								success: function(response) {
+									console.log('ok')
+									$(article_id_like_section).html(response['form'])
+								},
+						});
+			})
+	</script>
+</body>
+{% endblock %}

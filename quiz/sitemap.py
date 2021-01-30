@@ -30,7 +30,7 @@ class ArticlesSitemap(Sitemap):
         return Articles.objects.all()
 
     def location(self, obj):
-        return resolve_url('quiz:article_post', title_slug=obj.title_slug)
+        return resolve_url('quiz:article_detail', title_slug=obj.title_slug)
 
     def lastmod(self, obj):
         return obj.update

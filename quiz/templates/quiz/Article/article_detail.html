@@ -1,0 +1,175 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %} {{article.title}} {% endblock %}
+{% block description %}
+  {{article.summary}}
+{% endblock %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'quiz/css/article_index.min.css' %}">
+  <link rel="stylesheet" href="{% static 'quiz/css/content.min.css' %}">
+</head>
+<body>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper article_wrapper">
+			<div class="left_column">
+				<main class="article_detail_container">
+					<div class="detail_top">
+						<h1 class="title">{{ article.title }}</h1>
+						<div class="meta_info">
+							<span class="date">{{ article.update |date:"M j, Y f"}}</span>
+							{% if article.category %}
+								<a class="category" href="{% url 'quiz:article_category_list' article.category.slug %}">{{ article.category.name }}</a>
+							{% endif %}
+							<div class="tags">
+								{% for tag in article.tag.all %}
+								<a class="tag" href="{% url 'quiz:article_tag_list' tag.slug %}">
+									{{ tag }}
+								</a>
+								{% endfor %}
+							</div>
+								<div class="like_section article_like_section" id="article_{{article.pk}}_like_section">
+									{% include 'quiz/Article/like.html' %}
+								</div>
+						{% if article.thumbnail  %}
+							<img class="article-post_thumbnail" src="{{ article.thumbnail.url }}" alt="">
+							{% else %}
+							<img src="https://nihongotatsujin.s3-ap-northeast-1.amazonaws.com/media/article_thumbnail/undraw_japan_ubgk.png" alt="">
+						{% endif %}
+					</div>
+					</div>
+					<article class="content">
+						{{ article.markdown | safe}}
+						{% if articles.articlereferences_set.all %}
+						<section class="article_references"><!--references-->
+								<p class="section_head reference_head">References</p>
+								{% for reference in articles.articlereferences_set.all %}
+									<div class="article_reference">
+										{{ reference.reference |safe}}
+									</div>
+								{% endfor %}
+						</section>
+						{% endif %}
+					</article>
+				</main>
+				{% if article.related_articles.all %}
+				<p class="subsection_head">Realted Articles</p>
+				<section class="related_posts articles_container"><!--related-->
+					{% include "quiz/Article/article_list_snippet.html" %}
+				</section>
+				{% endif %}
+				<section class="comment_section">
+					<h2 class="subsection_head">Comments</h2>
+					<button class="button weak_button comment_collapse_button">Leave a comment</button>
+					<div class="comment_form_wrapper comment_form_collapse" style="display:none;">
+						{% include 'quiz/Article/Comment/comment_form.html' %}
+					</div>
+					<div class="comments_container">
+						{% include 'quiz/Article/Comment/comments.html' %}
+					</div>
+				</section><!-- /.article_comment -->
+			</div><!-- /.left_column -->
+			<div class="right_column">
+				<aside class="sidebar articles_sidebar" id="articles_sidebar"><!--Sidebar-->
+						{% include 'quiz/Article/sidebar.html' %}
+				</aside>
+			</div><!-- /.right_column -->
+		</div>
+		<script type="text/javascript">
+
+			$(document).on('click', '.article_like_button',function(event){
+				event.preventDefault();
+				var article_id = $(this).attr('id')
+				var article_id_like_section = '#article_' + article_id + '_like_section'
+						$.ajax({
+							type: "POST",
+							url: "{% url 'quiz:article_like' %}",
+							data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+							dataType: "json",
+							success: function(response) {
+
+									$(article_id_like_section).html(response['form'])
+								},
+
+						});
+					})
+			
+			
+			$(document).on('click', '#comment_submit',function(event){
+				event.preventDefault();
+				var article_id = $(this).attr('name')
+				var comment_author = $('#comment_author_id').val()
+				var comment_content = $('#comment_content_id').val()
+				if(comment_author == undefined || comment_author == ""){
+					comment_author = 'John Doe'
+				}
+				$('.comment_form_collapse').slideToggle()
+				$.ajax({
+					type: "POST",
+					url: "{% url 'quiz:comment_add' %}",
+					data: {
+					'article_id': article_id,
+					'comment_author': comment_author,
+					'comment_content': comment_content,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+				},
+					dataType: "json",
+					success: function(response) {
+						$('.comments_container').html(response['form'])
+						$('#comment_author_id').val('')
+						$('#comment_content_id').val('')
+					},
+
+				});
+
+			})
+
+			$(document).on('click', '.reply_submit_button',function(event){
+			event.preventDefault();
+			var comment_id = $(this).attr('id')
+			var reply_author = $('#reply_author_id').val()
+			var reply_content = $('#reply_content_id').val()
+			if(reply_author == undefined || reply_author == ""){
+				reply_author = 'John Doe'
+			}
+			$('#reply_' + comment_id + '_form_wrapper').slideToggle()
+			$.ajax({
+				type: "POST",
+				url: "{% url 'quiz:reply_add' %}",
+				data: {
+					'comment_id': comment_id,
+					'reply_author': reply_author,
+					'reply_content': reply_content,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+			},
+				dataType: "json",
+				success: function(response) {
+						$('.replies_container').html(response['form'])
+						$('#reply_author_id').val('')
+						$('#reply_content_id').val('')
+						
+					},
+
+			});
+
+		})
+
+
+			$(document).on('click', '.article_like_button',function(event){
+		event.preventDefault();
+		var article_id = $(this).attr('id')
+				$.ajax({
+								type: "POST",
+								url: "{% url 'quiz:article_like' %}",
+								data: {'pk': article_id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+								dataType: "json",
+								success: function(response) {
+									console.log('ok')
+									$(".article_like_section").html(response['form'])
+								},
+						});
+			})
+
+		</script>
+</body>
+{% endblock %}

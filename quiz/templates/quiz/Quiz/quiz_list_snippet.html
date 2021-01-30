@@ -1,0 +1,148 @@
+				<div class="quizzes_container">
+					{% for quiz in quiz_list %}
+						{% if user.is_authenticated or quiz.public %}
+							<div class="quiz_container" name="{{quiz.answer}}">
+								{% if not quiz.public %} Draft {% endif %}<h2 class="title">{{quiz.question | safe}}</h2>
+								<div class="choice_section" id="quiz_{{quiz.pk}}_choice_section" name="{{quiz.pk}}">
+									{% include 'quiz/Quiz/choice_section.html' %}
+								</div>
+								<div class="quiz_bottom">
+									<div class="meta_info"><!--quiz_info-->
+										<span class="level">
+											{{quiz.level}}
+										</span>
+										<span class="category">
+											{{quiz.category}}
+										</span>
+										<div class="tags">
+											{% for tag in quiz.tags.all %}
+												<span class="tag">{{ tag.name }}</span>
+											{% endfor %}
+										</div>
+									</div>
+									<div class="buttons">
+										<div class="like_section quiz_like_section" id="quiz_{{quiz.pk}}_like_section">
+											{% include 'quiz/Quiz/like.html' %}
+										</div>
+										<a class="inline_button weak_button answer_button_a" id="{{quiz.pk}}">
+											Description
+										</a>
+									</div>
+								</div>
+								<div class="quiz_collapse" id="collapse-{{quiz.pk}}">
+									<div class="correct_answer">Correct Answer: {{quiz.answer}}</div>
+									{% if quiz.explanation %}
+										<div class="quiz_explanation content">
+											{{quiz.markdown_explanation | safe}}
+										</div>
+									{% endif %}
+										<div class="question_description">
+										{% if quiz.question_yomi %}
+											<div class="bun">
+												<div>{{ quiz.question_yomi |safe }}</div>
+												{% if quiz.question_en %}
+													<div class="eng">
+														{{ quiz.question_en | safe }}
+													</div>
+												{% endif %}
+											</div>
+										{% endif %}										
+										{% if quiz.question_reading %}
+											<div class="question_reading">
+												<audio controls src="{{quiz.question_reading}}">
+														Your browser does not support the
+														<code>audio</code> element.
+												</audio>
+											</div>
+										{% endif %}
+									</div>
+									{% if quiz.choice1_detail %}
+										<div class="choices_description">
+											{% if quiz.choice1_detail %}
+												<p class="desc_head">Choices</p>
+											{% endif %}
+											{% if quiz.choice1_detail %}
+												<div class="choice_desc">
+													<div class="choice_desc_left">1</div><div class="choice_desc_right">{{ quiz.choice1_detail | safe }}</div>
+												</div>
+											{% endif %}
+											{% if quiz.choice2_detail %}
+												<div class="choice_desc">
+													<div class="choice_desc_left">2</div><div class="choice_desc_right">{{ quiz.choice2_detail | safe }}</div>
+												</div>
+											{% endif %}
+											{% if quiz.choice3_detail %}
+												<div class="choice_desc">
+													<div class="choice_desc_left">3</div><div class="choice_desc_right">{{ quiz.choice3_detail | safe}}</div>
+												</div>
+											{% endif %}
+											{% if quiz.choice4_detail %}
+												<div class="choice_desc">
+													<div class="choice_desc_left">4</div><div class="choice_desc_right">{{ quiz.choice4_detail | safe }}</div>
+												</div>
+											{% endif %}
+										</div>
+									{% endif %}
+									{% if quiz.descriptiondetail_set.all %}
+										<div class="vocabs_container"><!--DetailDescription-->
+											<p class="desc_head">Vocab</p>
+											{% for detail in quiz.descriptiondetail_set.all  %}
+												<div class="vocab_container">
+													{% if detail.word %}
+														<div class="detail_word">
+															{{ detail.word  |safe }} :
+															<div class="detail_usage">
+																{{ detail.markdown_usage | safe}}
+															</div>
+														</div>
+														
+													{% endif %}
+													<div class="word_description">
+														{% if detail.yomi %}
+															<div class="detail_yomi">
+																{{ detail.yomi  |safe }}
+															</div>
+														{% endif %}
+														{% if detail.word_form %}
+															<div class="detail_word_form">
+																{{ detail.word_form  |safe }}:
+															</div>
+														{% endif %}													
+														{% if detail.word_in_sentence %}
+															<div class="detail_word_in_sentence">
+																{{ detail.word_in_sentence  |safe }}
+															</div>
+														{% endif %}
+														{% if detail.definition %}
+															<div class="detail_definition">
+																{{ detail.markdown_definition  |safe }}
+															</div>
+														{% endif %}
+														{% if detail.usage %}
+														{% endif %}
+														{% if detail.example_ja %}
+															<div class="bun">
+																<div>{{ detail.example_ja |safe }}</div>
+																{% if detail.example_yomi %}
+																	<div class="detail_example_yomi">
+																		{{ detail.example_yomi |safe }}
+																	</div>
+																{% endif %}
+																{% if detail.example_en %}
+																	<div class="eng">
+																		{{ detail.example_en | safe}}
+																	</div>
+																{% endif %}
+															</div>
+														{% endif %}													
+													</div>
+												</div>
+											{% endfor %}
+
+										</div>
+									{% endif %}
+								</div>
+							{% endif %}
+						</div>
+					{% endfor %}
+					</div>

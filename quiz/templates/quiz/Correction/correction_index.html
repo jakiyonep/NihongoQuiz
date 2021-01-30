@@ -1,0 +1,30 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block title %} Correction {% endblock %}
+{% block description %}
+  Here you can read other's Japanese composition with my correction. I'm willing to correct your Japanese writing too, so feel free to send me yours!
+{% endblock %}
+{% block content %}
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
+  </head>
+  <body>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper correction_wrapper">
+      <h1 class="section_head">修 - Correction</h1>
+      <section class="correction_top_container">
+        <div class="correction_desc">
+          <p>Here you can read other's Japanese composition with my correction. I'm willing to correct your Japanese writing too, so feel free to send me yours!</p>
+        </div>
+          <a class="button strong_button" href="{% url 'quiz:correction_add' %}">Submit</a>
+      </section>
+
+      <section class="correction_main_container">
+        {% include "quiz/Correction/correction_list_snippet.html" %}
+      </section>
+    </div>
+  </body>
+</html>
+
+{% endblock %}

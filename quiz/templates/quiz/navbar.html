@@ -24,8 +24,8 @@
     </li>
 	-->
     <li class="navbar_item">
-      <a href="{% url 'quiz:articles' %}">
-        Articles
+      <a href="{% url 'quiz:article_index' %}">
+        Article
       </a>
     </li>
 		<!--
@@ -37,7 +37,12 @@
 	-->
     <li class="navbar_item">
       <a href="{% url 'quiz:quiz' %}">
-        Quizzes
+        Quiz
+      </a>
+    </li>
+		<li class="navbar_item">
+      <a href="{% url 'quiz:blog_index' %}">
+        Blog
       </a>
     </li>
     <li class="navbar_item">
@@ -78,8 +83,8 @@
 	</li>
 -->
 	<li class="navbar_item_collapse">
-		<a href="{% url 'quiz:articles' %}">
-			Articles
+		<a href="{% url 'quiz:article_index' %}">
+			Artice
 		</a>
 	</li>
 	<!--
@@ -91,7 +96,12 @@
 -->
 	<li class="navbar_item_collapse">
 		<a href="{% url 'quiz:quiz' %}">
-			Quizzes
+			Quiz
+		</a>
+	</li>
+	<li class="navbar_item_collapse">
+		<a href="{% url 'quiz:blog_index' %}">
+			Blog
 		</a>
 	</li>
 	<li class="navbar_item_collapse">

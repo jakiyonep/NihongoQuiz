@@ -1,0 +1,88 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% load markdownify %}
+{% block title %} {{correction.title}} {% endblock %}
+{% block description %}
+  {{correction.name}}'s composition
+{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static 'quiz/css/correction.min.css' %}">
+  </head>
+  <body>
+		{% include 'quiz/navbar.html' %}
+    <div class="wrapper correction_wrapper">
+			<div class="correction_detail_container">
+				<div class="correction_detail_info">
+					{% if correction.login_name.nickname %}
+						<div class="author">
+							Written by <span>{{correction.login_name.nickname}}</span>
+						</div>
+					{% elif correction.name %}
+						<div class="author">
+							Written by <span class="written_by">{{correction.name}}</span>
+						</div>	
+					{% else %}
+						<div class="author">
+							Written by <span class="written_by">John Doe</span>
+						</div>
+					{% endif %}
+
+					{% if correction.type %}
+						<div class="type">
+							Type: <span>
+							{% if correction.type == 1 %}
+								SUPER Casual
+							{% endif %}
+							{% if correction.type == 2 %}
+							Casual
+							{% endif %}
+							{% if correction.type == 3 %}
+							Formal
+							{% endif %}
+							{% if correction.type == 4 %}
+							SUPER Formal
+							{% endif %}
+						</div>
+					{% endif %}
+
+					{% if correction.desc %}
+						<div class="correction_info_desc">{{correction.desc}}</div>
+					{% endif %}
+					</span>
+				</div>
+
+				{% for desc in correction.correctionsentences_set.all %}
+					<div class="correction_content">
+						<div class="correction_left">
+							<div class="correction_original" id="original-{{desc.pk}}">
+								{{ desc.original | markdownify }}
+							</div>
+							<div class="correction_desc " id="desc-{{desc.pk}}">
+								<div class="corrected">
+									{{ desc.markdown_corrected | safe }}
+								</div>
+								<div class="corrected_yomi">
+									{{ desc.corrected_yomi | safe }}
+								</div>
+								<div class="content correction_content">
+									{{ desc.markdown | safe }}
+								</div>
+							</div>
+						</div>
+						<div class="correction_right">
+							<button class="correction_btn" type="button" onclick="color_change({{desc.pk}})" id="{{desc.pk}}">
+								<i class="fas fa-fish"></i>
+							</button>
+						</div>
+					</div>
+				{% endfor %}
+		</div>
+  </div>
+  <script type="text/javascript" src="{% static 'quiz/js/all.js' %}">
+  </script>
+  </body>
+</html>
+{% endblock %}

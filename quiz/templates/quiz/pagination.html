@@ -1,33 +1,28 @@
 {% load static %}
 {% load quiz_filter %}
-<link rel="stylesheet" href="{% static 'quiz/css/pagination.min.css' %}">
+<link rel="stylesheet" href="{% static 'quiz/css/common.min.css' %}">
 
 <nav class="pagination">
-
 {% if page_obj.has_next or page_obj.has_previous%}
 <ul class="pagination_ul">
 	{% if page_obj.number|add:"-3" > 1 %}
-		<li class="page-item">
-			<a class="page-link page-side" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">1&laquo;</a>
-		</li>
+		<a class="page_link page-side" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">1&laquo;</a>
 	{% endif %}
 
 	{% for num in paginator.page_range %}
 		{% if  num == page_obj.number|add:"-1" or num == page_obj.number|add:"-2" or num == page_obj.number|add:"1" or num == page_obj.number|add:"2" or num == page_obj.number|add:"-3" or num == page_obj.number|add:"3"  %}
-			<li class="page-item "><a class="page-link other-num" href="?page={{num}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{num}}</a></li>
+			<a class="page_link other_page" href="?page={{num}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{num}}</a></li>
 		{% endif %}
 
 		{% if page_obj.number == num %}
-			<li class="page-item current_number"><a class="page-link{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{num}}</a></li>
+			<a class="page_link current_page{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{num}}</a></li>
 		{% endif %}
 	{% endfor %}
 
 	{% if page_obj.paginator.num_pages > page_obj.number|add:"3" %}
-		<li class="page-item">
-			<a class="page-link page-side" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Next">
-				&raquo;{{page_obj.paginator.num_pages}}
-			</a>
-		</li>
+		<a class="page_link page-side" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Next">
+			&raquo;{{page_obj.paginator.num_pages}}
+		</a>
 	{% endif %}
 </ul>
 </nav>

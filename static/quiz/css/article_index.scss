@@ -1,0 +1,142 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.article_wrapper{
+	.sidebar_button{
+		display: none;
+	}
+	.articles_container{
+		.article_container{
+			border: 1px solid $border-secondary;
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 5rem;
+			padding: 1rem;
+			align-items: center;
+			.article_left{
+				width: 35%;
+				img{
+					box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem $border-secondary;
+				}
+			}
+			.article_right{
+				width: 60%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				.article_right_top{
+					.title{
+						display: block;
+						transition: 0.2s;
+						width: fit-content;
+						font-size: 1.1rem;
+						border-bottom: 1px solid $border-primary;
+						margin-bottom: 1rem;
+						&:hover{
+							background-color: $strong-blue;
+							transition: 0.2s;
+						}
+					}
+				}
+				.article_right_bottom{
+					.meta_info{
+						margin-bottom: 0;
+						.like_section{
+							margin-bottom: 0;
+							.like_container{
+								margin-bottom: 0;	
+							}
+							.like_button{
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.article_detail_container{
+		margin-bottom: 10rem;
+		.detail_top{
+			margin-bottom: 5rem;
+			.title{
+				font-size: 2rem;
+				margin-bottom: 1.5rem;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.article_wrapper{
+		.left_column{
+			.articles_container{
+				.article_container{
+					flex-wrap: wrap;
+					.article_left{
+						width: 100%;						
+						img{
+							height: 12rem;
+						}
+						margin-bottom: 1.5rem;
+					}
+					.article_right{
+						width: 100%;
+						height: auto;
+						.article_right_top{
+							.title{
+								margin-bottom: 1rem;
+							}
+						}
+						.article_right_bottom{
+
+						}
+						.meta_info{
+							
+						}
+					}
+				}
+			}
+		}
+		.right_column{
+		}
+	}
+}
+@media screen and (max-width: 650px) {
+	.article_wrapper{
+		.left_column{
+			order: 2;
+			.articles_container{
+				.article_container{
+					padding: 0.5rem;
+					.article_left{
+						width: 100%;
+						img{
+							height: 8rem;
+						}
+					}
+					.article_right{
+						.article_right_top{
+							.title{
+							}
+						}
+						.article_right_bottom{
+						}
+						.meta_info{							
+						}
+					}
+				}
+			}
+		}
+		.right_column{
+			order: 1;
+			margin-bottom: 1rem;
+			.sidebar{
+				.collapse_target{
+					display: none;
+				}
+			}
+		}
+	}
+}

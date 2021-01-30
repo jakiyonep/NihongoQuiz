@@ -1,0 +1,13 @@
+<form class="comment_form" method="POST">{% csrf_token %}
+	{% if not user.is_authenticated%}
+		<div class="author">
+			<label>Name(optional)</label>
+			<input type="text" name="author" id ="comment_author_id">
+		</div>
+	{% endif %}
+		<div class="comment_content">
+			<label>Comment</label>
+			<textarea id="comment_content_id" name="comment_content" rows="8" cols="80"></textarea>
+		</div>
+    <button type="submit" class="button strong_button comment_submit_button" id="comment_submit" name="{{article.pk}}">Submit</button>
+</form>

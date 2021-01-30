@@ -1,0 +1,56 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.toppage_wrapper{
+	width: 70%;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	.toppage_container{
+		width: 100%;
+		margin-bottom: 3em;
+		border-radius: 1em;
+		border: 1px solid rgb(218, 218, 218);
+		padding: 1.5em;
+		transition: 0.3s;
+		&:hover{
+			border-radius: 0;
+			border: 1px solid $strong_red;
+			transition: 0.3s;
+		}
+	}
+	.toppage_content_head{
+		color: $strong_red;
+		font-size: 1.6rem;
+		margin-bottom: 1em;
+	}
+	.toppage_content_desc{
+		font-size: 1.1rem;
+	}
+	.toppage_beforeyoustart{
+		width: 100%;
+	}
+  .toppage_account{
+		width: 100%
+	}
+}
+
+
+
+
+@media screen and (max-width:800px){
+	.toppage_wrapper{
+		width: 90%;
+		.toppage_container{
+			width: 100%;
+			margin-bottom: 3em;
+			border: 1px solid rgb(218, 218, 218);
+		}
+		.toppage_content_head{
+			font-size: 1.2rem;
+		}
+		.toppage_content_desc{
+			font-size: 1rem;
+		}
+	}
+}

@@ -1,0 +1,29 @@
+{% load markdownify %}
+	{% for comment in comment.replies.all %}
+		{% if user.is_authenticated or comment.approved %}
+			<div class="comment_container reply_container">
+				<div class="meta_info">
+					<p class="user">
+						{% if comment.aki %}							
+							Aki
+						{% elif comment.login_author %}
+							{{comment.login_author.nickname}}							
+						{% elif comment.author %}
+							{{comment.author}}
+						{% endif %}
+					</p>						
+					<p class="date">{{ comment.timestamp|date:"M j, Y f" }}</p>
+				</div>
+				<div class="content">{{ comment.text|markdownify }}</div>
+				<div class="comment_form_wrapper reply" id="reply_{{comment.pk}}_form_wrapper" style="display:none;">
+					{% include 'quiz/Article/Comment/reply_form.html' %}
+				</div>
+				{% if user.is_superuser %}
+					<div class="admin_buttons">
+						<a class="inline_button friendly_button" href="{% url 'quiz:reply_approve' comment.pk %}" >Approve</a>
+						<a class="inline_button dangerous_button" href="{% url 'quiz:reply_remove' comment.pk %}">Delete</a>
+					</div>
+				{% endif %}
+				</div>
+	{% endif %}
+{% endfor %}

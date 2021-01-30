@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="like_container">
+	{% if user.is_authenticated %}
+		{% if request.is_ajax %}		
+				{% if is_liked == True %}
+					<button action="post" class="like_button like_button_liked article_like_button is_liked" type="button"  name="{{ article.pk }}" id="{{article.pk}}"><span class="like_num">{{total_likes_json}}</span></button>
+				{% else %}
+					<button action="post" class="like_button article_like_button" type="button"  name="{{ article.pk }}" value="Like" id="{{article.pk}}"><span class="like_num">{{total_likes_json}}</span></button>
+				{% endif %}		
+			{% else %}		
+				{% if request.user in article.likes.all %}
+					<button action="post" class="like_button like_button_liked article_like_button is_liked" type="button"  name="{{ article.pk }}" id="{{article.pk}}"><span class="like_num">{{article.likes.count}}</span></button>
+				{% else %}
+					<button action="post" class="like_button article_like_button is_liked" type="button"  name="{{ article.pk }}" id="{{article.pk}}"><span class="like_num">{{article.likes.count}}</span></button>
+				{% endif %}
+			{% endif %}
+	{% else %}			
+		<a class="like_button" href="{% url 'quiz:login' %}">
+			<span class="like_num">{{article.likes.count}}</span>
+		</a>
+	{% endif %}
+</div>

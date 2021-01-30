@@ -13,7 +13,7 @@
     {% include 'quiz/navbar.html' %}
     <div class="wrapper toppage_wrapper">
 			{% if user.is_authenticated %}
-			<section class="toppage_container toppage_account" style="width:100%;"><!-- Logout-->
+			<section class="toppage_container toppage_account">
 				<a href="{% url 'quiz:user_detail' request.user.pk %}">
 					<div class="toppage_content">
 						<h2 class="toppage_content_head">Account</h2>
@@ -33,10 +33,10 @@
 			{% else %}
 			<section class="toppage_container toppage_basics"><!-- Basics-->
         <a href="{% url 'quiz:login' %}">
-	        <div class="toppage_content">
+					<div class="toppage_content">
 						<h2 class="toppage_content_head">員 - Login/Register</h2>
 						<p class="toppage_content_desc">Stay logged in and keep your favorite Articles and Quizzes. Not have an account yet? You can register here!</p>
-	        </div>
+					</div>
 				</a>
       </section>
 			{% endif %}
@@ -50,13 +50,13 @@
 	        </div>
 				</a>
       </section>
-	-->*
+	-->
 
 
 			<section class="toppage_container toppage_articles"><!-- Articles-->
-				<a href="{% url 'quiz:articles' %}">
+				<a href="{% url 'quiz:article_index' %}">
 					<div class="toppage_content">
-						<h2 class="toppage_content_head">記 - Articles</h2>
+						<h2 class="toppage_content_head">記 - Article</h2>
 						<p class="toppage_content_desc">Want to explore the Nihongo world more? You can read articles on more advanced Nihongo as well as the Japanese culture. Let's dive into it!</p>
 					</div>
 				</a>
@@ -74,8 +74,17 @@
 			<section class="toppage_container toppage_quizzes"><!--Quizzes -->
 				<a href="{% url 'quiz:quiz' %}">
 					<div class="toppage_content">
-						<h2 class="toppage_content_head">問 - Quizzes</h2>
+						<h2 class="toppage_content_head">問 - Quiz</h2>
 						<p class="toppage_content_desc">Practice makes perfect. A bunch of quick quizzes are waiting for you!</p>
+					</div>
+				</a>
+			</section>
+
+			<section class="toppage_container toppage_articles"><!--Blogs-->
+				<a href="{% url 'quiz:blog_index' %}">
+					<div class="toppage_content">
+						<h2 class="toppage_content_head">日 - Blog</h2>
+						<p class="toppage_content_desc">Here is my miscellaneous blog posts written in Japanese. Read a lot and get used to Nihongo!</p>
 					</div>
 				</a>
 			</section>
@@ -87,7 +96,7 @@
 						<p class="toppage_content_desc">Looking for someone who can correct your Japanese writing? I'm here! You also can read others' works!</p>
 					</div>
 				</a>
-			</section>
+			</section>			
   </body>
 </html>
 

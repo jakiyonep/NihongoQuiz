@@ -1,0 +1,24 @@
+{% load static %}
+{% load quiz_filter %}
+<link rel="stylesheet" href="{% static 'quiz/css/common.min.css' %}">
+
+<nav class="pagination">
+	<ul class="pagination_ul">
+		{% if quiz_list.number|add:"-3" > 1 %}
+			<a class="page_link" href="{% my_url 1 'page' request.GET.urlencode %}">1&laquo;</a>
+		{% endif %}
+
+		{% for num in quiz_list.paginator.page_range %}
+			{% if  num == quiz_list.number|add:"-1" or num == quiz_list.number|add:"-2" or num == quiz_list.number|add:"1" or num == quiz_list.number|add:"2" or num == quiz_list.number|add:"-3" or num == quiz_list.number|add:"3"  %}
+				<a class="page_link" href="{% my_url num 'page' request.GET.urlencode  %}">{{num}}</a>
+			{% elif quiz_list.number == num %}
+				<a class="page_link current_page">{{num}}</a>
+			{% endif %}
+		{% endfor%}
+		{% if quiz_list.paginator.num_pages > quiz_list.number|add:"3" %}
+				<a class="page_link" href="{% my_url quiz_list.next_page_number 'page' request.GET.urlencode %}">
+					&raquo;{{quiz_list.paginator.num_pages}}
+				</a>
+		{% endif %}
+	</ul>
+</nav>

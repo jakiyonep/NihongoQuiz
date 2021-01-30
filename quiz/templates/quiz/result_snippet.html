@@ -1,0 +1,28 @@
+<div class="result">
+	{% if correct_quizzes %}
+		<div>Quizzes you got correct</div>
+	{% elif wrong_quizzes %}
+		<div>Quizzes you got wrong</div>
+	{% elif login_user %}
+		<div>Your Favorite {{service_name}}</div>		
+	{% elif quiz_result %}
+		{% if query %}
+			<span class="query">{{query}}</span>
+		{% endif %}
+		{% if selected_level %}
+			<span class="level">{{selected_level}}</span>
+		{% endif %}
+		{% if selected_category %}
+			<span class="category">{{selected_category}}</span>
+		{% endif %}
+			{% for tag in selected_tags %}
+				<span class="tag">{{tag}}</span>
+			{% endfor %}
+	{% elif selected_category %}
+		<span class="category">{{selected_category}}</span>
+	{% elif selected_tag %}
+		<span class="tag">{{selected_tag}}</span>
+	{% elif query%}
+		<span class="query">{{query}}</span>
+	{% endif %}
+</div>

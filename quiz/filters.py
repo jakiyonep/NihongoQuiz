@@ -9,4 +9,4 @@ class QuizFilter(django_filters.FilterSet):
 class ArticleFilter(django_filters.FilterSet):
     class Meta:
         model = Articles
-        fields = ('category2', 'tag')
+        fields = ('category', 'tag')

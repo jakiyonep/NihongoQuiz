@@ -1,1 +1,88 @@
-*{color:#787878}.toppage_wrapper{width:70%;margin:0 auto;display:flex;flex-wrap:wrap}.toppage_wrapper .toppage_container{width:100%;margin-bottom:3em;border-radius:1em;border:1px solid #dadada;padding:1.5em;transition:0.3s}.toppage_wrapper .toppage_container:hover{border-radius:0;border:1px solid #f66;transition:0.3s}.toppage_wrapper .toppage_content_head{color:#f66;font-size:2rem;margin-bottom:1em}.toppage_wrapper .toppage_content_desc{font-size:1.1rem}.toppage_wrapper .toppage_beforeyoustart{width:100%}.toppage_wrapper .toppage_beforeyoustart .toppage_account{width:100%}@media screen and (max-width: 800px){.toppage_wrapper{width:90%}.toppage_wrapper .toppage_container{width:100%;margin-bottom:3em;border:1px solid #dadada}.toppage_wrapper .toppage_content_head{font-size:1.2rem}.toppage_wrapper .toppage_content_desc{font-size:1rem}}
+/* bg */
+/* border */
+/* font */
+/* highlight */
+/* difficulty */
+/* others */
+/* bg */
+/* border */
+/* font */
+/* highlight */
+/* difficulty */
+/* others */
+.fontawesome_before {
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  font-weight: 900;
+  color: #8b8b8b;
+}
+
+.green_hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #d1f8d3;
+  cursor: pointer;
+}
+
+.toppage_wrapper {
+  width: 70%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.toppage_wrapper .toppage_container {
+  width: 100%;
+  margin-bottom: 3em;
+  border-radius: 1em;
+  border: 1px solid #dadada;
+  padding: 1.5em;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.toppage_wrapper .toppage_container:hover {
+  border-radius: 0;
+  border: 1px solid #f89f9f;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.toppage_wrapper .toppage_content_head {
+  color: #f89f9f;
+  font-size: 1.6rem;
+  margin-bottom: 1em;
+}
+
+.toppage_wrapper .toppage_content_desc {
+  font-size: 1.1rem;
+}
+
+.toppage_wrapper .toppage_beforeyoustart {
+  width: 100%;
+}
+
+.toppage_wrapper .toppage_account {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .toppage_wrapper {
+    width: 90%;
+  }
+  .toppage_wrapper .toppage_container {
+    width: 100%;
+    margin-bottom: 3em;
+    border: 1px solid #dadada;
+  }
+  .toppage_wrapper .toppage_content_head {
+    font-size: 1.2rem;
+  }
+  .toppage_wrapper .toppage_content_desc {
+    font-size: 1rem;
+  }
+}
+/*# sourceMappingURL=toppage.min.css.map */

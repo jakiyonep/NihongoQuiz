@@ -1,0 +1,20 @@
+<div class="sidebar">
+	<button class="button weak_button search_open_button" id="collapse_open_button">
+		Search
+	</button>
+	<div class="collapse_target">
+	{% if all_quizzes_of_user == 1 %}
+		<form class="search_form" action="{% url 'quiz:all_quizzes_of_user' user.pk %}"
+		method="GET">
+			{% include "quiz/Quiz/sidebar_search_snippet.html" %}
+		</form>
+	{% else %}
+		<form class="search_form" action="{% url 'quiz:quiz' %}"
+		method="GET">
+			{% include "quiz/Quiz/sidebar_search_snippet.html" %}
+		</form>
+	{% endif %}
+		</div>
+	</div>
+</div>
+

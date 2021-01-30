@@ -1,0 +1,104 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% load markdown%}
+{% block title %}{{blog.title}}{% endblock %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'quiz/css/blog.min.css' %}">
+</head>
+<body>
+	<div class="navbar">
+		{% include 'quiz/navbar.html' %}
+	</div><!-- /.navbar -->
+	<div class="wrapper blog_wrapper">
+		<div class="left_column">
+			<div class="blog_detail_top"> 
+				<div class="thumbnail">
+					{% if blog.thumbnail %}
+						<img src="{{blog.thumbnail.url}}">
+					{% else %}
+						<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Design_thinking_re_644h.png" alt="">
+					{% endif %}
+				</div>
+				<h2 class="title">{{blog.title}}</h2>
+				<div class="meta_info">
+					<div class="date">
+						{{blog.update|date:"Y/m/d f"}}
+					</div>
+					<div class="category">
+						<a href="{% url 'quiz:blog_category_list' blog.category.category_slug %}">{{blog.category.category}}</a>
+					</div>
+					{% if blog.tag.all %}
+						<div class="tags">
+							{% for tag in blog.tag.all %}
+								<div class="tag">
+									<a href="{% url 'quiz:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+        <div class="difficulty_buttons">
+          <div class="switch_button switch_button_easy" id="easy">
+            易 - Easy
+          </div>
+          <div class="switch_button switch_button_difficult active" id="difficult">
+            難 - Difficult
+          </div>
+        </div>
+			</div>
+      <div class="blog_content">
+        <div class="content_container easy_container">
+          {% for content in blog.japanese_1.all %}
+            <div class="content">
+              {{content.content|markdown_to_html}}
+            </div>
+          {% endfor %}
+          <p class="subsection_head">Vocab Note</p>          
+          <div class="blog_details_container">            
+            {% for detail in blog.japanese_1_detail.all %}
+            <div class="blog_detail_container">
+              <div class="word">
+                {{detail.word}}: {{detail.usage}}
+              </div>
+              <div class="yomi">
+                {{detail.yomi}}
+              </div>
+              <div class="definition">
+                {{detail.definition}}
+              </div>
+            </div><!-- /.blog_detail_container -->              
+            {% endfor %}
+          </div><!-- /.blog_detail -->
+        </div><!-- /.japa_easy -->
+        <div class="content_container difficult_container">
+          {% for content in blog.japanese_2.all %}
+            <div class="content">
+              {{content.content|markdown_to_html}}
+            </div>
+          {% endfor %}
+          <p class="subsection_head">Vocab Note</p>          
+          <div class="blog_details_container">            
+            {% for detail in blog.japanese_2_detail.all %}
+            <div class="blog_detail_container">
+              <div class="word">
+                {{detail.word}}: {{detail.usage}}
+              </div>
+              <div class="yomi">
+                {{detail.yomi}}
+              </div>
+              <div class="definition">
+                {{detail.definition}}
+              </div>
+            </div><!-- /.blog_detail_container -->              
+            {% endfor %}
+          </div><!-- /.blog_detail -->
+        </div><!-- /.japa_difficult -->
+      </div><!-- /.blog_content -->
+		</div>
+		<div class="right_column">
+			{% include "quiz/Blog/sidebar.html" %}
+		</div>
+	</div>
+</body>
+{% endblock %}
