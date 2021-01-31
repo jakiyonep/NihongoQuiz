@@ -49,7 +49,7 @@
 										{% endif %}										
 										{% if quiz.question_reading %}
 											<div class="question_reading">
-												<audio controls src="{{quiz.question_reading}}">
+												<audio controls src="{{quiz.question_reading.url}}">
 														Your browser does not support the
 														<code>audio</code> element.
 												</audio>

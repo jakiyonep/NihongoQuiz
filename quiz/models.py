@@ -134,7 +134,7 @@ class Quiz(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
     question = models.TextField(blank=False, null=False, max_length=200)
-    question_reading = models.CharField(blank=True, null=True, max_length=300)
+    question_reading = models.FileField(blank=True, null=True, upload_to='quiz/reading')
     question_yomi = models.TextField(blank=True, max_length=200)
     question_en = models.TextField(blank=True, max_length=200)
     choice_long = models.BooleanField(default=False)
