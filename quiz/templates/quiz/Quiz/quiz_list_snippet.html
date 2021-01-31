@@ -90,7 +90,12 @@
 												<div class="vocab_container">
 													{% if detail.word %}
 														<div class="detail_word">
-															{{ detail.word  |safe }} {% if detail.markdown_usage % : {{ detail.markdown_usage | safe}}}{% endif %}
+															{{ detail.word  |safe }}
+															{% if detail.markdown_usage %} : 
+																<div class="detail_usage">
+																	{{ detail.markdown_usage | safe}}
+																</div>
+															{% endif %}
 														</div>
 														
 													{% endif %}
