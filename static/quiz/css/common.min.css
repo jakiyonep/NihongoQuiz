@@ -287,28 +287,26 @@ li:last-child {
 
 .content h2, .content h3, .content h4 {
   font-size: 1.2rem;
-  margin-top: 4rem;
 }
 
 .content h2 {
   background-color: #8b8b8b;
   color: white;
   padding: 0.5rem 1rem;
-  margin-top: 5rem;
+  margin-top: 7rem;
 }
 
 .content h3 {
   border: 1px solid #8b8b8b;
   padding: 0.5rem;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   border-radius: 0.3rem;
+  margin-top: 3rem;
 }
 
 .content h4 {
-  border-left: 0.5rem solid #8b8b8b;
+  border-left: 0.7rem solid #8b8b8b;
   padding-left: 0.5rem;
+  margin-top: 3rem;
 }
 
 .content strong {
@@ -425,7 +423,7 @@ li:last-child {
 }
 
 .content .voca-list {
-  border: 1px solid #e6e6e6;
+  border: 2px solid #e0f2fc;
   position: relative;
   padding: 1rem;
 }
@@ -441,8 +439,7 @@ li:last-child {
   left: -0.7rem;
   -webkit-transform: rotate(-10deg);
           transform: rotate(-10deg);
-  background-color: #e6e6e6;
-  color: white;
+  background-color: #e0f2fc;
   padding: 0.3rem;
 }
 

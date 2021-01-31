@@ -137,6 +137,24 @@
   height: 10rem;
 }
 
+.back_top_button {
+  position: fixed;
+  background-color: #8b8b8b;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.back_top_button i {
+  font-size: 2rem;
+  color: white;
+}
+
+.back_top_button:hover {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 880px) {
   .navbar {
     height: 4em !important;

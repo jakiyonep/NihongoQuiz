@@ -27,3 +27,11 @@
 		background-color: $border-primary;
 	}
 }
+
+@media screen and (max-width: 650px) {
+  .register_wrapper{
+		.form_container{
+			width: 100%;
+		}
+	}
+}

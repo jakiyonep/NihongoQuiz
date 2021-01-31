@@ -92,6 +92,22 @@
 	height: 10rem;
 }
 
+.back_top_button{
+	position: fixed;
+	background-color: $border-primary;
+	bottom: 0.5rem;
+	right: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 0.2rem;
+	i{
+			font-size: 2rem;
+			color: white;
+	}   
+	&:hover{
+			cursor: pointer;
+	}
+}
+
 @media screen and (max-width:880px){
 	.navbar{
 		height: 4em!important;

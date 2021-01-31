@@ -171,3 +171,27 @@ $(document).on('click', '.terms_check', function(event){
 		)
 	}
 })
+
+/* fixed buttons fade in/out */
+var lastScrollTop = 0;
+$(window).scroll(function(event){
+	var st = $(this).scrollTop();
+		if (st < lastScrollTop){
+			$(".back_top_button").stop().fadeIn("fast")
+			$(".side_menu_button").stop().fadeIn("fast")
+		} else {
+			$(".back_top_button").stop().fadeOut("fast")
+			$(".side_menu_button").stop().fadeOut("fast")
+		}
+	lastScrollTop = st;
+})
+
+$(function () {
+
+	$(".back_top_button").click(function () {
+		$("body,html").animate({
+			scrollTop: 0
+		}, 500);
+		return false;
+	});
+});

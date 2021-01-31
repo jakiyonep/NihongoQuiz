@@ -44,4 +44,10 @@
 .register_wrapper .not_checked {
   background-color: #8b8b8b;
 }
+
+@media screen and (max-width: 650px) {
+  .register_wrapper .form_container {
+    width: 100%;
+  }
+}
 /*# sourceMappingURL=register.min.css.map */
