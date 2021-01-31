@@ -836,8 +836,7 @@ class UserCreate(generic.CreateView):
 
         # アクティベーションURLの送付
         current_site = get_current_site(self.request)
-        #domain = current_site.domain
-        domain = '127.0.0.1:8000'
+        domain = current_site.domain
 
         context = {
             'protocol': 'https' if self.request.is_secure() else 'http',
@@ -994,3 +993,6 @@ class EmailChangeComplete(LoginRequiredMixin, generic.TemplateView):
             request.user.email = new_email
             request.user.save()
             return super().get(request, **kwargs)
+
+class TermsAndConditions(generic.TemplateView):
+        template_name = "quiz/Register/terms_and_conditions.html"

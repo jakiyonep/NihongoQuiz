@@ -65,6 +65,7 @@ del {
   text-decoration: none;
 }
 
+input,
 input[type="text"],
 input[type="search"] input[type="email"],
 input[type="password"],
@@ -77,6 +78,7 @@ select {
   height: 2rem;
 }
 
+input:focus,
 input[type="text"]:focus,
 input[type="search"] input[type="email"]:focus,
 input[type="password"]:focus,
@@ -85,12 +87,22 @@ select:focus {
   border: 1px solid #7dd5eb;
 }
 
+input[type="checkbox"] {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .multiple_select {
   height: 8rem;
 }
 
 input {
   height: 1.5rem;
+}
+
+textarea {
+  height: 5rem;
 }
 
 label {
@@ -110,6 +122,29 @@ li {
 
 li:last-child {
   margin-bottom: 0;
+}
+
+.form_section {
+  margin-bottom: 1rem;
+}
+
+.form_section .form_label {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.form_section .form_label span {
+  font-size: 0.9rem;
+}
+
+.form_error {
+  margin: 0.4rem 0;
+}
+
+.form_error li {
+  list-style: none;
+  margin-left: 0rem;
+  color: #f83a3a;
 }
 
 /* base */
@@ -435,6 +470,11 @@ li:last-child {
 
 .content .answer_exp_container .answer_exp .answer_exp_right p:last-child {
   margin-bottom: 0;
+}
+
+.plain_container {
+  margin: 0 auto;
+  width: 55%;
 }
 
 /* section_head */

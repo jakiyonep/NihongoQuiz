@@ -37,7 +37,7 @@ del{
     background-repeat: repeat-x;
     text-decoration: none;
 }
-
+input,
 input[type="text"],
 input[type="search"]
 input[type="email"],
@@ -53,11 +53,17 @@ select {
         border: 1px solid $strong-blue;
     }
 }
+input[type="checkbox"]{
+    width: fit-content;
+}
 .multiple_select{
     height: 8rem;
 }
 input{
     height: 1.5rem;
+}
+textarea{
+    height: 5rem;
 }
 label{
     margin-bottom: 0.5rem;
@@ -77,6 +83,24 @@ li {
     }
 }
 
+.form_section{
+    margin-bottom: 1rem;
+    .form_label{
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        span{
+        font-size: 0.9rem;
+        }
+    }
+}
+.form_error{
+    margin: 0.4rem 0;
+    li{
+        list-style: none;
+        margin-left: 0rem;
+        color: $warn-red;
+    }
+}
 
 /* base */
 .wrapper{
@@ -348,6 +372,11 @@ li {
             }
         }
     }    
+}
+
+.plain_container{
+    margin: 0 auto;
+    width: 55%;
 }
 
 /* section_head */

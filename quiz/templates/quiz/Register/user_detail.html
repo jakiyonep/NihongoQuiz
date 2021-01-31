@@ -32,14 +32,21 @@
 						</div>
 						<div class="user_activity_content">
 							<div class="quiz_collapse_container" id='quiz_favorite_wrapper'>
-								{% include "quiz/Quiz/quiz_list_snippet.html" %}
-								<a class="button weak_button" href="{% url 'quiz:all_quizzes_of_user' user.pk %}">More</a>
+								{% if quiz_list %}
+									{% include "quiz/Quiz/quiz_list_snippet.html" %}
+									<a class="button weak_button" href="{% url 'quiz:all_quizzes_of_user' user.pk %}">More</a>
+								{% else %}
+									None
+								{% endif %}
 							</div><!-- quiz end-->
 							<div class="articles_wrapper" id='article_favorite_wrapper' style="display:none;">
 								<div class="articles_container">
-
-									{% include 'quiz/Article/article_list_snippet.html' %}
-									<a class="button weak_button" href="{% url 'quiz:all_articles_of_user' user.pk %}">More</a>
+									{% if article_list %}
+										{% include 'quiz/Article/article_list_snippet.html' %}
+										<a class="button weak_button" href="{% url 'quiz:all_articles_of_user' user.pk %}">More</a>
+									{% else %}
+										None
+									{% endif %}
 								</div>
 							</div><!-- article end-->
 						</div>
@@ -48,11 +55,15 @@
 				<div class="user_activity_container">
 					<p class="subsection_head triger_user_info_subsection_head" id="correction">Corrected Compositions</p>
 					<div class="correction_container" id="correction_container">
-						<div class="correction_wrapper">
+						{% if correction_list %}
+							<div class="correction_wrapper">
 							<div class="correction_main_container">
 								{% include "quiz/Correction/correction_list_snippet.html" %}
 							</div>
 						</div><!-- correction end-->
+						{% else %}
+							None
+						{% endif %}						
 					</div>
 				</div>
 			</div>
@@ -143,7 +154,7 @@
 					<div class="user_info_row user_info_row_settings">
 						<div class="user_info_menu">
 							<a class="user_info_menu_item" href="{% url 'quiz:user_update' user.pk %}">Change Nickname</a>
-							<a class="user_info_menu_item" href="{% url 'quiz:password_change' %}">Chanve Password</a>
+							<a class="user_info_menu_item" href="{% url 'quiz:password_change' %}">Change Password</a>
 							<a class="user_info_menu_item" href="{% url 'quiz:email_change' %}">Change Email</a>
 						</div>
 					</div><!-- /.user_info_row -->

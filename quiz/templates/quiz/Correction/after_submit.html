@@ -11,17 +11,15 @@
   </head>
   <body>
 		{% include 'quiz/navbar.html' %}
-    <div class="wrapper after_submit_wrapper">
+    <div class="wrapper register">
+      <div class="plain_container">
         <p class="thanks">
-          ありがとう for submitting your writing! <br>
+          ありがとう for submitting your writing!
           I'll revise it ASAP!
         </p>
-        <p class="goback">Go back to<a href="{% url 'quiz:correction' %}">修 - Correction</a></p>
+        <a href="{% url 'quiz:correction' %}" class="button weak_button">Go back to 修 - Correction</a></a>
       </div>
-
-
     </div>
-
   </body>
 </html>
 

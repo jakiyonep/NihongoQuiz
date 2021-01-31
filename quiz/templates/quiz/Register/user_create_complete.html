@@ -7,12 +7,14 @@
 <body>
 	{% include 'quiz/navbar.html' %}
 	<div class="wrapper register_wrapper plain_wrapper">
-		<p class="plain_text">
-			Welcome! <br>
-			The registration has been completed.
-		</p>
-		<a href="{% url 'quiz:toppage' %}">Go back to Toppage</a>
-			<a  href="{% url 'quiz:login' %}">Login</a>
+		<div class="plain_container">
+			<p class="plain_text">
+				Welcome! <br>
+				The registration has been completed.
+			</p>
+			<a class="button strong_button" href="{% url 'quiz:toppage' %}">Go back to Toppage</a>
+			<a class="button weak_button" href="{% url 'quiz:login' %}">Login</a>
+		</div>
 	</div>
 </body>
 {% endblock %}

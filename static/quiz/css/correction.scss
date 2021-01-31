@@ -61,7 +61,6 @@
       flex-wrap: nowrap;
       justify-content: space-between;
       margin-bottom: 2rem;
-      align-items: center;
       .correction_left{
         width: 90%;
         .correction_original{
@@ -107,6 +106,7 @@
         align-items: flex-start;
         height: 100%;
         .correction_btn{
+          height: 100%;
           padding: 0.5rem;
           i{
             font-size: 1.4rem;          
@@ -116,6 +116,7 @@
     }
   }
   .correction_add_container{
+    margin: 0 auto;
     .correction_form{
       .form_section{
         margin-bottom: 2rem;

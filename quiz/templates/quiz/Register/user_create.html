@@ -8,21 +8,28 @@
 	{% include 'quiz/navbar.html' %}
 	<div class="wrapper register_wrapper">
 		<div class="form_container">
-			<p class="form_head">Registration</p>
+			<p class="form_head">Sign Up</p>
 			<p class="form_desc">Fill in the forms below, and we will send you a link for the registration.</p>
 			<form action="" method="POST">
-		    {{ form.non_field_errors }}
-				<div class="form_groups">
-			    {% for field in form %}
-			    <div class="form_group">
-		        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-		        <span>{{ field }}</span>
-		        <span>{{ field.errors }}</span>
-			    </div>
-			    {% endfor %}
+				<div class="form_error">
+					{{ form.non_field_errors }}
 				</div>
-		    {% csrf_token %}
-		    <button type="submit" class="form_button">Submit</button>
+				<div class="form_sections_container">
+					{% for field in form %}
+					<div class="form_section">
+						<div class="form_label">{{ field.label_tag }}</div>
+						{{ field }}
+						<div class="form_error">{{ field.errors }}</div>
+					</div>					
+					{% endfor %}					
+				</div>
+				{% csrf_token %}
+				<div class="terms_and_conditions_contaier">
+					<input class="terms_check" type="checkbox">I agree to the <a target="_blank" href="{% url 'quiz:terms_and_conditions' %}">Terms and Conditions</a>.
+				</div>
+				<div class="terms_button_container">
+					<div class="button not_checked terms_button">Submit</div>
+				</div>
 			</form>
 		</div>
 	</div>

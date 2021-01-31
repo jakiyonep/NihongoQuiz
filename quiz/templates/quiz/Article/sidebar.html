@@ -7,12 +7,12 @@
 	<div class="collapse_target">
 	{% if all_articles_of_user %}
 		<form class="search_form" action="{% url "quiz:all_articles_of_user" user.pk %}" method="get" accept-charset="utf-8">
-			<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="キーワード">
+			<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Keyword">
 			<button class="search_form_button" type="submit"><i class="fas fa-search"></i></button>
 		</form>
 		{% else %}<!-- if all_articles_of_user end -->
 			<form class="search_form" action="{% url "quiz:article_index" %}" method="get" accept-charset="utf-8">
-				<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="キーワード">
+				<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Keyword">
 				<button class="search_form_button" type="submit"><i class="fas fa-search"></i></button>
 			</form>
 			<div class="sidebar_category_tag_container">

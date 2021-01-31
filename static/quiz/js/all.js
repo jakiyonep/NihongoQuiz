@@ -157,3 +157,17 @@ $(document).on('click', '.switch_button', function(event){
 		$(selected_container).show()
 	}
 })
+
+/* terms and conditions */
+$(document).on('click', '.terms_check', function(event){
+	if($(this).prop("checked")){
+		$('.terms_button_container').html(
+			'<button type=submit class="button strong_button terms_button">Submit</button>'
+		)
+	}
+	else{
+		$('.terms_button_container').html(
+			'<div class="button not_checked terms_button">Submit</div>'
+		)
+	}
+})

@@ -7,11 +7,13 @@
 <body>
 	{% include 'quiz/navbar.html' %}
 	<div class="wrapper register_wrapper plain_wrapper">
-		<p class="plain_text">
-	    The email has been sent. <br>
-	    Note that the procedure has not been completed yet. Click on the link in the email, and finilize the registration.
-		</p>
-		<a href="{% url 'quiz:toppage' %}">Go back to Toppage</a>
+		<div class="plain_container">
+			<p class="plain_text">
+				The email has been sent. <br>
+				Note that the procedure has not been completed yet. Click on the link in the email, and finilize the registration.
+			</p>
+			<a class="button weak_button" href="{% url 'quiz:toppage' %}">Go back to Toppage</a>
+		</div>
 	</div>
 </body>
 {% endblock %}

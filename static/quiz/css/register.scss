@@ -1,0 +1,29 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.register_wrapper{
+	.form_container{
+		width: 55%;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+		box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem $border-primary;
+		border-radius: 1px;
+		.form_head{
+			font-size: 1.1rem;
+			.form{
+
+			}
+			.form_bottom{
+
+			}
+		}
+	}
+	.terms_and_conditions_contaier{
+		a{
+			color: $strong-blue;
+		}		
+	}
+	.not_checked{
+		background-color: $border-primary;
+	}
+}

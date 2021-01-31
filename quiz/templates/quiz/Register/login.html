@@ -5,22 +5,28 @@
 	<link rel="stylesheet" href="{% static 'quiz/css/register.min.css' %}">
 </head>
 {% include 'quiz/navbar.html' %}
-<div class="wrapper register_wrapper login_wrapper">
+<div class="wrapper register_wrapper">
 	<section class="form_container">
 		<p class="form_head">Log in</p>
     <form class="form" action="{% url 'quiz:login' %}" method="POST">
-      {{ form.non_field_errors }}
+      <div class="form_error">
+        {{ form.non_field_errors }}
+      </div>
       {% for field in form %}
-        {{ field }}
-        {{ field.errors }}
+        <div class="form_section">
+          {{ field }}        
+          <div class="form_error">
+            {{ field.errors }}
+          </div>
+        </div>
       {% endfor %}
-      <button type="submit" class="form_button login_button" >Login</button>
+      <button type="submit" class="button strong_button" >Login</button>
       <input type="hidden" name="next" value="{{ next }}" />
       {% csrf_token %}
     </form>
-		<div class="login_form_bottom">
-			<a href="{% url 'quiz:user_create' %}" class="form_button register_button" >Register</a>
-			<a href="{% url 'quiz:password_reset' %}" class="form_button password_forget_button" >Forgot password?</a>
+		<div class="form_bottom">
+			<a href="{% url 'quiz:user_create' %}" class="button friendly_button" >Sign Up</a>
+			<a href="{% url 'quiz:password_reset' %}" class="button weak_button" >Forgot password?</a>
 		</div>
 	</section>
 </div>

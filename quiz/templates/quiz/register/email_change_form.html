@@ -9,21 +9,19 @@
 	<div class="wrapper register_wrapper">
 		<div class="form_container">
 			<p class="form_desc">Enter your new Email below. We will send you a link for the procedure.</p>
-
-			<form action="" method="POST">
-    		{{ form.non_field_errors }}
-				<div class="form_groups">
-
-          {% for field in form %}
-						<div class="form_group">
-							<label>New Email Address</label>
-							<span>{{ field }}</span>
-							<span>{{ field.errors }}</span>
+			<form class="form" action="" method="POST">
+				<div class="form_error">{{ form.non_field_errors }}</div>
+				<div class="form_sections_container">
+					{% for field in form %}
+						<div class="form_section">
+							<div class="form_label">New Email Address</div>
+							{{ field }}
+							<div class="form_error">{{ field.errors }}</div>
 						</div>
-          {% endfor %}
+					{% endfor %}
 				</div>
-    	{% csrf_token %}
-    	<button type="submit" class="form_button" >Submit</button>
+			{% csrf_token %}
+			<button type="submit" class="button strong_button" >Submit</button>
 			</form>
 		</div>
 	</div>

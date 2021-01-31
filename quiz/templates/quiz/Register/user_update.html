@@ -9,19 +9,18 @@
 	<div class="wrapper register_wrapper">
 		<div class="form_container">
 			<form action="" method="POST">
-    		{{ form.non_field_errors }}
-				<div class="form_groups">
-
-          {% for field in form %}
-						<div class="form_group">
-							<label for="{{ field.id_for_label }}">{{ field.label }}</label>
-							<span>{{ field }}</span>
-							<span>{{ field.errors }}</span>
+				<div class="form_error">{{ form.non_field_errors }}</div>
+				<div class="form_sections_container">
+					{% for field in form %}
+						<div class="form_section">
+							<div class="form_label" >{{ field.label }}</div>
+							{{ field }}
+							<div class="form_error">{{ field.errors }}</div>
 						</div>
-          {% endfor %}
+					{% endfor %}
 				</div>
-    	{% csrf_token %}
-    	<button type="submit" class="form_button" >Submit</button>
+			{% csrf_token %}
+			<button type="submit" class="button strong_button" >Submit</button>
 			</form>
 		</div>
 	</div>
