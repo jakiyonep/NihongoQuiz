@@ -1,5 +1,3 @@
-Click on the link below, and finalize your email change procedure.
+Click on the link below, and finalize the email change procedure.
 
 {{ protocol}}://{{ domain }}{% url 'quiz:email_change_complete' token %}
-
-ほにゃらら
