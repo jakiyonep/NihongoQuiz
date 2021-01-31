@@ -12,7 +12,7 @@
 			justify-content: space-between;
 			margin-bottom: 5rem;
 			padding: 1rem;
-			align-items: center;
+			align-items: stretch;
 			.article_left{
 				width: 35%;
 				img{
@@ -21,7 +21,6 @@
 			}
 			.article_right{
 				width: 60%;
-				height: 100%;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
@@ -32,10 +31,15 @@
 						width: fit-content;
 						font-size: 1.1rem;
 						border-bottom: 1px solid $border-primary;
-						margin-bottom: 1rem;
+						margin-bottom: 0.5rem;
 						&:hover{
 							background-color: $strong-blue;
 							transition: 0.2s;
+						}						
+					}
+					.meta_info{
+						&>*{
+							display: inline-block;
 						}
 					}
 				}
@@ -85,8 +89,9 @@
 						width: 100%;
 						height: auto;
 						.article_right_top{
+							margin-bottom: 0.5rem;
 							.title{
-								margin-bottom: 1rem;
+								margin-bottom: 0.4rem;
 							}
 						}
 						.article_right_bottom{

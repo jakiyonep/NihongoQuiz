@@ -1022,3 +1022,11 @@ textarea{
   height:1.5em;
   width: 70vh;
 }
+
+fieldset{
+    display: flex;
+    flex-wrap: wrap;
+}
+fieldset .form-row{
+    width: 100%;
+}

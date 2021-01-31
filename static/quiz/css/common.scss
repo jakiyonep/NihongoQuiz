@@ -228,7 +228,7 @@ li {
         
     }
     strong{
-        border-bottom: 0.2rem solid $strong-red;
+        background:linear-gradient(transparent 70%, $strong-red 90%);
     }
     img{
         box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem $border-secondary;
@@ -333,10 +333,11 @@ li {
         border: 1px solid $border-primary;
         padding: 0.5rem;
     }
-    .voca-list{
+    .voca_list{
         border: 2px solid $weak-blue;
         position: relative;
         padding: 1rem;
+        margin-top: 3rem;
         li{
             list-style: none;
         }
@@ -628,10 +629,12 @@ li {
     width: fit-content;
     background-color: $bun-bolor;
     padding: 0.5rem 1rem;
+    margin: 2.5rem 0;
+    margin-left: 1rem;
+    line-height: 1.2rem;
     em, strong{
-        border-bottom: 0.1rem solid $border-primary;
+        background:linear-gradient(transparent 90%, $border-primary 10%);
         font-weight: normal;
-
     }
     li{
         list-style-type: none;
@@ -642,7 +645,6 @@ li {
         }
     }
     .eng{
-        background-color: $weak-blue;
         font-style: italic;
     }
 }
@@ -724,5 +726,9 @@ li {
                 margin: 0;
             }
         }
+    }
+    .bun{
+        margin-left: 0;
+        line-height: 1.5rem;
     }
 }

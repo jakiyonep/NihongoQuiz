@@ -310,7 +310,8 @@ li:last-child {
 }
 
 .content strong {
-  border-bottom: 0.2rem solid #f89f9f;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(70%, transparent), color-stop(90%, #f89f9f));
+  background: linear-gradient(transparent 70%, #f89f9f 90%);
 }
 
 .content img {
@@ -422,17 +423,18 @@ li:last-child {
   padding: 0.5rem;
 }
 
-.content .voca-list {
+.content .voca_list {
   border: 2px solid #e0f2fc;
   position: relative;
   padding: 1rem;
+  margin-top: 3rem;
 }
 
-.content .voca-list li {
+.content .voca_list li {
   list-style: none;
 }
 
-.content .voca-list::before {
+.content .voca_list::before {
   content: 'Vocab';
   position: absolute;
   top: -0.7rem;
@@ -733,10 +735,14 @@ li:last-child {
   width: fit-content;
   background-color: #f3f3f3;
   padding: 0.5rem 1rem;
+  margin: 2.5rem 0;
+  margin-left: 1rem;
+  line-height: 1.2rem;
 }
 
 .bun em, .bun strong {
-  border-bottom: 0.1rem solid #8b8b8b;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(90%, transparent), color-stop(10%, #8b8b8b));
+  background: linear-gradient(transparent 90%, #8b8b8b 10%);
   font-weight: normal;
 }
 
@@ -751,7 +757,6 @@ li:last-child {
 }
 
 .bun .eng {
-  background-color: #e0f2fc;
   font-style: italic;
 }
 
@@ -815,6 +820,10 @@ li:last-child {
   .pagination .pagination_ul .page_link {
     padding: 0.5rem 0.2rem;
     margin: 0;
+  }
+  .bun {
+    margin-left: 0;
+    line-height: 1.5rem;
   }
 }
 /*# sourceMappingURL=common.min.css.map */

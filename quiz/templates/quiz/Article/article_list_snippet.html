@@ -22,10 +22,15 @@
 									<a class="title" href="{% url 'quiz:article_detail' article.title_slug %}">
 										{{ article.title|upper }}
 									</a>
-								</div>
-								<div class="article_right_bottom">
 									<div class="meta_info">
 										<span class="date">{{ article.update |date:"M j, Y"}}</span>
+										<div class="like_section article_like_section" id="article_{{article.pk}}_like_section">
+											{% include 'quiz/Article/like.html' %}
+										</div>
+									</div>
+								</div>
+								<div class="article_right_bottom">
+									<div class="meta_info">										
 										{% if article.category %}
 											<a class="category" href="{% url 'quiz:article_category_list' article.category.slug %}">{{ article.category.name }}</a>
 										{% endif %}										
@@ -35,9 +40,6 @@
 												{{ tag }}
 											</a>
 											{% endfor %}
-										</div>
-										<div class="like_section article_like_section" id="article_{{article.pk}}_like_section">
-											{% include 'quiz/Article/like.html' %}
 										</div>
 									</div>
 								</div>
