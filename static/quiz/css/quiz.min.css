@@ -248,6 +248,7 @@
 
 .quiz_wrapper .left_column .quizzes_container .quiz_container .quiz_collapse .question_reading {
   margin-bottom: 2rem;
+  margin-left: 1rem;
 }
 
 .quiz_wrapper .left_column .quizzes_container .quiz_container .quiz_collapse .question_reading audio {
@@ -351,6 +352,7 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  margin-top: 1rem;
 }
 
 .quiz_wrapper .right_column .sidebar .collapse_target .search_section .user:hover, .quiz_wrapper .right_column .sidebar .collapse_target .search_section .category:hover, .quiz_wrapper .right_column .sidebar .collapse_target .search_section .tag:hover, .quiz_wrapper .right_column .sidebar .collapse_target .search_section .level:hover {

@@ -284,6 +284,7 @@ li {
     }
     .table{
         margin: 3rem 0;
+        overflow-x: scroll;        
         table{
             tbody{                
                 tr{
@@ -292,9 +293,9 @@ li {
                         border: 1px solid $border-secondary;
                         vertical-align: middle;
                         font-size: 0.9rem;
+                        white-space: nowrap;
                     }                
                     th{
-                        white-space: nowrap;
                         background-color: $light-bg-bolor;
                     }
                     td{
@@ -564,9 +565,6 @@ li {
 
 
 /* content */
-.content{
-    padding: 0;
-}
 
 /* comment_section */
 .comment_section {

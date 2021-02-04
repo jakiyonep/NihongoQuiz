@@ -31,12 +31,7 @@
 								</div>
 								<div class="quiz_collapse" id="collapse-{{quiz.pk}}">
 									<div class="correct_answer">Correct Answer: {{quiz.answer}}</div>
-									{% if quiz.explanation %}
-										<div class="quiz_explanation content">
-											{{quiz.markdown_explanation | safe}}
-										</div>
-									{% endif %}
-										<div class="question_description">
+									<div class="question_description">
 										{% if quiz.question_yomi %}
 											<div class="bun">
 												<div>{{ quiz.question_yomi |safe }}</div>
@@ -56,6 +51,11 @@
 											</div>
 										{% endif %}
 									</div>
+									{% if quiz.explanation %}
+										<div class="quiz_explanation content">
+											{{quiz.markdown_explanation | safe}}
+										</div>
+									{% endif %}
 									{% if quiz.choice1_detail %}
 										<div class="choices_description">
 											{% if quiz.choice1_detail %}
@@ -107,7 +107,7 @@
 														{% endif %}
 														{% if detail.word_form %}
 															<div class="detail_word_form">
-																{{ detail.word_form  |safe }}:
+																{{ detail.word_form  |safe }} :
 															</div>
 														{% endif %}													
 														{% if detail.word_in_sentence %}

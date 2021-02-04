@@ -375,6 +375,7 @@ li:last-child {
 
 .content .table {
   margin: 3rem 0;
+  overflow-x: scroll;
 }
 
 .content .table table tbody tr th, .content .table table tbody tr td {
@@ -382,10 +383,10 @@ li:last-child {
   border: 1px solid #e6e6e6;
   vertical-align: middle;
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .content .table table tbody tr th {
-  white-space: nowrap;
   background-color: #fafafa;
 }
 
@@ -663,10 +664,6 @@ li:last-child {
 }
 
 /* content */
-.content {
-  padding: 0;
-}
-
 /* comment_section */
 .comment_section .comment_form_wrapper {
   margin: 4rem 0;
