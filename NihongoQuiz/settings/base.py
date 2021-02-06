@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'markdownify',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django.forms',
 ]
 
 SITE_ID = 1
@@ -76,7 +77,7 @@ MARKDOWNIFY_WHITELIST_ATTRS = [
     'src',
 ]
 
-
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 TEMPLATES = [
     {
