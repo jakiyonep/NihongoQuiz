@@ -1,8 +1,8 @@
 				<div class="quizzes_container">
 					{% for quiz in quiz_list %}
-						{% if user.is_authenticated or quiz.public %}
+						{% if quiz.public %}
 							<div class="quiz_container" name="{{quiz.answer}}">
-								{% if not quiz.public %} Draft {% endif %}<h2 class="title">{{quiz.question | safe}}</h2>
+								<h2 class="title">{{quiz.question | safe}}</h2>
 								<div class="choice_section" id="quiz_{{quiz.pk}}_choice_section" name="{{quiz.pk}}">
 									{% include 'quiz/Quiz/choice_section.html' %}
 								</div>
@@ -16,7 +16,7 @@
 										</span>
 										<div class="tags">
 											{% for tag in quiz.tags.all %}
-												<span class="tag">{{ tag.name }}</span>
+												<div class="tag">{{ tag.name }}</div>
 											{% endfor %}
 										</div>
 									</div>

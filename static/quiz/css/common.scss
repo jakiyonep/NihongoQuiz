@@ -16,13 +16,13 @@ html {
     font-family: tbudrgothic-std, sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 0.95rem;
+    font-size: 1rem;
     box-sizing: border-box;
     color: $base-font-color;
     word-break: break-word;
 }
 p, h1, h2, h3, h4{
-    line-height: 2rem;
+    line-height: 2rem;    
 }
 
 img { 
@@ -202,7 +202,7 @@ li {
     margin: 1rem 0 1rem 0;
     padding: 1rem 0 1rem 0;
     &>*{
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
     h2, h3, h4{
         font-size: 1.2rem;
@@ -214,21 +214,21 @@ li {
         margin-top: 7rem;
     }
     h3{
-        border: 1px solid $border-primary;
+        border-bottom: 1px solid $border-primary;
         padding: 0.5rem;
-        border-radius: 0.3rem;
-        margin-top: 3rem;
+        margin-top: 7rem;
     }
     h4{
-        border-left: 0.7rem solid $border-primary;
+        border-left: 0.5rem solid $border-primary;
         padding-left: 0.5rem;
         margin-top: 3rem;
+        font-size: 1rem;
     }
     p{
         
     }
     strong{
-        background:linear-gradient(transparent 70%, $strong-red 90%);
+        background:linear-gradient(transparent 90%, $strong-red 97%);
     }
     img{
         box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem $border-secondary;
