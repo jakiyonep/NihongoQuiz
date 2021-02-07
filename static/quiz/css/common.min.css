@@ -281,12 +281,9 @@ li:last-child {
   padding: 1rem 0 1rem 0;
 }
 
-.content > * {
-  margin-bottom: 1rem;
-}
-
 .content h2, .content h3, .content h4 {
   font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .content h2 {
@@ -332,7 +329,7 @@ li:last-child {
 }
 
 .content blockquote {
-  background-color: #f0f0f0;
+  background-color: #f3f3f3;
   padding: 0.5rem;
 }
 
@@ -730,16 +727,15 @@ li:last-child {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  background-color: #f3f3f3;
+  background-color: #fafafa;
   padding: 0.5rem 1rem;
   margin: 2.5rem 0;
-  margin-left: 1rem;
   line-height: 1.2rem;
 }
 
 .bun em, .bun strong {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(90%, transparent), color-stop(10%, #8b8b8b));
-  background: linear-gradient(transparent 90%, #8b8b8b 10%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(98%, transparent), color-stop(10%, #8b8b8b));
+  background: linear-gradient(transparent 98%, #8b8b8b 10%);
   font-weight: normal;
 }
 
@@ -754,6 +750,10 @@ li:last-child {
 }
 
 .bun .eng {
+  font-style: italic;
+}
+
+.bun .eng em {
   font-style: italic;
 }
 

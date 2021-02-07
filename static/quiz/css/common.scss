@@ -201,11 +201,9 @@ li {
 .content {
     margin: 1rem 0 1rem 0;
     padding: 1rem 0 1rem 0;
-    &>*{
-        margin-bottom: 1rem;
-    }
     h2, h3, h4{
-        font-size: 1.2rem;
+        font-size: 1.2rem;        
+        margin-bottom: 2rem;
     }
     h2{
         background-color: $border-primary;
@@ -628,10 +626,9 @@ li {
     background-color: $bun-bolor;
     padding: 0.5rem 1rem;
     margin: 2.5rem 0;
-    margin-left: 1rem;
     line-height: 1.2rem;
     em, strong{
-        background:linear-gradient(transparent 90%, $border-primary 10%);
+        background:linear-gradient(transparent 98%, $border-primary 10%);
         font-weight: normal;
     }
     li{
@@ -644,6 +641,9 @@ li {
     }
     .eng{
         font-style: italic;
+        em{
+            font-style: italic;
+        }
     }
 }
 .result{

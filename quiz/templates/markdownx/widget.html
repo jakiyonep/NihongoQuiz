@@ -2,22 +2,10 @@
     <div class="markdown_textarea">
         {% include 'django/forms/widgets/textarea.html' %}
     </div>
-    <div class="markdown_preview">
-        <div class="markdownx-preview"></div>        
-    </div>
 </div>
-
 <style>
-  .markdown_container{
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  .markdown_container .markdown_textarea{
-    width: 49%;
-  }
-  .markdown_container .markdown_preview{
-    width: 49%;
-  }
-
+    .markdown_textarea textarea{
+        width: 98%;
+        background-color: rgb(251, 251, 251);
+    }
 </style>
