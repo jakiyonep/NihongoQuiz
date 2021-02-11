@@ -65,6 +65,12 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.extra',
     'markdown.extensions.toc',
 ]
+
+MARKDOWNX_IMAGE_MAX_SIZE = {
+    'quality': 100,
+    'size': (5000,0)
+}
+
 MARKDOWNIFY_STRIP = False
 MARKDOWNIFY_WHITELIST_TAGS = {
     'a', 'p',
