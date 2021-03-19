@@ -12,7 +12,7 @@ django-markdownify==0.8.0
 django-markdownx==3.0.1
 django-storages==1.9.1
 django-summernote==0.8.11.6
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-filters==0.11.1
 docutils==0.15.2
 gunicorn==20.0.4
